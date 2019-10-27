@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ReleasePage</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases</string>
+	<key>SourcePage</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive</string>
+	<key>IssuesPage</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive/issues</string>
+	<key>LatestZIP</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/Retroactive1_0.zip</string>
+	<key>LatestBuildNumber</key>
+	<string>1</string>
+	<key>CatalogURL</key>
+	<string>https://swscan.apple.com/content/catalogs/others/index-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz</string>
+	<key>DownloadIdentifier</key>
+	<string>061-26589</string>
+	<key>InstallerURL</key>
+	<string>http://swcdn.apple.com/content/downloads/17/32/061-26589-A_8GJTCGY9PC/25fhcu905eta7wau7aoafu8rvdm7k1j4el/InstallESDDmg.pkg</string>
+	<key>iTunes107URL</key>
+	<string>http://appldnld.apple.com/iTunes10/041-7195.20120912.d3uzQ/iTunes10.7.dmg</string>
+	<key>iTunes126URL</key>
+	<string>https://secure-appldnld.apple.com/itunes12/091-87821-20180912-69177170-B085-11E8-B6AB-C1D03409AD2A/iTunes12.6.5.dmg</string>
+</dict>
+</plist>

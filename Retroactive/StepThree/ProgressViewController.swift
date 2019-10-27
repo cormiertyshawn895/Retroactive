@@ -1,0 +1,527 @@
+//
+//  ProgressViewController.swift
+//  Retroactive
+//
+
+import Cocoa
+import CommonCrypto
+
+class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDataDelegate {
+    @IBOutlet weak var progressGrid1: NSView!
+    @IBOutlet weak var progressGrid2: NSView!
+    @IBOutlet weak var progressGrid3: NSView!
+    @IBOutlet weak var progressGrid4: NSView!
+    @IBOutlet weak var progressHeading: NSTextField!
+    @IBOutlet weak var progressCaption: NSTextField!
+    @IBOutlet weak var iconImageView: NSImageView!
+    @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    
+    var subProgress1: SubProgressViewController!
+    var subProgress2: SubProgressViewController!
+    var subProgress3: SubProgressViewController!
+    var subProgress4: SubProgressViewController!
+    var progressTimer: Timer?
+    
+    var session: URLSession?
+    var dataTask: URLSessionDataTask?
+    var isiTunesMode = false
+    let tempDir = "/tmp"
+    
+    let url = URL(string:"http://swcdn.apple.com/content/downloads/17/32/061-26589-A_8GJTCGY9PC/25fhcu905eta7wau7aoafu8rvdm7k1j4el/InstallESDDmg.pkg")!
+    var expectedContentLength = 0
+    var fileHandle: FileHandle?
+
+    static func instantiate() -> ProgressViewController
+    {
+        return NSStoryboard.main!.instantiateController(withIdentifier: "ProgressViewController") as! ProgressViewController
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        progressHeading.updateToken()
+        progressCaption.updateToken()
+        
+        isiTunesMode = AppManager.shared.chosenApp == .itunes
+        
+        subProgress1 = SubProgressViewController.instantiate()
+        progressGrid1.addSubview(subProgress1.view)
+        subProgress1.descriptionTextField.stringValue = isiTunesMode ? "Download iTunes" : "Copy support files"
+        subProgress1.sequenceLabel.stringValue = "1"
+        if (isiTunesMode) {
+            subProgress1.circularProgress.isIndeterminate = false
+        }
+
+        subProgress2 = SubProgressViewController.instantiate()
+        progressGrid2.addSubview(subProgress2.view)
+        subProgress2.sequenceLabel.stringValue = "2"
+        subProgress2.descriptionTextField.stringValue = isiTunesMode ? "Extract iTunes" : "Install support files"
+
+        subProgress3 = SubProgressViewController.instantiate()
+        progressGrid3.addSubview(subProgress3.view)
+        subProgress3.sequenceLabel.stringValue = "3"
+        subProgress3.descriptionTextField.stringValue = isiTunesMode ? "Install iTunes" : "Refresh \(AppManager.shared.nameOfChosenApp) icon"
+
+        subProgress4 = SubProgressViewController.instantiate()
+        progressGrid4.addSubview(subProgress4.view)
+        subProgress4.sequenceLabel.stringValue = "4"
+        subProgress4.descriptionTextField.stringValue = isiTunesMode ? "Configure iTunes" : "Sign \(AppManager.shared.nameOfChosenApp)"
+
+        iconImageView.updateIcon()
+        
+        if (isiTunesMode && AppManager.shared.choseniTunesVersion == .darkMode) {
+            progressCaption.stringValue = "\(progressCaption.stringValue) It is completely normal for the fans to spin up during the process."
+        }
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        STPrivilegedTask.preventSleep()
+        
+        let authenticateStatus = STPrivilegedTask.preAuthenticate()
+        if (authenticateStatus != errAuthorizationSuccess) {
+            return
+        }
+        
+        if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
+            self.kickoffPhotographyAppPatches()
+        }
+
+        if AppManager.shared.chosenApp == .itunes {
+            self.kickoffiTunesDownload()
+        }
+    }
+    
+    func kickoffPhotographyAppPatches() {
+        guard let appPath = AppManager.shared.appPathCString else { return }
+        
+        var resourcePath = Bundle.main.resourcePath!
+        let resourcePathCString = (resourcePath as NSString).fileSystemRepresentation
+        resourcePath = String(cString: resourcePathCString)
+
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.stage1Started()
+            self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
+
+            self.stage2Started()
+            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"])
+            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", "\(appPath)/Contents/Frameworks/ApertureFixer.framework"])
+
+            self.stage3Started()
+            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
+            ProgressViewController.runTask(toolPath: "insert_dylib", arguments: ["@executable_path/../Frameworks/ApertureFixer.framework/Versions/A/ApertureFixer", "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
+            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", "CFBundleIdentifier", "-string", AppManager.shared.patchedBundleIDOfChosenApp, "Contents/Info.plist"])
+
+            self.stage4Started()
+            self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
+            self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
+            self.stage4Finished()
+            
+            self.showCompletionVC()
+        }
+    }
+    
+    func showCompletionVC() {
+        self.syncMainQueue {
+            STPrivilegedTask.allowSleep()
+            self.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
+        }
+    }
+    
+    func guessProgressForTimer(approximateDuration: Double, startingPercent: Double, endingPercent: Double) {
+        self.syncMainQueue {
+            self.progressTimer?.invalidate()
+            let startTime = Date().timeIntervalSinceReferenceDate
+            let sectionalPercent = endingPercent - startingPercent
+            let updateClosure = {
+                let currentTime = Date().timeIntervalSinceReferenceDate
+                let currentPercent = (currentTime - startTime) / approximateDuration
+                if (self.progressIndicator.doubleValue < endingPercent - 0.03) {
+                    self.progressIndicator.doubleValue = startingPercent + currentPercent * sectionalPercent
+                } else if (self.progressIndicator.doubleValue < endingPercent - 0.02) {
+                    self.progressIndicator.doubleValue += 0.00001
+                } else {
+                    self.progressTimer?.invalidate()
+                }
+            }
+            updateClosure()
+            self.progressTimer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { (timer) in
+                updateClosure()
+            }
+        }
+    }
+    
+    func stage1Started() {
+        self.syncMainQueue {
+            self.subProgress1.inProgress = true
+        }
+    }
+    
+    func stage2Started() {
+        self.syncMainQueue {
+            self.subProgress1.inProgress = false
+            self.subProgress2.inProgress = true
+            if (isiTunesMode) {
+                var duration = 15.0
+                if AppManager.shared.choseniTunesVersion == .darkMode {
+                    duration = 600.0
+                }
+                self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: 0.70)
+            } else {
+                self.progressIndicator.doubleValue = 0.1
+            }
+        }
+    }
+    
+    func stage3Started() {
+        self.syncMainQueue {
+            self.subProgress2.inProgress = false
+            self.subProgress3.inProgress = true
+            if (isiTunesMode) {
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.70, endingPercent: 0.88)
+            } else {
+                self.progressIndicator.doubleValue = 0.3
+            }
+        }
+    }
+    
+    func stage4Started() {
+        self.syncMainQueue {
+            self.subProgress3.inProgress = false
+            self.subProgress4.inProgress = true
+            if (isiTunesMode) {
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.88, endingPercent: 1.0)
+            } else {
+                self.progressIndicator.doubleValue = 0.4
+                self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
+            }
+        }
+    }
+    
+    func stage4Finished() {
+        self.syncMainQueue {
+            self.progressTimer?.invalidate()
+            self.subProgress4.inProgress = false
+            self.progressIndicator.doubleValue = 1.0
+        }
+    }
+    
+    func syncMainQueue(closure: (() -> ())) {
+        if !Thread.isMainThread {
+            DispatchQueue.main.sync {
+                closure()
+            }
+        } else {
+            closure()
+        }
+    }
+    
+    func runTask(toolPath: String, arguments: [String]) {
+        ProgressViewController.runTask(toolPath: toolPath, arguments: arguments, path: AppManager.shared.locationOfChosenApp!)
+    }
+    
+    func runTaskAtTemp(toolPath: String, arguments: [String]) {
+        ProgressViewController.runTask(toolPath: toolPath, arguments: arguments, path: tempDir)
+    }
+
+    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true) {
+        let priviledgedTask = STPrivilegedTask()
+        priviledgedTask.launchPath = toolPath
+        priviledgedTask.arguments = arguments
+        priviledgedTask.currentDirectoryPath = path
+        let err: OSStatus = priviledgedTask.launch()
+        if (err != errAuthorizationSuccess) {
+            if (err == errAuthorizationCanceled) {
+                print("User cancelled")
+                return
+            } else {
+                print("Something went wrong with authorization: %d", err)
+                // For error codes, see http://www.opensource.apple.com/source/libsecurity_authorization/libsecurity_authorization-36329/lib/Authorization.h
+            }
+        }
+        if wait == true {
+            priviledgedTask.waitUntilExit()
+        }
+        let readHandle = priviledgedTask.outputFileHandle
+        if let outputData = readHandle?.readDataToEndOfFile(), let outputString = String(data: outputData, encoding: .utf8) {
+            print("Output string is \(outputString), terminationStatus is \(priviledgedTask.terminationStatus)")
+        }
+    }
+    
+    
+    // iTunes
+    func getGBFreeSpace() -> Double? {
+       do {
+        let fileAttributes = try FileManager.default.attributesOfFileSystem(forPath: "/")
+        if let size = fileAttributes[FileAttributeKey.systemFreeSize] as? Double {
+            let gbSize = size / 1000.0 / 1000.0 / 1000.0
+            print("Volume Size: \(size), \(gbSize)")
+            return gbSize
+          }
+       } catch { }
+       return nil
+    }
+
+    func kickoffiTunesDownload() {
+        guard let urlString = AppManager.shared.downloadURLOfChosenApp, let chosenURL = URL(string: urlString) else { return }
+        if let freeSpace = self.getGBFreeSpace() {
+            print("free space: \(String(describing: freeSpace))")
+            if ((freeSpace < 20.0 && AppManager.shared.choseniTunesVersion == .darkMode) || freeSpace < 2.0) {
+                AppDelegate.showOptionSheet(title: "There isn't enough free space to install iTunes", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install iTunes, your startup disk needs to at least have 20 GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+                    if (response == .alertFirstButtonReturn) {
+                        self.kickoffiTunesDownload()
+                    } else {
+                        self.navigationController.popToRootViewController(animated: true)
+                    }
+                }
+                return
+            }
+        }
+        self.stage1Started()
+        self.fileHandle = nil
+        self.subProgress1.inProgress = true
+        DispatchQueue.global(qos: .userInteractive).async {
+            let dmgPath = self.dmgPath
+            let exists = FileManager.default.fileExists(atPath: dmgPath)
+            if (exists == true) {
+                let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: dmgPath))
+                print("shasum is \(shaSum) for \(dmgPath)")
+                // 12.9.5, 12.6.5, 10.7
+                if ["defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7","7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0", "3d92702ac8b7b2a07bcfe13cc6e0ce07c67362eb4bb2db69f3aebc0cbef27548"].contains(shaSum) {
+                    self.syncMainQueue {
+                        self.kickOffInstallation()
+                    }
+                    return
+                }
+                do {
+                    try FileManager.default.removeItem(atPath: dmgPath)
+                } catch {
+                    print("Deletion \(error)")
+                }
+            }
+            let configuration = URLSessionConfiguration.default
+            let manqueue = OperationQueue.main
+            self.session = URLSession(configuration: configuration, delegate:self, delegateQueue: manqueue)
+            self.dataTask = self.session?.dataTask(with: URLRequest(url: chosenURL))
+            self.dataTask?.resume()
+        }
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        expectedContentLength = Int(response.expectedContentLength)
+        print(expectedContentLength)
+        completionHandler(URLSession.ResponseDisposition.allow)
+
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        // guard let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first else { return }
+        let fileURL = URL(fileURLWithPath: dmgPath)
+        do {
+            try fileHandle = FileHandle(forWritingTo: fileURL)
+        } catch {
+            print(error)
+            do {
+                try data.write(to: fileURL, options: .atomic)
+            } catch {
+                print(error)
+            }
+        }
+
+        var bufferLength: UInt64 = 0
+        if let handle = fileHandle {
+            defer {
+                fileHandle?.closeFile()
+            }
+            bufferLength = fileHandle?.seekToEndOfFile() ?? 0
+            fileHandle?.write(data)
+        }
+        
+        let percentageDownloaded = Float(bufferLength) / Float(expectedContentLength)
+        self.syncMainQueue {
+            self.subProgress1.circularProgress.progress = Double(percentageDownloaded)
+            self.progressIndicator.doubleValue = Double(percentageDownloaded) * 0.35
+            self.subProgress1.progressTextField.stringValue = "\(Int(percentageDownloaded * 100))% Complete"
+        }
+        print("download progress: \(percentageDownloaded)")
+
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        print("download progress, 100%")
+        fileHandle?.closeFile()
+        if (error != nil) {
+            AppDelegate.showOptionSheet(title: "Unable to download \(AppManager.shared.nameOfChosenApp)", text: "\(error?.localizedDescription ?? "The Internet connection appears to be offline.")", firstButtonText: "Try Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+                if (response == .alertFirstButtonReturn) {
+                    self.kickoffiTunesDownload()
+                } else {
+                    self.navigationController.popToRootViewController(animated: true)
+                }
+            }
+        } else {
+            self.kickOffInstallation()
+        }
+    }
+    
+    func kickOffInstallation() {
+        self.subProgress1.inProgress = false
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            let itunesType = AppManager.shared.choseniTunesVersion
+            switch itunesType {
+            case .darkMode:
+                self.installDarkModeiTunes()
+                break
+            case .appStore:
+                self.installAppStoreiTunes()
+                break
+            case .coverFlow:
+                self.installCoverFlowiTunes()
+                break
+            case .none:
+                break
+            }
+        }
+    }
+    
+    var dmgPath: String {
+        get {
+            let dmgName = AppManager.shared.downloadFileNameOfChosenApp
+            let dmgPath = "\(tempDir)/\(dmgName)"
+            return dmgPath
+        }
+    }
+    
+    func installDarkModeiTunes() {
+        self.installiTunesCommon("Packages/Core.pkg", appLocation: "Payload/Applications/iTunes.app")
+    }
+    
+    func installAppStoreiTunes() {
+        self.installiTunesCommon("Install iTunes.pkg", appLocation: "iTunesX.pkg/Payload/Applications/iTunes.app")
+    }
+    
+    func installCoverFlowiTunes() {
+        self.installiTunesCommon("Install iTunes.pkg", appLocation: "iTunesX.pkg/Payload/Applications/iTunes.app")
+    }
+    
+    func installiTunesCommon(_ pkgLocation: String, appLocation: String) {
+        guard let appPath = AppManager.shared.appPathCString else { return }
+
+        self.stage2Started()
+        let mountName = AppManager.shared.mountDirNameOfChosenApp
+        let extractName = AppManager.shared.extractDirNameOfChosenApp
+
+        let mountPath = "\(tempDir)/\(mountName)"
+        let badMountPath = "/Volumes/InstallESD"
+        let packageExtractionPath = "\(tempDir)/\(extractName)"
+
+        let packagePath = "\(mountPath)/\(pkgLocation.fileSystemString)"
+        let afterPackagePath = "\(packageExtractionPath)/\(appLocation.fileSystemString)"
+        
+        let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp
+        
+        self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", appPath])
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", badMountPath])
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", dmgPath, "-mountpoint", mountPath])
+        
+        let stageAfterExpansion = {
+            self.stage3Started()
+            self.runTaskAtTemp(toolPath: "/usr/bin/plutil", arguments: ["-replace", "CFBundleVersion", "-string", patchedVersionString, "\(afterPackagePath)/Contents/Info.plist"])
+            self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, appPath])
+            self.stage4Started()
+            
+            // Only re-sign iTunes 10.7. Other iTunes version will break if resigned.
+            if (AppManager.shared.choseniTunesVersion == .coverFlow) {
+                self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
+            }
+            self.runTaskAtTemp(toolPath: "/usr/bin/touch", arguments: [appPath])
+            self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
+
+            self.stage4Finished()
+            self.showCompletionVC()
+        }
+        
+        if AppManager.shared.choseniTunesVersion == .darkMode {
+            print("Chosen Dark Mode iTunes")
+            let timer = Timer.init(timeInterval: 15.0, repeats: true) { (timer) in
+                print("Timer fired to seek for extraction progress")
+                let libraryPath = "\(packageExtractionPath)/Payload/Library"
+                let libraryExists = FileManager.default.fileExists(atPath: libraryPath)
+                let afterPackageExists = FileManager.default.fileExists(atPath: afterPackagePath)
+                print("libraryPath = \(libraryPath), libraryExists = \(libraryExists), afterPackageExists = \(afterPackageExists)")
+                if libraryExists && afterPackageExists {
+                    timer.invalidate()
+                    stageAfterExpansion()
+                }
+            }
+            RunLoop.main.add(timer, forMode: .common)
+            ProgressViewController.runTask(toolPath: "/usr/sbin/pkgutil", arguments: ["--expand-full", packagePath, packageExtractionPath], path: tempDir, wait: false)
+        }
+    
+        if AppManager.shared.choseniTunesVersion != .darkMode {
+            self.runTaskAtTemp(toolPath: "/usr/sbin/pkgutil", arguments: ["--expand-full", packagePath, packageExtractionPath])
+            self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
+            stageAfterExpansion()
+        }
+    }
+    
+    func sha256String(fileURL: URL) -> String {
+        if let digestData = sha256(url: fileURL) {
+            let calculatedHash = digestData.map { String(format: "%02hhx", $0) }.joined()
+            return calculatedHash
+        }
+        return ""
+    }
+    
+    func sha256(url: URL) -> Data? {
+        do {
+            let bufferSize = 1024 * 1024
+            // Open file for reading:
+            let file = try FileHandle(forReadingFrom: url)
+            defer {
+                file.closeFile()
+            }
+
+            // Create and initialize SHA256 context:
+            var context = CC_SHA256_CTX()
+            CC_SHA256_Init(&context)
+
+            // Read up to `bufferSize` bytes, until EOF is reached, and update SHA256 context:
+            while autoreleasepool(invoking: {
+                // Read up to `bufferSize` bytes
+                let data = file.readData(ofLength: bufferSize)
+                if data.count > 0 {
+                    data.withUnsafeBytes {
+                        _ = CC_SHA256_Update(&context, $0, numericCast(data.count))
+                    }
+                    // Continue
+                    return true
+                } else {
+                    // End of file
+                    return false
+                }
+            }) { }
+
+            // Compute the SHA256 digest:
+            var digest = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
+            digest.withUnsafeMutableBytes {
+                _ = CC_SHA256_Final($0, &context)
+            }
+
+            return digest
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        if (isiTunesMode) {
+            let mountPath = "\(tempDir)/\(AppManager.shared.mountDirNameOfChosenApp)"
+            self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
+        }
+    }
+
+}

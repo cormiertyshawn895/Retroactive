@@ -1,0 +1,6 @@
+framework module ApertureFixer {
+  umbrella header "ApertureFixer.h"
+
+  export *
+  module * { export * }
+}
