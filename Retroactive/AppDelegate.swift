@@ -189,6 +189,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
-
+    
+    @IBAction func showCredits(_ sender: Any) {
+        if let credits = Bundle.main.url(forResource: "Credits", withExtension: "pdf") {
+            NSWorkspace.shared.open(credits)
+        }
+    }
 }
 

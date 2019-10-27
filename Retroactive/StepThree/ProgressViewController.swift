@@ -271,6 +271,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let dmgPath = self.dmgPath
             let exists = FileManager.default.fileExists(atPath: dmgPath)
             if (exists == true) {
+                self.guessProgressForTimer(approximateDuration: 15, startingPercent: 0.0, endingPercent: 0.4)
                 let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: dmgPath))
                 print("shasum is \(shaSum) for \(dmgPath)")
                 // 12.9.5, 12.6.5, 10.7
@@ -326,6 +327,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         let percentageDownloaded = Float(bufferLength) / Float(expectedContentLength)
         self.syncMainQueue {
+            progressTimer?.invalidate()
             self.subProgress1.circularProgress.progress = Double(percentageDownloaded)
             self.progressIndicator.doubleValue = Double(percentageDownloaded) * 0.35
             self.subProgress1.progressTextField.stringValue = "\(Int(percentageDownloaded * 100))% Complete"

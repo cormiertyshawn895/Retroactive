@@ -28,6 +28,12 @@
                                                 <action selector="checkForUpdates:" target="Voe-Tx-rLC" id="6I2-W8-S62"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Credits" id="qfD-tp-QNr">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showCredits:" target="Voe-Tx-rLC" id="6mK-Qb-Xq9"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
