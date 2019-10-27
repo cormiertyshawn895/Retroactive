@@ -28,7 +28,6 @@
 		32D181E82364303E006253DE /* ViewExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181E72364303E006253DE /* ViewExtras.swift */; };
 		32D181EA23643108006253DE /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181E923643108006253DE /* AppManager.swift */; };
 		32D181F423643519006253DE /* CCNNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D181F3236434F3006253DE /* CCNNavigationController.m */; };
-		32F763442364C8C000200ED7 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 		32F763462364C9F800200ED7 /* insert_dylib in Resources */ = {isa = PBXBuildFile; fileRef = 32F763452364C9F800200ED7 /* insert_dylib */; };
 		32F7634A2364CAD000200ED7 /* AppFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F763492364CAD000200ED7 /* AppFinder.swift */; };
 		32F7634C2364D0AA00200ED7 /* AuthenticateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F7634B2364D0AA00200ED7 /* AuthenticateViewController.swift */; };
@@ -38,6 +37,7 @@
 		32F763582365018600200ED7 /* capsule.icns in Resources */ = {isa = PBXBuildFile; fileRef = 32F763572365018500200ED7 /* capsule.icns */; };
 		32F7635A23651DC200200ED7 /* RetroactiveWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F7635923651DC200200ED7 /* RetroactiveWindow.swift */; };
 		32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */ = {isa = PBXBuildFile; fileRef = 32F763DC23657A8D00200ED7 /* install_name_tool_packed */; };
+		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -291,8 +291,8 @@
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
-				32F763442364C8C000200ED7 /* SupportPath.plist in Resources */,
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
+				60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */,
 				32D181C423640CDF006253DE /* Main.storyboard in Resources */,
 				32F763542364DEA700200ED7 /* NyxAudioAnalysis in Resources */,
 			);

@@ -49,10 +49,10 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
             if (patchVersion > 0) {
                 patchString = ".\(patchVersion)"
             }
-            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive", text: "This version of Retroactive is designed for macOS Catalina, and may be incompatible with macOS \(osVersion.majorVersion).\(osVersion.minorVersion)\(patchString).", firstButtonText: "Check for Updates", secondButtonText: "Run Anyways", thirdButtonText: "Quit") { (response) in
+            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive", text: "This version of Retroactive is only designed and tested for macOS Catalina, and may be incompatible with macOS \(osVersion.majorVersion).\(osVersion.minorVersion)\(patchString).", firstButtonText: "Check for Updates", secondButtonText: "Run Anyways", thirdButtonText: "Quit") { (response) in
                 if (response == .alertFirstButtonReturn) {
                     AppDelegate.current.checkForUpdates()
-                    NSApplication.shared.terminate(self)
+                    // NSApplication.shared.terminate(self)
                 } else if (response == .alertSecondButtonReturn) {
                 } else {
                     NSApplication.shared.terminate(self)
@@ -124,7 +124,7 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
 
     @IBAction func checkForUpdatesClicked(_ sender: Any) {
-        
+        AppDelegate.current.promptForUpdateAvailable()
     }
 }
 

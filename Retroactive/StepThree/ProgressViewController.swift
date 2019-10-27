@@ -205,17 +205,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.progressIndicator.doubleValue = 1.0
         }
     }
-    
-    func syncMainQueue(closure: (() -> ())) {
-        if !Thread.isMainThread {
-            DispatchQueue.main.sync {
-                closure()
-            }
-        } else {
-            closure()
-        }
-    }
-    
+        
     func runTask(toolPath: String, arguments: [String]) {
         ProgressViewController.runTask(toolPath: toolPath, arguments: arguments, path: AppManager.shared.locationOfChosenApp!)
     }

@@ -10,6 +10,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        _ = AppManager.shared
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -143,19 +144,50 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func checkForUpdates(_ sender: Any? = nil) {
-        NSWorkspace.shared.open(URL(string: AppManager.shared.releasePage)!)
+        AppManager.shared.checkForConfigurationUpdates()
+        if (AppManager.shared.hasNewerVersion == true) {
+            self.promptForUpdateAvailable()
+        } else {
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (timer) in
+                self.promptForUpdateAvailable()
+            }
+        }
     }
 
     @IBAction func openIssue(_ sender: Any? = nil) {
-        NSWorkspace.shared.open(URL(string: AppManager.shared.issuesPage)!)
+        self.safelyOpenURL(AppManager.shared.issuesPage)
     }
 
     @IBAction func viewSource(_ sender: Any? = nil) {
-        NSWorkspace.shared.open(URL(string: AppManager.shared.sourcePage)!)
+        self.safelyOpenURL(AppManager.shared.sourcePage)
     }
     
     @IBAction func projectPage(_ sender: Any? = nil) {
-        NSWorkspace.shared.open(URL(string: AppManager.shared.sourcePage)!)
+        self.safelyOpenURL(AppManager.shared.sourcePage)
+    }
+    
+    func safelyOpenURL(_ urlString: String?) {
+        if let page = urlString, let url = URL(string: page) {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
+    func promptForUpdateAvailable() {
+        if (AppManager.shared.hasNewerVersion == true) {
+            AppDelegate.showOptionSheet(title: AppManager.shared.newVersionVisibleTitle ?? "Update available.", text: AppManager.shared.newVersionChangelog ?? "A newer version of Retroactive is available.", firstButtonText: "Download", secondButtonText: "Learn More...", thirdButtonText: "Cancel") { (response) in
+                if (response == .alertFirstButtonReturn) {
+                    AppDelegate.current.safelyOpenURL(AppManager.shared.latestZIP)
+                } else if (response == .alertSecondButtonReturn) {
+                    AppDelegate.current.safelyOpenURL(AppManager.shared.releasePage)
+                }
+            }
+        } else {
+            AppDelegate.showOptionSheet(title: "Retroactive \(Bundle.main.cfBundleVersionString ?? "") is already the latest available version.", text:"", firstButtonText: "OK", secondButtonText: "View Release Page...", thirdButtonText: "") { (response) in
+                if (response == .alertSecondButtonReturn) {
+                    AppDelegate.current.safelyOpenURL(AppManager.shared.releasePage)
+                }
+            }
+        }
     }
 
 }

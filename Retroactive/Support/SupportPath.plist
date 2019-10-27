@@ -2,21 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NewVersionVisibleTitle</key>
+	<string>Retroactive 1.0 is available for download.</string>
+	<key>NewVersionChangelog</key>
+	<string>Retroactive 1.0 supports modifying Aperture, iPhoto, and iTunes to work with macOS Catalina, and contains bug fixes and general improvements.</string>
+	<key>LatestZIP</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.0/Retroactive.1.0.zip</string>
+	<key>LatestBuildNumber</key>
+	<integer>1</integer>
+	<key>SupportPathURL</key>
+	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases</string>
 	<key>SourcePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive</string>
 	<key>IssuesPage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/issues</string>
-	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/Retroactive1_0.zip</string>
-	<key>LatestBuildNumber</key>
-	<string>1</string>
-	<key>CatalogURL</key>
+	<key>iTunes129CatalogURL</key>
 	<string>https://swscan.apple.com/content/catalogs/others/index-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz</string>
-	<key>DownloadIdentifier</key>
+	<key>iTunes129DownloadIdentifier</key>
 	<string>061-26589</string>
-	<key>InstallerURL</key>
+	<key>iTunes129URL</key>
 	<string>http://swcdn.apple.com/content/downloads/17/32/061-26589-A_8GJTCGY9PC/25fhcu905eta7wau7aoafu8rvdm7k1j4el/InstallESDDmg.pkg</string>
 	<key>iTunes107URL</key>
 	<string>http://appldnld.apple.com/iTunes10/041-7195.20120912.d3uzQ/iTunes10.7.dmg</string>

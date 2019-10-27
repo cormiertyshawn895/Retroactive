@@ -22,46 +22,187 @@ let timeToken = "{timeEstimate}"
 let actionDetailToken = "{actionS}"
 let mainActionToken = "{actionM}"
 
-class AppManager: NSObject {
-    var configurationDictionary: Dictionary<String, Any> {
+extension Bundle {
+    var cfBundleVersionInt: Int? {
         get {
-            if let path = Bundle.main.path(forResource: "SupportPath", ofType: "plist"),
-                let loaded = NSDictionary(contentsOfFile: path) as? Dictionary<String, String> {
-               _configurationDictionary = loaded
+            if let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String, let intVersion = Int(bundleVersion) {
+                return intVersion
             }
-            return _configurationDictionary!
+            return nil
         }
     }
     
-    var releasePage: String {
-        return configurationDictionary["ReleasePage"] as? String ?? "https://github.com/cormiertyshawn895/Retroactive/releases"
+    var cfBundleVersionString: String? {
+        get {
+            return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        }
+    }
+}
+
+extension NSObject {
+    func syncMainQueue(closure: (() -> ())) {
+        if !Thread.isMainThread {
+            DispatchQueue.main.sync {
+                closure()
+            }
+        } else {
+            closure()
+        }
+    }
+}
+
+class AppManager: NSObject {
+    
+    static let shared = AppManager()
+    
+    private override init() {
+        super.init()
+        if let path = Bundle.main.path(forResource: "SupportPath", ofType: "plist"),
+            let loaded = NSDictionary(contentsOfFile: path) as? Dictionary<String, Any> {
+            self.configurationDictionary = loaded
+        }
+        
+        self.checkForConfigurationUpdates()
     }
     
-    var sourcePage: String {
-        return configurationDictionary["SourcePage"] as? String ?? "https://github.com/cormiertyshawn895/Retroactive"
+    func checkForConfigurationUpdates() {
+        guard let support = self.supportPath, let configurationPath = URL(string: support) else { return }
+        self.downloadAndParsePlist(plistPath: configurationPath) { (newDictionary) in
+            self.configurationDictionary = newDictionary
+            self.refreshiTunesURL()
+        }
     }
     
-    var issuesPage: String {
-        return configurationDictionary["IssuesPage"] as? String ?? "https://github.com/cormiertyshawn895/Retroactive/issues"
+    func downloadAndParsePlist(plistPath: URL, completed: @escaping ((Dictionary<String, Any>) -> ())) {
+        let task = URLSession.shared.dataTask(with: plistPath) { (data, response, error) in
+            if error != nil {
+                print("Error loading \(plistPath). \(String(describing: error))")
+            }
+            do {
+                let data = try Data(contentsOf:plistPath)
+                if let newDictionary = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? Dictionary<String, Any> {
+                    print("Downloaded dictionary \(String(describing: self.configurationDictionary))")
+                    completed(newDictionary)
+                }
+            } catch {
+                print("Error loading fetched support data. \(error)")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func refreshUpdateBadge() {
+        self.syncMainQueue {
+            if self.hasNewerVersion {
+                print("update available")
+                if let rootVC = AppDelegate.rootVC {
+                    rootVC.updateButton.isHidden = false
+                }
+            }
+        }
+    }
+    
+    var hasNewerVersion: Bool {
+        get {
+            if let versionNumber = Bundle.main.cfBundleVersionInt, let remoteVersion = self.latestBuildNumber {
+                print("\(versionNumber), \(remoteVersion)")
+                if (versionNumber < remoteVersion) {
+                    return true
+                }
+            }
+        return false
+        }
+    }
+    private var configurationDictionary: Dictionary<String, Any>? {
+        didSet {
+            self.refreshUpdateBadge()
+        }
+    }
+    
+    func refreshiTunesURL() {
+        if let iTunesPath = iTunesCatalogURL, let iTunesURL = URL(string: iTunesPath), let iTunesID = iTunesDownloadIdentifier {
+            self.downloadAndParsePlist(plistPath: iTunesURL) { (dictionary) in
+                if let products = dictionary["Products"] as? Dictionary<String, Dictionary<String, Any>>,
+                    let relevant = products[iTunesID],
+                    let packages = relevant["Packages"] as? [Dictionary<String, Any>] {
+                    for dictArray in packages {
+                        if let urlString = dictArray["URL"] as? String {
+                            if (urlString.contains("InstallESDDmg.pkg")) {
+                                self.configurationDictionary?["iTunes129URL"] = urlString
+                                print("Found updated iTunes package: \(String(describing: urlString))")
+                                return
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    var newVersionVisibleTitle: String? {
+        return configurationDictionary?["NewVersionVisibleTitle"] as? String
     }
 
-    var latestZIP: String {
-        return configurationDictionary["LatestZIP"] as? String ?? "https://github.com/cormiertyshawn895/Retroactive/releases/Retroactive1_0.zip"
+    var newVersionChangelog: String? {
+        return configurationDictionary?["NewVersionChangelog"] as? String
     }
     
-    var latestBuildNumber: Int {
-        return configurationDictionary["LatestBuildNumber"] as? Int ?? 1
+    var latestZIP: String? {
+        return configurationDictionary?["LatestZIP"] as? String
     }
     
-    var catalogURL: String {
-        return configurationDictionary["CatalogURL"] as? String ?? "https://swscan.apple.com/content/catalogs/others/index-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz"
+    var latestBuildNumber: Int? {
+        return configurationDictionary?["LatestBuildNumber"] as? Int
     }
-
-    var downloadIdentifier: String {
-        return configurationDictionary["DownloadIdentifier"] as? String ?? "061-26589"
+    
+    var supportPath: String? {
+        return configurationDictionary?["SupportPathURL"] as? String
     }
-
-    private var _configurationDictionary: Dictionary<String, String>?
+    
+    var releasePage: String? {
+        return configurationDictionary?["ReleasePage"] as? String
+    }
+    
+    var sourcePage: String? {
+        return configurationDictionary?["SourcePage"] as? String
+    }
+    
+    var issuesPage: String? {
+        return configurationDictionary?["IssuesPage"] as? String
+    }
+    
+    var iTunesCatalogURL: String? {
+        return configurationDictionary?["iTunes129CatalogURL"] as? String
+    }
+    
+    var iTunesDownloadIdentifier: String? {
+        return configurationDictionary?["iTunes129DownloadIdentifier"] as? String
+    }
+    
+    var downloadURLOfChosenApp: String? {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return nil
+            case .iphoto:
+                return nil
+            case .itunes:
+                switch choseniTunesVersion {
+                case .darkMode:
+                    return configurationDictionary?["iTunes129URL"] as? String
+                case .appStore:
+                    return configurationDictionary?["iTunes126URL"] as? String
+                case .coverFlow:
+                    return configurationDictionary?["iTunes107URL"] as? String
+                case .none:
+                    return nil
+                }
+            default:
+                return nil
+            }
+        }
+    }
     
     var chosenApp: AppType? {
         didSet {
@@ -118,7 +259,7 @@ class AppManager: NSObject {
             }
         }
     }
-
+    
     var existingBundleIDOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -202,7 +343,7 @@ class AppManager: NSObject {
             }
         }
     }
-
+    
     var appStoreImage: NSImage? {
         get {
             switch self.chosenApp {
@@ -255,30 +396,6 @@ class AppManager: NSObject {
         }
     }
     
-    var downloadURLOfChosenApp: String? {
-        get {
-            switch self.chosenApp {
-            case .aperture:
-                return nil
-            case .iphoto:
-                return nil
-            case .itunes:
-                switch choseniTunesVersion {
-                case .darkMode:
-                    return configurationDictionary["InstallerURL"] as? String
-                case .appStore:
-                    return configurationDictionary["iTunes126URL"] as? String
-                case .coverFlow:
-                    return configurationDictionary["iTunes107URL"] as? String
-                case .none:
-                    return nil
-                }
-            default:
-                return nil
-            }
-        }
-    }
-    
     var downloadFileNameOfChosenApp: String {
         get {
             if let downloadURL = self.downloadURLOfChosenApp, let url = URL(string: downloadURL) {
@@ -305,7 +422,7 @@ class AppManager: NSObject {
             return "blobExtract"
         }
     }
-
+    
     var mainActionOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -327,7 +444,7 @@ class AppManager: NSObject {
             }
         }
     }
-
+    
     var timeEstimateStringOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -347,15 +464,9 @@ class AppManager: NSObject {
             }
         }
     }
-
-    static let shared = AppManager()
-    
-    private override init() {
-        
-    }
     
     static func replaceTokenFor(_ string: String) -> String {
         return string.replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp).replacingOccurrences(of: timeToken, with: AppManager.shared.timeEstimateStringOfChosenApp).replacingOccurrences(of: mainActionToken, with: AppManager.shared.mainActionOfChosenApp).replacingOccurrences(of: actionDetailToken, with: AppManager.shared.detailActionOfChosenApp)
     }
-
+    
 }
