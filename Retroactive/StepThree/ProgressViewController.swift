@@ -94,9 +94,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     func kickoffPhotographyAppPatches() {
         guard let appPath = AppManager.shared.appPathCString else { return }
         
-        var resourcePath = Bundle.main.resourcePath!
-        let resourcePathCString = (resourcePath as NSString).fileSystemRepresentation
-        resourcePath = String(cString: resourcePathCString)
+        let resourcePath = Bundle.main.resourcePath!.fileSystemString
 
         DispatchQueue.global(qos: .userInteractive).async {
             self.stage1Started()
@@ -163,7 +161,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             if (isiTunesMode) {
                 var duration = 15.0
                 if AppManager.shared.choseniTunesVersion == .darkMode {
-                    duration = 600.0
+                    duration = 60.0
                 }
                 self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: 0.70)
             } else {
@@ -410,7 +408,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp
         
         self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", appPath])
-        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
         self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", badMountPath])
         self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", dmgPath, "-mountpoint", mountPath])
         
@@ -440,6 +437,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 let afterPackageExists = FileManager.default.fileExists(atPath: afterPackagePath)
                 print("libraryPath = \(libraryPath), libraryExists = \(libraryExists), afterPackageExists = \(afterPackageExists)")
                 if libraryExists && afterPackageExists {
+                    let resourcePath = Bundle.main.resourcePath!.fileSystemString
+                    // Extracting the entire macOS installer takes way too long
+                    // Kill pkg extraction before fans spin up too loud
+                    ProgressViewController.runTask(toolPath: "killpkg", arguments: [], path: resourcePath)
                     timer.invalidate()
                     stageAfterExpansion()
                 }

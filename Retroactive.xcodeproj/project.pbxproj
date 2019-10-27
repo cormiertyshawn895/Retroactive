@@ -37,6 +37,7 @@
 		32F763582365018600200ED7 /* capsule.icns in Resources */ = {isa = PBXBuildFile; fileRef = 32F763572365018500200ED7 /* capsule.icns */; };
 		32F7635A23651DC200200ED7 /* RetroactiveWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F7635923651DC200200ED7 /* RetroactiveWindow.swift */; };
 		32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */ = {isa = PBXBuildFile; fileRef = 32F763DC23657A8D00200ED7 /* install_name_tool_packed */; };
+		606CA12123664BFD001C550E /* killpkg in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12023664BFC001C550E /* killpkg */; };
 		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		32F763572365018500200ED7 /* capsule.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = capsule.icns; sourceTree = "<group>"; };
 		32F7635923651DC200200ED7 /* RetroactiveWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroactiveWindow.swift; sourceTree = "<group>"; };
 		32F763DC23657A8D00200ED7 /* install_name_tool_packed */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = install_name_tool_packed; sourceTree = "<group>"; };
+		606CA12023664BFC001C550E /* killpkg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = killpkg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				32D181C223640CDF006253DE /* Main.storyboard */,
 				32F763DC23657A8D00200ED7 /* install_name_tool_packed */,
 				32F763452364C9F800200ED7 /* insert_dylib */,
+				606CA12023664BFC001C550E /* killpkg */,
 				32F763552364EA2200200ED7 /* ApertureFixer */,
 				32F763532364DEA700200ED7 /* NyxAudioAnalysis */,
 				32D181C523640CDF006253DE /* Info.plist */,
@@ -294,6 +297,7 @@
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
 				60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */,
 				32D181C423640CDF006253DE /* Main.storyboard in Resources */,
+				606CA12123664BFD001C550E /* killpkg in Resources */,
 				32F763542364DEA700200ED7 /* NyxAudioAnalysis in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

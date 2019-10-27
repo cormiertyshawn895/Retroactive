@@ -1,0 +1,7 @@
+// If we have a .c extension, Xcode will compile the file instead of just copying it.
+#include <stdio.h>
+
+int main(void) {
+	printf("insert_dylib_test\n");
+	return 0;
+}
