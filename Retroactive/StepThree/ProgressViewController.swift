@@ -27,7 +27,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     var isiTunesMode = false
     let tempDir = "/tmp"
     
-    let url = URL(string:"http://swcdn.apple.com/content/downloads/17/32/061-26589-A_8GJTCGY9PC/25fhcu905eta7wau7aoafu8rvdm7k1j4el/InstallESDDmg.pkg")!
     var expectedContentLength = 0
     var fileHandle: FileHandle?
 

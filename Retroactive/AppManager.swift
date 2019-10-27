@@ -121,14 +121,14 @@ class AppManager: NSObject {
     }
     
     func refreshiTunesURL() {
-        if let iTunesPath = iTunesCatalogURL, let iTunesURL = URL(string: iTunesPath), let iTunesID = iTunesDownloadIdentifier {
+        if let iTunesPath = iTunesCatalogURL, let iTunesURL = URL(string: iTunesPath), let iTunesID = iTunesDownloadIdentifier, let expectedName = self.iTunesExpectedName {
             self.downloadAndParsePlist(plistPath: iTunesURL) { (dictionary) in
                 if let products = dictionary["Products"] as? Dictionary<String, Dictionary<String, Any>>,
                     let relevant = products[iTunesID],
                     let packages = relevant["Packages"] as? [Dictionary<String, Any>] {
                     for dictArray in packages {
                         if let urlString = dictArray["URL"] as? String {
-                            if (urlString.contains("InstallESDDmg.pkg")) {
+                            if (urlString.contains(expectedName)) {
                                 self.configurationDictionary?["iTunes129URL"] = urlString
                                 print("Found updated iTunes package: \(String(describing: urlString))")
                                 return
@@ -178,6 +178,10 @@ class AppManager: NSObject {
     
     var iTunesDownloadIdentifier: String? {
         return configurationDictionary?["iTunes129DownloadIdentifier"] as? String
+    }
+    
+    var iTunesExpectedName: String? {
+        return configurationDictionary?["iTunes129ExpectedName"] as? String
     }
     
     var downloadURLOfChosenApp: String? {
