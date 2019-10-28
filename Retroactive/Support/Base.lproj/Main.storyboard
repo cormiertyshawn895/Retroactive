@@ -685,9 +685,10 @@
                 <windowController id="B8D-0N-5wS" customClass="RetroactiveWindowController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Retroactive" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="RetroactiveWindow" customModule="Retroactive" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1011" height="625"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="1011" height="625"/>
+                        <value key="maxSize" type="size" width="1011" height="625"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -1540,6 +1541,7 @@ You can use {name} now.</string>
                     </view>
                     <connections>
                         <outlet property="authenticateButton" destination="iYC-bf-t4H" id="aje-xn-DrA"/>
+                        <outlet property="authenticateLabel" destination="ocb-6h-IMr" id="gA4-Yl-Mhe"/>
                         <outlet property="explainationLabel" destination="Gra-Jh-rYX" id="Lhh-ia-z9C"/>
                         <outlet property="iconView" destination="5Tt-dG-ikx" id="YT7-nL-KZ0"/>
                         <outlet property="searchingForLabel" destination="Eah-NJ-Zxt" id="N5J-1O-I0l"/>
