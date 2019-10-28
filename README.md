@@ -1,6 +1,4 @@
-## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina.
-
-The Retroactive app can modify Aperture, iPhoto, and iTunes to run on macOS Catalina. [Directly download the Retroactive app here](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.0/Retroactive.1.0.zip), or [from the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
+## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.0/Retroactive.1.0.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
 
 ---
 
@@ -22,17 +20,17 @@ Retroactive will not harm your Mac. This alert only shows up because Retroactive
 
 ### Picking an app
 
-This is obvious! Just pick the app you want to run on macOS Catalina. If you want to run multiple apps, just pick one for now. You will always be able to get back to this screen.
+Pick the app you want to run on macOS Catalina. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
 
 ![](screenshots/4.jpg)
 
-I’ll choose Aperture as the example here, but the same process also works for iPhoto and iTunes.
+I’ll use Aperture as the example, but the same process also works for iPhoto and iTunes.
 
 ---
 
 ### Locating the app or choosing a version
 
-Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, or iTunes install. If Retroactive has already located the app you would like to run, skip to Step 5.
+Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, or iTunes install. If Retroactive has already located the app you would like to run, skip to the next section.
 
 If Retroactive can’t locate an existing install, you’ll be asked to download it from the Purchased list in App Store. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
 
