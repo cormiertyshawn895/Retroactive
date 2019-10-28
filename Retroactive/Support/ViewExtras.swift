@@ -21,6 +21,14 @@ class DisplayOnlyImageView: NSImageView {
     }
 }
 
+public class DisplayOnlyNSView: NSView {
+    public override func hitTest(_ point: NSPoint) -> NSView? {
+        return subviews.first { subview in
+            !subview.isHidden && nil != subview.hitTest(point)
+        }
+    }
+}
+
 class AcceptsMouseView: NSView {
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
         return true

@@ -40,6 +40,8 @@
 		606CA12123664BFD001C550E /* killpkg in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12023664BFC001C550E /* killpkg */; };
 		606CA12823665C04001C550E /* Credits.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12723665C04001C550E /* Credits.pdf */; };
 		606CA12A23665CBF001C550E /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12923665CBF001C550E /* Credits.rtfd */; };
+		606CA154236666B3001C550E /* ConfettiView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 606CA150236666B3001C550E /* ConfettiView.bundle */; };
+		606CA155236666B3001C550E /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CA151236666B3001C550E /* ConfettiView.swift */; };
 		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +86,8 @@
 		606CA12023664BFC001C550E /* killpkg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = killpkg; sourceTree = "<group>"; };
 		606CA12723665C04001C550E /* Credits.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Credits.pdf; path = Retroactive/Help/Credits.pdf; sourceTree = SOURCE_ROOT; };
 		606CA12923665CBF001C550E /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
+		606CA150236666B3001C550E /* ConfettiView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ConfettiView.bundle; sourceTree = "<group>"; };
+		606CA151236666B3001C550E /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 		32D181EE236434E3006253DE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				606CA14F236666B3001C550E /* ConfettiView */,
 				32F7634F2364DBAA00200ED7 /* STPrivilegedTask */,
 				32D181F0236434F3006253DE /* CCNNavigationController */,
 				321B09CE23645B57007F3FBA /* CircularProgress */,
@@ -239,6 +244,15 @@
 			path = STPrivilegedTask;
 			sourceTree = "<group>";
 		};
+		606CA14F236666B3001C550E /* ConfettiView */ = {
+			isa = PBXGroup;
+			children = (
+				606CA150236666B3001C550E /* ConfettiView.bundle */,
+				606CA151236666B3001C550E /* ConfettiView.swift */,
+			);
+			path = ConfettiView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,6 +312,7 @@
 			files = (
 				32F763582365018600200ED7 /* capsule.icns in Resources */,
 				606CA12A23665CBF001C550E /* Credits.rtfd in Resources */,
+				606CA154236666B3001C550E /* ConfettiView.bundle in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
@@ -329,6 +344,7 @@
 				32D181EA23643108006253DE /* AppManager.swift in Sources */,
 				32D181D9236421E2006253DE /* SubProgressViewController.swift in Sources */,
 				32D181DF23642229006253DE /* VersionChoiceViewController.swift in Sources */,
+				606CA155236666B3001C550E /* ConfettiView.swift in Sources */,
 				32D181F423643519006253DE /* CCNNavigationController.m in Sources */,
 				32D181DD23642213006253DE /* VersionViewController.swift in Sources */,
 				321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */,

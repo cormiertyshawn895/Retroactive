@@ -12,6 +12,7 @@ class CompletionViewController: NSViewController {
     @IBOutlet weak var launchAppLabel: NSTextField!
     @IBOutlet weak var behindTheScenesButton: NSButton!
     @IBOutlet weak var clippingView: NSView!
+    var confettiView: ConfettiView?
     var allowPatchingAgain: Bool = false
     var justRecreatedLibrary: Bool = false
     
@@ -31,6 +32,23 @@ class CompletionViewController: NSViewController {
         launchAppLabel.addShadow()
         iconView.updateIcon()
         behindTheScenesButton.updateTitle()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        addConfettiView()
+        confettiView?.startConfetti()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (_) in
+            self.confettiView?.stopConfetti()
+        }
+    }
+    
+    func addConfettiView() {
+        confettiView = ConfettiView(frame: self.view.bounds)
+        confettiView?.intensity = 1.5
+        if let confetti = confettiView {
+            self.view.addSubview(confetti)
+        }
     }
     
     func cleariTunesPreferences() {

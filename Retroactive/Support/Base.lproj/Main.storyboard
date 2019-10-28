@@ -1185,33 +1185,6 @@ run on macOS Catalina.</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" alignment="left" imageScaling="proportionallyDown" image="aperture_cartoon" id="Khc-jQ-8sx"/>
                             </imageView>
-                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WUy-E7-LH2">
-                                <rect key="frame" x="204" y="462" width="4" height="14"/>
-                                <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-vp-cWZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="4" height="14"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="Yju-Tf-nzw">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system" size="28"/>
-                                        </buttonCell>
-                                    </button>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-GZ-Lq3">
-                                <rect key="frame" x="204" y="453" width="4" height="22"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" id="nmn-L9-PeB">
-                                    <font key="font" metaFont="system" size="19"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBg-47-9hl" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
                                 <rect key="frame" x="125" y="179" width="786" height="103"/>
                                 <autoresizingMask key="autoresizingMask"/>
