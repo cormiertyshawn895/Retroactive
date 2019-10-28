@@ -814,7 +814,7 @@ I’ll modify it to work on macOS Catalina.</string>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVj-GS-wyN" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="385" y="34" width="238" height="422"/>
+                                <rect key="frame" x="385" y="32" width="238" height="422"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="iphoto_cartoon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="fyR-if-oPa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -866,8 +866,11 @@ I’ll modify it to work on macOS Catalina.</string>
                     </view>
                     <connections>
                         <outlet property="apertureButton" destination="YFO-g2-phh" id="g6D-r7-jcD"/>
+                        <outlet property="apertureLabel" destination="boF-ID-sBM" id="Zat-bD-5fZ"/>
                         <outlet property="iphotoButton" destination="EVj-GS-wyN" id="4s9-Lo-nJy"/>
+                        <outlet property="iphotoLabel" destination="bmv-bW-JTb" id="aQh-Kf-GQn"/>
                         <outlet property="itunesButton" destination="aih-99-tah" id="IMo-kU-J2t"/>
+                        <outlet property="itunesLabel" destination="RYp-Oi-nLs" id="zc6-26-RMA"/>
                     </connections>
                 </viewController>
                 <customObject id="XHC-cX-gbX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1017,6 +1020,7 @@ I’ll modify it to work on macOS Catalina.</string>
                         <outlet property="iconImageView" destination="NhO-GK-KOq" id="keF-xH-RlS"/>
                         <outlet property="needInstallFirstTitle" destination="nCz-Am-4bb" id="9rr-pG-fi5"/>
                         <outlet property="timeMachineAppLabel" destination="Ydb-g6-A16" id="dV4-oa-7XP"/>
+                        <outlet property="timeMachineImageButton" destination="l5N-Fz-DFM" id="67S-jL-PVK"/>
                     </connections>
                 </viewController>
                 <customObject id="cEz-8V-wnD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1370,8 +1374,11 @@ You can use {name} now.</string>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="appStoreButton" destination="eKN-s4-v7R" id="obl-bC-xMs"/>
                         <outlet property="appStoreVersionView" destination="fox-RP-Kpo" id="bJS-bF-Ict"/>
+                        <outlet property="coverFlowButton" destination="VCh-XX-10X" id="1C9-Ic-5rB"/>
                         <outlet property="coverFlowVersionView" destination="jpu-Fc-OJG" id="leT-OB-LtZ"/>
+                        <outlet property="darkModeButton" destination="PLM-mg-Kxg" id="OIB-Js-dGD"/>
                         <outlet property="darkModeVersionView" destination="yha-Hy-OXT" id="sKM-ya-wyD"/>
                         <outlet property="nextButton" destination="ZgS-UH-zbG" id="0ut-XR-TTG"/>
                     </connections>
@@ -1384,7 +1391,7 @@ You can use {name} now.</string>
         <scene sceneID="IR6-7j-kZE">
             <objects>
                 <viewController storyboardIdentifier="VersionChoiceViewController" id="EbC-qc-unv" customClass="VersionChoiceViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="6dl-Fq-oDy" customClass="AcceptsMouseView" customModule="Retroactive" customModuleProvider="target">
+                    <view key="view" id="6dl-Fq-oDy">
                         <rect key="frame" x="0.0" y="0.0" width="294" height="277"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -1532,6 +1539,7 @@ You can use {name} now.</string>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="authenticateButton" destination="iYC-bf-t4H" id="aje-xn-DrA"/>
                         <outlet property="explainationLabel" destination="Gra-Jh-rYX" id="Lhh-ia-z9C"/>
                         <outlet property="iconView" destination="5Tt-dG-ikx" id="YT7-nL-KZ0"/>
                         <outlet property="searchingForLabel" destination="Eah-NJ-Zxt" id="N5J-1O-I0l"/>

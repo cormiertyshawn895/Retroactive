@@ -192,6 +192,26 @@ class AppManager: NSObject {
         return configurationDictionary?["iTunes129ExpectedName"] as? String
     }
     
+    var apertureDive: String? {
+        return configurationDictionary?["ApertureDive"] as? String
+    }
+    
+    var iPhotoDive: String? {
+        return configurationDictionary?["iPhotoDive"] as? String
+    }
+    
+    var iTunes129Dive: String? {
+        return configurationDictionary?["iTunes129Dive"] as? String
+    }
+    
+    var iTunes126Dive: String? {
+        return configurationDictionary?["iTunes126Dive"] as? String
+    }
+
+    var iTunes107Dive: String? {
+        return configurationDictionary?["iTunes107Dive"] as? String
+    }
+
     var downloadURLOfChosenApp: String? {
         get {
             switch self.chosenApp {
@@ -384,26 +404,26 @@ class AppManager: NSObject {
         }
     }
     
-    var behindTheScenesOfChosenApp: String {
+    var behindTheScenesOfChosenApp: String? {
         get {
             switch self.chosenApp {
             case .aperture:
-                return "https://medium.com/@cormiertyshawn895/how-to-run-aperture-and-iphoto-on-macos-catalina-46a86d028b87"
+                return apertureDive
             case .iphoto:
-                return "https://medium.com/@cormiertyshawn895/how-to-run-aperture-and-iphoto-on-macos-catalina-46a86d028b87"
+                return iPhotoDive
             case .itunes:
                 switch choseniTunesVersion {
                 case .darkMode:
-                    return "https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27843550#post-27843550"
+                    return iTunes129Dive
                 case .appStore:
-                    return "https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27807492#post-27807492"
+                    return iTunes126Dive
                 case .coverFlow:
-                    return "https://forums.macrumors.com/threads/how-to-safely-re-install-itunes-10-7-in-mavericks.1667115/"
+                    return iTunes107Dive
                 case .none:
-                    return ""
+                    return nil
                 }
             default:
-                return ""
+                return nil
             }
         }
     }

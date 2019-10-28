@@ -5,6 +5,15 @@
 
 import Cocoa
 
+extension NSView {
+    func moveIntoView(_ newView: NSView) {
+        let newRect = self.convert(self.bounds, to: newView)
+        self.removeFromSuperview()
+        self.frame = newRect
+        newView.addSubview(self)
+    }
+}
+
 class DisplayOnlyTextField: NSTextField {
     public override func hitTest(_ point: NSPoint) -> NSView? {
         return subviews.first { subview in
@@ -31,7 +40,7 @@ public class DisplayOnlyNSView: NSView {
 
 class AcceptsMouseView: NSView {
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
-        return true
+        return false
     }
 }
 

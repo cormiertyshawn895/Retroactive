@@ -15,6 +15,7 @@ class GuidanceViewController: NSViewController {
     @IBOutlet weak var airDropAppLabel: DisplayOnlyTextField!
     @IBOutlet weak var timeMachineAppLabel: DisplayOnlyTextField!
     @IBOutlet weak var continueButton: NSButton!
+    @IBOutlet weak var timeMachineImageButton: HoverButton!
     
     static func instantiate() -> GuidanceViewController {
         return NSStoryboard.main!.instantiateController(withIdentifier: "GuidanceViewController") as! GuidanceViewController
@@ -31,6 +32,9 @@ class GuidanceViewController: NSViewController {
         continueButton.updateTitle()
         downloadAppImage.image = AppManager.shared.appStoreImage
         airDropAppImage.image = AppManager.shared.airdropImage
+        downloadAppLabel.moveIntoView(downloadAppImage)
+        airDropAppLabel.moveIntoView(airDropAppImage)
+        timeMachineAppLabel.moveIntoView(timeMachineImageButton)
     }
     
     @IBAction func appStoreClicked(_ sender: Any) {

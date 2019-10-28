@@ -9,6 +9,7 @@ class AuthenticateViewController: NSViewController {
     @IBOutlet weak var iconView: DisplayOnlyImageView!
     @IBOutlet weak var searchingForLabel: DisplayOnlyTextField!
     @IBOutlet weak var explainationLabel: DisplayOnlyTextField!
+    @IBOutlet weak var authenticateButton: AccentGradientButton!
     
     static func instantiate() -> AuthenticateViewController {
         return NSStoryboard.main!.instantiateController(withIdentifier: "AuthenticateViewController") as! AuthenticateViewController
@@ -19,6 +20,7 @@ class AuthenticateViewController: NSViewController {
         iconView.updateIcon()
         searchingForLabel.updateToken()
         explainationLabel.updateToken()
+        explainationLabel.moveIntoView(authenticateButton)
     }
     
     @IBAction func authenticateClicked(_ sender: Any) {

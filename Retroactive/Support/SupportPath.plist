@@ -19,7 +19,7 @@
 	<key>NewIssuePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/issues/new</string>
 	<key>IssuesPage</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/issues</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/issues?q=</string>
 	<key>WikiPage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/wiki</string>
 	<key>iTunes129ExpectedName</key>
@@ -34,5 +34,15 @@
 	<string>http://appldnld.apple.com/iTunes10/041-7195.20120912.d3uzQ/iTunes10.7.dmg</string>
 	<key>iTunes126URL</key>
 	<string>https://secure-appldnld.apple.com/itunes12/091-87821-20180912-69177170-B085-11E8-B6AB-C1D03409AD2A/iTunes12.6.5.dmg</string>
+	<key>ApertureDive</key>
+	<string>https://medium.com/@cormiertyshawn895/deep-dive-how-does-retroactive-work-95fe0e5ea49e</string>
+	<key>iPhotoDive</key>
+	<string>https://medium.com/@cormiertyshawn895/deep-dive-how-does-retroactive-work-95fe0e5ea49e</string>
+	<key>iTunes129Dive</key>
+	<string>https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27843550#post-27843550</string>
+	<key>iTunes126Dive</key>
+	<string>https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27807492#post-27807492</string>
+	<key>iTunes107Dive</key>
+	<string>https://forums.macrumors.com/threads/how-to-safely-re-install-itunes-10-7-in-mavericks.1667115/</string>
 </dict>
 </plist>

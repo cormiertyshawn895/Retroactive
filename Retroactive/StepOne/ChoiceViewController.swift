@@ -16,7 +16,10 @@ class ChoiceViewController: NSViewController {
     @IBOutlet weak var apertureButton: NSButton!
     @IBOutlet weak var iphotoButton: NSButton!
     @IBOutlet weak var itunesButton: NSButton!
-    weak var shiningOnButton: NSButton?
+    @IBOutlet weak var apertureLabel: NSTextField!
+    @IBOutlet weak var iphotoLabel: NSTextField!
+    @IBOutlet weak var itunesLabel: NSTextField!
+    
     var appFinder: AppFinder?
     
     static func instantiate() -> ChoiceViewController
@@ -26,6 +29,9 @@ class ChoiceViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        apertureLabel.moveIntoView(apertureButton)
+        iphotoLabel.moveIntoView(iphotoButton)
+        itunesLabel.moveIntoView(itunesButton)
     }
     
     override func viewDidAppear() {

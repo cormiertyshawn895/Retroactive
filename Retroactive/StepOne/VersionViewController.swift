@@ -10,6 +10,10 @@ class VersionViewController: NSViewController {
     @IBOutlet weak var appStoreVersionView: NSView!
     @IBOutlet weak var coverFlowVersionView: NSView!
     @IBOutlet weak var nextButton: NSButton!
+    @IBOutlet weak var darkModeButton: HoverButton!
+    @IBOutlet weak var appStoreButton: HoverButton!
+    @IBOutlet weak var coverFlowButton: HoverButton!
+    
     var choiceVCs: [VersionChoiceViewController] = []
     
     static func instantiate() -> VersionViewController
@@ -19,14 +23,15 @@ class VersionViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let versionViews = [darkModeVersionView, appStoreVersionView, coverFlowVersionView]
-        var versions: [iTunesVersion] = [.darkMode, .appStore, .coverFlow]
-        for view in versionViews {
+        let versionViews : [(NSView, HoverButton, iTunesVersion)] = [(darkModeVersionView, darkModeButton, .darkMode), (appStoreVersionView, appStoreButton, .appStore), (coverFlowVersionView, coverFlowButton, .coverFlow)]
+        for (view, button, version) in versionViews {
             let choiceVC = VersionChoiceViewController.instantiate()
-            choiceVC.itunesApp = iTunesApp(versions.first!)
-            versions.removeFirst()
-            view?.addSubview(choiceVC.view)
+            choiceVC.itunesApp = iTunesApp(version)
+            view.addSubview(choiceVC.view)
             self.addChild(choiceVC)
+            for choiceSubview in choiceVC.view.subviews {
+                choiceSubview.moveIntoView(button)
+            }
             choiceVCs.append(choiceVC)
         }
         nextButton.updateTitle()

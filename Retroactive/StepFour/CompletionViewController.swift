@@ -32,6 +32,7 @@ class CompletionViewController: NSViewController {
         launchAppLabel.addShadow()
         iconView.updateIcon()
         behindTheScenesButton.updateTitle()
+        launchAppLabel.moveIntoView(launchAppButton)
     }
     
     override func viewDidAppear() {
@@ -111,9 +112,7 @@ class CompletionViewController: NSViewController {
             self.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
             return
         }
-        if let url = URL(string: AppManager.shared.behindTheScenesOfChosenApp) {
-            NSWorkspace.shared.open(url)
-        }
+        AppDelegate.current.safelyOpenURL(AppManager.shared.behindTheScenesOfChosenApp)
     }
 
 }
