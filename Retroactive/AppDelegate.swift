@@ -155,7 +155,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func openIssue(_ sender: Any? = nil) {
-        self.safelyOpenURL(AppManager.shared.issuesPage)
+        self.safelyOpenURL(AppManager.shared.newIssuePage)
     }
 
     @IBAction func viewSource(_ sender: Any? = nil) {
@@ -164,6 +164,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func projectPage(_ sender: Any? = nil) {
         self.safelyOpenURL(AppManager.shared.sourcePage)
+    }
+    
+    @IBAction func wikiPage(_ sender: Any) {
+        self.safelyOpenURL(AppManager.shared.wikiPage)
+    }
+    
+    @IBAction func issueTracker(_ sender: Any) {
+        self.safelyOpenURL(AppManager.shared.issuesPage)
     }
     
     func safelyOpenURL(_ urlString: String?) {

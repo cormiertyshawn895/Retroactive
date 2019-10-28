@@ -168,8 +168,16 @@ class AppManager: NSObject {
         return configurationDictionary?["SourcePage"] as? String
     }
     
+    var newIssuePage: String? {
+        return configurationDictionary?["NewIssuePage"] as? String
+    }
+    
     var issuesPage: String? {
         return configurationDictionary?["IssuesPage"] as? String
+    }
+    
+    var wikiPage: String? {
+        return configurationDictionary?["WikiPage"] as? String
     }
     
     var iTunesCatalogURL: String? {

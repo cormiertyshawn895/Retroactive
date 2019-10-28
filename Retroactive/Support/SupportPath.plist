@@ -16,8 +16,12 @@
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases</string>
 	<key>SourcePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive</string>
+	<key>NewIssuePage</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive/issues/new</string>
 	<key>IssuesPage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/issues</string>
+	<key>WikiPage</key>
+	<string>https://github.com/cormiertyshawn895/Retroactive/wiki</string>
 	<key>iTunes129ExpectedName</key>
 	<string>InstallESDDmg.pkg</string>
 	<key>iTunes129CatalogURL</key>
