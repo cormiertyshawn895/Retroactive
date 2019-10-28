@@ -69,7 +69,7 @@ If Retroactive ask for your login password again, enter it again. Otherwise, the
 
 ![](screenshots/8.jpg)
 
-When the app has been successfully modified or installed, you will be able to launch and use it.
+After successfully modifying or installing the app, you can play with it to your heart's content.
 
 ![](screenshots/9.jpg)
 
