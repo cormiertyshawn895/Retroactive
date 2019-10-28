@@ -1,8 +1,8 @@
 ## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina.
 
-The Retroactive app can modify Aperture, iPhoto, and iTunes to run on macOS Catalina. [Directly download the Retroactive app by clicking here](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.0/Retroactive.1.0.zip), or [from the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
+The Retroactive app can modify Aperture, iPhoto, and iTunes to run on macOS Catalina. [Directly download the Retroactive app here](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.0/Retroactive.1.0.zip), or [from the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
 
---
+---
 
 ### Opening Retroactive
 
@@ -18,7 +18,7 @@ If you right-clicked when opening Retroactive for the first time, you need to [r
 
 Retroactive will not harm your Mac. This alert only shows up because Retroactive is not notarized. Retroactive is open source, so you can always examine its source code to make sure it’s safe.
 
--- 
+---
 
 ### Picking an app
 
@@ -28,7 +28,7 @@ This is obvious! Just pick the app you want to run on macOS Catalina. If you wan
 
 I’ll choose Aperture as the example here, but the same process also works for iPhoto and iTunes.
 
---
+---
 
 ### Locating the app or choosing a version
 
@@ -47,7 +47,7 @@ If you chose iTunes, Retroactive will ask you which version to install, then aut
 
 If you don’t know which version to install, keep the default setting and click “Continue”.
 
---
+---
 
 ### Authenticating Retroactive
 
@@ -57,7 +57,7 @@ To install or modify the app you chose, you need to authenticate with your login
 
 Your password is never stored or sent anywhere. To verify this, you can view Retroactive’s source code.
 
---
+---
 
 ### Modifying the app
 
@@ -71,7 +71,7 @@ If Retroactive asks for your login password again, enter it again. Otherwise, th
 
 ![](screenshots/8.jpg)
 
---
+---
 
 ### Using the app
 
@@ -87,7 +87,7 @@ After successfully modifying or installing the app, you can play with it to your
 
 - iTunes 10.7 may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes.
 
---
+---
 
 ### Last Words
 - If GateKeeper prevents you from running modified versions of Aperture, iPhoto or iTunes, [temporarily disable GateKeeper in Terminal with `sudo spctl --master-disable`](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/).
