@@ -16,8 +16,11 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
             return titleLabel.stringValue
         }
         set {
-            titleLabel.stringValue = newValue
-            self.view.window?.title = "\(newValue) — Retroactive App"
+            if newValue == "Untitled" {
+                titleLabel.stringValue = "Retroactive"
+            } else {
+                titleLabel.stringValue = newValue
+            }
         }
     }
     
