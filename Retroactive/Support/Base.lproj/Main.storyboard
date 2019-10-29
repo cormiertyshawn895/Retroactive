@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14810.11"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -739,19 +739,11 @@
                                 </subviews>
                             </visualEffectView>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Tc-LH-rh1">
-                                <rect key="frame" x="421" y="605" width="170" height="16"/>
+                                <rect key="frame" x="455" y="605" width="101" height="16"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-p6-swQ">
-                                        <rect key="frame" x="-2" y="0.0" width="56" height="16"/>
-                                        <textFieldCell key="cell" alignment="center" title="Untitled" id="gp1-tX-nja">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4PW-jV-20u">
-                                        <rect key="frame" x="50" y="0.0" width="122" height="16"/>
-                                        <textFieldCell key="cell" alignment="center" title="— Retroactive App" id="8dJ-eQ-KsA">
+                                        <rect key="frame" x="-2" y="0.0" width="105" height="16"/>
+                                        <textFieldCell key="cell" alignment="center" title="Retroactive App" id="8dJ-eQ-KsA">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -760,10 +752,8 @@
                                 </subviews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
@@ -775,7 +765,6 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Y48-e4-WI5" id="eEO-cf-iMt"/>
-                        <outlet property="titleLabel" destination="mJ4-p6-swQ" id="e3u-YF-YvV"/>
                         <outlet property="titleStackView" destination="9Tc-LH-rh1" id="cDW-Gw-faq"/>
                         <outlet property="updateButton" destination="vYz-i9-IWU" id="9NM-0f-llA"/>
                     </connections>
