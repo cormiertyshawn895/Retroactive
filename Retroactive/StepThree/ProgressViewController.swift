@@ -253,8 +253,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         guard let urlString = AppManager.shared.downloadURLOfChosenApp, let chosenURL = URL(string: urlString) else { return }
         if let freeSpace = self.getGBFreeSpace() {
             print("free space: \(String(describing: freeSpace))")
-            if ((freeSpace < 20.0 && AppManager.shared.choseniTunesVersion == .darkMode) || freeSpace < 2.0) {
-                AppDelegate.showOptionSheet(title: "There isn't enough free space to install iTunes", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install iTunes, your startup disk needs to at least have 20 GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+            let freeSpaceRequirement = AppManager.shared.choseniTunesVersion == .darkMode ? 20.0 : 2.0
+            if (freeSpace < freeSpaceRequirement) {
+                AppDelegate.showOptionSheet(title: "There isn't enough free space to install iTunes", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install iTunes, your startup disk needs to at least have \(Int(freeSpaceRequirement)) GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
                     if (response == .alertFirstButtonReturn) {
                         self.kickoffiTunesDownload()
                     } else {

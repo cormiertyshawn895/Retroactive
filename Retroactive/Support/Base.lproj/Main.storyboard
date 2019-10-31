@@ -837,7 +837,7 @@ I’ll modify it to work on macOS Catalina.</string>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="boF-ID-sBM">
-                                <rect key="frame" x="150" y="118" width="90" height="24"/>
+                                <rect key="frame" x="154" y="112" width="90" height="24"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Aperture" id="5wq-le-A3N">
                                     <font key="font" metaFont="system" size="21"/>
@@ -846,7 +846,7 @@ I’ll modify it to work on macOS Catalina.</string>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmv-bW-JTb">
-                                <rect key="frame" x="468" y="112" width="72" height="24"/>
+                                <rect key="frame" x="477" y="112" width="72" height="24"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="iPhoto" id="UsG-Bx-gH6">
                                     <font key="font" metaFont="system" size="21"/>
@@ -855,7 +855,7 @@ I’ll modify it to work on macOS Catalina.</string>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYp-Oi-nLs">
-                                <rect key="frame" x="781" y="112" width="68" height="24"/>
+                                <rect key="frame" x="782" y="112" width="68" height="24"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="iTunes" id="iPE-Jd-BL4">
                                     <font key="font" metaFont="system" size="21"/>
