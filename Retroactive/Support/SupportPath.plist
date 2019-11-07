@@ -9,7 +9,7 @@
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.1/Retroactive.1.1.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>5</integer>
+	<integer>6</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

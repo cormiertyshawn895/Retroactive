@@ -51,7 +51,7 @@ class ChoiceViewController: NSViewController {
     }
     
     @IBAction func itunesClicked(_ sender: Any) {
-        if (ProcessInfo.processInfo.operatingSystemVersion.patchVersion <= 14) {
+        if (ProcessInfo.processInfo.operatingSystemVersion.minorVersion <= 14) {
             AppDelegate.showTextSheet(title: "iTunes is already installed", text: "iTunes is already installed on \(ProcessInfo.versionString) by default. \n\nIf you need to run iTunes after upgrading to macOS Catalina, open Retroactive again after upgrading to macOS Catalina.")
             return
         }
