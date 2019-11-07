@@ -162,7 +162,11 @@ class AppFinder: NSObject {
     }
     
     static func openMacAppStore() {
-        NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/System/Applications/App Store.app"), configuration: .init(), completionHandler: nil)
+        if #available(OSX 10.15, *) {
+            NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/System/Applications/App Store.app"), configuration: .init(), completionHandler: nil)
+        } else {
+            NSWorkspace.shared.launchApplication("App Store")
+        }
     }
 
 }

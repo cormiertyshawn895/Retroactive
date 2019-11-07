@@ -14,7 +14,7 @@ class VersionChoiceViewController: NSViewController {
     
     static func instantiate() -> VersionChoiceViewController
     {
-        return NSStoryboard.main!.instantiateController(withIdentifier: "VersionChoiceViewController") as! VersionChoiceViewController
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "VersionChoiceViewController") as! VersionChoiceViewController
     }
 
     override func viewDidLoad() {
@@ -23,7 +23,6 @@ class VersionChoiceViewController: NSViewController {
         self.screenshotView.image = itunesApp?.previewScreenshot
         self.featureDescription.stringValue = itunesApp?.featureDescriptionString ?? ""
         self.versionDescription.stringValue = "iTunes \(itunesApp?.versionNumberString ?? "")"
-        AppManager.shared.choseniTunesVersion = .darkMode
     }
     
 }

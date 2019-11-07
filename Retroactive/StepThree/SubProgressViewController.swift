@@ -14,7 +14,7 @@ class SubProgressViewController: NSViewController {
     
     static func instantiate() -> SubProgressViewController
     {
-        return NSStoryboard.main!.instantiateController(withIdentifier: "SubProgressViewController") as! SubProgressViewController
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "SubProgressViewController") as! SubProgressViewController
     }
 
     override func viewDidLoad() {
@@ -24,6 +24,7 @@ class SubProgressViewController: NSViewController {
         circularProgress.lineWidth = 4.0
         circularProgress.cancelProgress()
         circularProgress.isIndeterminate = true
+        numberBox.fillColor = NSColor.controlAccentColorPolyfill
         self.progressTextField.stringValue = "Waiting..."
     }
     

@@ -6,13 +6,17 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		USYsYgCZols0wWewVspvRkiozQQ=
+		ZTZmqC4uMqVcupc/nVpiJbsKnoo=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/ApertureFixer.h</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			9CYBX4PqwB3GvOPSm60abIFrfz0=
+			</data>
 			<key>hash2</key>
 			<data>
 			UAQubzh7eIHSJm7mWAgjUO/3UKzO2JAAW7s/Lkpgtc0=
@@ -20,6 +24,10 @@
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			Fin0qpfJrFJwreOl64pLvHzSE3Q=
+			</data>
 			<key>hash2</key>
 			<data>
 			UZX+S9KIEhxNqPXYdtU3W8BhF/L1ULM5PE+HrH8zZ5g=
@@ -27,9 +35,13 @@
 		</dict>
 		<key>Resources/Info.plist</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			ZTZmqC4uMqVcupc/nVpiJbsKnoo=
+			</data>
 			<key>hash2</key>
 			<data>
-			kpkD0mp/5M4db5FQo5ghOkHYNOrTFRZQ5h3HjaPFuZs=
+			YZ7Fd1Piy7uQtroekN8ReOf9liuHGTDnvP82reqZMkw=
 			</data>
 		</dict>
 	</dict>

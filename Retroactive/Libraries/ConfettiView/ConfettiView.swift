@@ -79,11 +79,11 @@ open class ConfettiView: ConfettiView.View {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            topAnchor.constraint(equalTo: superview.topAnchor),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor)
-            ])
+            NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: superview, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: superview, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .bottom, multiplier: 1, constant: 0),
+        ])
     }
 
     #if canImport(AppKit)
@@ -117,6 +117,10 @@ open class ConfettiView: ConfettiView.View {
                                                name: View.frameDidChangeNotification,
                                                object: nil)
         #endif
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     open func startConfetti() {

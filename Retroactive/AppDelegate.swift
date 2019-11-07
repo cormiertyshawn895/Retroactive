@@ -29,6 +29,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return NSApp.mainWindow?.contentViewController as? RootViewController
         }
     }
+    
+    static func openKBArticle(_ identifier: String) {
+        let url = URL(string:"https://support.apple.com/en-us/HT\(identifier)")!
+        NSWorkspace.shared.open(url)
+    }
 
     static func showOptionSheet(title: String, text: String, firstButtonText: String, secondButtonText: String, thirdButtonText: String, callback: @escaping ((_ response: NSApplication.ModalResponse)-> ())) {
         let alert = NSAlert()
@@ -148,9 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if (AppManager.shared.hasNewerVersion == true) {
             self.promptForUpdateAvailable()
         } else {
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { (timer) in
-                self.promptForUpdateAvailable()
-            }
+            Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(promptForUpdateAvailable), userInfo: nil, repeats: false)
         }
     }
 
@@ -180,7 +183,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    func promptForUpdateAvailable() {
+    @objc func promptForUpdateAvailable() {
         if (AppManager.shared.hasNewerVersion == true) {
             AppDelegate.showOptionSheet(title: AppManager.shared.newVersionVisibleTitle ?? "Update available.", text: AppManager.shared.newVersionChangelog ?? "A newer version of Retroactive is available.", firstButtonText: "Download", secondButtonText: "Learn More...", thirdButtonText: "Cancel") { (response) in
                 if (response == .alertFirstButtonReturn) {

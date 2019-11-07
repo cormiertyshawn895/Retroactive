@@ -32,7 +32,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
     static func instantiate() -> ProgressViewController
     {
-        return NSStoryboard.main!.instantiateController(withIdentifier: "ProgressViewController") as! ProgressViewController
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "ProgressViewController") as! ProgressViewController
     }
 
     override func viewDidLoad() {
@@ -142,9 +142,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 }
             }
             updateClosure()
-            self.progressTimer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { (timer) in
+            self.progressTimer = Timer.scheduledTimer(timeInterval: 1/60, target: BlockOperation {
                 updateClosure()
-            }
+            }, selector: #selector(Operation.main), userInfo: nil, repeats: true)
         }
     }
     
@@ -433,23 +433,25 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         if AppManager.shared.choseniTunesVersion == .darkMode {
             print("Chosen Dark Mode iTunes")
-            let timer = Timer.init(timeInterval: 15.0, repeats: true) { (timer) in
-                print("Timer fired to seek for extraction progress")
-                let libraryPath = "\(packageExtractionPath)/Payload/Library"
-                let libraryExists = FileManager.default.fileExists(atPath: libraryPath)
-                let afterPackageExists = FileManager.default.fileExists(atPath: afterPackagePath)
-                print("libraryPath = \(libraryPath), libraryExists = \(libraryExists), afterPackageExists = \(afterPackageExists)")
-                if libraryExists && afterPackageExists {
-                    let resourcePath = Bundle.main.resourcePath!.fileSystemString
-                    // Extracting the entire macOS installer takes way too long
-                    // Kill pkg extraction before fans spin up too loud
-                    ProgressViewController.runTask(toolPath: "killpkg", arguments: [], path: resourcePath)
-                    timer.invalidate()
-                    stageAfterExpansion()
+            if #available(OSX 10.12, *) {
+                let timer = Timer.init(timeInterval: 15.0, repeats: true) { (timer) in
+                    print("Timer fired to seek for extraction progress")
+                    let libraryPath = "\(packageExtractionPath)/Payload/Library"
+                    let libraryExists = FileManager.default.fileExists(atPath: libraryPath)
+                    let afterPackageExists = FileManager.default.fileExists(atPath: afterPackagePath)
+                    print("libraryPath = \(libraryPath), libraryExists = \(libraryExists), afterPackageExists = \(afterPackageExists)")
+                    if libraryExists && afterPackageExists {
+                        let resourcePath = Bundle.main.resourcePath!.fileSystemString
+                        // Extracting the entire macOS installer takes way too long
+                        // Kill pkg extraction before fans spin up too loud
+                        ProgressViewController.runTask(toolPath: "killpkg", arguments: [], path: resourcePath)
+                        timer.invalidate()
+                        stageAfterExpansion()
+                    }
                 }
+                RunLoop.main.add(timer, forMode: .common)
+                ProgressViewController.runTask(toolPath: "/usr/sbin/pkgutil", arguments: ["--expand-full", packagePath, packageExtractionPath], path: tempDir, wait: false)
             }
-            RunLoop.main.add(timer, forMode: .common)
-            ProgressViewController.runTask(toolPath: "/usr/sbin/pkgutil", arguments: ["--expand-full", packagePath, packageExtractionPath], path: tempDir, wait: false)
         }
     
         if AppManager.shared.choseniTunesVersion != .darkMode {

@@ -32,10 +32,10 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
         self.view.addSubview(self.navigationController.view)
         
         NSLayoutConstraint.activate([
-            self.view.topAnchor.constraint(equalTo: self.navigationController.view.topAnchor),
-            self.view.leadingAnchor.constraint(equalTo: self.navigationController.view.leadingAnchor),
-            self.view.trailingAnchor.constraint(equalTo: self.navigationController.view.trailingAnchor),
-            self.view.bottomAnchor.constraint(equalTo: self.navigationController.view.bottomAnchor),
+            NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: self.navigationController.view, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .leading, relatedBy: .equal, toItem: self.navigationController.view, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .trailing, relatedBy: .equal, toItem: self.navigationController.view, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .bottom, relatedBy: .equal, toItem: self.navigationController.view, attribute: .bottom, multiplier: 1, constant: 0),
         ])
         
         titleStackView.wantsLayer = true
@@ -44,12 +44,7 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     func alertForOSIncompatibility() {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
         if osVersion.minorVersion > 15 {
-            let patchVersion = osVersion.patchVersion
-            var patchString = ""
-            if (patchVersion > 0) {
-                patchString = ".\(patchVersion)"
-            }
-            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive", text: "This version of Retroactive is only designed and tested for macOS Catalina, and may be incompatible with macOS \(osVersion.majorVersion).\(osVersion.minorVersion)\(patchString).", firstButtonText: "Check for Updates", secondButtonText: "Run Anyways", thirdButtonText: "Quit") { (response) in
+            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive", text: "This version of Retroactive is only designed and tested for macOS Catalina, and may be incompatible with \(ProcessInfo.versionString).", firstButtonText: "Check for Updates", secondButtonText: "Run Anyways", thirdButtonText: "Quit") { (response) in
                 if (response == .alertFirstButtonReturn) {
                     AppDelegate.current.checkForUpdates()
                     // NSApplication.shared.terminate(self)

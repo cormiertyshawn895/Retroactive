@@ -24,7 +24,7 @@ class ChoiceViewController: NSViewController {
     
     static func instantiate() -> ChoiceViewController
     {
-        NSStoryboard.main!.instantiateController(withIdentifier: "ChoiceViewController") as! ChoiceViewController
+        NSStoryboard.standard!.instantiateController(withIdentifier: "ChoiceViewController") as! ChoiceViewController
     }
     
     override func viewDidLoad() {

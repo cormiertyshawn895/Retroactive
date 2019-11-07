@@ -18,7 +18,7 @@ class GuidanceViewController: NSViewController {
     @IBOutlet weak var timeMachineImageButton: HoverButton!
     
     static func instantiate() -> GuidanceViewController {
-        return NSStoryboard.main!.instantiateController(withIdentifier: "GuidanceViewController") as! GuidanceViewController
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "GuidanceViewController") as! GuidanceViewController
     }
 
     override func viewDidLoad() {
@@ -42,11 +42,11 @@ class GuidanceViewController: NSViewController {
     }
     
     @IBAction func airDropClicked(_ sender: Any) {
-        openKBArticle("203106")
+        AppDelegate.openKBArticle("203106")
     }
     
     @IBAction func timeMachineClicked(_ sender: Any) {
-        openKBArticle("209152")
+        AppDelegate.openKBArticle("209152")
     }
     
     @IBAction func alreadyInstalledClicked(_ sender: Any) {
@@ -58,8 +58,4 @@ class GuidanceViewController: NSViewController {
         AppFinder.shared.queryAllInstalledApps(shouldPresentAlert: true, claimsToHaveInstalled: false)
     }
     
-    func openKBArticle(_ identifier: String) {
-        let url = URL(string:"https://support.apple.com/en-us/HT\(identifier)")!
-        NSWorkspace.shared.open(url)
-    }
 }

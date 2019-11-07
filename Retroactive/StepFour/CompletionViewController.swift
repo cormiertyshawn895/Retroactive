@@ -18,7 +18,7 @@ class CompletionViewController: NSViewController {
     
     static func instantiate() -> CompletionViewController
     {
-        return NSStoryboard.main!.instantiateController(withIdentifier: "CompletionViewController") as! CompletionViewController
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "CompletionViewController") as! CompletionViewController
     }
 
     override func viewDidLoad() {
@@ -39,9 +39,11 @@ class CompletionViewController: NSViewController {
         super.viewDidAppear()
         addConfettiView()
         confettiView?.startConfetti()
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { (_) in
-            self.confettiView?.stopConfetti()
-        }
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(stopConfetti), userInfo: nil, repeats: false)
+    }
+    
+    @objc func stopConfetti() {
+        self.confettiView?.stopConfetti()
     }
     
     func addConfettiView() {

@@ -18,7 +18,7 @@ class VersionViewController: NSViewController {
     
     static func instantiate() -> VersionViewController
     {
-        return NSStoryboard.main!.instantiateController(withIdentifier: "VersionViewController") as! VersionViewController
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "VersionViewController") as! VersionViewController
     }
 
     override func viewDidLoad() {
@@ -36,6 +36,7 @@ class VersionViewController: NSViewController {
         }
         nextButton.updateTitle()
         self.selectedVersion = .darkMode
+        AppManager.shared.choseniTunesVersion = .darkMode
     }
     
     var selectedVersion: iTunesVersion? {

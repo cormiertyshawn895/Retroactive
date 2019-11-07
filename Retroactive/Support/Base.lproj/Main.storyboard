@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1407,7 +1408,7 @@ You can use {name} now.</string>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tick" id="A75-s9-ArJ"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R19-Kp-Kw6">
-                                <rect key="frame" x="23" y="41" width="264" height="27"/>
+                                <rect key="frame" x="23" y="41" width="273" height="27"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="DJ apps and Dark Mode" id="XcH-vJ-cWe">
                                     <font key="font" metaFont="systemMedium" size="23"/>
@@ -1545,6 +1546,7 @@ You can use {name} now.</string>
                         <outlet property="explainationLabel" destination="Gra-Jh-rYX" id="Lhh-ia-z9C"/>
                         <outlet property="iconView" destination="5Tt-dG-ikx" id="YT7-nL-KZ0"/>
                         <outlet property="searchingForLabel" destination="Eah-NJ-Zxt" id="N5J-1O-I0l"/>
+                        <outlet property="viewSourceButton" destination="y4m-yh-iGl" id="ZLP-vT-uKm"/>
                     </connections>
                 </viewController>
                 <customObject id="ThI-SK-k7l" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
