@@ -7,6 +7,7 @@ import Cocoa
 
 let shortBundleVersionKey = "CFBundleShortVersionString"
 let bundleVersionKey = "CFBundleVersion"
+let fixerFrameworkSubPath = "Contents/Frameworks/ApertureFixer.framework"
 
 class AppFinder: NSObject {
     var query: NSMetadataQuery?
@@ -69,8 +70,29 @@ class AppFinder: NSObject {
                 if bundleID.elementsEqual(AppManager.shared.patchedBundleIDOfChosenApp) || fullVersionNumberString == AppManager.shared.patchedVersionStringOfChosenApp {
                     print("Found compatible patched app: \(bundleID), \(path)")
                     AppManager.shared.locationOfChosenApp = path
-                    self.pushCompletionVC()
-                    return
+                    
+                    if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
+                        let existingFixerPath = "\(path)/\(fixerFrameworkSubPath)"
+                        if let existingFixerBundle = Bundle.init(path: existingFixerPath),
+                            let existingFixerVersion = existingFixerBundle.cfBundleVersionInt,
+                            let resourcePath = Bundle.main.resourcePath {
+                            let fixerResourcePath = "\(resourcePath)/ApertureFixer/Resources/Info.plist"
+                            if let loadedFixerInfoPlist = NSDictionary(contentsOfFile: fixerResourcePath) as? Dictionary<String, Any>,
+                                let bundledFixerVersionString = loadedFixerInfoPlist[bundleVersionKey] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
+                                if (existingFixerVersion < bundledFixerVersion) {
+                                    print("existing fixer is \(existingFixerVersion), bundled fixer is \(bundledFixerVersion), upgrade is available")
+                                    AppManager.shared.fixerUpdateAvailable = true
+                                } else {
+                                    self.pushCompletionVC()
+                                    return
+                                }
+                            }
+                        }
+                    } else {
+                        self.pushCompletionVC()
+                        return
+                    }
+
                 } else {
                     let contains = AppManager.shared.compatibleVersionOfChosenApp.contains { (compatibleID) -> Bool in
                         return compatibleID == versionNumberString

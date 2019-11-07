@@ -25,7 +25,7 @@ let mainActionToken = "{actionM}"
 extension Bundle {
     var cfBundleVersionInt: Int? {
         get {
-            if let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String, let intVersion = Int(bundleVersion) {
+            if let bundleVersion = self.infoDictionary?["CFBundleVersion"] as? String, let intVersion = Int(bundleVersion) {
                 return intVersion
             }
             return nil
@@ -34,7 +34,7 @@ extension Bundle {
     
     var cfBundleVersionString: String? {
         get {
-            return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            return self.infoDictionary?["CFBundleShortVersionString"] as? String
         }
     }
 }
@@ -245,6 +245,8 @@ class AppManager: NSObject {
         }
     }
     var choseniTunesVersion: iTunesVersion?
+    
+    var fixerUpdateAvailable: Bool = false
     
     var locationOfChosenApp: String?
     var nameOfChosenApp: String {

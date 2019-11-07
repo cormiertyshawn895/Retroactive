@@ -101,8 +101,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
 
             self.stage2Started()
+            let photoFixerPath = "\(appPath)/\(fixerFrameworkSubPath)"
+            self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", photoFixerPath])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"])
-            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", "\(appPath)/Contents/Frameworks/ApertureFixer.framework"])
+            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", photoFixerPath])
 
             self.stage3Started()
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
