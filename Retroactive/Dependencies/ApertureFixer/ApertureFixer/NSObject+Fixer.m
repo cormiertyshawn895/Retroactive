@@ -16,7 +16,17 @@ static
 }
 
 - (NSURL *)patched_URLForApplicationWithBundleIdentifier:(NSString *)bundleIdentifier {
-	return [self patched_URLForApplicationWithBundleIdentifier:bundleIdentifier ?: @"com.apple.iPhoto"];
+    NSString *appBundleIdentifier = [NSBundle mainBundle].bundleIdentifier;
+    if (!bundleIdentifier) {
+        if ([appBundleIdentifier containsString:@"com.apple.iPhoto"]) {
+            bundleIdentifier = @"com.apple.Aperture3";
+        } else {
+            bundleIdentifier = @"com.apple.iPhoto9";
+        }
+    }
+    NSURL *urlForBundle = [self patched_URLForApplicationWithBundleIdentifier:bundleIdentifier];
+    NSLog(@"this app is %@, looking for %@ at %@", appBundleIdentifier, bundleIdentifier, urlForBundle);
+	return urlForBundle;
 }
 
 - (void)_addToolTipRects {
@@ -32,9 +42,8 @@ static
 	method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"NSWorkspace"), NSSelectorFromString(@"URLForApplicationWithBundleIdentifier:")),
 								   class_getInstanceMethod(class, @selector(patched_URLForApplicationWithBundleIdentifier:)));
     
-    Class printClass = NSClassFromString(@"RKPrintPanel");
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKPrintPanel"), NSSelectorFromString(@"_updatePageSizePopup")),
-                                   class_getInstanceMethod(printClass, @selector(patched_updatePageSizePopup)));
+                                   class_getInstanceMethod(class, @selector(patched_updatePageSizePopup)));
     
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKRedRockApp"), NSSelectorFromString(@"_delayedFinishLaunching")),
                                    class_getInstanceMethod(class, @selector(patched_delayedFinishLaunching)));
@@ -44,6 +53,9 @@ static
     
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKPrinter"), NSSelectorFromString(@"paperWithID:")),
                                    class_getInstanceMethod(class, @selector(patched_paperWithID:)));
+    
+    method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"IPPrinterPaperSelectionView"), NSSelectorFromString(@"updatePaperMenu")),
+                                   class_getInstanceMethod(class, @selector(patched_updatePaperMenu)));
 }
 
 - (id)patched_paperWithID:(id)arg1 {
@@ -51,12 +63,21 @@ static
     return nil;
 }
 
+- (void)patched_updatePaperMenu {
+    NSLog(@"skipping updatePaperMenu to prevent crashes");
+}
+
 - (void)patched_runOperation {
-    NSLog(@"patching runOperation to run on main queue to prevent Auto Layout crashes");
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        NSLog(@"running operation on main queue");
+    NSLog(@"patching runOperation");
+    if ([NSThread isMainThread]) {
+        NSLog(@"current thread is already main thread, calling runOperation as is");
         [self patched_runOperation];
-    });
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"running operation on main queue after dispatching to main queue");
+            [self patched_runOperation];
+        });
+    }
 }
 
 - (void)patched_delayedFinishLaunching {
