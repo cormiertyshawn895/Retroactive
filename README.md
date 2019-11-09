@@ -1,6 +1,5 @@
 ## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.1/Retroactive.1.1.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
 
----
 
 ### Opening Retroactive
 
@@ -76,9 +75,9 @@ After successfully modifying or installing the app, you can play with it to your
 
 ![](screenshots/9.jpg)
 
-- All Aperture features should be available except for playing videos, exporting slideshows, printing, Photo Stream, and iCloud Photo Sharing.
+- All Aperture features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing. If RAW photos can't be opened, [you need to reprocess them](https://github.com/cormiertyshawn895/Retroactive#reprocessing-raw-photos-in-aperture).
 
-- All iPhoto features should be available except for playing videos, exporting slideshows, printing, Photo Stream, and iCloud Photo Sharing.
+- All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing.
 
 - All features should work for iTunes 12.9.5.
 
@@ -88,7 +87,19 @@ After successfully modifying or installing the app, you can play with it to your
 
 ---
 
-### Last Words
+### Reprocessing RAW photos in Aperture
+
+- In Aperture, if your RAW photos show up as “*Unsupported Image Format*”, open the “*Photos*” menu, click on “*Reprocess original…*”, and reprocess all photos. After reprocessing your RAW photos, you will be able to preview and adjust them as before.
+
+![](screenshots/reprocess.jpg)
+
+💡 Tip:
+
+- If some RAW photos still show up as "*Unsupported Image Format*" after reprocessing, repeat the process above to reprocess all photos again. In other words, you may need to reprocess all photos twice. 
+
+---
+
+### Last words
 - If GateKeeper prevents you from running modified versions of Aperture, iPhoto or iTunes, [temporarily disable GateKeeper in Terminal with `sudo spctl --master-disable`](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/).
 
 - To learn more about how Retroactive works, [take a technical deep dive](https://medium.com/@cormiertyshawn895/deep-dive-how-does-retroactive-work-95fe0e5ea49e).
