@@ -1,4 +1,4 @@
-## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.1/Retroactive.1.1.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
+## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.2/Retroactive.1.2.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
 
 
 ### Opening Retroactive
