@@ -114,6 +114,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.stage4Started()
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
+            self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
             self.stage4Finished()
             
             self.showCompletionVC()

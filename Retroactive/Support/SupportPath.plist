@@ -3,13 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.1 is available for download.</string>
+	<string>Retroactive 1.2 is available for download.</string>
 	<key>NewVersionChangelog</key>
-	<string>Retroactive 1.1 restores the ability to add adjustments, use Quick Brushes, and to print photos in Aperture.</string>
+	<string>Retroactive 1.2 contains bug fixes and additional enhancements:
+
+• Restores the ability to add adjustments and use Quick Brushes in Aperture
+• Restores the ability to print photos in Aperture and iPhoto
+• Resolves an issue where Aperture and iPhoto may fail to launch (Error 13)
+• Adds support for modifying Aperture and iPhoto to be compatible with macOS Catalina before upgrading to macOS Catalina</string>
 	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.1/Retroactive.1.1.zip</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.2/Retroactive.1.2.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>7</integer>
+	<integer>8</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

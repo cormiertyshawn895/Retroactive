@@ -627,6 +627,20 @@
                                                 <action selector="checkForUpdates" target="Voe-Tx-rLC" id="kdM-Yh-89G"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Project Page" id="Zep-T0-gcs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="projectPage:" target="Voe-Tx-rLC" id="93c-WO-D3K"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Oow-eD-yfJ"/>
+                                        <menuItem title="Get Help from Community" id="HRk-IW-XCR">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="issueTracker:" target="Voe-Tx-rLC" id="iKf-tF-P5F"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="w0N-lX-HMX"/>
                                         <menuItem title="Report an Issue" id="zEu-hd-hYQ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -637,32 +651,6 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="openIssue:" target="Voe-Tx-rLC" id="hfR-vy-lSd"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Oow-eD-yfJ"/>
-                                        <menuItem title="View Source" id="0zl-16-AQv">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="viewSource:" target="Voe-Tx-rLC" id="d6e-yF-Mgb"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="View All Feedback" id="HRk-IW-XCR">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="issueTracker:" target="Voe-Tx-rLC" id="iKf-tF-P5F"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="w0N-lX-HMX"/>
-                                        <menuItem title="Project Wiki" id="lpc-Nm-hEh">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="wikiPage:" target="Voe-Tx-rLC" id="SkA-Ev-skJ"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Project Page" id="Zep-T0-gcs">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="projectPage:" target="Voe-Tx-rLC" id="93c-WO-D3K"/>
                                             </connections>
                                         </menuItem>
                                     </items>
