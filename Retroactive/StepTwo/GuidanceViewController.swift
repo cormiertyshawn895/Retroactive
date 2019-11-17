@@ -20,12 +20,28 @@ class GuidanceViewController: NSViewController {
     static func instantiate() -> GuidanceViewController {
         return NSStoryboard.standard!.instantiateController(withIdentifier: "GuidanceViewController") as! GuidanceViewController
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let labels = [needInstallFirstTitle, downloadAppLabel, airDropAppLabel, timeMachineAppLabel]
         for label in labels {
             label!.updateToken()
+        }
+        let chosen = AppManager.shared.chosenApp
+        if (chosen == .keynote5) {
+            downloadAppLabel.stringValue = "Download and install iWork ’09 from The Internet Archive"
+            airDropAppLabel.stringValue = "Download and install the iWork 9.3 Update"
+            hideThirdLabel()
+        }
+        else if (chosen == .finalCutPro7) {
+            downloadAppLabel.stringValue = "Install Final Cut Pro 7 from DVD disc or DMG image"
+            airDropAppLabel.stringValue = "Install Pro Applications Update 2010-02"
+            hideThirdLabel()
+        }
+        else if (chosen == .logicPro9) {
+            downloadAppLabel.stringValue = "Install Logic Pro 9 from DVD disc or DMG image"
+            airDropAppLabel.stringValue = "Update to Logic Pro 9.1.8"
+            hideThirdLabel()
         }
         alreadyInstalledButton.updateTitle()
         iconImageView.updateIcon()
@@ -37,12 +53,27 @@ class GuidanceViewController: NSViewController {
         timeMachineAppLabel.moveIntoView(timeMachineImageButton)
     }
     
+    func hideThirdLabel() {
+        timeMachineImageButton.removeFromSuperview()
+        downloadAppLabel.frame = CGRect(x: downloadAppLabel.frame.origin.x + 22, y: downloadAppLabel.frame.origin.y, width: downloadAppLabel.frame.width, height: downloadAppLabel.frame.height)
+        airDropAppLabel.frame = CGRect(x: airDropAppLabel.frame.origin.x + 40, y: downloadAppLabel.frame.origin.y, width: downloadAppLabel.frame.width, height: downloadAppLabel.frame.height)
+        airDropAppImage.frame = CGRect(x: airDropAppImage.frame.origin.x, y: downloadAppImage.frame.origin.y, width: 403, height: 309)
+    }
+    
     @IBAction func appStoreClicked(_ sender: Any) {
-        AppFinder.openMacAppStore()
+        if (AppManager.shared.chosenApp == .keynote5) {
+            AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
+        } else {
+            AppFinder.openMacAppStore()
+        }
     }
     
     @IBAction func airDropClicked(_ sender: Any) {
-        AppDelegate.openKBArticle("203106")
+        if (AppManager.shared.chosenApp == .keynote5) {
+            AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09Update)
+        } else {
+            AppDelegate.openKBArticle("203106")
+        }
     }
     
     @IBAction func timeMachineClicked(_ sender: Any) {

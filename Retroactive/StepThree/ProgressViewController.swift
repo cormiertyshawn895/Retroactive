@@ -91,6 +91,14 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         }
     }
     
+    func kickoffProVideoAppPatches() {
+        
+    }
+    
+    func kickoffProAudioPatches() {
+        
+    }
+    
     func kickoffPhotographyAppPatches() {
         guard let appPath = AppManager.shared.appPathCString else { return }
         

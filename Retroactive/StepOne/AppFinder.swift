@@ -25,12 +25,14 @@ class AppFinder: NSObject {
     func queryAllInstalledApps(shouldPresentAlert: Bool, claimsToHaveInstalled: Bool) {
         query?.stop()
         query = NSMetadataQuery()
-        if AppManager.shared.chosenApp == .itunes {
+        let chosen = AppManager.shared.chosenApp
+        if chosen == .itunes || chosen == .finalCutPro7 || chosen == .logicPro9 || chosen == .keynote5 {
             query?.searchScopes = ["/Applications"]
         } else {
             query?.searchScopes = [NSMetadataQueryLocalComputerScope]
         }
-        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchDisplayName) CONTAINS[c] %@ AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.nameOfChosenApp, AppManager.shared.existingBundleIDOfChosenApp)
+        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.existingBundleIDOfChosenApp)
+//        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchDisplayName) CONTAINS[c] %@ AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.nameOfChosenApp, AppManager.shared.existingBundleIDOfChosenApp)
         query?.predicate = pred
         query?.start()
         NotificationCenter.default.removeObserver(self)
@@ -109,6 +111,12 @@ class AppFinder: NSObject {
         }
         
         if AppManager.shared.locationOfChosenApp == nil {
+            if let lastCompatibleVersion = AppManager.shared.compatibleVersionOfChosenApp.first, let knownIncompatible = incompatibleVersion {
+                let compareResult = knownIncompatible.compare(lastCompatibleVersion, options: .numeric, range: nil, locale: nil)
+                if compareResult == .orderedDescending {
+                    incompatibleVersion = nil
+                }
+            }
             self.pushGuidanceVC(incompatibleVersion)
         } else {
             self.pushAuthenticateVC()
@@ -123,10 +131,10 @@ class AppFinder: NSObject {
             let compat = AppManager.shared.compatibleVersionOfChosenApp.first ?? ""
             if let incompat = incompatibleVersionString {
                 title = "You need to update \(name) from \(incompat) to \(compat)."
-                explaination = "The copy of \(name) you have installed is \(name) \(incompat), and is too old to be modified. \n\nDownload the latest version of \(name) \(compat) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed \(name) \(compat) at a custom location, locate it manually."
+                explaination = "The copy of \(name) you have installed is \(name) (\(incompat)), and is too old to be modified. \n\nDownload the latest version of \(name) (\(compat)) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed \(name) (\(compat)) at a custom location, locate it manually."
             } else {
                 title = "\(name) is not installed on your Mac."
-                explaination = "Retroactive is unable to locate \(name) on your Mac. If you have previously downloaded Aperture from the Mac App Store, download it again from the Purchased list.\n\nIf you have installed \(name) at a custom location, locate it manually."
+                explaination = "Retroactive is unable to locate \(name) on your Mac. If you have previously downloaded \(name) from the Mac App Store, download it again from the Purchased list.\n\nIf you have installed \(name) at a custom location, locate it manually."
             }
             AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Locate Manually...", secondButtonText: "Open Mac App Store", thirdButtonText: "Cancel") { (result) in
                 if (result == .alertFirstButtonReturn) {
@@ -144,7 +152,7 @@ class AppFinder: NSObject {
                                     AppManager.shared.locationOfChosenApp = bundlePath
                                     self.pushAuthenticateVC()
                                 } else {
-                                    AppDelegate.showTextSheet(title: "Selected app is incompatible", text: "\(url?.deletingPathExtension().lastPathComponent ?? "") \(displayShortVersionNumberString) is not \(name) \(compat). To proceed, you need to locate a valid copy of \(name) \(compat).")
+                                    AppDelegate.showTextSheet(title: "Selected app is incompatible", text: "\(url?.deletingPathExtension().lastPathComponent ?? "") (\(displayShortVersionNumberString)) is not \(name) (\(compat)). To proceed, you need to locate a valid copy of \(name) (\(compat)).")
                                 }
                             }
                         }

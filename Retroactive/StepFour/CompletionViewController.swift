@@ -24,8 +24,8 @@ class CompletionViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if (allowPatchingAgain == true) {
-            behindTheScenesButton.title = "Modify {name} again"
-            congratulatoryLabel.stringValue = "You have already modified \(placeholderToken).\nThere's usually no need to modify it again."
+            behindTheScenesButton.title = "Unlock {name} again"
+            congratulatoryLabel.stringValue = "You have already unlocked \(placeholderToken).\nThere's usually no need to unlock it again."
         }
         congratulatoryLabel.updateToken()
         launchAppLabel.updateToken()

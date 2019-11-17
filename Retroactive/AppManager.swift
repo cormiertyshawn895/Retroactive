@@ -9,8 +9,8 @@ enum AppType {
     case aperture
     case iphoto
     case itunes
-    case finalCutStudio7
-    case logicStudio9
+    case finalCutPro7
+    case logicPro9
     case keynote5
 }
 
@@ -24,6 +24,7 @@ let placeholderToken = "{name}"
 let timeToken = "{timeEstimate}"
 let actionDetailToken = "{actionS}"
 let mainActionToken = "{actionM}"
+let systemNameToken = "{systemName}"
 
 extension Bundle {
     var cfBundleVersionInt: Int? {
@@ -215,6 +216,14 @@ class AppManager: NSObject {
         return configurationDictionary?["iTunes107Dive"] as? String
     }
 
+    var iWork09DVD: String? {
+        return configurationDictionary?["iWork09DVD"] as? String
+    }
+    
+    var iWork09Update: String? {
+        return configurationDictionary?["iWork09Update"] as? String
+    }
+
     var downloadURLOfChosenApp: String? {
         get {
             switch self.chosenApp {
@@ -261,6 +270,12 @@ class AppManager: NSObject {
                 return "iPhoto"
             case .itunes:
                 return "iTunes"
+            case .finalCutPro7:
+                return "Final Cut Pro 7"
+            case .logicPro9:
+                return "Logic Pro 9"
+            case .keynote5:
+                return "Keynote ’09"
             default:
                 return "Untitled"
             }
@@ -269,7 +284,22 @@ class AppManager: NSObject {
     
     var binaryNameOfChosenApp: String {
         get {
-            return self.nameOfChosenApp
+            switch self.chosenApp {
+            case .aperture:
+                return self.nameOfChosenApp
+            case .iphoto:
+                return self.nameOfChosenApp
+            case .itunes:
+                return self.nameOfChosenApp
+            case .finalCutPro7:
+                return "Final Cut Pro"
+            case .logicPro9:
+                return "Logic Pro"
+            case .keynote5:
+                return "Keynote"
+            default:
+                return self.nameOfChosenApp
+            }
         }
     }
     
@@ -291,6 +321,12 @@ class AppManager: NSObject {
                 case .none:
                     return []
                 }
+            case .finalCutPro7:
+                return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
+            case .logicPro9:
+                return ["9.1.8"]
+            case .keynote5:
+                return ["5.3"]
             default:
                 return []
             }
@@ -306,6 +342,12 @@ class AppManager: NSObject {
                 return "com.apple.iPhoto"
             case .itunes:
                 return "com.apple.iTunes"
+            case .finalCutPro7:
+                return "com.apple.FinalCutPro"
+            case .logicPro9:
+                return "com.apple.logic.pro"
+            case .keynote5:
+                return "com.apple.iWork.Keynote"
             default:
                 return ""
             }
@@ -331,6 +373,13 @@ class AppManager: NSObject {
                 case .none:
                     return ""
                 }
+            // These are intentionally left unused
+            case .finalCutPro7:
+                return "com.apple.FinalCutPro7"
+            case .logicPro9:
+                return "com.apple.logic.pro9"
+            case .keynote5:
+                return "com.apple.iWork.Keynote5"
             default:
                 return ""
             }
@@ -355,6 +404,12 @@ class AppManager: NSObject {
                 case .none:
                     return ""
                 }
+            case .finalCutPro7:
+                return "7.0.4"
+            case .logicPro9:
+                return "1700.68"
+            case .keynote5:
+                return "5.3.1"
             default:
                 return ""
             }
@@ -375,6 +430,8 @@ class AppManager: NSObject {
                 return NSImage(named: "airdrop_guide_aperture")
             case .iphoto:
                 return NSImage(named: "airdrop_guide_iphoto")
+            case .keynote5:
+                return NSImage(named: "iwork_stage2")
             default:
                 return nil
             }
@@ -388,6 +445,8 @@ class AppManager: NSObject {
                 return NSImage(named: "appstore_guide_aperture")
             case .iphoto:
                 return NSImage(named: "appstore_guide_iphoto")
+            case .keynote5:
+                return NSImage(named: "iwork_stage1")
             default:
                 return nil
             }
@@ -403,6 +462,12 @@ class AppManager: NSObject {
                 return NSImage(named: "iphoto_cartoon")
             case .itunes:
                 return NSImage(named: "itunes_cartoon")
+            case .finalCutPro7:
+                return NSImage(named: "final7_cartoon")
+            case .logicPro9:
+                return NSImage(named: "logic9_cartoon")
+            case .keynote5:
+                return NSImage(named: "keynote5_cartoon")
             default:
                 return nil
             }
@@ -465,8 +530,10 @@ class AppManager: NSObject {
             switch self.chosenApp {
             case .itunes:
                 return "installing"
+            case .keynote5:
+                return "fixing"
             default:
-                return "modifying"
+                return "unlocking"
             }
         }
     }
@@ -503,7 +570,11 @@ class AppManager: NSObject {
     }
     
     static func replaceTokenFor(_ string: String) -> String {
-        return string.replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp).replacingOccurrences(of: timeToken, with: AppManager.shared.timeEstimateStringOfChosenApp).replacingOccurrences(of: mainActionToken, with: AppManager.shared.mainActionOfChosenApp).replacingOccurrences(of: actionDetailToken, with: AppManager.shared.detailActionOfChosenApp)
+        return string.replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp)
+            .replacingOccurrences(of: timeToken, with: AppManager.shared.timeEstimateStringOfChosenApp)
+            .replacingOccurrences(of: mainActionToken, with: AppManager.shared.mainActionOfChosenApp)
+            .replacingOccurrences(of: actionDetailToken, with: AppManager.shared.detailActionOfChosenApp)
+            .replacingOccurrences(of: systemNameToken, with: ProcessInfo.versionName)
     }
     
 }

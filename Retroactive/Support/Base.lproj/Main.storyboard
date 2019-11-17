@@ -728,19 +728,19 @@
                                 </subviews>
                             </visualEffectView>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Tc-LH-rh1">
-                                <rect key="frame" x="421" y="605" width="170" height="16"/>
+                                <rect key="frame" x="467" y="605" width="77" height="16"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-p6-swQ">
-                                        <rect key="frame" x="-2" y="0.0" width="56" height="16"/>
-                                        <textFieldCell key="cell" alignment="center" title="Untitled" id="gp1-tX-nja">
+                                        <rect key="frame" x="-2" y="0.0" width="8" height="16"/>
+                                        <textFieldCell key="cell" alignment="center" id="gp1-tX-nja">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4PW-jV-20u">
-                                        <rect key="frame" x="50" y="0.0" width="122" height="16"/>
-                                        <textFieldCell key="cell" alignment="center" title="— Retroactive App" id="8dJ-eQ-KsA">
+                                        <rect key="frame" x="2" y="0.0" width="77" height="16"/>
+                                        <textFieldCell key="cell" alignment="center" title="Retroactive" id="8dJ-eQ-KsA">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -764,6 +764,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Y48-e4-WI5" id="eEO-cf-iMt"/>
+                        <outlet property="retroactiveLabel" destination="4PW-jV-20u" id="cqF-ng-fpk"/>
                         <outlet property="titleLabel" destination="mJ4-p6-swQ" id="e3u-YF-YvV"/>
                         <outlet property="titleStackView" destination="9Tc-LH-rh1" id="cDW-Gw-faq"/>
                         <outlet property="updateButton" destination="vYz-i9-IWU" id="9NM-0f-llA"/>
@@ -803,7 +804,7 @@
                                 <rect key="frame" x="62" y="206" width="904" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGe-T9-oAh">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGe-T9-oAh" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
                                 <rect key="frame" x="62" y="107" width="905" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" id="7iR-G1-f3y">
@@ -933,7 +934,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmi-q5-iMl">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmi-q5-iMl" customClass="DisplayOnlyImageView" customModule="Retroactive" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="63" width="1011" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="mojave-banner" id="XTd-Nf-85o"/>
@@ -1155,12 +1156,10 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-ie-Ea6" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="202" y="424" width="791" height="103"/>
+                                <rect key="frame" x="202" y="424" width="702" height="103"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" id="a56-ae-05u">
+                                <textFieldCell key="cell" title="Hang tight. We’re {actionM} {name} to run on {systemName}." id="a56-ae-05u">
                                     <font key="font" metaFont="systemBold" size="39"/>
-                                    <string key="title">Hang tight. We’re {actionM} {name} to 
-run on macOS Catalina.</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1618,7 +1617,7 @@ You can use {name} now.</string>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" alignment="center" id="iLs-7f-Jhg">
                                     <font key="font" metaFont="system" size="17"/>
-                                    <string key="title">To modify {name} for macOS Catalina, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code.</string>
+                                    <string key="title">To unlock {name} for {systemName}, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code.</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

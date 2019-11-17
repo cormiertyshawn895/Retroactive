@@ -55,17 +55,17 @@ class ChoiceViewController: NSViewController {
     func showMojaveChoices() {
         getStartedSubTitle.stringValue = "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09."
         
-        apertureButton.image = NSImage(named: "fcpstudio_cartoon")
+        apertureButton.image = NSImage(named: "final7_cartoon")
         apertureLabel.stringValue = "Final Cut Pro 7"
         
-        iphotoButton.image = NSImage(named: "logicstudio_cartoon")
+        iphotoButton.image = NSImage(named: "logic9_cartoon")
         iphotoLabel.stringValue = "Logic Pro 9"
         
         itunesButton.image = NSImage(named: "keynote5_cartoon")
-        itunesLabel.stringValue = "Keynote ‘09"
+        itunesLabel.stringValue = "Keynote ’09"
         thirdActionLabel.stringValue = "FIX"
         
-        otherOSSubtitle.stringValue = "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ‘09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina."
+        otherOSSubtitle.stringValue = "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina."
         otherOSImageView.image = NSImage(named:"catalina-banner")
     }
     
@@ -74,23 +74,26 @@ class ChoiceViewController: NSViewController {
     }
     
     @IBAction func apertureClicked(_ sender: Any) {
-        AppManager.shared.chosenApp = .aperture
+        AppManager.shared.chosenApp = oldOS ? .finalCutPro7 : .aperture
         AppFinder.shared.comingFromChoiceVC = true
         AppFinder.shared.queryAllInstalledApps()
     }
     
     @IBAction func iphotoClicked(_ sender: Any) {
-        AppManager.shared.chosenApp = .iphoto
+        AppManager.shared.chosenApp = oldOS ? .logicPro9 : .iphoto
         AppFinder.shared.comingFromChoiceVC = true
         AppFinder.shared.queryAllInstalledApps()
     }
     
     @IBAction func itunesClicked(_ sender: Any) {
-        if (ProcessInfo.processInfo.operatingSystemVersion.minorVersion <= 14) {
-            AppDelegate.showTextSheet(title: "iTunes is already installed", text: "iTunes is already installed on \(ProcessInfo.versionString) by default. \n\nIf you need to run iTunes after upgrading to macOS Catalina, open Retroactive again after upgrading to macOS Catalina.")
+        if (oldOS == true) {
+            AppManager.shared.chosenApp = .keynote5
+            AppFinder.shared.comingFromChoiceVC = true
+            AppFinder.shared.queryAllInstalledApps()
+//            AppDelegate.showTextSheet(title: "iTunes is already installed", text: "iTunes is already installed on \(ProcessInfo.versionString) by default. \n\nIf you need to run iTunes after upgrading to macOS Catalina, open Retroactive again after upgrading to macOS Catalina.")
             return
         }
-        AppManager.shared.chosenApp = .itunes
+        AppManager.shared.chosenApp = oldOS ? .keynote5 : .itunes
         let versionVC = VersionViewController.instantiate()
         self.navigationController.pushViewController(versionVC, animated: true)
     }

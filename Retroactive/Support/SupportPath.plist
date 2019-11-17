@@ -49,5 +49,9 @@
 	<string>https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27807492#post-27807492</string>
 	<key>iTunes107Dive</key>
 	<string>https://forums.macrumors.com/threads/how-to-safely-re-install-itunes-10-7-in-mavericks.1667115/</string>
+	<key>iWork09DVD</key>
+	<string>https://archive.org/download/691-6324-A2ZiWork_09_v9.0._Install_DVD_DVD/691-6324-A%2C2Z%2CiWork%20%2709%20v9.0.%20Install%20DVD%20%28DVD%29.iso</string>
+	<key>iWork09Update</key>
+	<string>https://support.apple.com/kb/DL1563</string>
 </dict>
 </plist>

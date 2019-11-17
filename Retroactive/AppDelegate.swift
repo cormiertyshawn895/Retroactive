@@ -127,7 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let name = AppManager.shared.nameOfChosenApp
         
         let showUnableToClose = {
-            AppDelegate.showTextSheet(title: "Unable to quit Retroactive", text: "Retroactive is modifying \(name). Quitting Retroactive will result in a corrupted copy of \(name).")
+            AppDelegate.showTextSheet(title: "Unable to quit Retroactive", text: "Retroactive is unlocking \(name). Quitting Retroactive will result in a corrupted copy of \(name).")
         }
 
         if AppManager.shared.chosenApp == .itunes {
