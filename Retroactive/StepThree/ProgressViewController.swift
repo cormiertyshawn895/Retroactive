@@ -166,10 +166,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
             self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["+x", appBinaryPath])
-
-            if (fullMode == true) {
-                self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", AppManager.shared.patchedVersionStringOfChosenApp, "Contents/Info.plist"])
-            }
+            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", AppManager.shared.patchedVersionStringOfChosenApp, "Contents/Info.plist"])
 
             self.stage4Started()
             // self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])

@@ -1338,7 +1338,7 @@ You can use {name} now.</string>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RfE-ZI-9L5" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="292" y="147" width="452" height="74"/>
+                                <rect key="frame" x="292" y="153" width="452" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" alignment="center" id="Ho8-7q-mzo">
                                     <font key="font" metaFont="system" size="14"/>
@@ -1605,7 +1605,7 @@ You can use {name} now.</string>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" alignment="center" id="iLs-7f-Jhg">
                                     <font key="font" metaFont="system" size="17"/>
-                                    <string key="title">To unlock {name} for {systemName}, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code.</string>
+                                    <string key="title">To {actionPR} {name} for {systemName}, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code.</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

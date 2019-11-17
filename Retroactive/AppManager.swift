@@ -32,6 +32,7 @@ let actionDetailToken = "{actionS}"
 let mainActionToken = "{actionM}"
 let systemNameToken = "{systemName}"
 let purposeToken = "{purpose}"
+let actionPresentTenseToken = "{actionPR}"
 
 extension Bundle {
     var cfBundleVersionInt: Int? {
@@ -371,15 +372,45 @@ class AppManager: NSObject {
             case .finalCutPro7:
                 return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
             case .logicPro9:
-                return ["9.1.8"]
+                return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1", "9.0.2", "9.0.1", "9.0"]
             case .keynote5:
-                return ["5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
+                return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
             default:
                 return []
             }
         }
     }
     
+    var userFacingLatestShortVersionOfChosenApp: String {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return "3.6"
+            case .iphoto:
+                return "9.6.1"
+            case .itunes:
+                switch choseniTunesVersion {
+                case .darkMode:
+                    return "12.9.5"
+                case .appStore:
+                    return "12.6.5"
+                case .coverFlow:
+                    return "10.7"
+                case .none:
+                    return ""
+                }
+            case .finalCutPro7:
+                return "7.0.3"
+            case .logicPro9:
+                return "9.1.8"
+            case .keynote5:
+                return "5.3"
+            default:
+                return ""
+            }
+        }
+    }
+
     var existingBundleIDOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -505,7 +536,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return "1700.68"
             case .keynote5:
-                return "5.3.1"
+                return "1171"
             default:
                 return ""
             }
@@ -599,7 +630,7 @@ class AppManager: NSObject {
                     return nil
                 }
             default:
-                return nil
+                return sourcePage
             }
         }
     }
@@ -631,21 +662,27 @@ class AppManager: NSObject {
         }
     }
     
-    var mainActionOfChosenApp: String {
+    var presentTenseActionOfChosenApp: String {
         get {
             switch self.chosenApp {
             case .itunes:
-                return "installing"
+                return "install"
             case .keynote5:
-                return "fixing"
+                return "fix"
             case .proVideoUpdate:
-                return "installing"
+                return "install"
             default:
-                return "unlocking"
+                return "unlock"
             }
         }
     }
     
+    var mainActionOfChosenApp: String {
+        get {
+            return "\(presentTenseActionOfChosenApp)ing"
+        }
+    }
+
     var detailActionOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -671,6 +708,8 @@ class AppManager: NSObject {
                 case .none:
                     return "an hour"
                 }
+            case .proVideoUpdate:
+                return "10 minutes"
             default:
                 return "2 minutes"
             }
@@ -820,6 +859,7 @@ class AppManager: NSObject {
             .replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp)
             .replacingOccurrences(of: timeToken, with: AppManager.shared.timeEstimateStringOfChosenApp)
             .replacingOccurrences(of: mainActionToken, with: AppManager.shared.mainActionOfChosenApp)
+            .replacingOccurrences(of: actionPresentTenseToken, with: AppManager.shared.presentTenseActionOfChosenApp)
             .replacingOccurrences(of: actionDetailToken, with: AppManager.shared.detailActionOfChosenApp)
             .replacingOccurrences(of: systemNameToken, with: ProcessInfo.versionName)
     }

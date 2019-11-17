@@ -98,7 +98,7 @@ class AppFinder: NSObject {
 
                 } else {
                     let contains = AppManager.shared.compatibleVersionOfChosenApp.contains { (compatibleID) -> Bool in
-                        return compatibleID == versionNumberString
+                        return (compatibleID == versionNumberString)
                     }
                     if contains {
                         AppManager.shared.locationOfChosenApp = path
@@ -139,7 +139,12 @@ class AppFinder: NSObject {
             let name = AppManager.shared.nameOfChosenApp
             var title: String = ""
             var explaination: String = ""
-            let compat = AppManager.shared.compatibleVersionOfChosenApp.first ?? ""
+            
+            var compat = AppManager.shared.compatibleVersionOfChosenApp.first ?? ""
+            let userFacingCompat = AppManager.shared.userFacingLatestShortVersionOfChosenApp
+            if (userFacingCompat != compat) {
+                compat = "\(userFacingCompat), \(compat)"
+            }
             
             if let incompat = incompatibleVersionString {
                 title = "You need to update \(name) from \(incompat) to \(compat)."
@@ -147,7 +152,7 @@ class AppFinder: NSObject {
             } else {
                 if (shouldOfferUpdate) {
                     let short = shortOldVersionString ?? ""
-                    title = "We recommend updating \(name) from version \(short) to version \(compat)."
+                    title = "We recommend updating \(name) to version \(userFacingCompat)."
                     explaination = "Retroactive can unlock your installed version of \(name) (\(short)), but works best with \(name) (\(compat)). To avoid stability issues, we recommend updating to \(name) (\(compat)) before proceeding."
                 } else {
                     title = "\(name) is not installed on your Mac."
@@ -155,7 +160,7 @@ class AppFinder: NSObject {
                 }
             }
             if (shouldOfferUpdate) {
-                AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Update (Recommended)", secondButtonText: "Don't Update", thirdButtonText: "Cancel") { (result) in
+                AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Update (Recommended)", secondButtonText: "Don't Update (Not Recommended)", thirdButtonText: "Cancel") { (result) in
                     if (result == .alertFirstButtonReturn) {
                         AppManager.shared.updateSelectedApp()
                     }

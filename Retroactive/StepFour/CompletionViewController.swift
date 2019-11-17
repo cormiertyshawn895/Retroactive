@@ -29,6 +29,8 @@ class CompletionViewController: NSViewController {
         if (allowPatchingAgain == true) {
             behindTheScenesButton.title = "Unlock {name} again"
             congratulatoryLabel.stringValue = "You have already unlocked \(placeholderToken).\nThere's usually no need to unlock it again."
+        } else if (AppManager.shared.behindTheScenesOfChosenApp == nil) {
+            behindTheScenesButton.isHidden = true
         }
         congratulatoryLabel.updateToken()
         launchAppLabel.updateToken()
