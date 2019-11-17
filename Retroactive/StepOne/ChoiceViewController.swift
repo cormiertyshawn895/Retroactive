@@ -41,6 +41,9 @@ class ChoiceViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstActionButton.fillColor = .controlAccentColorPolyfill
+        secondActionButton.fillColor = .controlAccentColorPolyfill
+        thirdActionButton.fillColor = .controlAccentColorPolyfill
         apertureLabel.moveIntoView(apertureButton)
         firstActionButton.moveIntoView(apertureButton)
         iphotoLabel.moveIntoView(iphotoButton)

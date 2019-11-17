@@ -53,5 +53,9 @@
 	<string>https://archive.org/download/691-6324-A2ZiWork_09_v9.0._Install_DVD_DVD/691-6324-A%2C2Z%2CiWork%20%2709%20v9.0.%20Install%20DVD%20%28DVD%29.iso</string>
 	<key>iWork09Update</key>
 	<string>https://support.apple.com/kb/DL1563</string>
+	<key>MainStageUpdate</key>
+	<string>https://support.apple.com/kb/dl1393</string>
+	<key>LogicUpdate</key>
+	<string>https://support.apple.com/kb/dl1601</string>
 </dict>
 </plist>

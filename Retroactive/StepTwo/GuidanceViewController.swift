@@ -35,12 +35,12 @@ class GuidanceViewController: NSViewController {
         }
         else if (chosen == .finalCutPro7) {
             downloadAppLabel.stringValue = "Install Final Cut Pro 7 from DVD disc or DMG image"
-            airDropAppLabel.stringValue = "Install Pro Applications Update 2010-02"
+            airDropAppLabel.stringValue = "Download and update to Final Cut Pro 7.0.3 (2010-02)"
             hideThirdLabel()
         }
         else if (chosen == .logicPro9) {
             downloadAppLabel.stringValue = "Install Logic Pro 9 from DVD disc or DMG image"
-            airDropAppLabel.stringValue = "Update to Logic Pro 9.1.8"
+            airDropAppLabel.stringValue = "Download and update to Logic Pro 9.1.8"
             hideThirdLabel()
         }
         alreadyInstalledButton.updateTitle()

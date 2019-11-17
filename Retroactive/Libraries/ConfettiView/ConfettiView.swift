@@ -180,8 +180,10 @@ open class ConfettiView: ConfettiView.View {
     }
     
     func confettiCells(for colors: [Color]) -> [CAEmitterCell] {
-        guard let cellImage = imageForType(confettiType)?.cgImage
-            else { fatalError("Could get image.") }
+        guard let cellImage = imageForType(confettiType)?.cgImage else {
+            print("Could get image.")
+            return []
+        }
 
         return colors.map { (color: Color) -> CAEmitterCell in
             let confetti = CAEmitterCell()

@@ -12,6 +12,7 @@ class AuthenticateViewController: NSViewController {
     @IBOutlet weak var authenticateButton: AccentGradientButton!
     @IBOutlet weak var authenticateLabel: DisplayOnlyTextField!
     @IBOutlet weak var viewSourceButton: HoverButton!
+    @IBOutlet weak var appLocationTextField: DisplayOnlyTextField!
     
     static func instantiate() -> AuthenticateViewController {
         return NSStoryboard.standard!.instantiateController(withIdentifier: "AuthenticateViewController") as! AuthenticateViewController
@@ -24,6 +25,7 @@ class AuthenticateViewController: NSViewController {
         explainationLabel.updateToken()
         authenticateLabel.moveIntoView(authenticateButton)
         viewSourceButton.updateTitle()
+        appLocationTextField.stringValue = AppManager.shared.locationOfChosenApp ?? ""
     }
     
     @IBAction func authenticateClicked(_ sender: Any) {
