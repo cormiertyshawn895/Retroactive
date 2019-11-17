@@ -64,6 +64,11 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
     
     @IBAction func previousClicked(_ sender: Any) {
+        if AppManager.shared.chosenApp == .proVideoUpdate {
+            self.navigationController.popToRootViewController(animated: true)
+            return
+        }
+        
         if let topVC = self.navigationController.topViewController {
             if topVC is CompletionViewController {
                 self.navigationController.popToRootViewController(animated: true)
@@ -72,12 +77,12 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
         }
         
         if let previousVC = self.navigationController.previousViewController {
-            if previousVC is CompletionViewController {
+            if previousVC is CompletionViewController || previousVC is ProgressViewController {
                 self.navigationController.popToRootViewController(animated: true)
                 return
             }
         }
-        
+
         self.navigationController.popViewController(animated: true)
     }
     

@@ -64,7 +64,10 @@ class AppFinder: NSObject {
 
         for result in queriedApps {
             if let bundleID = result.value(forAttribute: searchBundleIdentifier) as? String, let path = result.value(forAttribute: searchPath) as? String {
-                let appBundle = Bundle(path: path)
+                var appBundle = Bundle(path: path)
+                STPrivilegedTask.flushBundleCache(appBundle)
+                appBundle = Bundle(path: path)
+
                 let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleShortVersionString) as? String ?? ""
                 let fullVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleVersion) as? String ?? ""
                 if bundleID.elementsEqual(AppManager.shared.patchedBundleIDOfChosenApp) || fullVersionNumberString == AppManager.shared.patchedVersionStringOfChosenApp {

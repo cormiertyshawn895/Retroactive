@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<installer-gui-script minSpecVersion='1'>
+    <title>SU_TITLE</title>
+    <platforms>
+        <client arch="i386,ppc"/>
+    </platforms>
+    <license file="License.rtf"/>
+    <welcome file="Welcome.rtf"/>
+    <options customize='never'/>
+    <options rootVolumeOnly='true'/>
+    <options hostArchitectures='i386,ppc'/>
+    <volume-check script="volumeCheck()"/>
+    <choices-outline ui='SoftwareUpdate'>
+        <line choice='su'/>
+    </choices-outline>
+    <choices-outline ui='invisible'>
+        <line choice='AppleIntermediateCodecSU'/>
+        <line choice='AppleHDVCodecSU'/>
+        <line choice='AppleLoopsUtilitySU'/>
+        <line choice='CinemaToolsSU'/>
+        <line choice='ColorSU'/>
+        <line choice='CompressorSU'/>
+        <line choice='DSPPublishingSU'/>
+        <line choice='DSPPublishingTemplatesUpdateSU'/>
+        <line choice='FinalCutProSU'/>
+        <line choice='MotionSU'/>
+        <line choice='PAULeopardStatSU'/>
+        <line choice='PAUSnowLeopardStatSU'/>
+        <line choice='ProAppsEffectsSU'/>
+        <line choice='ProCoreSU'/>
+        <line choice='PSTSharedSU'/>
+        <line choice='QmasterSU'/>
+        <line choice='SoundtrackProSU'/>
+        <line choice='Uncompressed422SU'/>
+        <line choice='VideoOutSupportSU'/>
+    </choices-outline>
+    <choice id='su' suDisabledGroupID='PAU201002'/>
+    <choice id='su' visible="hasProAppCan() &amp;&amp; hasUpdatableComponent()"/>
+    <choice id='su' title='SU_TITLE'/>
+    <choice id='su' versStr='SU_VERS'/>
+    <choice id='su' description='SU_DESCRIPTION' description-mime-type='text/html'/>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; shouldInstallAppleIntermediateCodec()" id="AppleIntermediateCodecSU" title="AppleIntermediateCodec">
+        <pkg-ref id='autoAppleIntermediateCodec' auth='Root'>AppleIntermediateCodec.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; AppleHDVCodecRange(&quot;1.0.0.0.0&quot;, &quot;1.6.1.0.0&quot;)" id="AppleHDVCodecSU" title="AppleHDVCodec">
+        <pkg-ref id='autoAppleHDVCodec' auth='Root'>AppleHDVCodec.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; AppleLoopsUtilityRange(&quot;3.0.0.0.0&quot;, &quot;3.0.1.0.0&quot;)" id="AppleLoopsUtilitySU" title="AppleLoopsUtility">
+        <pkg-ref id='autoAppleLoopsUtility' auth='Root'>AppleLoopsUtility.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; CinemaToolsRange(&quot;4.5.0.0.0&quot;, &quot;4.5.1.0.0&quot;)" id="CinemaToolsSU" title="CinemaTools">
+        <pkg-ref id='autoCinemaTools' auth='Root'>CinemaTools.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; ColorRange(&quot;1.5.0.0.0&quot;, &quot;1.5.3.0.0&quot;)" id="ColorSU" title="Color">
+        <pkg-ref id='autoColor' auth='Root'>Color.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; CompressorRange(&quot;3.5.0.0.0&quot;, &quot;3.5.3.0.0&quot;)" id="CompressorSU" title="Compressor">
+        <pkg-ref id='autoCompressor' auth='Root'>Compressor.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; DSPPublishingRange(&quot;1.0.0.0.0&quot;, &quot;1.0.1.0.0&quot;)" id="DSPPublishingSU" title="DSPPublishing">
+        <pkg-ref id='autoDSPPublishing' auth='Root'>DSPPublishing.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; DSPPublishingTemplatesUpdateRange(&quot;1.0.0.0.0&quot;, &quot;1.0.1.0.0&quot;)" id="DSPPublishingTemplatesUpdateSU" title="DSPPublishingTemplatesUpdate">
+        <pkg-ref id='autoDSPPublishingTemplatesUpdate' auth='Root'>DSPPublishingTemplatesUpdate.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; FinalCutProRange(&quot;7.0.0.0.0&quot;, &quot;7.0.3.0.0&quot;)" id="FinalCutProSU" title="FinalCutPro">
+        <pkg-ref id='autoFinalCutPro' auth='Root'>FinalCutPro.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; MotionRange(&quot;4.0.0.0.0&quot;, &quot;4.0.3.0.0&quot;)" id="MotionSU" title="Motion">
+        <pkg-ref id='autoMotion' auth='Root'>Motion.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; isLeopard()" id="PAULeopardStatSU" title="LeopardStat">
+        <pkg-ref id='autoLeopardStatSU' auth='Root'>PAU2010-02LeopardStat.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; isSnowLeopard()" id="PAUSnowLeopardStatSU" title="SnowLeopardStat">
+        <pkg-ref id='autoSnowLeopardStatSU' auth='Root'>PAU2010-02SnowLeopardStat.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; shouldInstallProAppsEffects()" id="ProAppsEffectsSU" title="ProAppsEffects">
+        <pkg-ref id='autoProAppsEffectsSU' auth='Root'>ProAppsEffectsA.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; shouldInstallProCoreA()" id="ProCoreSU" title="ProCore">
+        <pkg-ref id='autoProCore' auth='Root'>ProCoreA.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; shouldInstallPSTShared()" id="PSTSharedSU" title="PSTShared">
+        <pkg-ref id='autoPSTShared' auth='Root'>PSTSharedA.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; (QmasterRange(&quot;3.5.0.0.0&quot;, &quot;3.5.3.0.0&quot;) || BatchMonitorRange(&quot;3.5.0.0.0&quot;, &quot;3.5.3.0.0&quot;) || CompressorFrameworksRange(&quot;3.5.0.0.0&quot;, &quot;3.5.3.0.0&quot;))" id="QmasterSU" title="Qmaster">
+        <pkg-ref id='autoQmaster' auth='Root'>Qmaster.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; SoundtrackProRange(&quot;3.0.0.0.0&quot;, &quot;3.0.1.0.0&quot;)" id="SoundtrackProSU" title="SoundtrackPro">
+        <pkg-ref id='autoSoundtrackPro' auth='Root'>SoundtrackPro.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; shouldInstallUncompressed422()" id="Uncompressed422SU" title="Uncompressed422">
+        <pkg-ref id='autoUncompressed422' auth='Root'>Uncompressed422.pkg</pkg-ref>
+    </choice>
+    <choice selected="(typeof(choices.su) != &quot;undefined&quot;) &amp;&amp; shouldInstallVideoOutSupport()" id="VideoOutSupportSU" title="VideoOutSupport">
+        <pkg-ref id='autoVideoOutSupport' auth='Root'>VideoOutSupport.pkg</pkg-ref>
+    </choice>
+    <choices-outline>
+        <line choice='manual'>
+            <line choice='AppleIntermediateCodec'/>
+            <line choice='AppleHDVCodec'/>
+            <line choice='AppleLoopsUtility'/>
+            <line choice='CinemaTools'/>
+            <line choice='Color'/>
+            <line choice='Compressor'/>
+            <line choice='DSPPublishing'/>
+            <line choice='DSPPublishingTemplatesUpdate'/>
+            <line choice='FinalCutPro'/>
+            <line choice='Motion'/>
+            <line choice='ProCore'/>
+            <line choice='ProAppsEffects'/>
+            <line choice='PSTShared'/>
+            <line choice='Qmaster'/>
+            <line choice='SoundtrackPro'/>
+            <line choice='Uncompressed422'/>
+            <line choice='VideoOutSupport'/>
+        </line>
+    </choices-outline>
+    <choice id='manual'/>
+    <choice id='manual' title='SU_TITLE'/>
+    <choice id='manual' versStr='SU_VERS'/>
+    <choice selected='canInstallAppleIntermediateCodec()' id="AppleIntermediateCodec" title="AppleIntermediateCodec">
+        <pkg-ref id='com.apple.pkg.AppleIntermediateCodec' auth='Root' installKBytes="318" version="1.3.1.1650300.1924">Contents/Packages/AppleIntermediateCodec.pkg</pkg-ref>
+    </choice>
+    <choice selected='AppleHDVCodecRange("1.0.0.0.0", "1.6.2.0.0")' id="AppleHDVCodec" title="AppleHDVCodec">
+        <pkg-ref id='com.apple.pkg.AppleHDVCodec' auth='Root' installKBytes="1620" version="1.6.1.1650300.1924">Contents/Packages/AppleHDVCodec.pkg</pkg-ref>
+    </choice>
+    <choice selected='AppleLoopsUtilityRange("3.0.0.0.0", "3.0.2.0.0")' id="AppleLoopsUtility" title="AppleLoopsUtility">
+        <pkg-ref id='com.apple.pkg.AppleLoopsUtility' auth='Root' installKBytes="23036" version="3.0.1.3440000.1737">Contents/Packages/AppleLoopsUtility.pkg</pkg-ref>
+    </choice>
+    <choice selected='CinemaToolsRange("4.5.0.0.0", "4.5.2.0.0")' id="CinemaTools" title="CinemaTools">
+        <pkg-ref id='com.apple.pkg.CinemaTools' auth='Root' installKBytes="26400" version="4.5.1.3440000.1737">Contents/Packages/CinemaTools.pkg</pkg-ref>
+    </choice>
+    <choice selected='ColorRange("1.5.0.0.0", "1.5.4.0.0")' id="Color" title="Color">
+        <pkg-ref id='com.apple.pkg.Color' auth='Root' installKBytes="25615" version="1.5.3.3440000.1737">Contents/Packages/Color.pkg</pkg-ref>
+    </choice>
+    <choice selected='CompressorRange("3.5.0.0.0", "3.5.4.0.0")' id="Compressor" title="Compressor">
+        <pkg-ref id='com.apple.pkg.Compressor' auth='Root' installKBytes="23495" version="3.5.3.3440000.1737">Contents/Packages/Compressor.pkg</pkg-ref>
+    </choice>
+    <choice selected='DSPPublishingRange("1.0.0.0.0", "1.0.2.0.0")' id="DSPPublishing" title="DSPPublishing">
+        <pkg-ref id='com.apple.pkg.DSPPublishing' auth='Root' installKBytes="180550" version="1.0.1.1650300.1924">Contents/Packages/DSPPublishing.pkg</pkg-ref>
+    </choice>
+    <choice selected='DSPPublishingTemplatesUpdateRange("1.0.0.0.0", "1.0.2.0.0")' id="DSPPublishingTemplatesUpdate" title="DSPPublishingTemplatesUpdate">
+        <pkg-ref id='com.apple.pkg.DSPPublishingTemplatesUpdate' auth='Root' installKBytes="1532" version="1.0.1.3440000.1737">Contents/Packages/DSPPublishingTemplatesUpdate.pkg</pkg-ref>
+    </choice>
+    <choice selected='FinalCutProRange("7.0.0.0.0", "7.0.4.0.0")' id="FinalCutPro" title="FinalCutPro">
+        <pkg-ref id='com.apple.pkg.FinalCutPro' auth='Root' installKBytes="107130" version="7.0.3.3440000.1737">Contents/Packages/FinalCutPro.pkg</pkg-ref>
+    </choice>
+    <choice selected='MotionRange("4.0.0.0.0", "4.0.4.0.0")' id="Motion" title="Motion">
+        <pkg-ref id='com.apple.pkg.Motion' auth='Root' installKBytes="161622" version="4.0.3.3440000.1737">Contents/Packages/Motion.pkg</pkg-ref>
+    </choice>
+    <choice selected='canInstallProAppsEffects()' id="ProAppsEffects" title="ProAppsEffects">
+        <pkg-ref id='com.apple.pkg.ProAppsEffectsA' auth='Root' installKBytes="7327" version="1.0.5.3440000.1737">Contents/Packages/ProAppsEffectsA.pkg</pkg-ref>
+    </choice>
+    <choice selected='canInstallProCoreA()' id="ProCore" title="ProCore">
+        <pkg-ref id='com.apple.pkg.ProCoreA' auth='Root' installKBytes="1794" version="4.0.1.3440000.1737">Contents/Packages/ProCoreA.pkg</pkg-ref>
+    </choice>
+    <choice selected='canInstallPSTShared()' id="PSTShared" title="PSTShared">
+        <pkg-ref id='com.apple.pkg.PSTSharedA' auth='Root' installKBytes="19204" version="1.0.2.1650300.1924">Contents/Packages/PSTSharedA.pkg</pkg-ref>
+    </choice>
+    <choice selected='QmasterRange("3.5.0.0.0", "3.5.4.0.0") || BatchMonitorRange("3.5.0.0.0", "3.5.4.0.0") || CompressorFrameworksRange("3.5.0.0.0", "3.5.4.0.0")' id="Qmaster" title="Qmaster">
+        <pkg-ref id='com.apple.pkg.Qmaster' auth='Root' installKBytes="47950" version="3.5.3.3440000.1737">Contents/Packages/Qmaster.pkg</pkg-ref>
+    </choice>
+    <choice selected='SoundtrackProRange("3.0.0.0.0", "3.0.2.0.0")' id="SoundtrackPro" title="SoundtrackPro">
+        <pkg-ref id='com.apple.pkg.SoundtrackPro' auth='Root' installKBytes="116067" version="3.0.1.3440000.1737">Contents/Packages/SoundtrackPro.pkg</pkg-ref>
+    </choice>
+    <choice selected='canInstallUncompressed422()' id="Uncompressed422" title="Uncompressed422">
+        <pkg-ref id='com.apple.pkg.Uncompressed422' auth='Root' installKBytes="228" version="1.6.1.1650300.1924">Contents/Packages/Uncompressed422.pkg</pkg-ref>
+    </choice>
+    <choice selected='canInstallVideoOutSupport()' id="VideoOutSupport" title="VideoOutSupport">
+        <pkg-ref id='com.apple.pkg.VideoOutSupport' auth='Root' installKBytes="4601" version="1.5.2.1650300.1924">Contents/Packages/VideoOutSupport.pkg</pkg-ref>
+    </choice>
+    <script>
+		
+		function isTiger()
+		{
+			if( (system.compareVersions(system.version.ProductVersion, '10.4') >= 0) &amp;&amp; (system.compareVersions(system.version.ProductVersion, '10.5') &lt; 0) ){ return true; } return false;
+		}
+	
+		function isLeopard()
+		{
+			if( (system.compareVersions(system.version.ProductVersion, '10.5') >= 0) &amp;&amp; (system.compareVersions(system.version.ProductVersion, '10.6') &lt; 0) ){ return true; } return false;
+		}
+
+		function isSnowLeopard()
+		{
+			if( (system.compareVersions(system.version.ProductVersion, '10.6') >= 0) &amp;&amp; (system.compareVersions(system.version.ProductVersion, '10.7') &lt; 0) ){ return true; } return false;
+		}
+	
+		function FinalCutProRange(lower, upper)             { return AppRange(lower, upper, new Array("Final Cut Pro"));                        }
+		function MotionRange(lower, upper)                  { return AppRange(lower, upper, new Array("Motion"));                               }
+		function SoundtrackProRange(lower, upper)           { return AppRange(lower, upper, new Array("Soundtrack Pro"));                       }
+		function DVDStudioProRange(lower, upper)            { return AppRange(lower, upper, new Array("DVD Studio Pro"));                       }
+		function DSPPublishingRange(lower, upper)           { return Range(lower, upper, "/Library/Frameworks/DSPPublishing.framework");	    }
+		function ColorRange(lower, upper)                   { return AppRange(lower, upper, new Array("Color"));                                }
+		function CinemaToolsRange(lower, upper)             { return AppRange(lower, upper, new Array("Cinema Tools"));                         }
+		function ShakeRange(lower, upper)                   { return Range(lower, upper, "/Applications/Shake/shake.app");	                    }
+		function QmasterRange(lower, upper)                 { return AppRange(lower, upper, new Array("Apple Qmaster"));	                    }
+		function CompressorRange(lower, upper)              { return AppRange(lower, upper, new Array("Compressor"));	                        }
+		function BatchMonitorRange(lower, upper)            { return Range(lower, upper, "/Applications/Utilities/Batch Monitor.app");          }
+		function LiveTypeRange(lower, upper)                { return AppRange(lower, upper, new Array("LiveType"));	                            }
+		function AppleLoopsUtilityRange(lower, upper)       { return Range(lower, upper, "/Applications/Utilities/Apple Loops Utility.app");    }
+		function AppleHDVCodecRange(lower, upper)			{ return Range(lower, upper, "/Library/QuickTime/AppleHDVCodec.component");			}
+
+		function CompressorFrameworksRange(lower, upper)
+		{
+			return Range(lower, upper, "/Library/Frameworks/Compressor.framework") || 
+				   Range(lower, upper, "/Library/Frameworks/Qmaster.framework") || 
+				   Range(lower, upper, "/Library/Frameworks/MediaServerAPI.framework") || 
+				   Range(lower, upper, "/Library/Frameworks/AECore.framework");
+		}
+
+		function DSPPublishingTemplatesUpdateRange(lower, upper)
+		{
+			return Range(lower, upper, "/Library/Application Support/Final Cut Studio/DiscPublishing/Templates/BlueGreen-BD.discpubtemplate") || 
+				   Range(lower, upper, "/Library/Application Support/Final Cut Studio/DiscPublishing/Templates/Black-BD.discpubtemplate") || 
+				   Range(lower, upper, "/Library/Application Support/Final Cut Studio/DiscPublishing/Templates/White-BD.discpubtemplate") || 
+				   Range(lower, upper, "/Library/Application Support/Final Cut Studio/DiscPublishing/Templates/OnLocation-BD.discpubtemplate") ||
+				   Range(lower, upper, "/Library/Application Support/Final Cut Studio/DiscPublishing/Templates/Street-BD.discpubtemplate");
+		}
+		
+		function canInstallProCoreA()
+		{
+		    return Range("4.0.0.0.0", "4.0.3.0.0", "/Library/Application Support/ProApps/SharedA/Frameworks/ProCore.framework");
+		}
+		
+		function shouldInstallProCoreA()
+		{
+		    return Range("4.0.0.0.0", "4.0.2.0.0", "/Library/Application Support/ProApps/SharedA/Frameworks/ProCore.framework");
+		}
+		
+		function canInstallAppleIntermediateCodec()
+		{
+		    return Range("1.3.0.0.0", "1.3.2.0.0", "/Library/QuickTime/AppleIntermediateCodec.component");
+		}
+		
+		function shouldInstallAppleIntermediateCodec()
+		{
+		    return Range("1.3.0.0.0", "1.3.1.0.0", "/Library/QuickTime/AppleIntermediateCodec.component");
+		}
+		
+		function canInstallProAppsEffects()
+		{
+			return Range("3.0.2.0.0", "4.0.3.0.0", "/Library/Application Support/ProApps/SharedA/Plug-Ins/FxPlug/Filters.bundle");
+		}
+		
+		function shouldInstallProAppsEffects()
+		{
+			return Range("3.0.2.0.0", "4.0.2.0.0", "/Library/Application Support/ProApps/SharedA/Plug-Ins/FxPlug/Filters.bundle");
+		}
+		
+		function canInstallPSTShared()
+		{
+			return Range("3.0.0.0.0", "3.0.3.0.0", "/Library/Application Support/ProApps/SharedA/Frameworks/Helium.framework");
+		}
+		
+		function shouldInstallPSTShared()
+		{
+			return Range("3.0.0.0.0", "3.0.2.0.0", "/Library/Application Support/ProApps/SharedA/Frameworks/Helium.framework");
+		}
+
+		function canInstallUncompressed422()
+		{
+			return Range("1.6.0.0.0", "1.6.2.0.0", "/Library/QuickTime/FCP Uncompressed 422.component");
+		}
+		
+		function shouldInstallUncompressed422()
+		{
+			return Range("1.6.0.0.0", "1.6.1.0.0", "/Library/QuickTime/FCP Uncompressed 422.component");
+		}
+		
+		function canInstallVideoOutSupport()
+		{
+			return Range("1.2.5.0.0", "1.2.8.0.0", "/Library/QuickTime/DesktopVideoOut.component");
+		}
+		
+		function shouldInstallVideoOutSupport()
+		{
+			return Range("1.2.5.0.0", "1.2.7.0.0", "/Library/QuickTime/DesktopVideoOut.component");
+		}
+
+		function hasProAppShould()
+		{
+			return FinalCutProRange("7.0.0.0.0", "7.0.3.0.0") ||
+				 SoundtrackProRange("3.0.0.0.0", "3.0.1.0.0") ||
+				   		MotionRange("4.0.0.0.0", "4.0.3.0.0") ||
+				  DVDStudioProRange("4.2.0.0.0", "4.2.2.0.0") ||
+				         ColorRange("1.5.0.0.0", "1.5.3.0.0") ||
+				      LiveTypeRange("2.1.3.0.0", "2.1.4.0.0") ||
+				    CompressorRange("3.5.0.0.0", "3.5.3.0.0") ||
+					   QmasterRange("3.5.0.0.0", "3.5.3.0.0") ||
+				  BatchMonitorRange("3.5.0.0.0", "3.5.3.0.0") || 
+				   CinemaToolsRange("4.5.0.0.0", "4.5.1.0.0") ||
+						 ShakeRange("4.10.0.0.0", "4.10.1.0.0") || ShakeRange("4.1.0.0.0", "4.1.1.0.0");
+		}
+		
+		function StudioAppsCanRange()
+		{
+			return FinalCutProRange("7.0.0.0.0", "7.0.4.0.0") ||
+				 SoundtrackProRange("3.0.0.0.0", "3.0.2.0.0") || 
+				        MotionRange("4.0.0.0.0", "4.0.4.0.0") || 
+				  DVDStudioProRange("4.2.0.0.0", "4.2.3.0.0") ||
+				         ColorRange("1.5.0.0.0", "1.5.4.0.0") ||
+				      LiveTypeRange("2.1.3.0.0", "2.1.5.0.0") ||
+				    CompressorRange("3.5.0.0.0", "3.5.4.0.0") ||
+				       QmasterRange("3.5.0.0.0", "3.5.4.0.0");
+		}
+		
+		function hasProAppCan()
+		{
+			return StudioAppsCanRange() ||
+				  BatchMonitorRange("3.0.0.0.0", "3.5.4.0.0") ||
+				   CinemaToolsRange("4.5.0.0.0", "4.5.2.0.0") ||
+ 						 ShakeRange("4.10.0.0.0", "4.10.2.0.0") || ShakeRange("4.1.0.0.0", "4.1.2.0.0");
+		}
+
+		function inManualRange()
+		{
+			return FinalCutProRange("7.0.0.0.0", "7.0.4.0.0") ||
+						 ColorRange("1.5.0.0.0", "1.5.4.0.0") ||
+					    MotionRange("4.0.0.0.0", "4.0.4.0.0") ||
+			     SoundtrackProRange("3.0.0.0.0", "3.0.2.0.0") ||
+					CompressorRange("3.5.0.0.0", "3.5.4.0.0") ||
+					   QmasterRange("3.5.0.0.0", "3.5.4.0.0") ||
+				  BatchMonitorRange("3.5.0.0.0", "3.5.4.0.0") ||
+		  CompressorFrameworksRange("3.5.0.0.0", "3.5.4.0.0") ||
+		           CinemaToolsRange("4.5.0.0.0", "4.5.2.0.0") ||
+				 DSPPublishingRange("1.0.0.0.0", "1.0.2.0.0") ||
+		DSPPublishingTemplatesUpdateRange("1.0.0.0.0", "1.0.2.0.0") ||
+					          canInstallProAppsEffects() ||
+							  canInstallPSTShared() ||
+							  canInstallVideoOutSupport() ||
+							  canInstallUncompressed422() ||
+							  canInstallAppleIntermediateCodec() ||
+							  canInstallProCoreA();
+		}
+
+		function hasUpdatableComponent()
+		{
+			return FinalCutProRange("7.0.0.0.0", "7.0.3.0.0") ||
+						 ColorRange("1.5.0.0.0", "1.5.3.0.0") ||
+			            MotionRange("4.0.0.0.0", "4.0.3.0.0") ||
+			     SoundtrackProRange("3.0.0.0.0", "3.0.1.0.0") ||
+				    CompressorRange("3.5.0.0.0", "3.5.3.0.0") ||
+				       QmasterRange("3.5.0.0.0", "3.5.3.0.0") ||
+				  BatchMonitorRange("3.5.0.0.0", "3.5.3.0.0") ||
+		  CompressorFrameworksRange("3.5.0.0.0", "3.5.3.0.0") ||
+		           CinemaToolsRange("4.5.0.0.0", "4.5.1.0.0") ||
+				 DSPPublishingRange("1.0.0.0.0", "1.0.1.0.0") ||
+		DSPPublishingTemplatesUpdateRange("1.0.0.0.0", "1.0.1.0.0") ||
+							  shouldInstallProAppsEffects() ||
+							  shouldInstallPSTShared() ||
+							  shouldInstallVideoOutSupport() ||
+							  shouldInstallUncompressed422() ||
+							  shouldInstallAppleIntermediateCodec() ||
+							  shouldInstallProCoreA();
+		}
+	
+		function proKitVersion()
+		{
+			return true;
+		}
+	
+		function volumeCheck()
+		{
+			// must have an os
+			if( false == system.files.fileExistsAtPath(my.target.mountpoint + "/System/Library/CoreServices/SystemVersion.plist") )
+			{
+				my.result.type = 'Fatal';
+				my.result.message = system.localizedString('ERROR_OS');
+				return false;
+			}
+
+			if( system.compareVersions(my.target.systemVersion.ProductVersion, '10.5.8') == -1 )
+			{
+				my.result.type = 'Fatal';
+				my.result.message = system.localizedString('ERROR_OSLEO');
+				return false;
+			}
+
+			var plist = system.files.plistAtPath(my.target.mountpoint + "/System/Library/Frameworks/QuickTime.framework/Versions/A/Resources/Info.plist");
+			if( plist )
+			{
+				var version = plist.CFBundleShortVersionString;
+				if( version &amp;&amp; (system.compareVersions(version, "7.6.2") == -1) )
+				{
+					my.result.type = 'Fatal';
+					my.result.message = system.localizedString('ERROR_QT');
+					
+					return false;
+				}
+			}
+
+			if( !proKitVersion() )
+			{
+				my.result.type = 'Fatal';
+				my.result.message = system.localizedString('ERROR_PROKIT');
+				return false;
+			}
+
+			if( !inManualRange() )
+			{
+				my.result.type = 'Fatal';
+				my.result.message = system.localizedString('ERROR_APP');
+				return false;
+			}
+
+			return true;
+		}
+
+		function AppRange(lower, upper, apps)
+		{
+			for( var i = 0; i &lt; apps.length; i++ )
+			{
+				var app= '/Applications/' + apps[i] + '.app';
+				var appBundle = system.files.bundleAtPath(app);
+				
+				if( appBundle )
+				{
+					var appVersion = GetBundleFiveTupleVersion(appBundle);
+					if( appBundle &amp;&amp; (system.compareVersions(appVersion, lower) >= 0) &amp;&amp; (system.compareVersions(appVersion, upper) &lt; 0) ){ return true; }
+				}
+			}
+			
+			return false;
+		}
+
+		function Range(lower, upper, bundle)
+		{
+			var appBundle = system.files.bundleAtPath(bundle);
+			var appVersion = GetBundleFiveTupleVersion(appBundle);
+			if(appBundle &amp;&amp; (system.compareVersions(appVersion, lower) >= 0) &amp;&amp; (system.compareVersions(appVersion, upper) &lt; 0)){ return true; } return false;
+		}
+		
+		function VersionHigherThan(lower, bundle)
+		{
+			var appBundle = system.files.bundleAtPath(bundle);
+			var appVersion = GetBundleFiveTupleVersion(appBundle);
+			if(appBundle &amp;&amp; (system.compareVersions(appVersion, lower) >= 0) ){ return true; } return false;
+		}
+		
+		function GetBundleFiveTupleVersion(bundle)
+		{
+			if( bundle == null ){ return null; }
+			var shortVers = bundle.CFBundleShortVersionString;
+			shortVers = PadVersion(shortVers, 3);
+			var sourceVers = bundle.SourceVersion;
+			sourceVers = PadVersion(sourceVers, 1);
+			var buildVers = bundle.BuildVersion;
+			buildVers = PadVersion(buildVers, 1);
+			var fiveTupleVers = shortVers + "." + sourceVers + "." + buildVers;
+			return fiveTupleVers;
+		}
+
+		function PadVersion(version, tupleCount)
+		{
+			if (version == null){ version = "0"; }
+			var components = version.split(".");
+			if (components.length > tupleCount){	components = components.slice(0, tupleCount); }
+			else{ for(; components.length&lt;tupleCount; ){ components.push("0"); }	}
+			return components.join(".");
+		}
+		
+	</script>
+    <pkg-ref id='autoAppleLoopsUtility' installKBytes='29588' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='autoCinemaTools' installKBytes='28784' version='4.5.1.3440000.1737'/>
+    <pkg-ref id='autoColor' installKBytes='26920' version='1.5.3.3440000.1737'/>
+    <pkg-ref id='autoCompressor' installKBytes='29272' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='autoDSPPublishingTemplatesUpdate' installKBytes='1680' version='1.0.1.3440000.1737'/>
+    <pkg-ref id='autoFinalCutPro' installKBytes='118096' version='7.0.3.3440000.1737'/>
+    <pkg-ref id='autoMotion' installKBytes='174408' version='4.0.3.3440000.1737'/>
+    <pkg-ref id='autoProAppsEffectsSU' installKBytes='7564' version='1.0.5.3440000.1737'/>
+    <pkg-ref id='autoProCore' installKBytes='1896' version='4.0.1.3440000.1737'/>
+    <pkg-ref id='autoQmaster' installKBytes='55112' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='autoSoundtrackPro' installKBytes='129280' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.AppleLoopsUtility' installKBytes='29588' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.CinemaTools' installKBytes='28784' version='4.5.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Color' installKBytes='26920' version='1.5.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Compressor' installKBytes='29272' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.DSPPublishingTemplatesUpdate' installKBytes='1680' version='1.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.FinalCutPro' installKBytes='118096' version='7.0.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Motion' installKBytes='174408' version='4.0.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.ProAppsEffectsA' installKBytes='7564' version='1.0.5.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.ProCoreA' installKBytes='1896' version='4.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Qmaster' installKBytes='55112' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.SoundtrackPro' installKBytes='129280' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='autoAppleLoopsUtility' installKBytes='29588' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='autoCinemaTools' installKBytes='28784' version='4.5.1.3440000.1737'/>
+    <pkg-ref id='autoColor' installKBytes='26920' version='1.5.3.3440000.1737'/>
+    <pkg-ref id='autoCompressor' installKBytes='29272' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='autoDSPPublishingTemplatesUpdate' installKBytes='1680' version='1.0.1.3440000.1737'/>
+    <pkg-ref id='autoFinalCutPro' installKBytes='118096' version='7.0.3.3440000.1737'/>
+    <pkg-ref id='autoMotion' installKBytes='174408' version='4.0.3.3440000.1737'/>
+    <pkg-ref id='autoProAppsEffectsSU' installKBytes='7564' version='1.0.5.3440000.1737'/>
+    <pkg-ref id='autoProCore' installKBytes='1896' version='4.0.1.3440000.1737'/>
+    <pkg-ref id='autoQmaster' installKBytes='55112' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='autoSoundtrackPro' installKBytes='129280' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.AppleLoopsUtility' installKBytes='29588' version='3.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.CinemaTools' installKBytes='28784' version='4.5.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Color' installKBytes='26920' version='1.5.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Compressor' installKBytes='29272' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.DSPPublishingTemplatesUpdate' installKBytes='1680' version='1.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.FinalCutPro' installKBytes='118096' version='7.0.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Motion' installKBytes='174408' version='4.0.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.ProAppsEffectsA' installKBytes='7564' version='1.0.5.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.ProCoreA' installKBytes='1896' version='4.0.1.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.Qmaster' installKBytes='55112' version='3.5.3.3440000.1737'/>
+    <pkg-ref id='com.apple.pkg.SoundtrackPro' installKBytes='129280' version='3.0.1.3440000.1737'/>
+</installer-gui-script>

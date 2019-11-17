@@ -87,7 +87,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         }
 
         if AppManager.shared.chosenApp == .itunes {
-            self.kickoffiTunesDownload()
+            self.kickoffLargeDownload()
         }
         
         if AppManager.shared.chosenApp == .finalCutPro7 {
@@ -101,6 +101,11 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         if AppManager.shared.chosenApp == .keynote5 {
             self.kickoffProVideoAppPatches(fullMode: false)
         }
+        
+        if AppManager.shared.chosenApp == .proVideoUpdate {
+            self.kickoffLargeDownload()
+        }
+
     }
     
     func kickoffProVideoAppPatches(fullMode: Bool = true) {
@@ -173,10 +178,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             
             self.showCompletionVC()
         }
-    }
-    
-    func kickoffKeynotePatches() {
-        
     }
     
     func kickoffPhotographyAppPatches() {
@@ -340,15 +341,16 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
        return nil
     }
 
-    func kickoffiTunesDownload() {
+    func kickoffLargeDownload() {
         guard let urlString = AppManager.shared.downloadURLOfChosenApp, let chosenURL = URL(string: urlString) else { return }
         if let freeSpace = self.getGBFreeSpace() {
             print("free space: \(String(describing: freeSpace))")
             let freeSpaceRequirement = AppManager.shared.choseniTunesVersion == .darkMode ? 20.0 : 2.0
             if (freeSpace < freeSpaceRequirement) {
-                AppDelegate.showOptionSheet(title: "There isn't enough free space to install iTunes", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install iTunes, your startup disk needs to at least have \(Int(freeSpaceRequirement)) GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+                let appName = AppManager.shared.nameOfChosenApp
+                AppDelegate.showOptionSheet(title: "There isn't enough free space to install \(appName)", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install \(appName), your startup disk needs to at least have \(Int(freeSpaceRequirement)) GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
                     if (response == .alertFirstButtonReturn) {
-                        self.kickoffiTunesDownload()
+                        self.kickoffLargeDownload()
                     } else {
                         self.navigationController.popToRootViewController(animated: true)
                     }
@@ -366,8 +368,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.guessProgressForTimer(approximateDuration: 15, startingPercent: 0.0, endingPercent: 0.4)
                 let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: dmgPath))
                 print("shasum is \(shaSum) for \(dmgPath)")
-                // 12.9.5, 12.6.5, 10.7
-                if ["defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7","7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0", "3d92702ac8b7b2a07bcfe13cc6e0ce07c67362eb4bb2db69f3aebc0cbef27548"].contains(shaSum) {
+                // Pro App 2010-02, 12.9.5, 12.6.5, 10.7
+                if ["2c50f7d57d92bd783773c188de8952e2a75b81a8d886a15890d7e0164cabbb43", "defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7","7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0", "3d92702ac8b7b2a07bcfe13cc6e0ce07c67362eb4bb2db69f3aebc0cbef27548"].contains(shaSum) {
                     self.syncMainQueue {
                         self.kickOffInstallation()
                     }
@@ -434,7 +436,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         if (error != nil) {
             AppDelegate.showOptionSheet(title: "Unable to download \(AppManager.shared.nameOfChosenApp)", text: "\(error?.localizedDescription ?? "The Internet connection appears to be offline.")", firstButtonText: "Try Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
                 if (response == .alertFirstButtonReturn) {
-                    self.kickoffiTunesDownload()
+                    self.kickoffLargeDownload()
                 } else {
                     self.navigationController.popToRootViewController(animated: true)
                 }
@@ -448,6 +450,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.subProgress1.inProgress = false
         
         DispatchQueue.global(qos: .userInteractive).async {
+            if AppManager.shared.chosenApp == .proVideoUpdate {
+                self.installProAppsUpdate()
+                return
+            }
             let itunesType = AppManager.shared.choseniTunesVersion
             switch itunesType {
             case .darkMode:
@@ -473,6 +479,44 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         }
     }
     
+    func installProAppsUpdate() {
+        self.stage2Started()
+        self.runTaskAtTemp(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", dmgPath])
+
+        let pkgLocation = "ProApplicationsUpdate2010-02.mpkg"
+        let distName = "ProApplicationsUpdate2010-02.dist"
+        
+        let mountName = AppManager.shared.mountDirNameOfChosenApp
+        let extractName = AppManager.shared.extractDirNameOfChosenApp
+
+        let mountPath = "\(tempDir)/\(mountName)"
+        let badMountPath = "/Volumes/InstallESD"
+        let packageExtractionPath = "\(tempDir)/\(extractName)"
+
+        let packagePath = "\(mountPath)/\(pkgLocation.fileSystemString)"
+        let afterPackagePath = "\(packageExtractionPath)/\(pkgLocation.fileSystemString)"
+        
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", badMountPath])
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", dmgPath, "-mountpoint", mountPath])
+        
+        self.stage3Started()
+        self.runTaskAtTemp(toolPath: "/bin/mkdir", arguments: ["-p", packageExtractionPath])
+        self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", packagePath, afterPackagePath])
+        
+        self.stage4Started()
+        let resourcePath = Bundle.main.resourcePath!.fileSystemString
+        self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["\(packageExtractionPath)/Contents/\(distName)"])
+        self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["\(resourcePath)/ProApplicationsUpdate2010-02.dist", "\(afterPackagePath)/Contents/\(distName)"])
+
+        self.runTaskAtTemp(toolPath: "/usr/sbin/installer", arguments: ["-pkg", afterPackagePath, "-target", "/"])
+
+        self.stage4Finished()
+        self.syncMainQueue {
+            AppManager.shared.chosenApp = .finalCutPro7
+            AppFinder.shared.queryAllInstalledApps()
+        }
+    }
+
     func installDarkModeiTunes() {
         self.installiTunesCommon("Packages/Core.pkg", appLocation: "Payload/Applications/iTunes.app")
     }

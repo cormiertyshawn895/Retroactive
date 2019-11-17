@@ -47,9 +47,25 @@ static OSStatus (*_AuthExecuteWithPrivsFn)(AuthorizationRef authorization, const
 static AuthorizationRef staticCachedAuthorizationRef = NULL;
 static IOPMAssertionID staticAssertionID = 0;
 
+extern void _CFBundleFlushBundleCaches(CFBundleRef bundle) __attribute__((weak_import));
+
 @implementation STPrivilegedTask
 {
     NSTimer *_checkStatusTimer;
+}
+
++ (BOOL)flushBundleCache:(NSBundle *)bundle {
+    // Before calling the function, we need to check if it exists
+    // since it was weak-linked.
+    if (_CFBundleFlushBundleCaches != NULL) {
+        NSLog(@"Flushing bundle cache with _CFBundleFlushBundleCaches");
+        CFBundleRef cfBundle =
+        CFBundleCreate(nil, (CFURLRef)[bundle bundleURL]);
+        _CFBundleFlushBundleCaches(cfBundle);
+        CFRelease(cfBundle);
+        return YES; // Success
+    }
+    return NO; // Not available
 }
 
 + (void)preventSleep {

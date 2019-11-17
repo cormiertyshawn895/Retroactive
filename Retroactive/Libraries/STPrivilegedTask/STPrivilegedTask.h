@@ -47,6 +47,8 @@ extern const OSStatus errAuthorizationFnNoLongerExists;
 
 @property (copy) void (^terminationHandler)(STPrivilegedTask *);
 
++ (BOOL)flushBundleCache:(NSBundle *)bundle;
+
 + (BOOL)authorizationFunctionAvailable;
 + (OSStatus)preAuthenticate;
     

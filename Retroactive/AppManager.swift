@@ -266,6 +266,14 @@ class AppManager: NSObject {
                 case .none:
                     return nil
                 }
+            case .finalCutPro7:
+                return nil
+            case .logicPro9:
+                return nil
+            case .keynote5:
+                return nil
+            case .proVideoUpdate:
+                return fCPUpdate
             default:
                 return nil
             }
@@ -300,6 +308,8 @@ class AppManager: NSObject {
                 return "Logic Pro 9"
             case .keynote5:
                 return "Keynote ’09"
+            case .proVideoUpdate:
+                return "Pro Applications Update 2010-02"
             default:
                 return "Untitled"
             }
@@ -726,8 +736,12 @@ class AppManager: NSObject {
         case .itunes:
             return
         case .finalCutPro7:
-            AppManager.shared.chosenApp = .proVideoUpdate
-            AppDelegate.rootVC?.navigationController.pushViewController(GuidanceViewController.instantiate(), animated: true)
+            if (AppManager.shared.locationOfChosenApp != nil) {
+                AppManager.shared.chosenApp = .proVideoUpdate
+                AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
+            } else {
+                AppDelegate.showTextSheet(title: "You need to install Final Cut Pro 7 first.", text: "After you have already installed Final Cut Pro 7 from a DVD installer or DMG image, Retroactive can download and update Final Cut Pro 7 from version 7.0 to 7.0.3, and unlock it to be compatible with \(ProcessInfo.versionName).")
+            }
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicUpdate)
         case .keynote5:
