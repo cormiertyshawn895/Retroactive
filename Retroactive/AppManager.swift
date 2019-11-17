@@ -31,6 +31,7 @@ let timeToken = "{timeEstimate}"
 let actionDetailToken = "{actionS}"
 let mainActionToken = "{actionM}"
 let systemNameToken = "{systemName}"
+let purposeToken = "{purpose}"
 
 extension Bundle {
     var cfBundleVersionInt: Int? {
@@ -316,6 +317,18 @@ class AppManager: NSObject {
         }
     }
     
+    var spaceConstrainedNameOfChosenApp: String {
+        get {
+            switch self.chosenApp {
+            case .proVideoUpdate:
+                return "Pro Update"
+            default:
+                return self.nameOfChosenApp
+            }
+        }
+    }
+
+    
     var binaryNameOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -559,6 +572,8 @@ class AppManager: NSObject {
                 return NSImage(named: "logic9_cartoon")
             case .keynote5:
                 return NSImage(named: "keynote5_cartoon")
+            case .proVideoUpdate:
+                return NSImage(named: "fcpstudio_cartoon")
             default:
                 return nil
             }
@@ -623,6 +638,8 @@ class AppManager: NSObject {
                 return "installing"
             case .keynote5:
                 return "fixing"
+            case .proVideoUpdate:
+                return "installing"
             default:
                 return "unlocking"
             }
@@ -759,9 +776,18 @@ class AppManager: NSObject {
         }
     }
     
+    var purposeString: String {
+        get {
+            if chosenApp == .proVideoUpdate {
+                return ""
+            }
+            return " to run on {systemName}"
+        }
+    }
 
     static func replaceTokenFor(_ string: String) -> String {
-        return string.replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp)
+        return string.replacingOccurrences(of: purposeToken, with: AppManager.shared.purposeString)
+            .replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp)
             .replacingOccurrences(of: timeToken, with: AppManager.shared.timeEstimateStringOfChosenApp)
             .replacingOccurrences(of: mainActionToken, with: AppManager.shared.mainActionOfChosenApp)
             .replacingOccurrences(of: actionDetailToken, with: AppManager.shared.detailActionOfChosenApp)

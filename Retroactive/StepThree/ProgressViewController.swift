@@ -24,7 +24,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     var session: URLSession?
     var dataTask: URLSessionDataTask?
-    var isiTunesMode = false
+    var isDownloadMode = false
     let tempDir = "/tmp"
     
     var expectedContentLength = 0
@@ -40,34 +40,35 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         progressHeading.updateToken()
         progressCaption.updateToken()
         
-        isiTunesMode = AppManager.shared.chosenApp == .itunes
+        isDownloadMode = AppManager.shared.chosenApp == .itunes || AppManager.shared.chosenApp == .proVideoUpdate
+        let shortName = AppManager.shared.spaceConstrainedNameOfChosenApp
         
         subProgress1 = SubProgressViewController.instantiate()
         progressGrid1.addSubview(subProgress1.view)
-        subProgress1.descriptionTextField.stringValue = isiTunesMode ? "Download iTunes" : "Copy support files"
+        subProgress1.descriptionTextField.stringValue = isDownloadMode ? "Download \(shortName)" : "Copy support files"
         subProgress1.sequenceLabel.stringValue = "1"
-        if (isiTunesMode) {
+        if (isDownloadMode) {
             subProgress1.circularProgress.isIndeterminate = false
         }
 
         subProgress2 = SubProgressViewController.instantiate()
         progressGrid2.addSubview(subProgress2.view)
         subProgress2.sequenceLabel.stringValue = "2"
-        subProgress2.descriptionTextField.stringValue = isiTunesMode ? "Extract iTunes" : "Install support files"
+        subProgress2.descriptionTextField.stringValue = isDownloadMode ? "Extract \(shortName)" : "Install support files"
 
         subProgress3 = SubProgressViewController.instantiate()
         progressGrid3.addSubview(subProgress3.view)
         subProgress3.sequenceLabel.stringValue = "3"
-        subProgress3.descriptionTextField.stringValue = isiTunesMode ? "Install iTunes" : "Refresh \(AppManager.shared.nameOfChosenApp) icon"
+        subProgress3.descriptionTextField.stringValue = isDownloadMode ? "Install \(shortName)" : "Refresh \(AppManager.shared.nameOfChosenApp) icon"
 
         subProgress4 = SubProgressViewController.instantiate()
         progressGrid4.addSubview(subProgress4.view)
         subProgress4.sequenceLabel.stringValue = "4"
-        subProgress4.descriptionTextField.stringValue = isiTunesMode ? "Configure iTunes" : "Sign \(AppManager.shared.nameOfChosenApp)"
+        subProgress4.descriptionTextField.stringValue = isDownloadMode ? "Configure \(shortName)" : "Sign \(AppManager.shared.nameOfChosenApp)"
 
         iconImageView.updateIcon()
         
-        if (isiTunesMode && AppManager.shared.choseniTunesVersion == .darkMode) {
+        if (isDownloadMode && AppManager.shared.choseniTunesVersion == .darkMode) {
             progressCaption.stringValue = "\(progressCaption.stringValue) It is completely normal for the fans to spin up during the process."
         }
     }
@@ -250,7 +251,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.syncMainQueue {
             self.subProgress1.inProgress = false
             self.subProgress2.inProgress = true
-            if (isiTunesMode) {
+            if (isDownloadMode) {
                 var duration = 15.0
                 if AppManager.shared.choseniTunesVersion == .darkMode {
                     duration = 60.0
@@ -266,7 +267,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.syncMainQueue {
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
-            if (isiTunesMode) {
+            if (isDownloadMode) {
                 self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.70, endingPercent: 0.88)
             } else {
                 self.progressIndicator.doubleValue = 0.3
@@ -278,7 +279,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.syncMainQueue {
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
-            if (isiTunesMode) {
+            if (isDownloadMode) {
                 self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.88, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
@@ -648,7 +649,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        if (isiTunesMode) {
+        if (isDownloadMode) {
             let mountPath = "\(tempDir)/\(AppManager.shared.mountDirNameOfChosenApp)"
             self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
         }
