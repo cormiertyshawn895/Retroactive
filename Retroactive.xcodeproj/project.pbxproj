@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042E9E492381AC2C001D3F38 /* AppKit in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E452381AC2B001D3F38 /* AppKit */; };
+		042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E472381AC2B001D3F38 /* GeneralFixerScript */; };
+		042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E482381AC2B001D3F38 /* VideoFixer */; };
+		046034E22381B41200070C86 /* KeynoteFixer in Resources */ = {isa = PBXBuildFile; fileRef = 046034E12381B41200070C86 /* KeynoteFixer */; };
+		046034E42381B6E800070C86 /* KeynoteScript in Resources */ = {isa = PBXBuildFile; fileRef = 046034E32381B6E800070C86 /* KeynoteScript */; };
+		046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 046034E52381C18900070C86 /* BrowserKit.framework.zip */; };
+		046034E82381C18A00070C86 /* ProKit.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 046034E62381C18A00070C86 /* ProKit.framework.zip */; };
 		321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09CC23643F89007F3FBA /* RetroApp.swift */; };
 		321B09D523645B57007F3FBA /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09CF23645B57007F3FBA /* CheckmarkView.swift */; };
 		321B09D623645B57007F3FBA /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09D023645B57007F3FBA /* util.swift */; };
@@ -46,6 +53,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042E9E452381AC2B001D3F38 /* AppKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppKit; sourceTree = "<group>"; };
+		042E9E472381AC2B001D3F38 /* GeneralFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = GeneralFixerScript; sourceTree = "<group>"; };
+		042E9E482381AC2B001D3F38 /* VideoFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VideoFixer; sourceTree = "<group>"; };
+		046034E12381B41200070C86 /* KeynoteFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = KeynoteFixer; sourceTree = "<group>"; };
+		046034E32381B6E800070C86 /* KeynoteScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = KeynoteScript; sourceTree = "<group>"; };
+		046034E52381C18900070C86 /* BrowserKit.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = BrowserKit.framework.zip; sourceTree = "<group>"; };
+		046034E62381C18A00070C86 /* ProKit.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ProKit.framework.zip; sourceTree = "<group>"; };
 		321B09CC23643F89007F3FBA /* RetroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroApp.swift; sourceTree = "<group>"; };
 		321B09CF23645B57007F3FBA /* CheckmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		321B09D023645B57007F3FBA /* util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
@@ -168,8 +182,15 @@
 				32F763DC23657A8D00200ED7 /* install_name_tool_packed */,
 				32F763452364C9F800200ED7 /* insert_dylib */,
 				606CA12023664BFC001C550E /* killpkg */,
+				046034E32381B6E800070C86 /* KeynoteScript */,
+				042E9E472381AC2B001D3F38 /* GeneralFixerScript */,
+				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
+				046034E62381C18A00070C86 /* ProKit.framework.zip */,
+				046034E12381B41200070C86 /* KeynoteFixer */,
 				32F763552364EA2200200ED7 /* ApertureFixer */,
 				32F763532364DEA700200ED7 /* NyxAudioAnalysis */,
+				042E9E452381AC2B001D3F38 /* AppKit */,
+				042E9E482381AC2B001D3F38 /* VideoFixer */,
 				32D181C523640CDF006253DE /* Info.plist */,
 				32D181C623640CDF006253DE /* Retroactive.entitlements */,
 				32D181C023640CDF006253DE /* Assets.xcassets */,
@@ -313,15 +334,22 @@
 				32F763582365018600200ED7 /* capsule.icns in Resources */,
 				606CA12A23665CBF001C550E /* Credits.rtfd in Resources */,
 				606CA154236666B3001C550E /* ConfettiView.bundle in Resources */,
+				046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */,
+				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
+				046034E42381B6E800070C86 /* KeynoteScript in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
 				606CA12823665C04001C550E /* Credits.pdf in Resources */,
 				60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */,
 				32D181C423640CDF006253DE /* Main.storyboard in Resources */,
 				606CA12123664BFD001C550E /* killpkg in Resources */,
+				042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */,
 				32F763542364DEA700200ED7 /* NyxAudioAnalysis in Resources */,
+				046034E82381C18A00070C86 /* ProKit.framework.zip in Resources */,
+				042E9E492381AC2C001D3F38 /* AppKit in Resources */,
+				046034E22381B41200070C86 /* KeynoteFixer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

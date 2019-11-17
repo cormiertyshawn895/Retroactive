@@ -5,10 +5,6 @@
 
 import Cocoa
 
-let shortBundleVersionKey = "CFBundleShortVersionString"
-let bundleVersionKey = "CFBundleVersion"
-let fixerFrameworkSubPath = "Contents/Frameworks/ApertureFixer.framework"
-
 class AppFinder: NSObject {
     var query: NSMetadataQuery?
     var comingFromChoiceVC: Bool = false
@@ -67,20 +63,20 @@ class AppFinder: NSObject {
         for result in queriedApps {
             if let bundleID = result.value(forAttribute: searchBundleIdentifier) as? String, let path = result.value(forAttribute: searchPath) as? String {
                 let appBundle = Bundle(path: path)
-                let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: shortBundleVersionKey) as? String ?? ""
-                let fullVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: bundleVersionKey) as? String ?? ""
+                let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleShortVersionString) as? String ?? ""
+                let fullVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleVersion) as? String ?? ""
                 if bundleID.elementsEqual(AppManager.shared.patchedBundleIDOfChosenApp) || fullVersionNumberString == AppManager.shared.patchedVersionStringOfChosenApp {
                     print("Found compatible patched app: \(bundleID), \(path)")
                     AppManager.shared.locationOfChosenApp = path
                     
                     if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
-                        let existingFixerPath = "\(path)/\(fixerFrameworkSubPath)"
+                        let existingFixerPath = "\(path)/\(AppManager.shared.fixerFrameworkSubPath)"
                         if let existingFixerBundle = Bundle.init(path: existingFixerPath),
                             let existingFixerVersion = existingFixerBundle.cfBundleVersionInt,
                             let resourcePath = Bundle.main.resourcePath {
                             let fixerResourcePath = "\(resourcePath)/ApertureFixer/Resources/Info.plist"
                             if let loadedFixerInfoPlist = NSDictionary(contentsOfFile: fixerResourcePath) as? Dictionary<String, Any>,
-                                let bundledFixerVersionString = loadedFixerInfoPlist[bundleVersionKey] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
+                                let bundledFixerVersionString = loadedFixerInfoPlist[kCFBundleVersion] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
                                 if (existingFixerVersion < bundledFixerVersion) {
                                     print("existing fixer is \(existingFixerVersion), bundled fixer is \(bundledFixerVersion), upgrade is available")
                                     AppManager.shared.fixerUpdateAvailable = true
@@ -142,9 +138,9 @@ class AppFinder: NSObject {
                         if (result) {
                             if let bundlePath = path {
                                 let appBundle = Bundle(path: bundlePath)
-                                let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: bundleVersionKey) as? String ?? ""
-                                let displayShortVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-                                let identifier: String = appBundle?.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String ?? ""
+                                let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleVersion) as? String ?? ""
+                                let displayShortVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleShortVersionString) as? String ?? ""
+                                let identifier: String = appBundle?.object(forInfoDictionaryKey: kCFBundleIdentifier) as? String ?? ""
                                 let matchesCompatible = AppManager.shared.compatibleVersionOfChosenApp.contains { (compatible) -> Bool in
                                     return compatible == versionNumberString || compatible == displayShortVersionNumberString
                                 }

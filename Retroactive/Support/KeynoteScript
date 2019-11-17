@@ -1,0 +1,6 @@
+#!/bin/bash
+KeynoteApp_PATH="`dirname "${0}"`"
+KeynoteApp_BIN=$KeynoteApp_PATH/"`basename "${0}"`"_
+
+export DYLD_INSERT_LIBRARIES="${KeynoteApp_PATH}/../Frameworks/KeynoteFixer.framework/Versions/A/KeynoteFixer"
+"$KeynoteApp_BIN"

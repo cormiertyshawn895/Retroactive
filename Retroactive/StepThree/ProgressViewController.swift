@@ -89,13 +89,93 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         if AppManager.shared.chosenApp == .itunes {
             self.kickoffiTunesDownload()
         }
-    }
-    
-    func kickoffProVideoAppPatches() {
         
+        if AppManager.shared.chosenApp == .finalCutPro7 {
+            self.kickoffProVideoAppPatches()
+        }
+        
+        if AppManager.shared.chosenApp == .logicPro9 {
+            self.kickoffProVideoAppPatches()
+        }
+        
+        if AppManager.shared.chosenApp == .keynote5 {
+            self.kickoffProVideoAppPatches(fullMode: false)
+        }
     }
     
-    func kickoffProAudioPatches() {
+    func kickoffProVideoAppPatches(fullMode: Bool = true) {
+        guard let appPath = AppManager.shared.appPathCString else { return }
+        
+        let resourcePath = Bundle.main.resourcePath!.fileSystemString
+
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.stage1Started()
+            self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
+
+            self.stage2Started()
+            let fixerPath = "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"
+            let appMacOSPath = "\(appPath)/Contents/MacOS"
+            let appBinaryPath = "\(appMacOSPath)/\(AppManager.shared.binaryNameOfChosenApp)"
+            let macAppBinaryPathUnderscore = "\(appBinaryPath)_"
+            
+            let kAppKitShimPath =  "/Library/Frameworks/AppKit.framework"
+            let kLibraryFrameworkPath = "/Library/Frameworks"
+            let kBrowserKitCopyPath = "\(kLibraryFrameworkPath)/BrowserKit.framework"
+            let kProKitCopyPath = "\(kLibraryFrameworkPath)/ProKit.framework"
+            
+            if (fullMode == true) {
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kAppKitShimPath])
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kBrowserKitCopyPath])
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kProKitCopyPath])
+                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKit", kAppKitShimPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kLibraryFrameworkPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kLibraryFrameworkPath])
+            } else {
+                self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
+            }
+
+            self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", fixerPath])
+            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)", fixerPath])
+
+            self.stage3Started()
+            let exists = FileManager.default.fileExists(atPath: macAppBinaryPathUnderscore)
+            if (exists) {
+                do {
+                    if let fileSize = try FileManager.default.attributesOfItem(atPath: appBinaryPath)[.size] as? UInt64 {
+                        print("file size of non underscore is \(fileSize) bytes")
+                        if (fileSize < 1000) {
+                            print("The non underscored file is a fixer, no mach-o binary is smaller than 1000 bytes.")
+                            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", appBinaryPath])
+                            self.runTask(toolPath: "/bin/mv", arguments: [macAppBinaryPathUnderscore, appBinaryPath])
+                        } else {
+                            print("The non underscored file probably isn't a fixer because it exceeds 1000 bytes, it probably got there with an app update. Removing the underscored backup.")
+                            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", macAppBinaryPathUnderscore])
+                        }
+                    }
+                } catch {
+                    print("Can't determine file size, \(error)")
+                }
+            }
+
+            self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
+            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
+            self.runTask(toolPath: "/bin/chmod", arguments: ["+x", appBinaryPath])
+
+            if (fullMode == true) {
+                self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", AppManager.shared.patchedVersionStringOfChosenApp, "Contents/Info.plist"])
+            }
+
+            self.stage4Started()
+            // self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
+            self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
+            self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
+            self.stage4Finished()
+            
+            self.showCompletionVC()
+        }
+    }
+    
+    func kickoffKeynotePatches() {
         
     }
     
@@ -109,7 +189,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
 
             self.stage2Started()
-            let photoFixerPath = "\(appPath)/\(fixerFrameworkSubPath)"
+            let photoFixerPath = "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", photoFixerPath])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", photoFixerPath])
@@ -117,7 +197,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.stage3Started()
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "insert_dylib", arguments: ["@executable_path/../Frameworks/ApertureFixer.framework/Versions/A/ApertureFixer", "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
-            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", "CFBundleIdentifier", "-string", AppManager.shared.patchedBundleIDOfChosenApp, "Contents/Info.plist"])
+            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", AppManager.shared.patchedBundleIDOfChosenApp, "Contents/Info.plist"])
 
             self.stage4Started()
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
@@ -427,7 +507,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         let stageAfterExpansion = {
             self.stage3Started()
-            self.runTaskAtTemp(toolPath: "/usr/bin/plutil", arguments: ["-replace", "CFBundleVersion", "-string", patchedVersionString, "\(afterPackagePath)/Contents/Info.plist"])
+            self.runTaskAtTemp(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", patchedVersionString, "\(afterPackagePath)/Contents/Info.plist"])
             self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, appPath])
             self.stage4Started()
             

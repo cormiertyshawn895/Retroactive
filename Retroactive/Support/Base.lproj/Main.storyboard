@@ -1244,7 +1244,7 @@
                                 <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mtz-Vo-ntt">
-                                <rect key="frame" x="77" y="31" width="240" height="27"/>
+                                <rect key="frame" x="77" y="31" width="276" height="27"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Download support files" id="0oS-Ef-mjC">
                                     <font key="font" metaFont="systemMedium" size="23"/>
@@ -1253,7 +1253,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AyW-pc-6JK">
-                                <rect key="frame" x="77" y="4" width="236" height="25"/>
+                                <rect key="frame" x="77" y="4" width="276" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Waiting..." id="Ylq-Kc-m0B">
                                     <font key="font" metaFont="system" size="16"/>

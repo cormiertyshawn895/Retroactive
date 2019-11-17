@@ -55,7 +55,7 @@ class GuidanceViewController: NSViewController {
     
     func hideThirdLabel() {
         timeMachineImageButton.removeFromSuperview()
-        downloadAppLabel.frame = CGRect(x: downloadAppLabel.frame.origin.x + 22, y: downloadAppLabel.frame.origin.y, width: downloadAppLabel.frame.width, height: downloadAppLabel.frame.height)
+        downloadAppLabel.frame = CGRect(x: downloadAppLabel.frame.origin.x + 30, y: downloadAppLabel.frame.origin.y, width: downloadAppLabel.frame.width - 35, height: downloadAppLabel.frame.height)
         airDropAppLabel.frame = CGRect(x: airDropAppLabel.frame.origin.x + 40, y: downloadAppLabel.frame.origin.y, width: downloadAppLabel.frame.width, height: downloadAppLabel.frame.height)
         airDropAppImage.frame = CGRect(x: airDropAppImage.frame.origin.x, y: downloadAppImage.frame.origin.y, width: 403, height: 309)
     }

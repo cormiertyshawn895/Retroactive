@@ -1,0 +1,7 @@
+#!/bin/bash
+VideoApp_PATH="`dirname "${0}"`"
+VideoApp_BIN=$VideoApp_PATH/"`basename "${0}"`"_
+
+export DYLD_FRAMEWORK_PATH="${VideoApp_PATH}/../Frameworks"
+export DYLD_INSERT_LIBRARIES="${VideoApp_PATH}/../Frameworks/VideoFixer.framework/Versions/A/VideoFixer"
+"$VideoApp_BIN"

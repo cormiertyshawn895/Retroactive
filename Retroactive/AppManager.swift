@@ -20,6 +20,10 @@ enum iTunesVersion {
     case coverFlow
 }
 
+let kCFBundleIdentifier = "CFBundleIdentifier"
+let kCFBundleVersion = "CFBundleVersion"
+let kCFBundleShortVersionString = "CFBundleShortVersionString"
+
 let placeholderToken = "{name}"
 let timeToken = "{timeEstimate}"
 let actionDetailToken = "{actionS}"
@@ -29,7 +33,7 @@ let systemNameToken = "{systemName}"
 extension Bundle {
     var cfBundleVersionInt: Int? {
         get {
-            if let bundleVersion = self.infoDictionary?["CFBundleVersion"] as? String, let intVersion = Int(bundleVersion) {
+            if let bundleVersion = self.infoDictionary?[kCFBundleVersion] as? String, let intVersion = Int(bundleVersion) {
                 return intVersion
             }
             return nil
@@ -38,7 +42,7 @@ extension Bundle {
     
     var cfBundleVersionString: String? {
         get {
-            return self.infoDictionary?["CFBundleShortVersionString"] as? String
+            return self.infoDictionary?[kCFBundleShortVersionString] as? String
         }
     }
 }
@@ -326,7 +330,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return ["9.1.8"]
             case .keynote5:
-                return ["5.3"]
+                return ["5.3", "5.0"]
             default:
                 return []
             }
@@ -386,6 +390,55 @@ class AppManager: NSObject {
         }
     }
     
+    var fixerScriptName: String {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                fatalError()
+            case .iphoto:
+                fatalError()
+            case .itunes:
+                fatalError()
+            case .finalCutPro7:
+                return "GeneralFixerScript"
+            case .logicPro9:
+                return "GeneralFixerScript"
+            case .keynote5:
+                return "KeynoteScript"
+            default:
+                fatalError()
+            }
+        }
+    }
+    
+    var fixerFrameworkName: String {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return "ApertureFixer"
+            case .iphoto:
+                return "ApertureFixer"
+            case .itunes:
+                return ""
+            case .finalCutPro7:
+                return "VideoFixer"
+            case .logicPro9:
+                return "VideoFixer"
+            case .keynote5:
+                return "KeynoteFixer"
+            default:
+                fatalError()
+            }
+        }
+    }
+
+    var fixerFrameworkSubPath: String {
+        get {
+            return "Contents/Frameworks/\(self.fixerFrameworkName).framework"
+        }
+    }
+
+    
     var patchedVersionStringOfChosenApp: String {
         get {
             switch self.chosenApp {
@@ -432,6 +485,10 @@ class AppManager: NSObject {
                 return NSImage(named: "airdrop_guide_iphoto")
             case .keynote5:
                 return NSImage(named: "iwork_stage2")
+            case .finalCutPro7:
+                return NSImage(named: "iwork_stage2")
+            case .logicPro9:
+                return NSImage(named: "iwork_stage2")
             default:
                 return nil
             }
@@ -447,6 +504,10 @@ class AppManager: NSObject {
                 return NSImage(named: "appstore_guide_iphoto")
             case .keynote5:
                 return NSImage(named: "iwork_stage1")
+            case .finalCutPro7:
+                return NSImage(named: "fcp7_stage1")
+            case .logicPro9:
+                return NSImage(named: "fcp7_stage1")
             default:
                 return nil
             }
