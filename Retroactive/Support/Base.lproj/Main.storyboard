@@ -1284,12 +1284,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eDp-Bt-Jgf" customClass="DisplayOnlyImageView" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="388" y="260" width="260" height="260"/>
+                                <rect key="frame" x="388" y="305" width="260" height="260"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" alignment="left" imageScaling="proportionallyDown" image="aperture_cartoon" id="Khc-jQ-8sx"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBg-47-9hl" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="125" y="179" width="786" height="103"/>
+                                <rect key="frame" x="125" y="229" width="786" height="103"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" enabled="NO" alignment="center" id="ODF-W9-pxv">
                                     <font key="font" metaFont="systemBold" size="33"/>
@@ -1337,12 +1337,27 @@ You can use {name} now.</string>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RfE-ZI-9L5" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="292" y="147" width="452" height="74"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" alignment="center" id="Ho8-7q-mzo">
+                                    <font key="font" metaFont="system" size="14"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fHQ-Lw-oi2">
+                                <rect key="frame" x="294" y="233" width="448" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="behindTheScenesButton" destination="KrF-Pq-lVe" id="qyx-oY-8If"/>
                         <outlet property="clippingView" destination="oB4-lP-2Xb" id="7tc-wG-aoX"/>
                         <outlet property="congratulatoryLabel" destination="qBg-47-9hl" id="cfP-Uq-A0E"/>
+                        <outlet property="dividerLine" destination="fHQ-Lw-oi2" id="CZj-kh-JxQ"/>
+                        <outlet property="extraInfoLabel" destination="RfE-ZI-9L5" id="fIq-du-hCH"/>
                         <outlet property="iconView" destination="eDp-Bt-Jgf" id="WK2-n4-748"/>
                         <outlet property="launchAppButton" destination="hQW-8b-D2d" id="4nq-4o-f1r"/>
                         <outlet property="launchAppLabel" destination="5Wh-qh-6OC" id="Qgz-jF-Aap"/>

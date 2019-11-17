@@ -12,6 +12,9 @@ class CompletionViewController: NSViewController {
     @IBOutlet weak var launchAppLabel: NSTextField!
     @IBOutlet weak var behindTheScenesButton: NSButton!
     @IBOutlet weak var clippingView: NSView!
+    @IBOutlet weak var extraInfoLabel: DisplayOnlyTextField!
+    @IBOutlet weak var dividerLine: NSBox!
+        
     var confettiView: ConfettiView?
     var allowPatchingAgain: Bool = false
     var justRecreatedLibrary: Bool = false
@@ -33,6 +36,10 @@ class CompletionViewController: NSViewController {
         iconView.updateIcon()
         behindTheScenesButton.updateTitle()
         launchAppLabel.moveIntoView(launchAppButton)
+        if let knownIssues = AppManager.shared.appKnownIssuesText {
+            dividerLine.isHidden = false
+            extraInfoLabel.stringValue = "Note: \(knownIssues)"
+        }
     }
     
     override func viewDidAppear() {

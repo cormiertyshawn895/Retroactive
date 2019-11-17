@@ -725,6 +725,36 @@ class AppManager: NSObject {
         }
     }
 
+    var appKnownIssuesText: String? {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice."
+            case .iphoto:
+                return "All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing."
+            case .itunes:
+                switch choseniTunesVersion {
+                case .darkMode:
+                    return nil
+                case .appStore:
+                    return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead."
+                case .coverFlow:
+                    return "iTunes may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes."
+                case .none:
+                    return nil
+                }
+            case .finalCutPro7:
+                return "Some serial numbers for Final Cut Pro 7.0 do not work with Final Cut Pro 7.0.3. If you are asked to register again, you need to find and enter a serial number compatible with Final Cut Pro 7.0.3."
+            case .logicPro9:
+                return nil
+            case .keynote5:
+                return nil
+            default:
+                return nil
+            }
+        }
+    }
+
     func acquireSelectedApp() {
         switch self.chosenApp {
         case .aperture:
