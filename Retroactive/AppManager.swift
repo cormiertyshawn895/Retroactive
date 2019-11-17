@@ -12,6 +12,8 @@ enum AppType {
     case finalCutPro7
     case logicPro9
     case keynote5
+    
+    case proVideoUpdate
 }
 
 enum iTunesVersion {
@@ -70,7 +72,9 @@ class AppManager: NSObject {
             self.configurationDictionary = loaded
         }
         
+        #if !DEBUG
         self.checkForConfigurationUpdates()
+        #endif
     }
     
     func checkForConfigurationUpdates() {
@@ -330,7 +334,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return ["9.1.8"]
             case .keynote5:
-                return ["5.3", "5.0"]
+                return ["5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
             default:
                 return []
             }
