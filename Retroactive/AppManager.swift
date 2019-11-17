@@ -9,6 +9,9 @@ enum AppType {
     case aperture
     case iphoto
     case itunes
+    case finalCutStudio7
+    case logicStudio9
+    case keynote5
 }
 
 enum iTunesVersion {

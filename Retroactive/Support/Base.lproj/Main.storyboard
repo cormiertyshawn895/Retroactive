@@ -782,18 +782,39 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bIm-cy-8o5" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="102" y="424" width="783" height="96"/>
+                                <rect key="frame" x="53" y="530" width="914" height="38"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" id="gqn-0y-uaG">
-                                    <font key="font" metaFont="systemBold" size="39"/>
-                                    <string key="title">Pick your favorite app.
-I’ll modify it to work on macOS Catalina.</string>
+                                <textFieldCell key="cell" alignment="center" title="Get Started" id="gqn-0y-uaG">
+                                    <font key="font" metaFont="systemSemibold" size="32"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J1B-Wn-Wy6" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="53" y="486" width="914" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" alignment="center" title="Unlock Aperture and iPhoto, or install iTunes." id="6B8-22-FCU">
+                                    <font key="font" metaFont="system" size="19"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="6op-tu-0xH">
+                                <rect key="frame" x="62" y="206" width="904" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGe-T9-oAh">
+                                <rect key="frame" x="62" y="107" width="905" height="78"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" id="7iR-G1-f3y">
+                                    <font key="font" metaFont="system" size="18"/>
+                                    <string key="title">Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. To get started, install macOS Mojave on a separate volume ›</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFO-g2-phh" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="69" y="34" width="249" height="431"/>
+                                <rect key="frame" x="202" y="245" width="171" height="314"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="aperture_cartoon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="paT-wo-pc9">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -803,21 +824,10 @@ I’ll modify it to work on macOS Catalina.</string>
                                     <action selector="apertureClicked:" target="MjG-QZ-5gm" id="ztn-Fz-Vb0"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVj-GS-wyN" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="385" y="32" width="238" height="422"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="iphoto_cartoon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="fyR-if-oPa">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="iphotoClicked:" target="MjG-QZ-5gm" id="xae-au-u9C"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aih-99-tah" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="696" y="34" width="238" height="422"/>
+                                <rect key="frame" x="638" y="245" width="171" height="314"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="itunes_cartoon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="cvp-oo-k06">
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="itunes_cartoon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="cvp-oo-k06">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -825,45 +835,132 @@ I’ll modify it to work on macOS Catalina.</string>
                                     <action selector="itunesClicked:" target="MjG-QZ-5gm" id="ey5-8l-Joa"/>
                                 </connections>
                             </button>
+                            <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jmc-1c-c9F">
+                                <rect key="frame" x="675" y="265" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" ambiguous="YES" id="2Na-b8-4gM">
+                                    <rect key="frame" x="0.0" y="0.0" width="97" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gVC-eL-E5o">
+                                            <rect key="frame" x="-2" y="8" width="101" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="INSTALL" id="z1o-z6-W1t">
+                                                <font key="font" metaFont="systemBold" size="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="boF-ID-sBM">
-                                <rect key="frame" x="154" y="112" width="90" height="24"/>
+                                <rect key="frame" x="200" y="304" width="175" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Aperture" id="5wq-le-A3N">
-                                    <font key="font" metaFont="system" size="21"/>
+                                    <font key="font" metaFont="system" size="20"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmv-bW-JTb">
-                                <rect key="frame" x="477" y="112" width="72" height="24"/>
+                                <rect key="frame" x="418" y="304" width="175" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="iPhoto" id="UsG-Bx-gH6">
-                                    <font key="font" metaFont="system" size="21"/>
+                                    <font key="font" metaFont="system" size="20"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="15" translatesAutoresizingMaskIntoConstraints="NO" id="Eyz-di-Cu5">
+                                <rect key="frame" x="239" y="266" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" ambiguous="YES" id="dby-cr-Tfu">
+                                    <rect key="frame" x="0.0" y="0.0" width="97" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6O-8W-vrO">
+                                            <rect key="frame" x="-2" y="8" width="101" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="UNLOCK" id="M4J-11-44U">
+                                                <font key="font" metaFont="systemBold" size="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </box>
+                            <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="15" translatesAutoresizingMaskIntoConstraints="NO" id="rhM-wK-fkU">
+                                <rect key="frame" x="460" y="266" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" ambiguous="YES" id="PX3-oe-c8z">
+                                    <rect key="frame" x="0.0" y="0.0" width="97" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xSV-Tb-Nfp">
+                                            <rect key="frame" x="-2" y="8" width="101" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="UNLOCK" id="Gmj-7c-mcD">
+                                                <font key="font" metaFont="systemBold" size="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </box>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EVj-GS-wyN" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="420" y="245" width="171" height="314"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="iphoto_cartoon" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="fyR-if-oPa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="iphotoClicked:" target="MjG-QZ-5gm" id="xae-au-u9C"/>
+                                </connections>
+                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYp-Oi-nLs">
-                                <rect key="frame" x="782" y="112" width="68" height="24"/>
+                                <rect key="frame" x="636" y="304" width="175" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="iTunes" id="iPE-Jd-BL4">
-                                    <font key="font" metaFont="system" size="21"/>
+                                    <font key="font" metaFont="system" size="20"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmi-q5-iMl">
+                                <rect key="frame" x="0.0" y="63" width="1011" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="mojave-banner" id="XTd-Nf-85o"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="apertureButton" destination="YFO-g2-phh" id="g6D-r7-jcD"/>
                         <outlet property="apertureLabel" destination="boF-ID-sBM" id="Zat-bD-5fZ"/>
+                        <outlet property="firstActionButton" destination="Eyz-di-Cu5" id="ET3-Ry-gaf"/>
+                        <outlet property="getStartedSubTitle" destination="J1B-Wn-Wy6" id="Z4T-WS-CWR"/>
                         <outlet property="iphotoButton" destination="EVj-GS-wyN" id="4s9-Lo-nJy"/>
                         <outlet property="iphotoLabel" destination="bmv-bW-JTb" id="aQh-Kf-GQn"/>
                         <outlet property="itunesButton" destination="aih-99-tah" id="IMo-kU-J2t"/>
                         <outlet property="itunesLabel" destination="RYp-Oi-nLs" id="zc6-26-RMA"/>
+                        <outlet property="otherOSImageView" destination="kmi-q5-iMl" id="yFS-K3-5z8"/>
+                        <outlet property="otherOSSubtitle" destination="rGe-T9-oAh" id="YaI-mh-Uaf"/>
+                        <outlet property="secondActionButton" destination="rhM-wK-fkU" id="67i-Xm-Bp7"/>
+                        <outlet property="thirdActionButton" destination="Jmc-1c-c9F" id="swv-DI-iGh"/>
+                        <outlet property="thirdActionLabel" destination="gVC-eL-E5o" id="hPQ-7w-eG6"/>
                     </connections>
                 </viewController>
                 <customObject id="XHC-cX-gbX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customView id="5Lp-Px-nJJ">
+                    <rect key="frame" x="0.0" y="0.0" width="419" height="267"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
             </objects>
             <point key="canvasLocation" x="75.5" y="1888.5"/>
         </scene>
@@ -1550,6 +1647,7 @@ You can use {name} now.</string>
         <image name="iphoto_cartoon" width="252" height="252"/>
         <image name="itunes12_9" width="281" height="195.5"/>
         <image name="itunes_cartoon" width="252" height="252"/>
+        <image name="mojave-banner" width="882" height="69.5"/>
         <image name="tick" width="51" height="45"/>
         <image name="timemachine_guide" width="381" height="146"/>
     </resources>

@@ -13,6 +13,10 @@ let bundleContentType = "com.apple.application-bundle"
 let debugAlwaysPatch = true
 
 class ChoiceViewController: NSViewController {
+    @IBOutlet weak var getStartedSubTitle: DisplayOnlyTextField!
+    @IBOutlet weak var otherOSSubtitle: NSTextField!
+    @IBOutlet weak var otherOSImageView: NSImageView!
+    
     @IBOutlet weak var apertureButton: NSButton!
     @IBOutlet weak var iphotoButton: NSButton!
     @IBOutlet weak var itunesButton: NSButton!
@@ -20,7 +24,15 @@ class ChoiceViewController: NSViewController {
     @IBOutlet weak var iphotoLabel: NSTextField!
     @IBOutlet weak var itunesLabel: NSTextField!
     
+    @IBOutlet weak var firstActionButton: NSBox!
+    @IBOutlet weak var secondActionButton: NSBox!
+    @IBOutlet weak var thirdActionButton: NSBox!
+    
+    @IBOutlet weak var thirdActionLabel: NSTextField!
+    
     var appFinder: AppFinder?
+    
+    let oldOS: Bool = ProcessInfo.processInfo.operatingSystemVersion.minorVersion <= 14
     
     static func instantiate() -> ChoiceViewController
     {
@@ -30,8 +42,31 @@ class ChoiceViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         apertureLabel.moveIntoView(apertureButton)
+        firstActionButton.moveIntoView(apertureButton)
         iphotoLabel.moveIntoView(iphotoButton)
+        secondActionButton.moveIntoView(iphotoButton)
         itunesLabel.moveIntoView(itunesButton)
+        thirdActionButton.moveIntoView(itunesButton)
+        if (oldOS == true) {
+            showMojaveChoices()
+        }
+    }
+    
+    func showMojaveChoices() {
+        getStartedSubTitle.stringValue = "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09."
+        
+        apertureButton.image = NSImage(named: "fcpstudio_cartoon")
+        apertureLabel.stringValue = "Final Cut Pro 7"
+        
+        iphotoButton.image = NSImage(named: "logicstudio_cartoon")
+        iphotoLabel.stringValue = "Logic Pro 9"
+        
+        itunesButton.image = NSImage(named: "keynote5_cartoon")
+        itunesLabel.stringValue = "Keynote ‘09"
+        thirdActionLabel.stringValue = "FIX"
+        
+        otherOSSubtitle.stringValue = "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ‘09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina."
+        otherOSImageView.image = NSImage(named:"catalina-banner")
     }
     
     override func viewDidAppear() {
