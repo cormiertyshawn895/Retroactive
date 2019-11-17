@@ -61,19 +61,11 @@ class GuidanceViewController: NSViewController {
     }
     
     @IBAction func appStoreClicked(_ sender: Any) {
-        if (AppManager.shared.chosenApp == .keynote5) {
-            AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
-        } else {
-            AppFinder.openMacAppStore()
-        }
+        AppManager.shared.acquireSelectedApp()
     }
     
     @IBAction func airDropClicked(_ sender: Any) {
-        if (AppManager.shared.chosenApp == .keynote5) {
-            AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09Update)
-        } else {
-            AppDelegate.openKBArticle("203106")
-        }
+        AppManager.shared.updateSelectedApp()
     }
     
     @IBAction func timeMachineClicked(_ sender: Any) {

@@ -55,7 +55,13 @@
 	<string>https://support.apple.com/kb/DL1563</string>
 	<key>MainStageUpdate</key>
 	<string>https://support.apple.com/kb/dl1393</string>
+	<key>LogicDVD</key>
+	<string>https://www.ebay.com/sch/i.html?_nkw=Logic+Pro+9</string>
 	<key>LogicUpdate</key>
 	<string>https://support.apple.com/kb/dl1601</string>
+	<key>FCPDVD</key>
+	<string>https://www.ebay.com/sch/i.html?_nkw=Final+Cut+Pro+7</string>
+	<key>FCPUpdate</key>
+	<string>https://download.info.apple.com/Mac_OS_X/061-8474.20100915.wtoKR/ProApplicationsUpdate2010-02.dmg</string>
 </dict>
 </plist>

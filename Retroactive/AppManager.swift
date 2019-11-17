@@ -232,6 +232,22 @@ class AppManager: NSObject {
         return configurationDictionary?["iWork09Update"] as? String
     }
 
+    var logicDVD: String? {
+        return configurationDictionary?["LogicDVD"] as? String
+    }
+    
+    var logicUpdate: String? {
+        return configurationDictionary?["LogicUpdate"] as? String
+    }
+
+    var fcpDVD: String? {
+        return configurationDictionary?["FCPDVD"] as? String
+    }
+    
+    var fCPUpdate: String? {
+        return configurationDictionary?["FCPUpdate"] as? String
+    }
+
     var downloadURLOfChosenApp: String? {
         get {
             switch self.chosenApp {
@@ -634,6 +650,102 @@ class AppManager: NSObject {
         }
     }
     
+    var notInstalledText: String {
+        get {
+            let appStoreTemplate = "If you have previously downloaded \(nameOfChosenApp) from the Mac App Store, download it again from the Purchased list."
+            let dvdTemplate = "\n\nIf you have a DVD installer for \(nameOfChosenApp), insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of \(nameOfChosenApp) on eBay. \n\nIf your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of \(nameOfChosenApp), and install \(nameOfChosenApp) through the DMG installer."
+
+            switch self.chosenApp {
+            case .aperture:
+                return appStoreTemplate
+            case .iphoto:
+                return appStoreTemplate
+            case .itunes:
+                return ""
+            case .finalCutPro7:
+                return dvdTemplate
+            case .logicPro9:
+                return "\(dvdTemplate) \n\n\(appStoreTemplate)"
+            case .keynote5:
+                return "\n\nYou can download and install iWork ’09, which includes Keynote ’09, from The Internet Archive."
+            default:
+                return ""
+            }
+        }
+    }
+    
+    var notInstalledActionText: String {
+        get {
+            let appStoreTemplate = "Open Mac App Store"
+            let dvdTemplate = "Shop DVD on eBay"
+
+            switch self.chosenApp {
+            case .aperture:
+                return appStoreTemplate
+            case .iphoto:
+                return appStoreTemplate
+            case .itunes:
+                return ""
+            case .finalCutPro7:
+                return dvdTemplate
+            case .logicPro9:
+                return dvdTemplate
+            case .keynote5:
+                return "Download iWork ’09"
+            default:
+                return ""
+            }
+        }
+    }
+
+    func acquireSelectedApp() {
+        switch self.chosenApp {
+        case .aperture:
+            openMacAppStore()
+        case .iphoto:
+            openMacAppStore()
+        case .itunes:
+            return
+        case .finalCutPro7:
+            AppDelegate.current.safelyOpenURL(AppManager.shared.fcpDVD)
+        case .logicPro9:
+            AppDelegate.current.safelyOpenURL(AppManager.shared.logicDVD)
+        case .keynote5:
+            AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
+        default:
+            openMacAppStore()
+        }
+    }
+    
+    func updateSelectedApp() {
+        switch self.chosenApp {
+        case .aperture:
+            AppDelegate.openKBArticle("203106")
+        case .iphoto:
+            AppDelegate.openKBArticle("203106")
+        case .itunes:
+            return
+        case .finalCutPro7:
+            AppManager.shared.chosenApp = .proVideoUpdate
+            AppDelegate.rootVC?.navigationController.pushViewController(GuidanceViewController.instantiate(), animated: true)
+        case .logicPro9:
+            AppDelegate.current.safelyOpenURL(AppManager.shared.logicUpdate)
+        case .keynote5:
+            AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09Update)
+        default:
+            return
+        }
+    }
+    
+    func openMacAppStore() {
+        if #available(OSX 10.15, *) {
+            NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/System/Applications/App Store.app"), configuration: .init(), completionHandler: nil)
+        } else {
+            NSWorkspace.shared.launchApplication("App Store")
+        }
+    }
+    
+
     static func replaceTokenFor(_ string: String) -> String {
         return string.replacingOccurrences(of: placeholderToken, with: AppManager.shared.nameOfChosenApp)
             .replacingOccurrences(of: timeToken, with: AppManager.shared.timeEstimateStringOfChosenApp)

@@ -59,7 +59,9 @@ class AppFinder: NSObject {
         }
         
         var incompatibleVersion: String?
-        
+        var installedFullVersionString: String?
+        var installedShortVersionString: String?
+
         for result in queriedApps {
             if let bundleID = result.value(forAttribute: searchBundleIdentifier) as? String, let path = result.value(forAttribute: searchPath) as? String {
                 let appBundle = Bundle(path: path)
@@ -97,6 +99,8 @@ class AppFinder: NSObject {
                     }
                     if contains {
                         AppManager.shared.locationOfChosenApp = path
+                        installedFullVersionString = fullVersionNumberString
+                        installedShortVersionString = versionNumberString
                         print("Found compatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
                     } else {
                         incompatibleVersion = versionNumberString
@@ -106,8 +110,9 @@ class AppFinder: NSObject {
             }
         }
         
+        let lastCompatible = AppManager.shared.compatibleVersionOfChosenApp.first
         if AppManager.shared.locationOfChosenApp == nil {
-            if let lastCompatibleVersion = AppManager.shared.compatibleVersionOfChosenApp.first, let knownIncompatible = incompatibleVersion {
+            if let lastCompatibleVersion = lastCompatible, let knownIncompatible = incompatibleVersion {
                 let compareResult = knownIncompatible.compare(lastCompatibleVersion, options: .numeric, range: nil, locale: nil)
                 if compareResult == .orderedDescending {
                     incompatibleVersion = nil
@@ -115,24 +120,49 @@ class AppFinder: NSObject {
             }
             self.pushGuidanceVC(incompatibleVersion)
         } else {
+            if let lastCompatibleVersion = lastCompatible, let installed = installedFullVersionString, let shortVersion = installedShortVersionString {
+                let compareResult = installed.compare(lastCompatibleVersion, options: .numeric, range: nil, locale: nil)
+                if compareResult == .orderedAscending {
+                    self.pushGuidanceVC(nil, shortOldVersionString: shortVersion, shouldOfferUpdate: true)
+                    return
+                }
+            }
             self.pushAuthenticateVC()
         }
     }
-    
-    private func pushGuidanceVC(_ incompatibleVersionString: String? = nil) {
+
+    private func pushGuidanceVC(_ incompatibleVersionString: String? = nil, shortOldVersionString: String? = nil, shouldOfferUpdate: Bool = false) {
         if AppDelegate.rootVC?.navigationController.topViewController is GuidanceViewController {
             let name = AppManager.shared.nameOfChosenApp
             var title: String = ""
             var explaination: String = ""
             let compat = AppManager.shared.compatibleVersionOfChosenApp.first ?? ""
+            
             if let incompat = incompatibleVersionString {
                 title = "You need to update \(name) from \(incompat) to \(compat)."
                 explaination = "The copy of \(name) you have installed is \(name) (\(incompat)), and is too old to be modified. \n\nDownload the latest version of \(name) (\(compat)) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed \(name) (\(compat)) at a custom location, locate it manually."
             } else {
-                title = "\(name) is not installed on your Mac."
-                explaination = "Retroactive is unable to locate \(name) on your Mac. If you have previously downloaded \(name) from the Mac App Store, download it again from the Purchased list.\n\nIf you have installed \(name) at a custom location, locate it manually."
+                if (shouldOfferUpdate) {
+                    let short = shortOldVersionString ?? ""
+                    title = "We recommend updating \(name) from version \(short) to version \(compat)."
+                    explaination = "Retroactive can unlock your installed version of \(name) (\(short)), but works best with \(name) (\(compat)). To avoid stability issues, we recommend updating to \(name) (\(compat)) before proceeding."
+                } else {
+                    title = "\(name) is not installed on your Mac."
+                    explaination = "Retroactive is unable to locate \(name) on your Mac. \(AppManager.shared.notInstalledText)\n\nIf you have installed \(name) at a custom location, locate it manually."
+                }
             }
-            AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Locate Manually...", secondButtonText: "Open Mac App Store", thirdButtonText: "Cancel") { (result) in
+            if (shouldOfferUpdate) {
+                AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Update (Recommended)", secondButtonText: "Don't Update", thirdButtonText: "Cancel") { (result) in
+                    if (result == .alertFirstButtonReturn) {
+                        AppManager.shared.updateSelectedApp()
+                    }
+                    if (result == .alertSecondButtonReturn) {
+                        self.pushAuthenticateVC()
+                    }
+                }
+                return
+            }
+            AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Locate Manually...", secondButtonText: AppManager.shared.notInstalledActionText, thirdButtonText: "Cancel") { (result) in
                 if (result == .alertFirstButtonReturn) {
                     AppDelegate.manuallyLocateApp { (result, url, path) in
                         if (result) {
@@ -155,7 +185,7 @@ class AppFinder: NSObject {
                     }
                 }
                 if (result == .alertSecondButtonReturn) {
-                    AppFinder.openMacAppStore()
+                    AppManager.shared.acquireSelectedApp()
                 }
             }
             return
@@ -187,12 +217,4 @@ class AppFinder: NSObject {
         AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
     }
     
-    static func openMacAppStore() {
-        if #available(OSX 10.15, *) {
-            NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/System/Applications/App Store.app"), configuration: .init(), completionHandler: nil)
-        } else {
-            NSWorkspace.shared.launchApplication("App Store")
-        }
-    }
-
 }
