@@ -29,18 +29,18 @@ class GuidanceViewController: NSViewController {
         }
         let chosen = AppManager.shared.chosenApp
         if (chosen == .keynote5) {
-            downloadAppLabel.stringValue = "Download and install iWork ’09 from The Internet Archive"
-            airDropAppLabel.stringValue = "Download and install the iWork 9.3 Update"
+            downloadAppLabel.stringValue = "Download and install iWork ’09 from The Internet Archive".localized()
+            airDropAppLabel.stringValue = "Download and install the iWork 9.3 Update".localized()
             hideThirdLabel()
         }
         else if (chosen == .finalCutPro7) {
-            downloadAppLabel.stringValue = "Install Final Cut Pro 7 from DVD disc or DMG image"
-            airDropAppLabel.stringValue = "Download and update to Final Cut Pro 7.0.3 (2010-02)"
+            downloadAppLabel.stringValue = "Install Final Cut Pro 7 from DVD disc or DMG image".localized()
+            airDropAppLabel.stringValue = "Download and update to Final Cut Pro 7.0.3 (2010-02)".localized()
             hideThirdLabel()
         }
         else if (chosen == .logicPro9) {
-            downloadAppLabel.stringValue = "Install Logic Pro 9 from DVD disc or DMG image"
-            airDropAppLabel.stringValue = "Download and update to Logic Pro 9.1.8"
+            downloadAppLabel.stringValue = "Install Logic Pro 9 from DVD disc or DMG image".localized()
+            airDropAppLabel.stringValue = "Download and update to Logic Pro 9.1.8".localized()
             hideThirdLabel()
         }
         alreadyInstalledButton.updateTitle()

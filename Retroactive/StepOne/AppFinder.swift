@@ -21,12 +21,14 @@ class AppFinder: NSObject {
     func queryAllInstalledApps(shouldPresentAlert: Bool, claimsToHaveInstalled: Bool) {
         query?.stop()
         query = NSMetadataQuery()
-        let chosen = AppManager.shared.chosenApp
-        if chosen == .itunes || chosen == .finalCutPro7 || chosen == .logicPro9 || chosen == .keynote5 {
-            query?.searchScopes = ["/Applications"]
-        } else {
-            query?.searchScopes = [NSMetadataQueryLocalComputerScope]
-        }
+        query?.searchScopes = ["/Applications"]
+
+//        let chosen = AppManager.shared.chosenApp
+//        if chosen == .itunes || chosen == .finalCutPro7 || chosen == .logicPro9 || chosen == .keynote5 {
+//            query?.searchScopes = ["/Applications"]
+//        } else {
+//            query?.searchScopes = [NSMetadataQueryLocalComputerScope]
+//        }
         let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.existingBundleIDOfChosenApp)
 //        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchDisplayName) CONTAINS[c] %@ AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.nameOfChosenApp, AppManager.shared.existingBundleIDOfChosenApp)
         query?.predicate = pred
@@ -147,20 +149,20 @@ class AppFinder: NSObject {
             }
             
             if let incompat = incompatibleVersionString {
-                title = "You need to update \(name) from \(incompat) to \(compat)."
-                explaination = "The copy of \(name) you have installed is \(name) (\(incompat)), and is too old to be modified. \n\nDownload the latest version of \(name) (\(compat)) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed \(name) (\(compat)) at a custom location, locate it manually."
+                title = String.init(format: "You need to update %@ from %@ to %@.".localized(), name, incompat,compat)
+                explaination = String.init(format: "The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\nDownload the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed %@ (%@) at a custom location, locate it manually.".localized(), name, name, incompat, name, compat, name, compat)
             } else {
                 if (shouldOfferUpdate) {
                     let short = shortOldVersionString ?? ""
-                    title = "We recommend updating \(name) to version \(userFacingCompat)."
-                    explaination = "Retroactive can unlock your installed version of \(name) (\(short)), but works best with \(name) (\(compat)). To avoid stability issues, we recommend updating to \(name) (\(compat)) before proceeding."
+                    title = String.init(format: "We recommend updating %@ to version %@.".localized(), name, userFacingCompat)
+                    explaination = String.init(format: "Retroactive can unlock your installed version of %@ (%@), but works best with %@ (%@). To avoid stability issues, we recommend updating to %@ (%@) before proceeding.".localized(), name, short, name, compat, name, compat)
                 } else {
-                    title = "\(name) is not installed on your Mac."
-                    explaination = "Retroactive is unable to locate \(name) on your Mac. \(AppManager.shared.notInstalledText)\n\nIf you have installed \(name) at a custom location, locate it manually."
+                    title = String(format: "%@ is not installed on your Mac.".localized(), name)
+                    explaination = String(format: "Retroactive is unable to locate %@ on your Mac. %@\n\nIf you have installed %@ at a custom location, locate it manually.".localized(), name, AppManager.shared.notInstalledText, name)
                 }
             }
             if (shouldOfferUpdate) {
-                AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Update (Recommended)", secondButtonText: "Don't Update (Not Recommended)", thirdButtonText: "Cancel") { (result) in
+                AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Update (Recommended)".localized(), secondButtonText: "Don't Update (Not Recommended)".localized(), thirdButtonText: "Cancel".localized()) { (result) in
                     if (result == .alertFirstButtonReturn) {
                         AppManager.shared.updateSelectedApp()
                     }
@@ -170,7 +172,7 @@ class AppFinder: NSObject {
                 }
                 return
             }
-            AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Locate Manually...", secondButtonText: AppManager.shared.notInstalledActionText, thirdButtonText: "Cancel") { (result) in
+            AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Locate Manually...".localized(), secondButtonText: AppManager.shared.notInstalledActionText, thirdButtonText: "Cancel".localized()) { (result) in
                 if (result == .alertFirstButtonReturn) {
                     AppDelegate.manuallyLocateApp { (result, url, path) in
                         if (result) {
@@ -186,7 +188,8 @@ class AppFinder: NSObject {
                                     AppManager.shared.locationOfChosenApp = bundlePath
                                     self.pushAuthenticateVC()
                                 } else {
-                                    AppDelegate.showTextSheet(title: "Selected app is incompatible", text: "\(url?.deletingPathExtension().lastPathComponent ?? "") (\(displayShortVersionNumberString)) is not \(name) (\(compat)). To proceed, you need to locate a valid copy of \(name) (\(compat)).")
+                                    let text = String(format: "%@ (%@) is not %@ (%@). To proceed, you need to locate a valid copy of %@ (%@).".localized(), url?.deletingPathExtension().lastPathComponent ?? "", displayShortVersionNumberString, name, compat, name, compat)
+                                    AppDelegate.showTextSheet(title: "Selected app is incompatible".localized(), text: text)
                                 }
                             }
                         }

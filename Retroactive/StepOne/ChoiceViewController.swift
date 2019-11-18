@@ -56,7 +56,7 @@ class ChoiceViewController: NSViewController {
     }
     
     func showMojaveChoices() {
-        getStartedSubTitle.stringValue = "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09."
+        getStartedSubTitle.stringValue = "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09.".localized()
         
         apertureButton.image = NSImage(named: "final7_cartoon")
         apertureLabel.stringValue = "Final Cut Pro 7"
@@ -66,9 +66,9 @@ class ChoiceViewController: NSViewController {
         
         itunesButton.image = NSImage(named: "keynote5_cartoon")
         itunesLabel.stringValue = "Keynote ’09"
-        thirdActionLabel.stringValue = "FIX"
+        thirdActionLabel.stringValue = "FIX".localized()
         
-        otherOSSubtitle.stringValue = "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina."
+        otherOSSubtitle.stringValue = "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
         otherOSImageView.image = NSImage(named:"catalina-banner")
     }
     

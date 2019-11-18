@@ -45,7 +45,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         subProgress1 = SubProgressViewController.instantiate()
         progressGrid1.addSubview(subProgress1.view)
-        subProgress1.descriptionTextField.stringValue = isDownloadMode ? "Download \(shortName)" : "Copy support files"
+        subProgress1.descriptionTextField.stringValue = isDownloadMode ? String(format: "Download %@".localized(), shortName) : "Copy support files".localized()
         subProgress1.sequenceLabel.stringValue = "1"
         if (isDownloadMode) {
             subProgress1.circularProgress.isIndeterminate = false
@@ -54,22 +54,22 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         subProgress2 = SubProgressViewController.instantiate()
         progressGrid2.addSubview(subProgress2.view)
         subProgress2.sequenceLabel.stringValue = "2"
-        subProgress2.descriptionTextField.stringValue = isDownloadMode ? "Extract \(shortName)" : "Install support files"
+        subProgress2.descriptionTextField.stringValue = isDownloadMode ? String(format: "Extract %@".localized(), shortName) : "Install support files".localized()
 
         subProgress3 = SubProgressViewController.instantiate()
         progressGrid3.addSubview(subProgress3.view)
         subProgress3.sequenceLabel.stringValue = "3"
-        subProgress3.descriptionTextField.stringValue = isDownloadMode ? "Install \(shortName)" : "Refresh \(AppManager.shared.nameOfChosenApp) icon"
+        subProgress3.descriptionTextField.stringValue = isDownloadMode ? String(format: "Install %@".localized(), shortName) : String(format: "Refresh %@ icon".localized(), AppManager.shared.nameOfChosenApp)
 
         subProgress4 = SubProgressViewController.instantiate()
         progressGrid4.addSubview(subProgress4.view)
         subProgress4.sequenceLabel.stringValue = "4"
-        subProgress4.descriptionTextField.stringValue = isDownloadMode ? "Configure \(shortName)" : "Sign \(AppManager.shared.nameOfChosenApp)"
+        subProgress4.descriptionTextField.stringValue = isDownloadMode ? String(format: "Configure %@".localized(), shortName) : String(format: "Sign %@".localized(), AppManager.shared.nameOfChosenApp)
 
         iconImageView.updateIcon()
         
         if (isDownloadMode && AppManager.shared.choseniTunesVersion == .darkMode) {
-            progressCaption.stringValue = "\(progressCaption.stringValue) It is completely normal for the fans to spin up during the process."
+            progressCaption.stringValue = "\(progressCaption.stringValue) " + "It is completely normal for the fans to spin up during the process.".localized()
         }
     }
     
@@ -134,8 +134,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kBrowserKitCopyPath])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kProKitCopyPath])
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKit", kAppKitShimPath])
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kLibraryFrameworkPath])
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kLibraryFrameworkPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kBrowserKitCopyPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kProKitCopyPath])
             } else {
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
             }
@@ -346,7 +346,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let freeSpaceRequirement = AppManager.shared.choseniTunesVersion == .darkMode ? 20.0 : 2.0
             if (freeSpace < freeSpaceRequirement) {
                 let appName = AppManager.shared.nameOfChosenApp
-                AppDelegate.showOptionSheet(title: "There isn't enough free space to install \(appName)", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install \(appName), your startup disk needs to at least have \(Int(freeSpaceRequirement)) GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+                AppDelegate.showOptionSheet(title: String(format: "There isn't enough free space to install %@".localized(), appName),
+                                            text: String(format: "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.\n\nFree up some space and try again.".localized(), Int(freeSpace), appName, Int(freeSpaceRequirement)),
+                                            firstButtonText: "Check Again".localized(), secondButtonText: "Cancel".localized(), thirdButtonText: "") { (response) in
                     if (response == .alertFirstButtonReturn) {
                         self.kickoffLargeDownload()
                     } else {
@@ -422,7 +424,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             progressTimer?.invalidate()
             self.subProgress1.circularProgress.progress = Double(percentageDownloaded)
             self.progressIndicator.doubleValue = Double(percentageDownloaded) * 0.35
-            self.subProgress1.progressTextField.stringValue = "\(Int(percentageDownloaded * 100))% Complete"
+            self.subProgress1.progressTextField.stringValue = String(format: "%d%% Complete".localized(), Int(percentageDownloaded * 100))
         }
         print("download progress: \(percentageDownloaded)")
 
@@ -432,7 +434,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         print("download progress, 100%")
         fileHandle?.closeFile()
         if (error != nil) {
-            AppDelegate.showOptionSheet(title: "Unable to download \(AppManager.shared.nameOfChosenApp)", text: "\(error?.localizedDescription ?? "The Internet connection appears to be offline.")", firstButtonText: "Try Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+            AppDelegate.showOptionSheet(title: String(format: "Unable to download %@".localized(), AppManager.shared.nameOfChosenApp),
+                                        text: "\(error?.localizedDescription ?? "The Internet connection appears to be offline.".localized())",
+                                        firstButtonText: "Try Again".localized(), secondButtonText: "Cancel".localized(), thirdButtonText: "") { (response) in
                 if (response == .alertFirstButtonReturn) {
                     self.kickoffLargeDownload()
                 } else {

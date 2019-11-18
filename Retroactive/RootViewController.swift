@@ -18,8 +18,8 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
         }
         set {
             titleLabel.stringValue = newValue
-            retroactiveLabel.stringValue = newValue.count > 0 ? "— Retroactive" : "Retroactive"
-            self.view.window?.title = "\(newValue) — Retroactive"
+            retroactiveLabel.stringValue = newValue.count > 0 ? "— Retroactive".localized() : "Retroactive".localized()
+            self.view.window?.title = String(format: "%@ — Retroactive".localized(), newValue)
         }
     }
     
@@ -46,7 +46,11 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     func alertForOSIncompatibility() {
         let osVersion = ProcessInfo.processInfo.operatingSystemVersion
         if osVersion.minorVersion > 15 {
-            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive", text: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with \(ProcessInfo.versionString).", firstButtonText: "Check for Updates", secondButtonText: "Run Anyways", thirdButtonText: "Quit") { (response) in
+            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive".localized(),
+                                        text: String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@.".localized(), ProcessInfo.versionString),
+                                        firstButtonText: "Check for Updates",
+                                        secondButtonText: "Run Anyways",
+                                        thirdButtonText: "Quit") { (response) in
                 if (response == .alertFirstButtonReturn) {
                     AppDelegate.current.checkForUpdates()
                     // NSApplication.shared.terminate(self)
