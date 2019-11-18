@@ -74,9 +74,7 @@ class AppManager: NSObject {
             self.configurationDictionary = loaded
         }
         
-        #if !DEBUG
         self.checkForConfigurationUpdates()
-        #endif
     }
     
     func checkForConfigurationUpdates() {
@@ -155,10 +153,24 @@ class AppManager: NSObject {
     }
     
     var newVersionVisibleTitle: String? {
+        if let language = NSLocale.preferredLanguages.first?.lowercased() {
+            if language.contains("zh-hant") || language.contains("zh-hk") || language.contains("zh-tw") {
+                return configurationDictionary?["NewVersionVisibleTitlezhHant"] as? String
+            } else if language.contains("zh-") {
+                return configurationDictionary?["NewVersionVisibleTitlezhHans"] as? String
+            }
+        }
         return configurationDictionary?["NewVersionVisibleTitle"] as? String
     }
 
     var newVersionChangelog: String? {
+        if let language = NSLocale.preferredLanguages.first?.lowercased() {
+            if language.contains("zh-hant") || language.contains("zh-hk") || language.contains("zh-tw") {
+                return configurationDictionary?["NewVersionChangelogzhHant"] as? String
+            } else if language.contains("zh-") {
+                return configurationDictionary?["NewVersionChangelogzhHans"] as? String
+            }
+        }
         return configurationDictionary?["NewVersionChangelog"] as? String
     }
     
