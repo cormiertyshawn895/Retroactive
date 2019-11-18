@@ -46,7 +46,6 @@
 		32F7635A23651DC200200ED7 /* RetroactiveWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F7635923651DC200200ED7 /* RetroactiveWindow.swift */; };
 		32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */ = {isa = PBXBuildFile; fileRef = 32F763DC23657A8D00200ED7 /* install_name_tool_packed */; };
 		6008E6C623820F7300A2F659 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6008E6C823820F7300A2F659 /* InfoPlist.strings */; };
-		6008E6C923820F8A00A2F659 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32D181C523640CDF006253DE /* Info.plist */; };
 		6008E6DC2382140C00A2F659 /* String+LocalizeTableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D62382140C00A2F659 /* String+LocalizeTableName.swift */; };
 		6008E6DD2382140C00A2F659 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D72382140C00A2F659 /* Localize.swift */; };
 		6008E6DE2382140C00A2F659 /* String+LocalizeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D92382140C00A2F659 /* String+LocalizeBundle.swift */; };
@@ -121,6 +120,9 @@
 		606CA150236666B3001C550E /* ConfettiView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ConfettiView.bundle; sourceTree = "<group>"; };
 		606CA151236666B3001C550E /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		607C3D7D23823BE200FAE528 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		607C3D7E2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		607C3D7F2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		607C3D802382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +353,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 32D181B023640CDE006253DE;
 			productRefGroup = 32D181BA23640CDE006253DE /* Products */;
@@ -375,7 +378,6 @@
 				046034EA2381DDB300070C86 /* ProApplicationsUpdate2010-02.dist in Resources */,
 				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
-				6008E6C923820F8A00A2F659 /* Info.plist in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				046034E42381B6E800070C86 /* KeynoteScript in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
@@ -439,6 +441,7 @@
 			children = (
 				32D181C323640CDF006253DE /* Base */,
 				607C3D7D23823BE200FAE528 /* zh-Hans */,
+				607C3D7E2382409B00FAE528 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 			children = (
 				6008E6C723820F7300A2F659 /* zh-Hans */,
 				6008E6CA2382100A00A2F659 /* en */,
+				607C3D802382409B00FAE528 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -457,6 +461,7 @@
 			children = (
 				6008E6E42382160400A2F659 /* zh-Hans */,
 				6008E6E62382160C00A2F659 /* en */,
+				607C3D7F2382409B00FAE528 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
