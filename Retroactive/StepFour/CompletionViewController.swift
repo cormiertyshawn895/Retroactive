@@ -94,7 +94,7 @@ class CompletionViewController: NSViewController {
             let standardPath = "\(musicFolderPath)/iTunes"
             let hasiTunesLibraryAtStandardPath = FileManager.default.fileExists(atPath: standardPath)
             if (hasiTunesLibraryAtStandardPath) {
-                description = "\n\n" + String(format: "%@Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed.".localized(), description)
+                description = description + "\n\n" + "Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed.".localized()
             }
             AppDelegate.showOptionSheet(title: "Would you like to create a new iTunes library?".localized(), text: description, firstButtonText: "Create New Library".localized(), secondButtonText: "Don't Create".localized(), thirdButtonText: "") { (response) in
                 if (response == .alertFirstButtonReturn) {

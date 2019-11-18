@@ -10,7 +10,7 @@
 "%@ (%@) 不是%@ (%@)。如需繼續，您需要找到並選擇有效的%@ (%@)。" = "%@ (%@) is not %@ (%@) . To proceed, you need to locate a valid copy of %@ (%@).";
 "%@ is not installed on your Mac." = "您的 Mac 尚未安裝 %@。";
 "%@ — Retroactive" = "%@ — 解印";
-"%@Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed." = "%@不必擔心，您現有的iTunes 資料庫不會被刪除，而是會被重命名。";
+"Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed." = "不必擔心，您現有的iTunes 資料庫不會被刪除，而是會被重命名。";
 "%@ing" = "%@";
 "%d%% Complete" = "已完成 %d%%";
 "10 minutes" = "10 分鐘";
@@ -47,7 +47,7 @@
 "Install Final Cut Pro 7 from DVD disc or DMG image" = "從 DVD 光盤或 DMG 磁盤鏡像安裝 Final Cut Pro 7";
 "Install Logic Pro 9 from DVD disc or DMG image" = "從 DVD 光盤或 DMG 磁盤鏡像安裝 Logic Pro 9";
 "Install support files" = "安裝支持文件";
-"It is completely normal for the fans to spin up during the process." = "在此過程中風扇可能加速旋轉，這完全正常。";
+"It is completely normal for the fans to spin up during the process." = "在此過程中風扇可能加速運轉，這完全正常。";
 "Keep Installing" = "繼續安裝";
 "Learn More..." = "進一步了解...";
 "Locate %@ %@" = "找到並選擇 %@ %@";
