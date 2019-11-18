@@ -712,10 +712,22 @@
                                 <rect key="frame" x="551" y="150" width="351" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HQ9-52-QEW" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="785" y="34" width="138" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="Continue ›" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="wCE-ll-wiN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="19"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="continueClicked:" target="ErU-T7-7XY" id="zqA-Px-7gm"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="iconImageView" destination="xwb-lN-hWl" id="s34-hd-YQj"/>
+                        <outlet property="manualContinueButton" destination="HQ9-52-QEW" id="80m-wf-Ukh"/>
                         <outlet property="progressCaption" destination="UUC-lR-sbm" id="X3Q-qm-Mb7"/>
                         <outlet property="progressGrid1" destination="eH0-xZ-t03" id="a5j-7T-lLP"/>
                         <outlet property="progressGrid2" destination="Dvd-vq-uyP" id="yMZ-NN-VtG"/>
@@ -1167,7 +1179,7 @@ You can use {name} now.</string>
         <image name="iphoto_cartoon" width="252" height="252"/>
         <image name="itunes12_9" width="281" height="195.5"/>
         <image name="itunes_cartoon" width="252" height="252"/>
-        <image name="mojave-banner" width="882" height="69.5"/>
+        <image name="mojave-banner" width="882" height="70"/>
         <image name="tick" width="51" height="45"/>
         <image name="timemachine_guide" width="381" height="146"/>
     </resources>

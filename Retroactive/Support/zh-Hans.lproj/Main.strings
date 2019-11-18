@@ -30,7 +30,7 @@
 "6yW-ps-YvK.title" = "验证身份";
 
 /* Class = "NSTextFieldCell"; title = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. To get started, install macOS Mojave on a separate volume."; ObjectID = "7iR-G1-f3y"; */
-"7iR-G1-f3y.title" = "解印还可以在 macOS Mojave 和 macOS High Sierra 下解除对 Final Cut Pro 7 和 Logic Pro 9 等应用程序的封印，或修复 Keynote ’09。在单独的宗卷上安装 macOS Mojave 以继续。";
+"7iR-G1-f3y.title" = "解印还可以在 macOS Mojave 和 macOS High Sierra 下解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 Keynote ’09。在单独的宗卷上安装 macOS Mojave 以继续。";
 
 /* Class = "NSTextFieldCell"; title = "iTunes 12.9.5"; ObjectID = "8QN-TG-LSP"; */
 "8QN-TG-LSP.title" = "iTunes 12.9.5";
@@ -208,3 +208,6 @@
 
 /* Class = "NSTextFieldCell"; title = "/Applications/Stuff.app"; ObjectID = "zN7-i2-jN4"; */
 "zN7-i2-jN4.title" = "/Applications/Stuff.app";
+
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "wCE-ll-wiN"; */
+"wCE-ll-wiN.title" = "继续 ›";

@@ -120,7 +120,7 @@
 		606CA12923665CBF001C550E /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
 		606CA150236666B3001C550E /* ConfettiView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ConfettiView.bundle; sourceTree = "<group>"; };
 		606CA151236666B3001C550E /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
-		6089B7EC23820C6D009AA108 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		607C3D7D23823BE200FAE528 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -438,7 +438,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				32D181C323640CDF006253DE /* Base */,
-				6089B7EC23820C6D009AA108 /* zh-Hans */,
+				607C3D7D23823BE200FAE528 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

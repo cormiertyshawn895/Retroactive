@@ -15,6 +15,7 @@ class AppFinder: NSObject {
     }
 
     func queryAllInstalledApps() {
+        print("query all installed apps")
         queryAllInstalledApps(shouldPresentAlert: false, claimsToHaveInstalled: false)
     }
     
@@ -22,7 +23,7 @@ class AppFinder: NSObject {
         query?.stop()
         query = NSMetadataQuery()
         query?.searchScopes = ["/Applications"]
-
+        print("query = \(String(describing: query))")
 //        let chosen = AppManager.shared.chosenApp
 //        if chosen == .itunes || chosen == .finalCutPro7 || chosen == .logicPro9 || chosen == .keynote5 {
 //            query?.searchScopes = ["/Applications"]
@@ -31,6 +32,7 @@ class AppFinder: NSObject {
 //        }
         let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.existingBundleIDOfChosenApp)
 //        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchDisplayName) CONTAINS[c] %@ AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.nameOfChosenApp, AppManager.shared.existingBundleIDOfChosenApp)
+        print("pred = \(String(describing: pred))")
         query?.predicate = pred
         query?.start()
         NotificationCenter.default.removeObserver(self)
@@ -51,6 +53,9 @@ class AppFinder: NSObject {
         guard let actualQuery = notif.object as? NSMetadataQuery else {
             return
         }
+        
+        print("finishedQueryInstalledApps, results = \(String(describing: query?.results))")
+
         if actualQuery != query {
             return
         }

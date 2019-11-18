@@ -823,7 +823,11 @@ class AppManager: NSObject {
             return
         case .finalCutPro7:
             if (AppManager.shared.locationOfChosenApp != nil) {
+                // Save the location and don't let the setter reset it
+                let cachedLocation = AppManager.shared.locationOfChosenApp
                 AppManager.shared.chosenApp = .proVideoUpdate
+                AppManager.shared.locationOfChosenApp = cachedLocation
+
                 AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
             } else {
                 AppDelegate.showTextSheet(title: "You need to install Final Cut Pro 7 first.".localized(), text: String(format: "After you have already installed Final Cut Pro 7 from a DVD installer or DMG image, Retroactive can download and update Final Cut Pro 7 from version 7.0 to 7.0.3, and unlock it to be compatible with %@.".localized(), ProcessInfo.versionName))

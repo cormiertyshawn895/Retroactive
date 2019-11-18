@@ -15,6 +15,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     @IBOutlet weak var progressCaption: NSTextField!
     @IBOutlet weak var iconImageView: NSImageView!
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    @IBOutlet weak var manualContinueButton: HoverButton!
     
     var subProgress1: SubProgressViewController!
     var subProgress2: SubProgressViewController!
@@ -25,6 +26,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     var session: URLSession?
     var dataTask: URLSessionDataTask?
     var isDownloadMode = false
+    var isProVideoUpdate = false
     let tempDir = "/tmp"
     
     var expectedContentLength = 0
@@ -37,10 +39,12 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        manualContinueButton.updateTitle()
         progressHeading.updateToken()
         progressCaption.updateToken()
         
-        isDownloadMode = AppManager.shared.chosenApp == .itunes || AppManager.shared.chosenApp == .proVideoUpdate
+        isProVideoUpdate = AppManager.shared.chosenApp == .proVideoUpdate
+        isDownloadMode = AppManager.shared.chosenApp == .itunes || isProVideoUpdate
         let shortName = AppManager.shared.spaceConstrainedNameOfChosenApp
         
         subProgress1 = SubProgressViewController.instantiate()
@@ -56,15 +60,18 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         subProgress2.sequenceLabel.stringValue = "2"
         subProgress2.descriptionTextField.stringValue = isDownloadMode ? String(format: "Extract %@".localized(), shortName) : "Install support files".localized()
 
+        let installString = String(format: "Install %@".localized(), shortName)
+        let configureString = String(format: "Configure %@".localized(), shortName)
+        
         subProgress3 = SubProgressViewController.instantiate()
         progressGrid3.addSubview(subProgress3.view)
         subProgress3.sequenceLabel.stringValue = "3"
-        subProgress3.descriptionTextField.stringValue = isDownloadMode ? String(format: "Install %@".localized(), shortName) : String(format: "Refresh %@ icon".localized(), AppManager.shared.nameOfChosenApp)
+        subProgress3.descriptionTextField.stringValue = isDownloadMode ? (isProVideoUpdate ? configureString : installString) : String(format: "Refresh %@ icon".localized(), AppManager.shared.nameOfChosenApp)
 
         subProgress4 = SubProgressViewController.instantiate()
         progressGrid4.addSubview(subProgress4.view)
         subProgress4.sequenceLabel.stringValue = "4"
-        subProgress4.descriptionTextField.stringValue = isDownloadMode ? String(format: "Configure %@".localized(), shortName) : String(format: "Sign %@".localized(), AppManager.shared.nameOfChosenApp)
+        subProgress4.descriptionTextField.stringValue = isDownloadMode ? (isProVideoUpdate ? installString : configureString) : String(format: "Sign %@".localized(), AppManager.shared.nameOfChosenApp)
 
         iconImageView.updateIcon()
         
@@ -104,6 +111,15 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         }
         
         if AppManager.shared.chosenApp == .proVideoUpdate {
+            let kExpectedFCP7Path = "/Applications/Final Cut Pro.app"
+            print("Final Cut Pro 7 found at path \(String(describing: AppManager.shared.locationOfChosenApp))")
+            if let foundLocation = AppManager.shared.locationOfChosenApp {
+                if (foundLocation != kExpectedFCP7Path) {
+                    print("Final Cut Pro 7 found at non-standard path \(foundLocation), let's move it before updating")
+                    self.runTask(toolPath: "/bin/mv", arguments: [kExpectedFCP7Path, "/Applications/Final Cut Pro Backup.app"])
+                    self.runTask(toolPath: "/bin/mv", arguments: [foundLocation, kExpectedFCP7Path])
+                }
+            }
             self.kickoffLargeDownload()
         }
 
@@ -130,6 +146,11 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let kProKitCopyPath = "\(kLibraryFrameworkPath)/ProKit.framework"
             
             if (fullMode == true) {
+                // It shouldn't be possible to have ProKit or BrowserKit at /System/Library/Frameworks on High Sierra or Mojave, and deleting them will fail with SIP.
+                // Handle the corner for those who manually copied or installed old versions ProKit.
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/Frameworks/ProKit.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/Frameworks/BrowserKit.framework"])
+
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kAppKitShimPath])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kBrowserKitCopyPath])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kProKitCopyPath])
@@ -253,7 +274,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 if AppManager.shared.choseniTunesVersion == .darkMode {
                     duration = 60.0
                 }
-                self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: 0.70)
+                self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: isProVideoUpdate ? 0.38 : 0.70)
             } else {
                 self.progressIndicator.doubleValue = 0.1
             }
@@ -265,7 +286,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.70, endingPercent: 0.88)
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -277,7 +298,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.88, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 5, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
                 self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
@@ -516,9 +537,15 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.syncMainQueue {
             AppManager.shared.chosenApp = .finalCutPro7
             AppFinder.shared.queryAllInstalledApps()
+            manualContinueButton.isHidden = false
         }
     }
 
+    @IBAction func continueClicked(_ sender: Any) {
+        AppManager.shared.chosenApp = .finalCutPro7
+        AppFinder.shared.queryAllInstalledApps()
+    }
+    
     func installDarkModeiTunes() {
         self.installiTunesCommon("Packages/Core.pkg", appLocation: "Payload/Applications/iTunes.app")
     }

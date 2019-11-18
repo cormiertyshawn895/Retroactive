@@ -41,7 +41,7 @@
 "Extract %@" = "解包 %@";
 "FIX" = "修复";
 "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list." = "如果您此前曾在 Mac App Store 下载过 %@，请前往已购清单将其重新下载。";
-"If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina." = "如果您将 Mac 更新到 macOS Catalina，Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 等应用会被重新封印且无法解除。但解印依然可以在 macOS Catalina 下解锁 Aperture 和 iPhoto，或安装 iTunes。";
+"If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina." = "如果您将 Mac 更新到 macOS Catalina，Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 会被重新封印且无法解除。但解印依然可以在 macOS Catalina 下解锁 Aperture 和 iPhoto，或安装 iTunes。";
 "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice." = "如果您的 RAW 原图无法正常显示，请先打开“照片”菜单, 选择“重新处理原件…”，然后按提示重新处理原件。您可能需要重复上述操作两次。";
 "Install %@" = "安装 %@";
 "Install Final Cut Pro 7 from DVD disc or DMG image" = "从 DVD 光盘或 DMG 磁盘镜像安装 Final Cut Pro 7";
@@ -77,7 +77,7 @@
 "Try Again" = "再试一次";
 "Unable to download %@" = "无法下载 %@";
 "Unable to quit Retroactive" = "无法退出解印";
-"Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09." = "解除对 Final Cut Pro 7 和 Logic Pro 9 等应用的封印，或修复 Keynote ’09。";
+"Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09." = "解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 Keynote ’09。";
 "Unlock {name} again" = "重新解印 {name}";
 "Untitled" = "新项目";
 "Update (Recommended)" = "安装更新 (推荐)";
