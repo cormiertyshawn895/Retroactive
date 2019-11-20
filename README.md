@@ -1,4 +1,4 @@
-## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.2/Retroactive.1.2.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
+## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. It also lets you run Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave and macOS High Sierra. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.3/Retroactive.1.3.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
 
 
 ### Opening Retroactive
@@ -19,19 +19,23 @@ Retroactive will not harm your Mac. This alert only shows up because Retroactive
 
 ### Picking an app
 
-Pick the app you want to run on macOS Catalina. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
+Pick the app you want to run. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
 
 ![](screenshots/4.jpg)
 
-I’ll use Aperture as the example, but the same process also works for iPhoto and iTunes.
+On macOS Mojave and macOS High Sierra, Retroactive can also unlock Final Cut Pro 7, Logic Pro 9 (experimental), and fix Keynote ’09.
+
+![](screenshots/4b.jpg)
+
+I’ll use Aperture as the example, but the same process also works for iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, and Keynote ’09.
 
 ---
 
 ### Locating the app or choosing a version
 
-Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, or iTunes install. If Retroactive has already located the app you would like to run, skip to the next section.
+Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, or Keynote ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
 
-If Retroactive can’t locate an existing install, you’ll be asked to download it from the Purchased list in App Store. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
+If Retroactive can’t locate an existing install of Aperture or iPhoto, you’ll either be asked to download it from the Purchased list in App Store, or re-install it from a DVD disc. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
 
 ![](screenshots/5.jpg)
 
@@ -57,7 +61,7 @@ Your password is never stored or sent anywhere. To verify this, you can view Ret
 
 ### Modifying the app
 
-Retroactive will install or modify the app you chose. Modifying Aperture and iPhoto to run on macOS Catalina should only take about 2 minutes.
+Retroactive will install or modify the app you chose. Modifying the app should only take about 2 minutes.
 
 ![](screenshots/7.jpg)
 
@@ -85,6 +89,12 @@ After successfully modifying or installing the app, you can play with it to your
 
 - iTunes 10.7 may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes.
 
+- All Final Cut Pro 7 features should work.
+
+- Support for Logic Pro 9 is experimental. You may see frequent freezes and hangs.
+
+- After fixing Keynote ’09 with Retroactive, you can normally play slideshows.
+
 ---
 
 ### Reprocessing RAW photos in Aperture
@@ -100,6 +110,6 @@ After successfully modifying or installing the app, you can play with it to your
 ---
 
 ### Last words
-- If GateKeeper prevents you from running modified versions of Aperture, iPhoto or iTunes, [temporarily disable GateKeeper in Terminal with `sudo spctl --master-disable`](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/).
+- If GateKeeper prevents you from running modified versions of your chosen app, [temporarily disable GateKeeper in Terminal with `sudo spctl --master-disable`](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/).
 
 - To learn more about how Retroactive works, [take a technical deep dive](https://medium.com/@cormiertyshawn895/deep-dive-how-does-retroactive-work-95fe0e5ea49e).

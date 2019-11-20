@@ -27,8 +27,8 @@ class CompletionViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if (allowPatchingAgain == true) {
-            behindTheScenesButton.title = "Unlock {name} again"
-            congratulatoryLabel.stringValue = "You have already unlocked \(placeholderToken).\nThere's usually no need to unlock it again."
+            behindTheScenesButton.title = NSLocalizedString("Unlock {name} again".localized(), comment: "")
+            congratulatoryLabel.stringValue = String(format: "You have already unlocked %@.\nThere's usually no need to unlock it again.".localized(), placeholderToken)
         } else if (AppManager.shared.behindTheScenesOfChosenApp == nil) {
             behindTheScenesButton.isHidden = true
         }
@@ -40,7 +40,7 @@ class CompletionViewController: NSViewController {
         launchAppLabel.moveIntoView(launchAppButton)
         if let knownIssues = AppManager.shared.appKnownIssuesText {
             dividerLine.isHidden = false
-            extraInfoLabel.stringValue = "Note: \(knownIssues)"
+            extraInfoLabel.stringValue = String(format: "Note: %@".localized(), knownIssues)
         }
     }
     
@@ -89,14 +89,14 @@ class CompletionViewController: NSViewController {
             return
         }
         if AppManager.shared.chosenApp == .itunes && AppManager.shared.choseniTunesVersion != .darkMode {
-            var description = "You have installed an older version of iTunes, which may not be compatible with your current iTunes library.\n\nWould you like to create a new iTunes library to use with iTunes \(AppManager.shared.compatibleVersionOfChosenApp.first ?? "")?"
+            var description = String(format: "You have installed an older version of iTunes, which may not be compatible with your current iTunes library.\n\nWould you like to create a new iTunes library to use with iTunes %@?".localized(), AppManager.shared.compatibleVersionOfChosenApp.first ?? "")
             let musicFolderPath = ("~/Music" as NSString).expandingTildeInPath
             let standardPath = "\(musicFolderPath)/iTunes"
             let hasiTunesLibraryAtStandardPath = FileManager.default.fileExists(atPath: standardPath)
             if (hasiTunesLibraryAtStandardPath) {
-                description = "\(description)\n\nDon't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed."
+                description = description + "\n\n" + "Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed.".localized()
             }
-            AppDelegate.showOptionSheet(title: "Would you like to create a new iTunes library?", text: description, firstButtonText: "Create New Library", secondButtonText: "Don't Create", thirdButtonText: "") { (response) in
+            AppDelegate.showOptionSheet(title: "Would you like to create a new iTunes library?".localized(), text: description, firstButtonText: "Create New Library".localized(), secondButtonText: "Don't Create".localized(), thirdButtonText: "") { (response) in
                 if (response == .alertFirstButtonReturn) {
                     self.cleariTunesPreferences()
                     do {

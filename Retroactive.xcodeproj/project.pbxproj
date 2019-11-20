@@ -45,11 +45,20 @@
 		32F763582365018600200ED7 /* capsule.icns in Resources */ = {isa = PBXBuildFile; fileRef = 32F763572365018500200ED7 /* capsule.icns */; };
 		32F7635A23651DC200200ED7 /* RetroactiveWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F7635923651DC200200ED7 /* RetroactiveWindow.swift */; };
 		32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */ = {isa = PBXBuildFile; fileRef = 32F763DC23657A8D00200ED7 /* install_name_tool_packed */; };
+		6008E6C623820F7300A2F659 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6008E6C823820F7300A2F659 /* InfoPlist.strings */; };
+		6008E6DC2382140C00A2F659 /* String+LocalizeTableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D62382140C00A2F659 /* String+LocalizeTableName.swift */; };
+		6008E6DD2382140C00A2F659 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D72382140C00A2F659 /* Localize.swift */; };
+		6008E6DE2382140C00A2F659 /* String+LocalizeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D92382140C00A2F659 /* String+LocalizeBundle.swift */; };
+		6008E6DF2382140C00A2F659 /* String+LocalizedBundleTableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6DA2382140C00A2F659 /* String+LocalizedBundleTableName.swift */; };
+		6008E6E32382160400A2F659 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6008E6E52382160400A2F659 /* Localizable.strings */; };
+		6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */; };
+		6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */; };
 		606CA12123664BFD001C550E /* killpkg in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12023664BFC001C550E /* killpkg */; };
 		606CA12823665C04001C550E /* Credits.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12723665C04001C550E /* Credits.pdf */; };
 		606CA12A23665CBF001C550E /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12923665CBF001C550E /* Credits.rtfd */; };
 		606CA154236666B3001C550E /* ConfettiView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 606CA150236666B3001C550E /* ConfettiView.bundle */; };
 		606CA155236666B3001C550E /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CA151236666B3001C550E /* ConfettiView.swift */; };
+		607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 607C3D812382665900FAE528 /* AudioToolbox.framework.zip */; };
 		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 /* End PBXBuildFile section */
 
@@ -99,11 +108,27 @@
 		32F763572365018500200ED7 /* capsule.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = capsule.icns; sourceTree = "<group>"; };
 		32F7635923651DC200200ED7 /* RetroactiveWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroactiveWindow.swift; sourceTree = "<group>"; };
 		32F763DC23657A8D00200ED7 /* install_name_tool_packed */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = install_name_tool_packed; sourceTree = "<group>"; };
+		6008E6C723820F7300A2F659 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6008E6CA2382100A00A2F659 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6008E6D62382140C00A2F659 /* String+LocalizeTableName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizeTableName.swift"; sourceTree = "<group>"; };
+		6008E6D72382140C00A2F659 /* Localize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
+		6008E6D82382140C00A2F659 /* Localize_Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Localize_Swift.h; sourceTree = "<group>"; };
+		6008E6D92382140C00A2F659 /* String+LocalizeBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizeBundle.swift"; sourceTree = "<group>"; };
+		6008E6DA2382140C00A2F659 /* String+LocalizedBundleTableName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizedBundleTableName.swift"; sourceTree = "<group>"; };
+		6008E6E42382160400A2F659 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6008E6E62382160C00A2F659 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Mojave32Bit.mobileconfig; sourceTree = "<group>"; };
+		6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HighSierra32Bit.mobileconfig; sourceTree = "<group>"; };
 		606CA12023664BFC001C550E /* killpkg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = killpkg; sourceTree = "<group>"; };
 		606CA12723665C04001C550E /* Credits.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Credits.pdf; path = Retroactive/Help/Credits.pdf; sourceTree = SOURCE_ROOT; };
 		606CA12923665CBF001C550E /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
 		606CA150236666B3001C550E /* ConfettiView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ConfettiView.bundle; sourceTree = "<group>"; };
 		606CA151236666B3001C550E /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		607C3D7D23823BE200FAE528 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		607C3D7E2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		607C3D7F2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		607C3D802382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		607C3D812382665900FAE528 /* AudioToolbox.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = AudioToolbox.framework.zip; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +202,8 @@
 				606CA12723665C04001C550E /* Credits.pdf */,
 				32F763572365018500200ED7 /* capsule.icns */,
 				32F763432364C8C000200ED7 /* SupportPath.plist */,
+				6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */,
+				6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */,
 				046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */,
 				32D181CC23640DE0006253DE /* RetroactiveWindowController.swift */,
 				32F7635923651DC200200ED7 /* RetroactiveWindow.swift */,
@@ -187,6 +214,7 @@
 				606CA12023664BFC001C550E /* killpkg */,
 				046034E32381B6E800070C86 /* KeynoteScript */,
 				042E9E472381AC2B001D3F38 /* GeneralFixerScript */,
+				607C3D812382665900FAE528 /* AudioToolbox.framework.zip */,
 				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
 				046034E62381C18A00070C86 /* ProKit.framework.zip */,
 				046034E12381B41200070C86 /* KeynoteFixer */,
@@ -195,6 +223,8 @@
 				042E9E452381AC2B001D3F38 /* AppKit */,
 				042E9E482381AC2B001D3F38 /* VideoFixer */,
 				32D181C523640CDF006253DE /* Info.plist */,
+				6008E6E52382160400A2F659 /* Localizable.strings */,
+				6008E6C823820F7300A2F659 /* InfoPlist.strings */,
 				32D181C623640CDF006253DE /* Retroactive.entitlements */,
 				32D181C023640CDF006253DE /* Assets.xcassets */,
 			);
@@ -204,6 +234,7 @@
 		32D181EE236434E3006253DE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6008E6D52382140C00A2F659 /* Localize */,
 				606CA14F236666B3001C550E /* ConfettiView */,
 				32F7634F2364DBAA00200ED7 /* STPrivilegedTask */,
 				32D181F0236434F3006253DE /* CCNNavigationController */,
@@ -268,6 +299,18 @@
 			path = STPrivilegedTask;
 			sourceTree = "<group>";
 		};
+		6008E6D52382140C00A2F659 /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				6008E6D62382140C00A2F659 /* String+LocalizeTableName.swift */,
+				6008E6D72382140C00A2F659 /* Localize.swift */,
+				6008E6D82382140C00A2F659 /* Localize_Swift.h */,
+				6008E6D92382140C00A2F659 /* String+LocalizeBundle.swift */,
+				6008E6DA2382140C00A2F659 /* String+LocalizedBundleTableName.swift */,
+			);
+			path = Localize;
+			sourceTree = "<group>";
+		};
 		606CA14F236666B3001C550E /* ConfettiView */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +361,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 32D181B023640CDE006253DE;
 			productRefGroup = 32D181BA23640CDE006253DE /* Products */;
@@ -335,20 +380,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F763582365018600200ED7 /* capsule.icns in Resources */,
+				6008E6C623820F7300A2F659 /* InfoPlist.strings in Resources */,
+				6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */,
 				606CA12A23665CBF001C550E /* Credits.rtfd in Resources */,
 				606CA154236666B3001C550E /* ConfettiView.bundle in Resources */,
 				046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */,
 				046034EA2381DDB300070C86 /* ProApplicationsUpdate2010-02.dist in Resources */,
 				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
+				607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				046034E42381B6E800070C86 /* KeynoteScript in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
+				6008E6E32382160400A2F659 /* Localizable.strings in Resources */,
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
 				606CA12823665C04001C550E /* Credits.pdf in Resources */,
 				60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */,
 				32D181C423640CDF006253DE /* Main.storyboard in Resources */,
 				606CA12123664BFD001C550E /* killpkg in Resources */,
+				6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */,
 				042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */,
 				32F763542364DEA700200ED7 /* NyxAudioAnalysis in Resources */,
 				046034E82381C18A00070C86 /* ProKit.framework.zip in Resources */,
@@ -372,7 +422,9 @@
 				32D181BD23640CDE006253DE /* AppDelegate.swift in Sources */,
 				32D181D6236421C0006253DE /* ProgressViewController.swift in Sources */,
 				32F7634A2364CAD000200ED7 /* AppFinder.swift in Sources */,
+				6008E6DF2382140C00A2F659 /* String+LocalizedBundleTableName.swift in Sources */,
 				32F7635A23651DC200200ED7 /* RetroactiveWindow.swift in Sources */,
+				6008E6DE2382140C00A2F659 /* String+LocalizeBundle.swift in Sources */,
 				32D181EA23643108006253DE /* AppManager.swift in Sources */,
 				32D181D9236421E2006253DE /* SubProgressViewController.swift in Sources */,
 				32D181DF23642229006253DE /* VersionChoiceViewController.swift in Sources */,
@@ -380,7 +432,9 @@
 				32D181F423643519006253DE /* CCNNavigationController.m in Sources */,
 				32D181DD23642213006253DE /* VersionViewController.swift in Sources */,
 				321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */,
+				6008E6DC2382140C00A2F659 /* String+LocalizeTableName.swift in Sources */,
 				32F763522364DBAA00200ED7 /* STPrivilegedTask.m in Sources */,
+				6008E6DD2382140C00A2F659 /* Localize.swift in Sources */,
 				32D181D223642192006253DE /* GuidanceViewController.swift in Sources */,
 				32F7634C2364D0AA00200ED7 /* AuthenticateViewController.swift in Sources */,
 				32D181E82364303E006253DE /* ViewExtras.swift in Sources */,
@@ -398,8 +452,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				32D181C323640CDF006253DE /* Base */,
+				607C3D7D23823BE200FAE528 /* zh-Hans */,
+				607C3D7E2382409B00FAE528 /* zh-Hant */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6008E6C823820F7300A2F659 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6008E6C723820F7300A2F659 /* zh-Hans */,
+				6008E6CA2382100A00A2F659 /* en */,
+				607C3D802382409B00FAE528 /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6008E6E52382160400A2F659 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6008E6E42382160400A2F659 /* zh-Hans */,
+				6008E6E62382160C00A2F659 /* en */,
+				607C3D7F2382409B00FAE528 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -409,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -469,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -524,7 +602,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 13;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -545,7 +623,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 13;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

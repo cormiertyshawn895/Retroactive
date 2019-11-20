@@ -25,7 +25,7 @@ class SubProgressViewController: NSViewController {
         circularProgress.cancelProgress()
         circularProgress.isIndeterminate = true
         numberBox.fillColor = NSColor.controlAccentColorPolyfill
-        self.progressTextField.stringValue = "Waiting..."
+        self.progressTextField.stringValue = "Waiting...".localized()
     }
     
     var stageDescription: String?
@@ -34,13 +34,13 @@ class SubProgressViewController: NSViewController {
         set {
             if (newValue == true) {
                 // circularProgress.resetProgress()
-                self.progressTextField.stringValue = "Working..."
+                self.progressTextField.stringValue = "Working...".localized()
                 circularProgress.isHidden = false
                 numberBox.isHidden = true
             } else {
                 circularProgress.progress = 1.0
                 circularProgress.color = NSColor.systemGreen
-                self.progressTextField.stringValue = "Completed"
+                self.progressTextField.stringValue = "Completed".localized()
             }
         }
         get {

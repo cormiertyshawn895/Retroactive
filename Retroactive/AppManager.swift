@@ -74,9 +74,7 @@ class AppManager: NSObject {
             self.configurationDictionary = loaded
         }
         
-        #if !DEBUG
         self.checkForConfigurationUpdates()
-        #endif
     }
     
     func checkForConfigurationUpdates() {
@@ -154,11 +152,42 @@ class AppManager: NSObject {
         }
     }
     
+    var isLanguageZhFamily: Bool {
+        if let language = NSLocale.preferredLanguages.first?.lowercased() {
+            return language.contains("zh-")
+        }
+        return false
+    }
+    
+    var isLanguageTraditionalZhFamily: Bool {
+        if let language = NSLocale.preferredLanguages.first?.lowercased() {
+            return language.contains("zh-hant") || language.contains("zh-hk") || language.contains("zh-tw")
+        }
+        return false
+    }
+    
+    var isLanguageSimplifiedZhFamily: Bool {
+        if let language = NSLocale.preferredLanguages.first?.lowercased() {
+            return language.contains("zh-hans") || language.contains("zh-cn")
+        }
+        return false
+    }
+    
     var newVersionVisibleTitle: String? {
+        if isLanguageTraditionalZhFamily {
+            return configurationDictionary?["NewVersionVisibleTitlezhHant"] as? String
+        } else if isLanguageZhFamily {
+            return configurationDictionary?["NewVersionVisibleTitlezhHans"] as? String
+        }
         return configurationDictionary?["NewVersionVisibleTitle"] as? String
     }
 
     var newVersionChangelog: String? {
+        if isLanguageTraditionalZhFamily {
+            return configurationDictionary?["NewVersionChangelogzhHant"] as? String
+        } else if isLanguageZhFamily {
+            return configurationDictionary?["NewVersionChangelogzhHans"] as? String
+        }
         return configurationDictionary?["NewVersionChangelog"] as? String
     }
     
@@ -227,6 +256,9 @@ class AppManager: NSObject {
     }
 
     var iWork09DVD: String? {
+        if isLanguageSimplifiedZhFamily {
+            return configurationDictionary?["iWork09DVDCN"] as? String
+        }
         return configurationDictionary?["iWork09DVD"] as? String
     }
     
@@ -235,6 +267,9 @@ class AppManager: NSObject {
     }
 
     var logicDVD: String? {
+        if isLanguageSimplifiedZhFamily {
+            return configurationDictionary?["LogicDVDCN"] as? String
+        }
         return configurationDictionary?["LogicDVD"] as? String
     }
     
@@ -243,6 +278,9 @@ class AppManager: NSObject {
     }
 
     var fcpDVD: String? {
+        if isLanguageSimplifiedZhFamily {
+            return configurationDictionary?["FCPDVDCN"] as? String
+        }
         return configurationDictionary?["FCPDVD"] as? String
     }
     
@@ -311,9 +349,9 @@ class AppManager: NSObject {
             case .keynote5:
                 return "Keynote ’09"
             case .proVideoUpdate:
-                return "Pro Applications Update 2010-02"
+                return "Pro Applications Update 2010-02".localized()
             default:
-                return "Untitled"
+                return "Untitled".localized()
             }
         }
     }
@@ -322,7 +360,7 @@ class AppManager: NSObject {
         get {
             switch self.chosenApp {
             case .proVideoUpdate:
-                return "Pro Update"
+                return "Pro Update".localized()
             default:
                 return self.nameOfChosenApp
             }
@@ -372,7 +410,7 @@ class AppManager: NSObject {
             case .finalCutPro7:
                 return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
             case .logicPro9:
-                return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1", "9.0.2", "9.0.1", "9.0"]
+                return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
             case .keynote5:
                 return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
             default:
@@ -666,20 +704,20 @@ class AppManager: NSObject {
         get {
             switch self.chosenApp {
             case .itunes:
-                return "install"
+                return "install".localized()
             case .keynote5:
-                return "fix"
+                return "fix".localized()
             case .proVideoUpdate:
-                return "install"
+                return "install".localized()
             default:
-                return "unlock"
+                return "unlock".localized()
             }
         }
     }
     
     var mainActionOfChosenApp: String {
         get {
-            return "\(presentTenseActionOfChosenApp)ing"
+            return String(format: "%@ing".localized(), presentTenseActionOfChosenApp)
         }
     }
 
@@ -687,9 +725,9 @@ class AppManager: NSObject {
         get {
             switch self.chosenApp {
             case .itunes:
-                return "downloading and installing"
+                return "downloading and installing".localized()
             default:
-                return "installing support files for"
+                return "installing support files for".localized()
             }
         }
     }
@@ -700,26 +738,26 @@ class AppManager: NSObject {
             case .itunes:
                 switch choseniTunesVersion {
                 case .darkMode:
-                    return "25 minutes"
+                    return "25 minutes".localized()
                 case .appStore:
-                    return "10 minutes"
+                    return "10 minutes".localized()
                 case .coverFlow:
-                    return "10 minutes"
+                    return "10 minutes".localized()
                 case .none:
-                    return "an hour"
+                    return "an hour".localized()
                 }
             case .proVideoUpdate:
-                return "10 minutes"
+                return "10 minutes".localized()
             default:
-                return "2 minutes"
+                return "2 minutes".localized()
             }
         }
     }
     
     var notInstalledText: String {
         get {
-            let appStoreTemplate = "If you have previously downloaded \(nameOfChosenApp) from the Mac App Store, download it again from the Purchased list."
-            let dvdTemplate = "\n\nIf you have a DVD installer for \(nameOfChosenApp), insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of \(nameOfChosenApp) on eBay. \n\nIf your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of \(nameOfChosenApp), and install \(nameOfChosenApp) through the DMG installer."
+            let appStoreTemplate = String(format: "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list.".localized(), nameOfChosenApp)
+            let dvdTemplate = String(format: "\n\nIf you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay. \n\nIf your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer.".localized(), nameOfChosenApp, nameOfChosenApp, nameOfChosenApp, nameOfChosenApp)
 
             switch self.chosenApp {
             case .aperture:
@@ -733,7 +771,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return "\(dvdTemplate) \n\n\(appStoreTemplate)"
             case .keynote5:
-                return "\n\nYou can download and install iWork ’09, which includes Keynote ’09, from The Internet Archive."
+                return "\n\nYou can download and install iWork ’09, which includes Keynote ’09, from The Internet Archive.".localized()
             default:
                 return ""
             }
@@ -742,8 +780,8 @@ class AppManager: NSObject {
     
     var notInstalledActionText: String {
         get {
-            let appStoreTemplate = "Open Mac App Store"
-            let dvdTemplate = "Shop DVD on eBay"
+            let appStoreTemplate = "Open Mac App Store".localized()
+            let dvdTemplate = "Shop DVD on eBay".localized()
 
             switch self.chosenApp {
             case .aperture:
@@ -757,7 +795,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return dvdTemplate
             case .keynote5:
-                return "Download iWork ’09"
+                return "Download iWork ’09".localized()
             default:
                 return ""
             }
@@ -768,22 +806,22 @@ class AppManager: NSObject {
         get {
             switch self.chosenApp {
             case .aperture:
-                return "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice."
+                return "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice.".localized()
             case .iphoto:
-                return "All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing."
+                return "All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing.".localized()
             case .itunes:
                 switch choseniTunesVersion {
                 case .darkMode:
                     return nil
                 case .appStore:
-                    return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead."
+                    return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead.".localized()
                 case .coverFlow:
-                    return "iTunes may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes."
+                    return "iTunes may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes.".localized()
                 case .none:
                     return nil
                 }
             case .finalCutPro7:
-                return "Some serial numbers for Final Cut Pro 7.0 do not work with Final Cut Pro 7.0.3. If you are asked to register again, you need to find and enter a serial number compatible with Final Cut Pro 7.0.3."
+                return "Some serial numbers for Final Cut Pro 7.0 do not work with Final Cut Pro 7.0.3. If you are asked to register again, you need to find and enter a serial number compatible with Final Cut Pro 7.0.3.".localized()
             case .logicPro9:
                 return nil
             case .keynote5:
@@ -823,10 +861,14 @@ class AppManager: NSObject {
             return
         case .finalCutPro7:
             if (AppManager.shared.locationOfChosenApp != nil) {
+                // Save the location and don't let the setter reset it
+                let cachedLocation = AppManager.shared.locationOfChosenApp
                 AppManager.shared.chosenApp = .proVideoUpdate
+                AppManager.shared.locationOfChosenApp = cachedLocation
+
                 AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
             } else {
-                AppDelegate.showTextSheet(title: "You need to install Final Cut Pro 7 first.", text: "After you have already installed Final Cut Pro 7 from a DVD installer or DMG image, Retroactive can download and update Final Cut Pro 7 from version 7.0 to 7.0.3, and unlock it to be compatible with \(ProcessInfo.versionName).")
+                AppDelegate.showTextSheet(title: "You need to install Final Cut Pro 7 first.".localized(), text: String(format: "After you have already installed Final Cut Pro 7 from a DVD installer or DMG image, Retroactive can download and update Final Cut Pro 7 from version 7.0 to 7.0.3, and unlock it to be compatible with %@.".localized(), ProcessInfo.versionName))
             }
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicUpdate)
@@ -850,7 +892,7 @@ class AppManager: NSObject {
             if chosenApp == .proVideoUpdate {
                 return ""
             }
-            return " to run on {systemName}"
+            return " to run on {systemName}".localized()
         }
     }
 

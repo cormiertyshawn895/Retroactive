@@ -15,6 +15,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     @IBOutlet weak var progressCaption: NSTextField!
     @IBOutlet weak var iconImageView: NSImageView!
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
+    @IBOutlet weak var manualContinueButton: HoverButton!
     
     var subProgress1: SubProgressViewController!
     var subProgress2: SubProgressViewController!
@@ -25,6 +26,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     var session: URLSession?
     var dataTask: URLSessionDataTask?
     var isDownloadMode = false
+    var isProVideoUpdate = false
     let tempDir = "/tmp"
     
     var expectedContentLength = 0
@@ -37,15 +39,17 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        manualContinueButton.updateTitle()
         progressHeading.updateToken()
         progressCaption.updateToken()
         
-        isDownloadMode = AppManager.shared.chosenApp == .itunes || AppManager.shared.chosenApp == .proVideoUpdate
+        isProVideoUpdate = AppManager.shared.chosenApp == .proVideoUpdate
+        isDownloadMode = AppManager.shared.chosenApp == .itunes || isProVideoUpdate
         let shortName = AppManager.shared.spaceConstrainedNameOfChosenApp
         
         subProgress1 = SubProgressViewController.instantiate()
         progressGrid1.addSubview(subProgress1.view)
-        subProgress1.descriptionTextField.stringValue = isDownloadMode ? "Download \(shortName)" : "Copy support files"
+        subProgress1.descriptionTextField.stringValue = isDownloadMode ? String(format: "Download %@".localized(), shortName) : "Copy support files".localized()
         subProgress1.sequenceLabel.stringValue = "1"
         if (isDownloadMode) {
             subProgress1.circularProgress.isIndeterminate = false
@@ -54,22 +58,25 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         subProgress2 = SubProgressViewController.instantiate()
         progressGrid2.addSubview(subProgress2.view)
         subProgress2.sequenceLabel.stringValue = "2"
-        subProgress2.descriptionTextField.stringValue = isDownloadMode ? "Extract \(shortName)" : "Install support files"
+        subProgress2.descriptionTextField.stringValue = isDownloadMode ? String(format: "Extract %@".localized(), shortName) : "Install support files".localized()
 
+        let installString = String(format: "Install %@".localized(), shortName)
+        let configureString = String(format: "Configure %@".localized(), shortName)
+        
         subProgress3 = SubProgressViewController.instantiate()
         progressGrid3.addSubview(subProgress3.view)
         subProgress3.sequenceLabel.stringValue = "3"
-        subProgress3.descriptionTextField.stringValue = isDownloadMode ? "Install \(shortName)" : "Refresh \(AppManager.shared.nameOfChosenApp) icon"
+        subProgress3.descriptionTextField.stringValue = isDownloadMode ? (isProVideoUpdate ? configureString : installString) : String(format: "Refresh %@ icon".localized(), AppManager.shared.nameOfChosenApp)
 
         subProgress4 = SubProgressViewController.instantiate()
         progressGrid4.addSubview(subProgress4.view)
         subProgress4.sequenceLabel.stringValue = "4"
-        subProgress4.descriptionTextField.stringValue = isDownloadMode ? "Configure \(shortName)" : "Sign \(AppManager.shared.nameOfChosenApp)"
+        subProgress4.descriptionTextField.stringValue = isDownloadMode ? (isProVideoUpdate ? installString : configureString) : String(format: "Sign %@".localized(), AppManager.shared.nameOfChosenApp)
 
         iconImageView.updateIcon()
         
         if (isDownloadMode && AppManager.shared.choseniTunesVersion == .darkMode) {
-            progressCaption.stringValue = "\(progressCaption.stringValue) It is completely normal for the fans to spin up during the process."
+            progressCaption.stringValue = "\(progressCaption.stringValue) " + "It is completely normal for the fans to spin up during the process.".localized()
         }
     }
     
@@ -104,9 +111,33 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         }
         
         if AppManager.shared.chosenApp == .proVideoUpdate {
+            let kExpectedFCP7Path = "/Applications/Final Cut Pro.app"
+            print("Final Cut Pro 7 found at path \(String(describing: AppManager.shared.locationOfChosenApp))")
+            if let foundLocation = AppManager.shared.locationOfChosenApp {
+                if (foundLocation != kExpectedFCP7Path) {
+                    print("Final Cut Pro 7 found at non-standard path \(foundLocation), let's move it before updating")
+                    self.runTask(toolPath: "/bin/mv", arguments: [kExpectedFCP7Path, "/Applications/Final Cut Pro Backup.app"])
+                    self.runTask(toolPath: "/bin/mv", arguments: [foundLocation, kExpectedFCP7Path])
+                }
+            }
             self.kickoffLargeDownload()
         }
 
+    }
+    
+    func runNonAdminTask(toolPath: String, arguments: [String]) {
+        let task = Process()
+        task.launchPath = toolPath
+        task.arguments = arguments
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        task.launch()
+        task.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        if let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? {
+            print(output)
+        }
     }
     
     func kickoffProVideoAppPatches(fullMode: Bool = true) {
@@ -128,17 +159,43 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let kLibraryFrameworkPath = "/Library/Frameworks"
             let kBrowserKitCopyPath = "\(kLibraryFrameworkPath)/BrowserKit.framework"
             let kProKitCopyPath = "\(kLibraryFrameworkPath)/ProKit.framework"
-            
+            let kAudioToolboxCopyPath = "\(appPath)/Contents/Frameworks/AudioToolbox.framework"
+
             if (fullMode == true) {
+                // It shouldn't be possible to have ProKit or BrowserKit at /System/Library/Frameworks on High Sierra or Mojave, and deleting them will fail with SIP.
+                // Handle the corner for those who manually copied or installed old versions ProKit.
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/Frameworks/ProKit.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/Frameworks/BrowserKit.framework"])
+
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kAppKitShimPath])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kBrowserKitCopyPath])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kProKitCopyPath])
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKit", kAppKitShimPath])
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kLibraryFrameworkPath])
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kLibraryFrameworkPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/AudioToolbox.framework.zip", kAudioToolboxCopyPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kBrowserKitCopyPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kProKitCopyPath])
+                self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kAudioToolboxCopyPath])
+                self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kBrowserKitCopyPath])
+                self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kProKitCopyPath])
             } else {
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
             }
+
+            // Some pro apps and iWork may hang when submitting information, skip this by setting the defaults key.
+            let expandediWork09Path = ("~/Library/Preferences/com.apple.iWork09.plist" as NSString).expandingTildeInPath
+            let expandedLogicProPath = ("~/Library/Preferences/com.apple.logic.pro.plist" as NSString).expandingTildeInPath
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["write", expandediWork09Path, "ShouldNotSendRegistration", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["write", expandediWork09Path, "RegistrationHasBeenSent", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["write", expandedLogicProPath, "DoNotInformAgainAbout_10.0", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["write", expandedLogicProPath, "MobileMeStartupCheckDone", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["write", expandedLogicProPath, "MobileMeStartupCheckDone.0", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["-currentHost", "write", "com.apple.RegLogicStudio", "AECoreTechDisplayedRegPanelCount", "-int", "1"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["write", "com.apple.RegLogicStudio", "AECoreTechRegister", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["-currentHost", "write", "com.apple.RegLogicStudio", "AECoreTechRegister", "-bool", "true"])
+            self.runNonAdminTask(toolPath: "/usr/bin/defaults", arguments: ["-currentHost", "write", "com.apple.RegLogicStudio", "AECoreTechRegSent", "-bool", "true"])
+
+            self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", expandediWork09Path])
+            self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", expandedLogicProPath])
 
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", fixerPath])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)", fixerPath])
@@ -169,9 +226,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", AppManager.shared.patchedVersionStringOfChosenApp, "Contents/Info.plist"])
 
             self.stage4Started()
-            // self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
+            self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
+            self.suppress32BitWarnings()
             self.stage4Finished()
             
             self.showCompletionVC()
@@ -205,6 +263,21 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.stage4Finished()
             
             self.showCompletionVC()
+        }
+    }
+    
+    func suppress32BitWarnings() {
+        if let resourcePath = Bundle.main.resourcePath?.fileSystemString {
+            let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+            let minorVersion = osVersion.minorVersion
+            if (minorVersion == 13) {
+                print("supporessing 32 bit warnings on High Sierra")
+                self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/HighSierra32Bit.mobileconfig"])
+            }
+            if (minorVersion == 14) {
+                print("supporessing 32 bit warnings on Mojave")
+                self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/Mojave32Bit.mobileconfig"])
+            }
         }
     }
     
@@ -253,7 +326,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 if AppManager.shared.choseniTunesVersion == .darkMode {
                     duration = 60.0
                 }
-                self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: 0.70)
+                self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: isProVideoUpdate ? 0.38 : 0.70)
             } else {
                 self.progressIndicator.doubleValue = 0.1
             }
@@ -265,7 +338,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.70, endingPercent: 0.88)
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -277,7 +350,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.88, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 5, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
                 self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
@@ -346,7 +419,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let freeSpaceRequirement = AppManager.shared.choseniTunesVersion == .darkMode ? 20.0 : 2.0
             if (freeSpace < freeSpaceRequirement) {
                 let appName = AppManager.shared.nameOfChosenApp
-                AppDelegate.showOptionSheet(title: "There isn't enough free space to install \(appName)", text: "Your startup disk only has \(Int(freeSpace)) GB available. To install \(appName), your startup disk needs to at least have \(Int(freeSpaceRequirement)) GB of available space.\n\nFree up some space and try again.", firstButtonText: "Check Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+                AppDelegate.showOptionSheet(title: String(format: "There isn't enough free space to install %@".localized(), appName),
+                                            text: String(format: "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.\n\nFree up some space and try again.".localized(), Int(freeSpace), appName, Int(freeSpaceRequirement)),
+                                            firstButtonText: "Check Again".localized(), secondButtonText: "Cancel".localized(), thirdButtonText: "") { (response) in
                     if (response == .alertFirstButtonReturn) {
                         self.kickoffLargeDownload()
                     } else {
@@ -422,7 +497,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             progressTimer?.invalidate()
             self.subProgress1.circularProgress.progress = Double(percentageDownloaded)
             self.progressIndicator.doubleValue = Double(percentageDownloaded) * 0.35
-            self.subProgress1.progressTextField.stringValue = "\(Int(percentageDownloaded * 100))% Complete"
+            self.subProgress1.progressTextField.stringValue = String(format: "%d%% Complete".localized(), Int(percentageDownloaded * 100))
         }
         print("download progress: \(percentageDownloaded)")
 
@@ -432,7 +507,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         print("download progress, 100%")
         fileHandle?.closeFile()
         if (error != nil) {
-            AppDelegate.showOptionSheet(title: "Unable to download \(AppManager.shared.nameOfChosenApp)", text: "\(error?.localizedDescription ?? "The Internet connection appears to be offline.")", firstButtonText: "Try Again", secondButtonText: "Cancel", thirdButtonText: "") { (response) in
+            AppDelegate.showOptionSheet(title: String(format: "Unable to download %@".localized(), AppManager.shared.nameOfChosenApp),
+                                        text: "\(error?.localizedDescription ?? "The Internet connection appears to be offline.".localized())",
+                                        firstButtonText: "Try Again".localized(), secondButtonText: "Cancel".localized(), thirdButtonText: "") { (response) in
                 if (response == .alertFirstButtonReturn) {
                     self.kickoffLargeDownload()
                 } else {
@@ -495,7 +572,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         let afterPackagePath = "\(packageExtractionPath)/\(pkgLocation.fileSystemString)"
         
         self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", badMountPath])
-        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", dmgPath, "-mountpoint", mountPath])
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", "-nobrowse", dmgPath, "-mountpoint", mountPath])
         
         self.stage3Started()
         self.runTaskAtTemp(toolPath: "/bin/mkdir", arguments: ["-p", packageExtractionPath])
@@ -507,14 +584,21 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["\(resourcePath)/ProApplicationsUpdate2010-02.dist", "\(afterPackagePath)/Contents/\(distName)"])
 
         self.runTaskAtTemp(toolPath: "/usr/sbin/installer", arguments: ["-pkg", afterPackagePath, "-target", "/"])
+        self.suppress32BitWarnings()
 
         self.stage4Finished()
         self.syncMainQueue {
             AppManager.shared.chosenApp = .finalCutPro7
             AppFinder.shared.queryAllInstalledApps()
+            manualContinueButton.isHidden = false
         }
     }
 
+    @IBAction func continueClicked(_ sender: Any) {
+        AppManager.shared.chosenApp = .finalCutPro7
+        AppFinder.shared.queryAllInstalledApps()
+    }
+    
     func installDarkModeiTunes() {
         self.installiTunesCommon("Packages/Core.pkg", appLocation: "Payload/Applications/iTunes.app")
     }
@@ -545,7 +629,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", appPath])
         self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", badMountPath])
-        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", dmgPath, "-mountpoint", mountPath])
+        self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", "-nobrowse", dmgPath, "-mountpoint", mountPath])
         
         let stageAfterExpansion = {
             self.stage3Started()

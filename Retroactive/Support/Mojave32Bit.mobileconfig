@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>CSUIDisable32BitWarnings</key>
+			<true/>
+			<key>PayloadDescription</key>
+			<string>Configures com.apple.coreservices.uiagent settings</string>
+			<key>PayloadDisplayName</key>
+			<string>com.apple.coreservices.uiagent</string>
+			<key>PayloadIdentifier</key>
+			<string>com.company.profile.57E80D89-1CA6-4386-8FDE-81DA0292CA3D.com.apple.coreservices.uiagent.FE123766-B72C-4620-9A21-CCABBEB48B2A</string>
+			<key>PayloadOrganization</key>
+			<string></string>
+			<key>PayloadType</key>
+			<string>com.apple.coreservices.uiagent</string>
+			<key>PayloadUUID</key>
+			<string>FE123766-B72C-4620-9A21-CCABBEB48B2A</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Disable 32-bit application warnings</string>
+	<key>PayloadDisplayName</key>
+	<string>Disable 32-bit application warnings</string>
+	<key>PayloadIdentifier</key>
+	<string>com.company.profile.csuidisable32bitwarning.57E80D89-1CA6-4386-8FDE-81DA0292CA3D</string>
+	<key>PayloadOrganization</key>
+	<string>Company Name</string>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>57E80D89-1CA6-4386-8FDE-81DA0292CA3D</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

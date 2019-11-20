@@ -1,0 +1,210 @@
+
+/* Class = "NSTextFieldCell"; title = "Download support files"; ObjectID = "0oS-Ef-mjC"; */
+"0oS-Ef-mjC.title" = "Download support files";
+
+/* Class = "NSMenuItem"; title = "Retroactive"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "Retroactive";
+
+/* Class = "NSButtonCell"; title = "What happened behind the scenes?"; ObjectID = "4OD-xb-Ejf"; */
+"4OD-xb-Ejf.title" = "What happened behind the scenes?";
+
+/* Class = "NSMenuItem"; title = "Quit Retroactive"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit Retroactive";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
+"5QF-Oa-p0T.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "About Retroactive"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About Retroactive";
+
+/* Class = "NSTextFieldCell"; title = "Aperture"; ObjectID = "5wq-le-A3N"; */
+"5wq-le-A3N.title" = "Aperture";
+
+/* Class = "NSTextFieldCell"; title = "Unlock Aperture and iPhoto, or install iTunes."; ObjectID = "6B8-22-FCU"; */
+"6B8-22-FCU.title" = "Unlock Aperture and iPhoto, or install iTunes.";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
+"6dh-zS-Vam.title" = "Redo";
+
+/* Class = "NSTextFieldCell"; title = "Authenticate"; ObjectID = "6yW-ps-YvK"; */
+"6yW-ps-YvK.title" = "Authenticate";
+
+/* Class = "NSTextFieldCell"; title = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. To get started, install macOS Mojave on a separate volume."; ObjectID = "7iR-G1-f3y"; */
+"7iR-G1-f3y.title" = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. To get started, install macOS Mojave on a separate volume.";
+
+/* Class = "NSTextFieldCell"; title = "iTunes 12.9.5"; ObjectID = "8QN-TG-LSP"; */
+"8QN-TG-LSP.title" = "iTunes 12.9.5";
+
+/* Class = "NSTextFieldCell"; title = "Retroactive"; ObjectID = "8dJ-eQ-KsA"; */
+"8dJ-eQ-KsA.title" = "Retroactive";
+
+/* Class = "NSTextFieldCell"; title = "Restore {name} from a Time Machine backup."; ObjectID = "9Qx-Go-wht"; */
+"9Qx-Go-wht.title" = "Restore {name} from a Time Machine backup.";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "Bta-sA-ii0"; */
+"Bta-sA-ii0.title" = "Check for Updates...";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
+"DVo-aG-piG.title" = "Close";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "Help";
+
+/* Class = "NSTextFieldCell"; title = "2"; ObjectID = "G9q-NA-Hkv"; */
+"G9q-NA-Hkv.title" = "2";
+
+/* Class = "NSTextFieldCell"; title = "UNLOCK"; ObjectID = "Gmj-7c-mcD"; */
+"Gmj-7c-mcD.title" = "UNLOCK";
+
+/* Class = "NSMenuItem"; title = "Get Help from Community"; ObjectID = "HRk-IW-XCR"; */
+"HRk-IW-XCR.title" = "Get Help from Community";
+
+/* Class = "NSWindow"; title = "Retroactive"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "Retroactive";
+
+/* Class = "NSTextFieldCell"; title = "You need to authenticate first."; ObjectID = "ItV-uC-67V"; */
+"ItV-uC-67V.title" = "You need to authenticate first.";
+
+/* Class = "NSButtonCell"; title = "I have already installed {name} ›"; ObjectID = "JRd-3z-xeo"; */
+"JRd-3z-xeo.title" = "I have already installed {name} ›";
+
+/* Class = "NSTextFieldCell"; title = "Launch {name}"; ObjectID = "KAc-1b-JvD"; */
+"KAc-1b-JvD.title" = "Launch {name}";
+
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "KaI-4k-ass"; */
+"KaI-4k-ass.title" = "Continue ›";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
+"LE2-aR-0XJ.title" = "Bring All to Front";
+
+/* Class = "NSTextFieldCell"; title = "UNLOCK"; ObjectID = "M4J-11-44U"; */
+"M4J-11-44U.title" = "UNLOCK";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
+"NMo-om-nkz.title" = "Services";
+
+/* Class = "NSTextFieldCell"; title = "Congratulations!\nYou can use {name} now."; ObjectID = "ODF-W9-pxv"; */
+"ODF-W9-pxv.title" = "Congratulations!\nYou can use {name} now.";
+
+/* Class = "NSMenuItem"; title = "Hide Retroactive"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Hide Retroactive";
+
+/* Class = "NSButtonCell"; title = "View source code"; ObjectID = "RWn-oN-1aI"; */
+"RWn-oN-1aI.title" = "View source code";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m"; */
+"Ruw-6m-B2m.title" = "Select All";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
+"Td7-aD-5lo.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "iPhoto"; ObjectID = "UsG-Bx-gH6"; */
+"UsG-Bx-gH6.title" = "iPhoto";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "Hide Others";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl"; */
+"W48-6f-4Dl.title" = "Edit";
+
+/* Class = "NSMenuItem"; title = "Send Feedback"; ObjectID = "WLk-og-ZMB"; */
+"WLk-og-ZMB.title" = "Send Feedback";
+
+/* Class = "NSTextFieldCell"; title = "DJ apps and Dark Mode"; ObjectID = "XcH-vJ-cWe"; */
+"XcH-vJ-cWe.title" = "DJ apps and Dark Mode";
+
+/* Class = "NSTextFieldCell"; title = "Waiting..."; ObjectID = "Ylq-Kc-m0B"; */
+"Ylq-Kc-m0B.title" = "Waiting...";
+
+/* Class = "NSMenuItem"; title = "Project Page"; ObjectID = "Zep-T0-gcs"; */
+"Zep-T0-gcs.title" = "Project Page";
+
+/* Class = "NSTextFieldCell"; title = "Hang tight. We’re {actionM} {name}{purpose}."; ObjectID = "a56-ae-05u"; */
+"a56-ae-05u.title" = "Hang tight. We’re {actionM} {name}{purpose}.";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
+"aUF-d1-5bR.title" = "Window";
+
+/* Class = "NSTextFieldCell"; title = "You need to install {name} first."; ObjectID = "b6v-Iz-J0i"; */
+"b6v-Iz-J0i.title" = "You need to install {name} first.";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
+"bib-Uj-vzu.title" = "File";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
+"dMs-cI-mzQ.title" = "File";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
+"dRJ-4n-Yzg.title" = "Undo";
+
+/* Class = "NSTextFieldCell"; title = "This process requires {actionS} {name}, and usually takes about {timeEstimate}."; ObjectID = "fFM-5t-5vq"; */
+"fFM-5t-5vq.title" = "This process requires {actionS} {name}, and usually takes about {timeEstimate}.";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
+"gVA-U4-sdL.title" = "Paste";
+
+/* Class = "NSTextFieldCell"; title = "Get Started"; ObjectID = "gqn-0y-uaG"; */
+"gqn-0y-uaG.title" = "Get Started";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "Services";
+
+/* Class = "NSTextFieldCell"; title = "To {actionPR} {name} for {systemName}, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code."; ObjectID = "iLs-7f-Jhg"; */
+"iLs-7f-Jhg.title" = "To {actionPR} {name} for {systemName}, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code.";
+
+/* Class = "NSTextFieldCell"; title = "iTunes"; ObjectID = "iPE-Jd-BL4"; */
+"iPE-Jd-BL4.title" = "iTunes";
+
+/* Class = "NSTextFieldCell"; title = "Download {name} from the Purchased list in App Store."; ObjectID = "nzg-d3-rIG"; */
+"nzg-d3-rIG.title" = "Download {name} from the Purchased list in App Store.";
+
+/* Class = "NSTextFieldCell"; title = "Find {name} on another Mac, and AirDrop it to yourself."; ObjectID = "oU0-KV-ceF"; */
+"oU0-KV-ceF.title" = "Find {name} on another Mac, and AirDrop it to yourself.";
+
+/* Class = "NSTextFieldCell"; title = "What’s your most important iTunes feature?"; ObjectID = "omN-c8-kvx"; */
+"omN-c8-kvx.title" = "What’s your most important iTunes feature?";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
+"pa3-QI-u2k.title" = "Delete";
+
+/* Class = "NSMenuItem"; title = "Credits"; ObjectID = "qfD-tp-QNr"; */
+"qfD-tp-QNr.title" = "Credits";
+
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "twL-s9-KNO"; */
+"twL-s9-KNO.title" = "Continue ›";
+
+/* Class = "NSMenu"; title = "Retroactive"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "Retroactive";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
+"uRl-iY-unG.title" = "Cut";
+
+/* Class = "NSButtonCell"; title = "Update Available"; ObjectID = "v50-Lo-50e"; */
+"v50-Lo-50e.title" = "Update Available";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "Help";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "wvx-zI-fDM"; */
+"wvx-zI-fDM.title" = "Box";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU"; */
+"x3v-GG-iWU.title" = "Copy";
+
+/* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "xDZ-Au-B53"; */
+"xDZ-Au-B53.title" = "Check for Updates...";
+
+/* Class = "NSTextFieldCell"; title = "INSTALL"; ObjectID = "z1o-z6-W1t"; */
+"z1o-z6-W1t.title" = "INSTALL";
+
+/* Class = "NSMenuItem"; title = "Report an Issue"; ObjectID = "zEu-hd-hYQ"; */
+"zEu-hd-hYQ.title" = "Report an Issue";
+
+/* Class = "NSTextFieldCell"; title = "/Applications/Stuff.app"; ObjectID = "zN7-i2-jN4"; */
+"zN7-i2-jN4.title" = "/Applications/Stuff.app";

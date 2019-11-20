@@ -1,0 +1,213 @@
+
+/* Class = "NSTextFieldCell"; title = "Download support files"; ObjectID = "0oS-Ef-mjC"; */
+"0oS-Ef-mjC.title" = "下载支持文件";
+
+/* Class = "NSMenuItem"; title = "Retroactive"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "解印";
+
+/* Class = "NSButtonCell"; title = "What happened behind the scenes?"; ObjectID = "4OD-xb-Ejf"; */
+"4OD-xb-Ejf.title" = "查看解印的工作原理";
+
+/* Class = "NSMenuItem"; title = "Quit Retroactive"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "退出解印";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
+"5QF-Oa-p0T.title" = "编辑";
+
+/* Class = "NSMenuItem"; title = "About Retroactive"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "关于解印";
+
+/* Class = "NSTextFieldCell"; title = "Aperture"; ObjectID = "5wq-le-A3N"; */
+"5wq-le-A3N.title" = "Aperture";
+
+/* Class = "NSTextFieldCell"; title = "Unlock Aperture and iPhoto, or install iTunes."; ObjectID = "6B8-22-FCU"; */
+"6B8-22-FCU.title" = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
+"6dh-zS-Vam.title" = "重做";
+
+/* Class = "NSTextFieldCell"; title = "Authenticate"; ObjectID = "6yW-ps-YvK"; */
+"6yW-ps-YvK.title" = "验证身份";
+
+/* Class = "NSTextFieldCell"; title = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. To get started, install macOS Mojave on a separate volume."; ObjectID = "7iR-G1-f3y"; */
+"7iR-G1-f3y.title" = "解印还可以在 macOS Mojave 和 macOS High Sierra 下解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 Keynote ’09。在单独的宗卷上安装 macOS Mojave 以继续。";
+
+/* Class = "NSTextFieldCell"; title = "iTunes 12.9.5"; ObjectID = "8QN-TG-LSP"; */
+"8QN-TG-LSP.title" = "iTunes 12.9.5";
+
+/* Class = "NSTextFieldCell"; title = "Retroactive"; ObjectID = "8dJ-eQ-KsA"; */
+"8dJ-eQ-KsA.title" = "解印";
+
+/* Class = "NSTextFieldCell"; title = "Restore {name} from a Time Machine backup."; ObjectID = "9Qx-Go-wht"; */
+"9Qx-Go-wht.title" = "从时间机器备份恢复 {name}";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "主菜单";
+
+/* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "Bta-sA-ii0"; */
+"Bta-sA-ii0.title" = "检查更新...";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
+"DVo-aG-piG.title" = "关闭";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "帮助";
+
+/* Class = "NSTextFieldCell"; title = "2"; ObjectID = "G9q-NA-Hkv"; */
+"G9q-NA-Hkv.title" = "2";
+
+/* Class = "NSTextFieldCell"; title = "UNLOCK"; ObjectID = "Gmj-7c-mcD"; */
+"Gmj-7c-mcD.title" = "解除封印";
+
+/* Class = "NSMenuItem"; title = "Get Help from Community"; ObjectID = "HRk-IW-XCR"; */
+"HRk-IW-XCR.title" = "从社区获取帮助";
+
+/* Class = "NSWindow"; title = "Retroactive"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "解印";
+
+/* Class = "NSTextFieldCell"; title = "You need to authenticate first."; ObjectID = "ItV-uC-67V"; */
+"ItV-uC-67V.title" = "您需要先验证身份";
+
+/* Class = "NSButtonCell"; title = "I have already installed {name} ›"; ObjectID = "JRd-3z-xeo"; */
+"JRd-3z-xeo.title" = "我已经安装了 {name} ›";
+
+/* Class = "NSTextFieldCell"; title = "Launch {name}"; ObjectID = "KAc-1b-JvD"; */
+"KAc-1b-JvD.title" = "启动 {name}";
+
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "KaI-4k-ass"; */
+"KaI-4k-ass.title" = "继续 ›";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "显示全部内容";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
+"LE2-aR-0XJ.title" = "前置全部窗口";
+
+/* Class = "NSTextFieldCell"; title = "UNLOCK"; ObjectID = "M4J-11-44U"; */
+"M4J-11-44U.title" = "解除封印";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
+"NMo-om-nkz.title" = "服务";
+
+/* Class = "NSTextFieldCell"; title = "Congratulations!\nYou can use {name} now."; ObjectID = "ODF-W9-pxv"; */
+"ODF-W9-pxv.title" = "恭喜！\n您现在已可使用 {name}。";
+
+/* Class = "NSMenuItem"; title = "Hide Retroactive"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "隐藏解印";
+
+/* Class = "NSButtonCell"; title = "View source code"; ObjectID = "RWn-oN-1aI"; */
+"RWn-oN-1aI.title" = "查看源代码";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "Ruw-6m-B2m"; */
+"Ruw-6m-B2m.title" = "全选";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
+"Td7-aD-5lo.title" = "窗口";
+
+/* Class = "NSTextFieldCell"; title = "iPhoto"; ObjectID = "UsG-Bx-gH6"; */
+"UsG-Bx-gH6.title" = "iPhoto";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "隐藏其他窗口";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "W48-6f-4Dl"; */
+"W48-6f-4Dl.title" = "编辑";
+
+/* Class = "NSMenuItem"; title = "Send Feedback"; ObjectID = "WLk-og-ZMB"; */
+"WLk-og-ZMB.title" = "发送建议和反馈";
+
+/* Class = "NSTextFieldCell"; title = "DJ apps and Dark Mode"; ObjectID = "XcH-vJ-cWe"; */
+"XcH-vJ-cWe.title" = "DJ 应用和深色模式";
+
+/* Class = "NSTextFieldCell"; title = "Waiting..."; ObjectID = "Ylq-Kc-m0B"; */
+"Ylq-Kc-m0B.title" = "等待中...";
+
+/* Class = "NSMenuItem"; title = "Project Page"; ObjectID = "Zep-T0-gcs"; */
+"Zep-T0-gcs.title" = "项目网站";
+
+/* Class = "NSTextFieldCell"; title = "Hang tight. We’re {actionM} {name}{purpose}."; ObjectID = "a56-ae-05u"; */
+"a56-ae-05u.title" = "请稍安勿躁。正在{actionM} {name}{purpose}。";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
+"aUF-d1-5bR.title" = "窗口";
+
+/* Class = "NSTextFieldCell"; title = "You need to install {name} first."; ObjectID = "b6v-Iz-J0i"; */
+"b6v-Iz-J0i.title" = "您需要先安装 {name}。";
+
+/* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
+"bib-Uj-vzu.title" = "文件";
+
+/* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
+"dMs-cI-mzQ.title" = "文件";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
+"dRJ-4n-Yzg.title" = "撤销";
+
+/* Class = "NSTextFieldCell"; title = "This process requires {actionS} {name}, and usually takes about {timeEstimate}."; ObjectID = "fFM-5t-5vq"; */
+"fFM-5t-5vq.title" = "此过程需要{actionS} {name}，通常需要 {timeEstimate}。";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
+"gVA-U4-sdL.title" = "粘贴";
+
+/* Class = "NSTextFieldCell"; title = "Get Started"; ObjectID = "gqn-0y-uaG"; */
+"gqn-0y-uaG.title" = "选择要解印的应用程序";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "服务";
+
+/* Class = "NSTextFieldCell"; title = "To {actionPR} {name} for {systemName}, you need to authenticate with your login password first.   Your password is never stored or sent anywhere. To verify this, you can independently examine Retroactive's source code."; ObjectID = "iLs-7f-Jhg"; */
+"iLs-7f-Jhg.title" = "如需为 {systemName} {actionPR} {name}，请输入并验证您的登录密码。   您的密码不会被储存，也不会被上传。如需进一步审计解印的安全性，您可以独立查阅解印的源代码。";
+
+/* Class = "NSTextFieldCell"; title = "iTunes"; ObjectID = "iPE-Jd-BL4"; */
+"iPE-Jd-BL4.title" = "iTunes";
+
+/* Class = "NSTextFieldCell"; title = "Download {name} from the Purchased list in App Store."; ObjectID = "nzg-d3-rIG"; */
+"nzg-d3-rIG.title" = "从 App Store 的已购列表中下载 {name}";
+
+/* Class = "NSTextFieldCell"; title = "Find {name} on another Mac, and AirDrop it to yourself."; ObjectID = "oU0-KV-ceF"; */
+"oU0-KV-ceF.title" = "在另一台 Mac 上找到 {name}，并将其隔空投送给自己";
+
+/* Class = "NSTextFieldCell"; title = "What’s your most important iTunes feature?"; ObjectID = "omN-c8-kvx"; */
+"omN-c8-kvx.title" = "哪个 iTunes 功能\n对你而言最重要？";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
+"pa3-QI-u2k.title" = "删除";
+
+/* Class = "NSMenuItem"; title = "Credits"; ObjectID = "qfD-tp-QNr"; */
+"qfD-tp-QNr.title" = "致谢名单";
+
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "twL-s9-KNO"; */
+"twL-s9-KNO.title" = "继续 ›";
+
+/* Class = "NSMenu"; title = "Retroactive"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "解印";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
+"uRl-iY-unG.title" = "剪切";
+
+/* Class = "NSButtonCell"; title = "Update Available"; ObjectID = "v50-Lo-50e"; */
+"v50-Lo-50e.title" = "可下载新版本解印";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "帮助";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "wvx-zI-fDM"; */
+"wvx-zI-fDM.title" = "Box";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "x3v-GG-iWU"; */
+"x3v-GG-iWU.title" = "复制";
+
+/* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "xDZ-Au-B53"; */
+"xDZ-Au-B53.title" = "检查更新...";
+
+/* Class = "NSTextFieldCell"; title = "INSTALL"; ObjectID = "z1o-z6-W1t"; */
+"z1o-z6-W1t.title" = "安装";
+
+/* Class = "NSMenuItem"; title = "Report an Issue"; ObjectID = "zEu-hd-hYQ"; */
+"zEu-hd-hYQ.title" = "报告问题";
+
+/* Class = "NSTextFieldCell"; title = "/Applications/Stuff.app"; ObjectID = "zN7-i2-jN4"; */
+"zN7-i2-jN4.title" = "/Applications/Stuff.app";
+
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "wCE-ll-wiN"; */
+"wCE-ll-wiN.title" = "继续 ›";

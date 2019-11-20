@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>CSUIDisable32BitWarning</key>
+			<true/>
+			<key>PayloadDescription</key>
+			<string>Configures Global Preferences settings</string>
+			<key>PayloadDisplayName</key>
+			<string>Global Preferences</string>
+			<key>PayloadIdentifier</key>
+			<string>com.company.profile.C4C7FDF6-8B81-4B15-A6DD-C158890120C7.com.apple.GlobalPreferences.A0192F52-0F2E-447B-9ABF-3F19D7353290</string>
+			<key>PayloadOrganization</key>
+			<string></string>
+			<key>PayloadType</key>
+			<string>.GlobalPreferences</string>
+			<key>PayloadUUID</key>
+			<string>A0192F52-0F2E-447B-9ABF-3F19D7353290</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Disable 32-bit application warnings</string>
+	<key>PayloadDisplayName</key>
+	<string>Disable 32-bit application warnings</string>
+	<key>PayloadIdentifier</key>
+	<string>com.company.profile.csuidisable32bitwarning.C4C7FDF6-8B81-4B15-A6DD-C158890120C7</string>
+	<key>PayloadOrganization</key>
+	<string>Company Name</string>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>C4C7FDF6-8B81-4B15-A6DD-C158890120C7</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

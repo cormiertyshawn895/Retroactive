@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     static func openKBArticle(_ identifier: String) {
-        let url = URL(string:"https://support.apple.com/en-us/HT\(identifier)")!
+        let url = URL(string:"https://support.apple.com/HT\(identifier)")!
         NSWorkspace.shared.open(url)
     }
 
@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         let dialog = NSOpenPanel()
-        dialog.title = "Locate \(AppManager.shared.nameOfChosenApp) \(AppManager.shared.compatibleVersionOfChosenApp.first ?? "")"
+        dialog.title = String(format: "Locate %@ %@".localized(), AppManager.shared.nameOfChosenApp, AppManager.shared.compatibleVersionOfChosenApp.first ?? "")
 
         dialog.showsResizeIndicator = true
         dialog.showsHiddenFiles = false
@@ -99,7 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.messageText = title
         alert.informativeText = text
         alert.alertStyle = NSAlert.Style.informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "OK".localized())
         if let window = NSApp.mainWindow {
             alert.beginSheetModal(for: window, completionHandler: nil)
         } else {
@@ -127,13 +127,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let name = AppManager.shared.nameOfChosenApp
         
         let showUnableToClose = {
-            AppDelegate.showTextSheet(title: "Unable to quit Retroactive", text: "Retroactive is unlocking \(name). Quitting Retroactive will result in a corrupted copy of \(name).")
+            AppDelegate.showTextSheet(title: "Unable to quit Retroactive".localized(), text: String(format: "Retroactive is unlocking %@. Quitting Retroactive will result in a corrupted copy of %@.".localized(), name, name))
         }
 
         if AppManager.shared.chosenApp == .itunes {
             if let progressVC = rootVC.navigationController.topViewController as? ProgressViewController {
                 if progressVC.subProgress1.inProgress {
-                    AppDelegate.showOptionSheet(title: "Are you sure you want to stop installing \(name)?", text: "Quitting Retroactive now may result in a corrupted install of \(name) and is not recommended.", firstButtonText: "Keep Installing", secondButtonText: "Stop Installing \(name)", thirdButtonText: "") { (response) in
+                    AppDelegate.showOptionSheet(title: String(format: "Are you sure you want to stop installing %@?".localized(), name),
+                                                text: String(format: "Quitting Retroactive now may result in a corrupted install of %@ and is not recommended.".localized(), name),
+                                                firstButtonText: "Keep Installing".localized(),
+                                                secondButtonText: String(format: "Stop Installing %@".localized(), name),
+                                                thirdButtonText: "") { (response) in
                         if (response == .alertSecondButtonReturn) {
                             AppDelegate.appWindow()?.close()
                         }
@@ -185,7 +189,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func promptForUpdateAvailable() {
         if (AppManager.shared.hasNewerVersion == true) {
-            AppDelegate.showOptionSheet(title: AppManager.shared.newVersionVisibleTitle ?? "Update available.", text: AppManager.shared.newVersionChangelog ?? "A newer version of Retroactive is available.", firstButtonText: "Download", secondButtonText: "Learn More...", thirdButtonText: "Cancel") { (response) in
+            AppDelegate.showOptionSheet(title: AppManager.shared.newVersionVisibleTitle ?? "Update available.".localized(),
+                                        text: AppManager.shared.newVersionChangelog ?? "A newer version of Retroactive is available.".localized(),
+                                        firstButtonText: "Download".localized(),
+                                        secondButtonText: "Learn More...".localized(),
+                                        thirdButtonText: "Cancel".localized()) { (response) in
                 if (response == .alertFirstButtonReturn) {
                     AppDelegate.current.safelyOpenURL(AppManager.shared.latestZIP)
                 } else if (response == .alertSecondButtonReturn) {
@@ -193,7 +201,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         } else {
-            AppDelegate.showOptionSheet(title: "Retroactive \(Bundle.main.cfBundleVersionString ?? "") is already the latest available version.", text:"", firstButtonText: "OK", secondButtonText: "View Release Page...", thirdButtonText: "") { (response) in
+            AppDelegate.showOptionSheet(title: String(format: "Retroactive %@ is already the latest available version.".localized(), Bundle.main.cfBundleVersionString ?? ""),
+                                        text:"",
+                                        firstButtonText: "OK".localized(),
+                                        secondButtonText: "View Release Page...".localized(),
+                                        thirdButtonText: "") { (response) in
                 if (response == .alertSecondButtonReturn) {
                     AppDelegate.current.safelyOpenURL(AppManager.shared.releasePage)
                 }

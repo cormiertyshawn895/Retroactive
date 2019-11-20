@@ -3,19 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.3 is available for download.</string>
+	<string>Retroactive 1.3 contains the following features and is available for download.</string>
 	<key>NewVersionChangelog</key>
-	<string>Retroactive 1.3 contains the following features:
-• Adds support for modifying Final Cut Pro 7, Logic Pro 9, and Keynote ’09 to be compatible with macOS Mojave and macOS High Sierra
-
-Retroactive 1.3 also contains changes from Retroactive 1.2:
-• Restores the ability to add adjustments and use Quick Brushes in Aperture
-• Restores the ability to print photos in Aperture and iPhoto
-• Resolves an issue where Aperture and iPhoto may fail to launch (Error 13)</string>
+	<string>• Adds support for modifying Final Cut Pro 7, Logic Pro 9, and Keynote ’09 to be compatible with macOS Mojave and macOS High Sierra</string>
+	<key>NewVersionVisibleTitlezhHans</key>
+	<string>新版本解印 1.3 包含如下功能，现已提供下载: </string>
+	<key>NewVersionChangelogzhHans</key>
+	<string>• 支持修改 Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 以兼容 macOS Mojave 和 macOS High Sierra</string>
+	<key>NewVersionVisibleTitlezhHant</key>
+	<string>新版本解印 1.3 包含如下功能，現已提供下載:</string>
+	<key>NewVersionChangelogzhHant</key>
+	<string>• 支持修改 Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 以兼容 macOS Mojave 和 macOS High Sierra</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.3/Retroactive.1.3.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>9</integer>
+	<integer>13</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>
@@ -52,16 +54,22 @@ Retroactive 1.3 also contains changes from Retroactive 1.2:
 	<string>https://forums.macrumors.com/threads/how-to-safely-re-install-itunes-10-7-in-mavericks.1667115/</string>
 	<key>iWork09DVD</key>
 	<string>https://archive.org/download/691-6324-A2ZiWork_09_v9.0._Install_DVD_DVD/691-6324-A%2C2Z%2CiWork%20%2709%20v9.0.%20Install%20DVD%20%28DVD%29.iso</string>
+	<key>iWork09DVDCN</key>
+	<string>https://www.baidu.com/s?wd=iWork%2009%20Mac</string>
 	<key>iWork09Update</key>
 	<string>https://support.apple.com/kb/DL1563</string>
 	<key>MainStageUpdate</key>
 	<string>https://support.apple.com/kb/dl1393</string>
 	<key>LogicDVD</key>
 	<string>https://www.ebay.com/sch/i.html?_nkw=Logic+Pro+9</string>
+	<key>LogicDVDCN</key>
+	<string>https://www.baidu.com/s?wd=Logic%20Pro%209</string>
 	<key>LogicUpdate</key>
 	<string>https://support.apple.com/kb/dl1601</string>
 	<key>FCPDVD</key>
 	<string>https://www.ebay.com/sch/i.html?_nkw=Final+Cut+Pro+7</string>
+	<key>FCPDVDCN</key>
+	<string>https://www.baidu.com/s?wd=Final%20Cut%20Pro%207</string>
 	<key>FCPUpdate</key>
 	<string>https://download.info.apple.com/Mac_OS_X/061-8474.20100915.wtoKR/ProApplicationsUpdate2010-02.dmg</string>
 </dict>
