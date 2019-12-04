@@ -24,14 +24,7 @@ class AppFinder: NSObject {
         query = NSMetadataQuery()
         query?.searchScopes = ["/Applications"]
         print("query = \(String(describing: query))")
-//        let chosen = AppManager.shared.chosenApp
-//        if chosen == .itunes || chosen == .finalCutPro7 || chosen == .logicPro9 || chosen == .keynote5 {
-//            query?.searchScopes = ["/Applications"]
-//        } else {
-//            query?.searchScopes = [NSMetadataQueryLocalComputerScope]
-//        }
-        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.existingBundleIDOfChosenApp)
-//        let pred = NSPredicate.init(format: "\(searchContentType) == '\(bundleContentType)' AND \(searchDisplayName) CONTAINS[c] %@ AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.nameOfChosenApp, AppManager.shared.existingBundleIDOfChosenApp)
+        let pred = NSPredicate.init(format: "\(searchContentTypeTree) == '\(bundleContentType)' AND \(searchBundleIdentifier) CONTAINS[c] %@", AppManager.shared.existingBundleIDOfChosenApp)
         print("pred = \(String(describing: pred))")
         query?.predicate = pred
         query?.start()

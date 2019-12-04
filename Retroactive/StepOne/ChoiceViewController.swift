@@ -6,7 +6,7 @@
 import Cocoa
 
 let searchDisplayName = "kMDItemDisplayName"
-let searchContentType = "kMDItemContentType"
+let searchContentTypeTree = "kMDItemContentTypeTree"
 let searchBundleIdentifier = "kMDItemCFBundleIdentifier"
 let searchPath = "kMDItemPath"
 let bundleContentType = "com.apple.application-bundle"
