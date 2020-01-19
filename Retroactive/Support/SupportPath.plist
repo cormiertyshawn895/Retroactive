@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.3 contains the following features and is available for download.</string>
+	<string>Retroactive 1.4 contains the following features and is available for download.</string>
 	<key>NewVersionChangelog</key>
-	<string>• Adds support for modifying Final Cut Pro 7, Logic Pro 9, and Keynote ’09 to be compatible with macOS Mojave and macOS High Sierra</string>
+	<string>• Resolves an issue where Final Cut Pro 7 may become unresponsive or quit unexpectedly on launch</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.3 包含如下功能，现已提供下载: </string>
+	<string>新版本解印 1.4 包含如下功能，现已提供下载: </string>
 	<key>NewVersionChangelogzhHans</key>
-	<string>• 支持修改 Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 以兼容 macOS Mojave 和 macOS High Sierra</string>
+	<string>• 修复了 Final Cut Pro 7 在启动时可能意外退出或停止响应的问题</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.3 包含如下功能，現已提供下載:</string>
+	<string>新版本解印 1.4 包含如下功能，現已提供下載:</string>
 	<key>NewVersionChangelogzhHant</key>
-	<string>• 支持修改 Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 以兼容 macOS Mojave 和 macOS High Sierra</string>
+	<string>• 修復了 Final Cut Pro 7 在啟動時可能意外退出或停止響應的問題</string>
 	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.3/Retroactive.1.3.zip</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.4/Retroactive.1.4.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>14</integer>
+	<integer>15</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

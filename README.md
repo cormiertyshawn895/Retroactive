@@ -1,4 +1,4 @@
-## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. It also lets you run Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave and macOS High Sierra. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.3/Retroactive.1.3.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
+## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. It also lets you run Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave and macOS High Sierra. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.4/Retroactive.1.4.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
 
 
 ### Opening Retroactive
