@@ -91,6 +91,22 @@ class AppFinder: NSObject {
                                 }
                             }
                         }
+                    } else if AppManager.shared.chosenApp == .finalCutPro7 {
+                        do {
+                            let exists = FileManager.default.fileExists(atPath: kCustomSettingsPath)
+                            if (!exists) {
+                                self.pushCompletionVC()
+                                return
+                            }
+                            let contents = try FileManager.default.contentsOfDirectory(atPath: kCustomSettingsPath)
+                            let presets = contents.filter { $0.lowercased().hasSuffix(".fcpre") }
+                            if (presets.count == 0) {
+                                self.pushCompletionVC()
+                                return
+                            }
+                        } catch {
+                            print("Can't determine if custom settings exist \(error)")
+                        }
                     } else {
                         self.pushCompletionVC()
                         return

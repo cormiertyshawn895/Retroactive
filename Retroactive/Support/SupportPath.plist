@@ -17,7 +17,7 @@
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.4/Retroactive.1.4.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>15</integer>
+	<integer>16</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

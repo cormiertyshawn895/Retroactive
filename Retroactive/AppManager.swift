@@ -34,6 +34,8 @@ let systemNameToken = "{systemName}"
 let purposeToken = "{purpose}"
 let actionPresentTenseToken = "{actionPR}"
 
+let kCustomSettingsPath = "/Library/Application Support/Final Cut Pro System Support/Custom Settings"
+
 extension Bundle {
     var cfBundleVersionInt: Int? {
         get {
