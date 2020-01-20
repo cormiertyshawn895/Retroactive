@@ -5,19 +5,22 @@
 	<key>NewVersionVisibleTitle</key>
 	<string>Retroactive 1.4 contains the following features and is available for download.</string>
 	<key>NewVersionChangelog</key>
-	<string>• Resolves an issue where Final Cut Pro 7 may become unresponsive or quit unexpectedly on launch</string>
+	<string>• Resolves an issue where Final Cut Pro 7 may become unresponsive or quit unexpectedly on launch
+• Adds the ability to export existing Final Cut Pro 7 projects into XML files when running under a virtual machine (workaround required for initial install, learn more at the release page*)</string>
 	<key>NewVersionVisibleTitlezhHans</key>
 	<string>新版本解印 1.4 包含如下功能，现已提供下载: </string>
 	<key>NewVersionChangelogzhHans</key>
-	<string>• 修复了 Final Cut Pro 7 在启动时可能意外退出或停止响应的问题</string>
+	<string>• 修复了 Final Cut Pro 7 在启动时可能意外退出或停止响应的问题
+• 支持在虚拟机下将已有的 Final Cut Pro 7 项目导出为 XML 文件 (详见发布页说明*)</string>
 	<key>NewVersionVisibleTitlezhHant</key>
 	<string>新版本解印 1.4 包含如下功能，現已提供下載:</string>
 	<key>NewVersionChangelogzhHant</key>
-	<string>• 修復了 Final Cut Pro 7 在啟動時可能意外退出或停止響應的問題</string>
+	<string>• 修復了 Final Cut Pro 7 在啟動時可能意外退出或停止響應的問題
+• 支持在虛擬機下將已有的 Final Cut Pro 7 項目導出為 XML 文件 (詳見發布頁說明*)</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.4/Retroactive.1.4.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>16</integer>
+	<integer>21</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

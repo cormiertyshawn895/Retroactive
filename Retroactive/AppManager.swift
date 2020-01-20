@@ -22,6 +22,12 @@ enum iTunesVersion {
     case coverFlow
 }
 
+enum VirtualMachine {
+    case parallels
+    case vmware
+    case generic
+}
+
 let kCFBundleIdentifier = "CFBundleIdentifier"
 let kCFBundleVersion = "CFBundleVersion"
 let kCFBundleShortVersionString = "CFBundleShortVersionString"
@@ -35,6 +41,8 @@ let purposeToken = "{purpose}"
 let actionPresentTenseToken = "{actionPR}"
 
 let kCustomSettingsPath = "/Library/Application Support/Final Cut Pro System Support/Custom Settings"
+
+let lastHWForMojave = ["iMac19,2", "iMacPro1,1", "MacBook10,1", "MacBookAir8,2", "MacBookPro15,4", "Macmini8,1", "MacPro6,1"]
 
 extension Bundle {
     var cfBundleVersionInt: Int? {
@@ -62,6 +70,57 @@ extension NSObject {
         } else {
             closure()
         }
+    }
+}
+
+extension String {
+    var machineType: String? {
+        return self.components(separatedBy: .decimalDigits).first
+    }
+
+    var machineFullNumber: String? {
+        if let modelType = self.machineType {
+            return self.replacingOccurrences(of: modelType, with: "")
+        }
+        return nil
+    }
+
+    var machineGenerationNumber: Int? {
+        if let fullNumber = self.machineFullNumber {
+            let seperated = fullNumber.components(separatedBy: ",")
+            if seperated.count > 1 {
+                if let intGen = Int(seperated[0]) {
+                    return intGen
+                }
+            }
+        }
+        return nil
+    }
+
+    var machineSubmodelNumber: Int? {
+        if let fullNumber = self.machineFullNumber {
+            let seperated = fullNumber.components(separatedBy: ",")
+            if seperated.count > 1 {
+                if let intSub = Int(seperated[1]) {
+                    return intSub
+                }
+            }
+        }
+        return nil
+    }
+    
+    func isNewerThan(otherMachine: String) -> Bool {
+        if (self.machineType == otherMachine.machineType) {
+            if let thisGen = self.machineGenerationNumber, let thisSub = self.machineSubmodelNumber, let otherGen = otherMachine.machineGenerationNumber, let otherSub = otherMachine.machineSubmodelNumber {
+                if thisGen > otherGen {
+                    return true
+                }
+                if thisGen == otherGen && thisSub > otherSub {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
 
@@ -514,7 +573,13 @@ class AppManager: NSObject {
             case .itunes:
                 fatalError()
             case .finalCutPro7:
-                return "GeneralFixerScript"
+                if self.likelyInVirtualMachine {
+                    print("In VM and FCP7, using VM fixer script")
+                    return "VMFCPFixerScript"
+                } else {
+                    print("Normal FCP7, using general fixer script")
+                    return "GeneralFixerScript"
+                }
             case .logicPro9:
                 return "GeneralFixerScript"
             case .keynote5:
@@ -907,5 +972,180 @@ class AppManager: NSObject {
             .replacingOccurrences(of: actionDetailToken, with: AppManager.shared.detailActionOfChosenApp)
             .replacingOccurrences(of: systemNameToken, with: ProcessInfo.versionName)
     }
+
+    var platform: String {
+        get {
+            var size = 0
+            sysctlbyname("hw.model", nil, &size, nil, 0)
+            var machine = [CChar](repeating: 0,  count: size)
+            sysctlbyname("hw.model", &machine, &size, nil, 0)
+            return String(cString: machine)
+        }
+    }
     
+    var platformShippedAfterMojave: Bool {
+        let hwIdentifier = self.platform
+        var machineTypeMatchedAtLeastOnce = false
+        for mac in lastHWForMojave {
+            if hwIdentifier.isNewerThan(otherMachine: mac) {
+                return true
+            }
+            if hwIdentifier.machineType == mac.machineType {
+                machineTypeMatchedAtLeastOnce = true
+            }
+        }
+        return !machineTypeMatchedAtLeastOnce
+    }
+
+    var chosenAppHasLimitedFeaturesInVirtualMachine: Bool {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return true
+            case .iphoto:
+                return true
+            case .proVideoUpdate:
+                fallthrough
+            case .finalCutPro7:
+                return true
+            case .keynote5:
+                return true
+            case .logicPro9:
+                return false
+            case .itunes:
+                return false
+            default:
+                return false
+            }
+        }
+    }
+
+    var currentVM: VirtualMachine {
+        let platform = self.platform
+        if (platform.contains("VMware")) {
+            return .vmware
+        }
+        if (platform.contains("Parallels")) {
+            return .parallels
+        }
+        return .generic
+    }
+
+    var currentVMName: String {
+        switch self.currentVM {
+        case .vmware:
+            return "VMware Fusion".localized()
+        case .parallels:
+            return "Parallels Desktop".localized()
+        case .generic:
+            fallthrough
+        default:
+            return "a virtual machine".localized()
+        }
+    }
+
+    var currentVMImage: NSImage? {
+        switch self.currentVM {
+        case .vmware:
+            return NSImage(named: "vmware")
+        case .parallels:
+            return NSImage(named: "parallels")
+        case .generic:
+            fallthrough
+        default:
+            return NSImage(named: "generic-vm")
+        }
+    }
+
+    var chosenAppVMTitle: String {
+        get {
+            let basicFormat = "%1$@ in %2$@".localized()
+            switch self.chosenApp {
+            case .aperture:
+                return String(format: basicFormat, "Aperture has reduced functionality".localized(), self.currentVMName)
+            case .iphoto:
+                return String(format: basicFormat, "iPhoto has reduced functionality".localized(), self.currentVMName)
+            case .proVideoUpdate:
+                fallthrough
+            case .finalCutPro7:
+                return String(format: basicFormat, "Final Cut Pro 7 only supports XML exports".localized(), self.currentVMName)
+            case .keynote5:
+                return String(format: basicFormat, "Keynote ’09 only supports PPTX exports".localized(), self.currentVMName)
+            case .logicPro9:
+                return ""
+            case .itunes:
+                return ""
+            default:
+                return ""
+            }
+        }
+    }
+
+    var chosenAppVMDescription: String {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return "You can open and organize your Aperture library, or export edited images. To use editing features such as image preview, adjustments, brushes, and effects, run Retroactive on a real Mac.".localized()
+            case .iphoto:
+                return "You can open and organize your iPhoto library, or export edited images. To use editing features such as image preview, Quick Fixes, effects, and adjustments, run Retroactive on a real Mac.".localized()
+            case .proVideoUpdate:
+                fallthrough
+            case .finalCutPro7:
+                return "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac.".localized()
+            case .keynote5:
+                return "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac.".localized()
+            case .logicPro9:
+                return ""
+            case .itunes:
+                return ""
+            default:
+                return ""
+            }
+        }
+    }
+    
+    private var _previouslyDetectedInVM: Bool = false
+
+    var likelyInVirtualMachine: Bool {
+        get {
+            if _previouslyDetectedInVM == true {
+                print("previously already detected in VM, skipping the check")
+                return true
+            }
+            print("main window is \(String(describing: NSApp.mainWindow)), screen is \(String(describing: NSApp.mainWindow?.screen))")
+            var window = NSApp.mainWindow
+            if (window == nil) {
+                let subwindows = NSApp.windows
+                print("main window is nil, NSApp.windows are \(subwindows)")
+                for subwindow in subwindows {
+                    if let validWindow = subwindow as? RetroactiveWindow {
+                        window = validWindow
+                    }
+                }
+                if (window == nil && subwindows.count > 0) {
+                    window = subwindows[0]
+                }
+            }
+            let deviceDescription = window?.screen?.deviceDescription
+            print("device description is \(String(describing: deviceDescription))")
+            if let description = deviceDescription {
+                print("screen number is \(String(describing: description[NSDeviceDescriptionKey("NSScreenNumber")]))")
+                if let screenNumber = description[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID {
+                    let usesOpenGL = CGDisplayUsesOpenGLAcceleration(screenNumber)
+                    print("usesOpenGL is \(usesOpenGL)")
+                    if CGDisplayUsesOpenGLAcceleration(screenNumber) == 1 {
+                        print("OpenGL acceleration present, likely not in virtual machine")
+                        return false
+                    } else {
+                        print("OpenGL acceleration missing, likely in virtual machine")
+                        _previouslyDetectedInVM = true
+                        return true
+                    }
+                }
+            }
+            print("can't find current screen, assuming not in virtual machine")
+            return false
+        }
+    }
+
 }

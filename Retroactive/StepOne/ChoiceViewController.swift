@@ -50,8 +50,16 @@ class ChoiceViewController: NSViewController {
         secondActionButton.moveIntoView(iphotoButton)
         itunesLabel.moveIntoView(itunesButton)
         thirdActionButton.moveIntoView(itunesButton)
-        if (oldOS == true) {
+        if (oldOS) {
             showMojaveChoices()
+        } else {
+            var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. ".localized()
+            if AppManager.shared.platformShippedAfterMojave {
+                otherOSHint += "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized()
+            } else {
+                otherOSHint += "To get started, install macOS Mojave on a separate volume.".localized()
+            }
+            otherOSSubtitle.stringValue = otherOSHint
         }
     }
     

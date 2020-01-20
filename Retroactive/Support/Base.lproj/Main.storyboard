@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -326,9 +326,8 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGe-T9-oAh" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
                                 <rect key="frame" x="62" y="101" width="905" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" id="7iR-G1-f3y">
+                                <textFieldCell key="cell" title="{otherOSSubtitle}" id="7iR-G1-f3y">
                                     <font key="font" metaFont="system" size="18"/>
-                                    <string key="title">Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. To get started, install macOS Mojave on a separate volume.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1154,16 +1153,59 @@ You can use {name} now.</string>
                                 <rect key="frame" x="274" y="269" width="508" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
+                            <box hidden="YES" fixedFrame="YES" boxType="custom" borderType="none" cornerRadius="11" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="lN5-Mz-2x0">
+                                <rect key="frame" x="82" y="485" width="873" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" ambiguous="YES" id="kYD-Rs-Qye">
+                                    <rect key="frame" x="0.0" y="0.0" width="873" height="104"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FEy-dh-1lY">
+                                            <rect key="frame" x="113" y="61" width="742" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="{chosenAppVMTitle}" id="Kxf-lg-IRo">
+                                                <font key="font" metaFont="systemBold" size="18"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ih6-22-o5N">
+                                            <rect key="frame" x="113" y="9" width="742" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <textFieldCell key="cell" title="{chosenAppVMDescription}" id="TSF-eD-3w7">
+                                                <font key="font" metaFont="menu" size="14"/>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEA-eq-p28">
+                                            <rect key="frame" x="25" y="26" width="59" height="59"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="parallels" id="GIP-rN-ATh"/>
+                                        </imageView>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a71-pF-Gir">
+                                            <rect key="frame" x="58" y="14" width="44" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="GRy-w8-Py7"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <color key="fillColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            </box>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="appLocationTextField" destination="Rqw-cG-14g" id="0o1-eG-7oJ"/>
                         <outlet property="authenticateButton" destination="iYC-bf-t4H" id="aje-xn-DrA"/>
                         <outlet property="authenticateLabel" destination="ocb-6h-IMr" id="gA4-Yl-Mhe"/>
+                        <outlet property="chosenAppVMDescriptionField" destination="Ih6-22-o5N" id="rXh-n6-bma"/>
+                        <outlet property="chosenAppVMTitleField" destination="FEy-dh-1lY" id="4vY-nf-daz"/>
+                        <outlet property="currentVMIconImageView" destination="sEA-eq-p28" id="cS1-ip-bLx"/>
                         <outlet property="explainationLabel" destination="Gra-Jh-rYX" id="Lhh-ia-z9C"/>
                         <outlet property="iconView" destination="5Tt-dG-ikx" id="YT7-nL-KZ0"/>
                         <outlet property="searchingForLabel" destination="Eah-NJ-Zxt" id="N5J-1O-I0l"/>
                         <outlet property="viewSourceButton" destination="y4m-yh-iGl" id="ZLP-vT-uKm"/>
+                        <outlet property="virtualMachineBox" destination="lN5-Mz-2x0" id="aEi-o6-VCO"/>
                     </connections>
                 </viewController>
                 <customObject id="ThI-SK-k7l" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1172,14 +1214,16 @@ You can use {name} now.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="NSCaution" width="32" height="32"/>
         <image name="airdrop_guide_aperture" width="381" height="146.5"/>
-        <image name="aperture_cartoon" width="252" height="252"/>
+        <image name="aperture_cartoon" width="254.5" height="254.5"/>
         <image name="appstore_guide_aperture" width="402.5" height="308.5"/>
         <image name="back" width="51" height="51"/>
-        <image name="iphoto_cartoon" width="252" height="252"/>
+        <image name="iphoto_cartoon" width="254.5" height="254.5"/>
         <image name="itunes12_9" width="281" height="195.5"/>
         <image name="itunes_cartoon" width="252" height="252"/>
         <image name="mojave-banner" width="882" height="70"/>
+        <image name="parallels" width="128" height="128"/>
         <image name="tick" width="51" height="45"/>
         <image name="timemachine_guide" width="381" height="146"/>
     </resources>

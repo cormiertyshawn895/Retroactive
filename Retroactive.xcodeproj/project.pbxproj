@@ -60,6 +60,7 @@
 		606CA155236666B3001C550E /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CA151236666B3001C550E /* ConfettiView.swift */; };
 		607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 607C3D812382665900FAE528 /* AudioToolbox.framework.zip */; };
 		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
+		60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 60D7289F23D5787B0006F233 /* VMFCPFixerScript */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		607C3D7F2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		607C3D802382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		607C3D812382665900FAE528 /* AudioToolbox.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = AudioToolbox.framework.zip; sourceTree = "<group>"; };
+		60D7289F23D5787B0006F233 /* VMFCPFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = VMFCPFixerScript; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				606CA12023664BFC001C550E /* killpkg */,
 				046034E32381B6E800070C86 /* KeynoteScript */,
 				042E9E472381AC2B001D3F38 /* GeneralFixerScript */,
+				60D7289F23D5787B0006F233 /* VMFCPFixerScript */,
 				607C3D812382665900FAE528 /* AudioToolbox.framework.zip */,
 				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
 				046034E62381C18A00070C86 /* ProKit.framework.zip */,
@@ -386,6 +389,7 @@
 				606CA154236666B3001C550E /* ConfettiView.bundle in Resources */,
 				046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */,
 				046034EA2381DDB300070C86 /* ProApplicationsUpdate2010-02.dist in Resources */,
+				60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */,
 				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
 				607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */,
@@ -602,7 +606,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 21;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,7 +627,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 21;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
