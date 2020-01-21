@@ -6,7 +6,7 @@
 import Cocoa
 import CommonCrypto
 
-class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDataDelegate {
+class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDataDelegate, DownloaderDelegate {
     @IBOutlet weak var progressGrid1: NSView!
     @IBOutlet weak var progressGrid2: NSView!
     @IBOutlet weak var progressGrid3: NSView!
@@ -27,10 +27,13 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     var dataTask: URLSessionDataTask?
     var isDownloadMode = false
     var isProVideoUpdate = false
+    var isMacOSInstallerMode = false
     let tempDir = "/tmp"
     
     var expectedContentLength = 0
     var fileHandle: FileHandle?
+    
+    var macOSDownloader: MacOSDownloader?
 
     static func instantiate() -> ProgressViewController
     {
@@ -45,6 +48,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         isProVideoUpdate = AppManager.shared.chosenApp == .proVideoUpdate
         isDownloadMode = AppManager.shared.chosenApp == .itunes || isProVideoUpdate
+        isMacOSInstallerMode = AppManager.shared.chosenApp == .macOSInstaller
         let shortName = AppManager.shared.spaceConstrainedNameOfChosenApp
         
         subProgress1 = SubProgressViewController.instantiate()
@@ -78,12 +82,21 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         if (isDownloadMode && AppManager.shared.choseniTunesVersion == .darkMode) {
             progressCaption.stringValue = "\(progressCaption.stringValue) " + "It is completely normal for the fans to spin up during the process.".localized()
         }
+        
+        if isMacOSInstallerMode {
+            self.setUpMacOSInstallerProgressDescription()
+        }
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
         STPrivilegedTask.preventSleep()
+        
+        if isMacOSInstallerMode {
+            self.kickoffMacOSInstallerDownload()
+            return
+        }
         
         let authenticateStatus = STPrivilegedTask.preAuthenticate()
         if (authenticateStatus != errAuthorizationSuccess) {
@@ -337,6 +350,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     func stage1Started() {
         self.syncMainQueue {
             self.subProgress1.inProgress = true
+            if (isMacOSInstallerMode) {
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0, endingPercent: 0.05)
+            }
         }
     }
     
@@ -350,6 +366,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                     duration = 60.0
                 }
                 self.guessProgressForTimer(approximateDuration: duration, startingPercent: 0.35, endingPercent: isProVideoUpdate ? 0.38 : 0.70)
+            } else if (isMacOSInstallerMode) {
+                print("letting installer download progress take over the loading bar")
             } else {
                 self.progressIndicator.doubleValue = 0.1
             }
@@ -362,6 +380,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
                 self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
+            } else if (isMacOSInstallerMode) {
+                self.guessProgressForTimer(approximateDuration: 15, startingPercent: 0.8, endingPercent: 0.95)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -374,6 +394,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
                 self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 5, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
+            } else if (isMacOSInstallerMode) {
+                self.guessProgressForTimer(approximateDuration: 3, startingPercent: 0.95, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
                 self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
@@ -756,6 +778,79 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         if (isDownloadMode) {
             let mountPath = "\(tempDir)/\(AppManager.shared.mountDirNameOfChosenApp)"
             self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
+        }
+    }
+    
+    func popBackToRoot() {
+        self.syncMainQueue {
+            STPrivilegedTask.allowSleep()
+            self.navigationController.popToRootViewController(animated: true)
+        }
+    }
+    
+    func kickoffMacOSInstallerDownload() {
+        if let catalog = AppManager.shared.catalogURLForChosenMacOSInstaller, let minor = AppManager.shared.chosenMacOSInstallerVersion {
+            macOSDownloader = MacOSDownloader(catalogURL: catalog, metadataURL: nil, minorVersion: Int32(minor))
+            macOSDownloader?.delegate = self
+            macOSDownloader?.startDownloading(toPath: "/tmp", withWindowForAlertSheets: NSApp.mainWindow)
+        }
+    }
+    
+    func updateProgressPercentage(_ percent: Double) {
+        self.subProgress2.circularProgress.progress = percent
+        self.progressIndicator.doubleValue = 0.05 + percent * (0.8 - 0.05)
+    }
+    
+    func updateProgressSize(_ size: String!) {
+        self.subProgress2.progressTextField.font = NSFont.monospacedDigitSystemFont(ofSize: 16, weight: .regular)
+        self.subProgress2.progressTextField.stringValue = size
+    }
+    
+    func updateProgressStatus(_ status: String!) {
+        progressCaption.stringValue = status
+    }
+    
+    func updateProgressStage(_ stage: stage) {
+        switch stage {
+        case searchCatalog:
+            self.stage1Started()
+        case downloadInstaller:
+            self.stage2Started()
+        case extractInstaller:
+            self.stage3Started()
+        case verifyInstaller:
+            self.stage4Started()
+        default:
+            return
+        }
+    }
+    
+    func setIndefiniteProgress(_ indefinite: Bool) {
+        print("set indefinite progress")
+    }
+    
+    func downloadDidFailWithError(_ err: error) {
+        print("Download failed \(err)")
+        if (err == overwriteDecline) {
+            self.showCompletionVC()
+        } else {
+            self.popBackToRoot()
+        }
+    }
+    
+    func setUpMacOSInstallerProgressDescription() {
+        self.subProgress1.descriptionTextField.stringValue = "Search through catalog".localized()
+        self.subProgress2.descriptionTextField.stringValue = "Download macOS installer".localized()
+        self.subProgress3.descriptionTextField.stringValue = "Extract macOS installer".localized()
+        self.subProgress4.descriptionTextField.stringValue = "Verify macOS installer".localized()
+    }
+
+    func shouldLoadApp(_ shouldLoad: Bool, atPath path: String!) {
+        if (shouldLoad) {
+            self.stage4Finished()
+            self.showCompletionVC()
+        } else {
+            popBackToRoot()
         }
     }
 

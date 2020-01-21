@@ -7,7 +7,7 @@ import Cocoa
 
 @NSApplicationMain
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _ = AppManager.shared
@@ -124,6 +124,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return true
         }
         
+        if AppManager.shared.chosenApp == .macOSInstaller {
+            return true
+        }
+        
         let name = AppManager.shared.nameOfChosenApp
         
         let showUnableToClose = {
@@ -218,5 +222,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSWorkspace.shared.open(credits)
         }
     }
+    
+    func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+        if item.action == #selector(macOSDownloadClicked(_:)) || item.action == #selector(macOSDMGDownloadClicked(_:)) {
+            if AppDelegate.rootVC?.navigationController.topViewController is ProgressViewController {
+                return false
+            }
+        }
+        return true
+    }
+    
+    @objc @IBAction func macOSDownloadClicked(_ sender: NSMenuItem) {
+        AppManager.shared.chosenApp = .macOSInstaller
+        AppManager.shared.chosenMacOSInstallerVersion = sender.tag
+        AppDelegate.rootVC?.navigationController.pushViewController(ProgressViewController.instantiate(), animated: true)
+    }
+
+    @IBAction func macOSDMGDownloadClicked(_ sender: NSMenuItem) {
+        let tagNumber = sender.tag
+        self.safelyOpenURL(AppManager.shared.dmgURLForVersion(tagNumber))
+    }
+
 }
 

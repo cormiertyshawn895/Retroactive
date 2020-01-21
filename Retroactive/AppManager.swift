@@ -14,6 +14,8 @@ enum AppType {
     case keynote5
     
     case proVideoUpdate
+
+    case macOSInstaller
 }
 
 enum iTunesVersion {
@@ -348,6 +350,10 @@ class AppManager: NSObject {
     var fCPUpdate: String? {
         return configurationDictionary?["FCPUpdate"] as? String
     }
+    
+    var installMediaGuide: String? {
+        return configurationDictionary?["InstallMediaGuide"] as? String
+    }
 
     var downloadURLOfChosenApp: String? {
         get {
@@ -411,6 +417,16 @@ class AppManager: NSObject {
                 return "Keynote ’09"
             case .proVideoUpdate:
                 return "Pro Applications Update 2010-02".localized()
+            case .macOSInstaller:
+                var builtString = "Install macOS".localized()
+                if let version = self.chosenMacOSInstallerVersion {
+                    if let shortName = ProcessInfo.shortNameForMinorVersion(version) {
+                        builtString += " \(shortName)"
+                    } else {
+                        builtString += "10.\(version)"
+                    }
+                }
+                return builtString
             default:
                 return "Untitled".localized()
             }
@@ -710,6 +726,11 @@ class AppManager: NSObject {
                 return NSImage(named: "keynote5_cartoon")
             case .proVideoUpdate:
                 return NSImage(named: "fcpstudio_cartoon")
+            case .macOSInstaller:
+                if let version = self.chosenMacOSInstallerVersion, let image = NSImage(named: "\(version)-installer") {
+                    return image
+                }
+                return NSImage(named: "installer")
             default:
                 return nil
             }
@@ -734,6 +755,8 @@ class AppManager: NSObject {
                 case .none:
                     return nil
                 }
+            case .macOSInstaller:
+                return installMediaGuide
             default:
                 return sourcePage
             }
@@ -776,6 +799,8 @@ class AppManager: NSObject {
                 return "fix".localized()
             case .proVideoUpdate:
                 return "install".localized()
+            case .macOSInstaller:
+                return "download".localized()
             default:
                 return "unlock".localized()
             }
@@ -793,6 +818,8 @@ class AppManager: NSObject {
             switch self.chosenApp {
             case .itunes:
                 return "downloading and installing".localized()
+            case .macOSInstaller:
+                return "downloading".localized()
             default:
                 return "installing support files for".localized()
             }
@@ -956,7 +983,7 @@ class AppManager: NSObject {
     
     var purposeString: String {
         get {
-            if chosenApp == .proVideoUpdate {
+            if chosenApp == .proVideoUpdate || chosenApp == .macOSInstaller {
                 return ""
             }
             return " to run on {systemName}".localized()
@@ -1146,6 +1173,19 @@ class AppManager: NSObject {
             print("can't find current screen, assuming not in virtual machine")
             return false
         }
+    }
+    
+    func dmgURLForVersion(_ version: Int) -> String? {
+        return configurationDictionary?["\(version)DMG"] as? String
+    }
+
+    var chosenMacOSInstallerVersion: Int?
+
+    var catalogURLForChosenMacOSInstaller: String? {
+        if let version = chosenMacOSInstallerVersion {
+            return configurationDictionary?["\(version)Catalog"] as? String
+        }
+        return nil
     }
 
 }

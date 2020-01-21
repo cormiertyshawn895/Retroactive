@@ -18,6 +18,7 @@ class CompletionViewController: NSViewController {
     var confettiView: ConfettiView?
     var allowPatchingAgain: Bool = false
     var justRecreatedLibrary: Bool = false
+    var macInstallerMode: Bool = false
     
     static func instantiate() -> CompletionViewController
     {
@@ -26,6 +27,7 @@ class CompletionViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        macInstallerMode = AppManager.shared.chosenApp == .macOSInstaller
         if (allowPatchingAgain == true) {
             behindTheScenesButton.title = NSLocalizedString("Unlock {name} again".localized(), comment: "")
             congratulatoryLabel.stringValue = String(format: "You have already unlocked %@.\nThere's usually no need to unlock it again.".localized(), placeholderToken)
@@ -41,6 +43,10 @@ class CompletionViewController: NSViewController {
         if let knownIssues = AppManager.shared.appKnownIssuesText {
             dividerLine.isHidden = false
             extraInfoLabel.stringValue = String(format: "Note: %@".localized(), knownIssues)
+        }
+        if (macInstallerMode) {
+            launchAppLabel.stringValue = "Show installer in Finder"
+            behindTheScenesButton.title = "How to create a bootable installer for macOS?".localized()
         }
     }
     
@@ -79,6 +85,12 @@ class CompletionViewController: NSViewController {
     }
     
     @IBAction func launchAppClicked(_ sender: Any) {
+        if (macInstallerMode) {
+            if let chosen = AppManager.shared.locationOfChosenApp, let chosenURL = URL(string: chosen) {
+                NSWorkspace.shared.activateFileViewerSelecting([chosenURL])
+            }
+            return
+        }
         let openApp = {
             if let knownLocation = AppManager.shared.locationOfChosenApp {
                 NSWorkspace.shared.launchApplication(knownLocation)

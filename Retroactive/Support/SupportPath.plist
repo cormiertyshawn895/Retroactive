@@ -22,7 +22,7 @@
 	<key>LatestBuildNumber</key>
 	<integer>21</integer>
 	<key>SupportPathURL</key>
-	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
+	<string></string>
 	<key>ReleasePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases</string>
 	<key>SourcePage</key>
@@ -75,5 +75,25 @@
 	<string>https://www.baidu.com/s?wd=Final%20Cut%20Pro%207</string>
 	<key>FCPUpdate</key>
 	<string>https://download.info.apple.com/Mac_OS_X/061-8474.20100915.wtoKR/ProApplicationsUpdate2010-02.dmg</string>
+	<key>15Catalog</key>
+	<string>https://swscan.apple.com/content/catalogs/others/index-10.15-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz</string>
+	<key>15Key</key>
+	<string>061-10700</string>
+	<key>14Catalog</key>
+	<string>https://swscan.apple.com/content/catalogs/others/index-10.14-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz</string>
+	<key>14Key</key>
+	<string>061-26589</string>
+	<key>13Catalog</key>
+	<string>https://swscan.apple.com/content/catalogs/others/index-10.13-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog.gz</string>
+	<key>13Key</key>
+	<string>041-91758</string>
+	<key>12DMG</key>
+	<string>http://updates-http.cdn-apple.com/2019/cert/061-39476-20191023-48f365f4-0015-4c41-9f44-39d3d2aca067/InstallOS.dmg</string>
+	<key>11DMG</key>
+	<string>http://updates-http.cdn-apple.com/2019/cert/061-41424-20191024-218af9ec-cf50-4516-9011-228c78eda3d2/InstallMacOSX.dmg</string>
+	<key>10DMG</key>
+	<string>http://updates-http.cdn-apple.com/2019/cert/061-41343-20191023-02465f92-3ab5-4c92-bfe2-b725447a070d/InstallMacOSX.dmg</string>
+	<key>InstallMediaGuide</key>
+	<string>https://support.apple.com/HT201372</string>
 </dict>
 </plist>

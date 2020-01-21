@@ -123,6 +123,51 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Download" id="ZXj-sh-yvC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Download" id="8tI-Aj-c49">
+                                    <items>
+                                        <menuItem title="macOS Catalina" tag="15" id="7fT-1v-k2Z">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="macOSDownloadClicked:" target="Voe-Tx-rLC" id="1Xq-UB-Gew"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="gFU-nA-cPb"/>
+                                        <menuItem title="macOS Mojave" tag="14" id="e8t-yX-6A1">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="macOSDownloadClicked:" target="Voe-Tx-rLC" id="N8p-dd-AI0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="macOS High Sierra" tag="13" id="OST-KB-Nrj">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="macOSDownloadClicked:" target="Voe-Tx-rLC" id="gZ2-AF-DW3"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="macOS Sierra" tag="12" id="XU9-E6-VaM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="macOSDMGDownloadClicked:" target="Voe-Tx-rLC" id="e1r-12-7Q0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="1Ct-EB-uND"/>
+                                        <menuItem title="OS X El Capitan" tag="11" id="I5b-Ky-RM3">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="macOSDMGDownloadClicked:" target="Voe-Tx-rLC" id="4n7-sx-LJa"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="OS X Yosemite" tag="10" id="0eT-8d-x49">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="macOSDMGDownloadClicked:" target="Voe-Tx-rLC" id="aZl-Wa-TNN"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Window" id="aUF-d1-5bR">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -847,7 +892,7 @@ You can use {name} now.</string>
                                 </subviews>
                             </customView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KrF-Pq-lVe" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="363" y="72" width="310" height="26"/>
+                                <rect key="frame" x="294" y="72" width="423" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" title="What happened behind the scenes?" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="4OD-xb-Ejf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
