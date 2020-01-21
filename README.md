@@ -109,6 +109,22 @@ After successfully modifying or installing the app, you can play with it to your
 
 ---
 
+### Workaround to install Final Cut Pro 7 in VMware Fusion
+
+If you don't have a Mac released before Late 2019, you can still install Final Cut Pro 7 in VMware Fusion to export existing Final Cut Pro 7 projects into XML files. This lets SendToX, DaVinci Resolve, Media Composer, and Premiere Pro open them. 
+
+- [Install macOS Mojave virtual machine with VMware Fusion](https://www.huibdijkstra.nl/how-to-set-up-a-osx-mojave-vm-in-vmware-fusion/). Other virtual machine software, such as Parallels Desktop, is not supported and will not work.
+- After mounting the Final Cut Studio installer in VMware Fusion, right click on Install Final Cut Studio.pkg > Show Original, then copy FinalCutStudio.mpkg and Packages to VMware Fusion's Desktop
+- Right click on the copied FinalCutStudio.mpkg > Show Package Contents > Resources
+- Right click on Requirements Checker.app > Show Package Contents > Contents > Resources
+- Delete minsys.plist
+- Double click on the modified FinalCutStudio.mpkg to start the install
+- Use Retroactive as usual
+
+To use editing features such as timeline and preview, install macOS Mojave on a real, older Mac released before Late 2019, then run Retroactive as usual.
+
+---
+
 ### Last words
 - If GateKeeper prevents you from running modified versions of your chosen app, [temporarily disable GateKeeper in Terminal with `sudo spctl --master-disable`](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/).
 

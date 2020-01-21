@@ -153,6 +153,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let fixerPath = "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"
             let appMacOSPath = "\(appPath)/Contents/MacOS"
             let appBinaryPath = "\(appMacOSPath)/\(AppManager.shared.binaryNameOfChosenApp)"
+            let appMinSysPath = "\(appPath)/Contents/Resources/minsys.plist"
             let macAppBinaryPathUnderscore = "\(appBinaryPath)_"
             
             let kAppKitShimPath =  "/Library/Frameworks/AppKit.framework"
@@ -171,6 +172,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 // Handle the corner for those who manually copied or installed old versions ProKit.
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/Frameworks/ProKit.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/Frameworks/BrowserKit.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/PrivateFrameworks/ProKit.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", "/System/Library/PrivateFrameworks/BrowserKit.framework"])
 
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kAppKitShimPath])
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kAppKitSecondaryShimPath])
@@ -178,10 +181,19 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kProKitCopyPath])
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKit", kAppKitShimPath])
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKit", kAppKitSecondaryShimPath])
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/AudioToolbox.framework.zip", kAudioToolboxCopyPath])
+                
+                if (AppManager.shared.likelyInVirtualMachine && AppManager.shared.chosenApp == .finalCutPro7) {
+                    print("In virtual machine and unlocking Final Cut Pro 7. Delete minsys.plist and AudioToolbox framework.")
+                    self.runTask(toolPath: "/bin/rm", arguments: [appMinSysPath])
+                    self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", kAudioToolboxCopyPath])
+                } else {
+                    print("Normally extracting AudioToolbox framework.")
+                    self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/AudioToolbox.framework.zip", kAudioToolboxCopyPath])
+                    self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kAudioToolboxCopyPath])
+                }
+
                 self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kBrowserKitCopyPath])
                 self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kProKitCopyPath])
-                self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kAudioToolboxCopyPath])
                 self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kBrowserKitCopyPath])
                 self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kProKitCopyPath])
             } else {
@@ -227,6 +239,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 }
             }
 
+            print("Installing fixer script, and renaming the real binary to be underscored.")
             self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
             self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["+x", appBinaryPath])
