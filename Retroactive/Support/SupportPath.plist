@@ -3,24 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.4 contains the following features and is available for download.</string>
+	<string>Retroactive 1.5 improves iTunes compatibility with macOS Catalina 10.15.4 and is available for download.</string>
 	<key>NewVersionChangelog</key>
-	<string>• Resolves an issue where Final Cut Pro 7 may become unresponsive or quit unexpectedly on launch
-• Adds the ability to export existing Final Cut Pro 7 projects into XML files when running under VMware Fusion (workaround required for initial install, learn more at the release page*)</string>
+	<string>• Resolves an issue where authenticating with Apple Music, iTunes Store, or App Store may fail with iTunes 12.9.5 and iTunes 12.6.5 running on macOS Catalina 10.15.4 (11571 and -42408).
+• Resolves an issue where iTunes 10.7 may prompt to reinstall itself (-42401).</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.4 包含如下功能，现已提供下载: </string>
+	<string>新版本解印 1.5 改善了 iTunes 与 macOS Catalina 10.15.4 的兼容性，现已提供下载:</string>
 	<key>NewVersionChangelogzhHans</key>
-	<string>• 修复了 Final Cut Pro 7 在启动时可能意外退出或停止响应的问题
-• 支持在 VMware Fusion 虚拟机下将已有的 Final Cut Pro 7 项目导出为 XML 文件 (详见发布页说明*)</string>
+	<string>• 修复了 iTunes 12.9.5 和 iTunes 12.6.5 无法在 macOS Catalina 10.15.4 下登录 Apple Music、iTunes Store 和 App Store (11571 和 -42408) 的问题 
+• 修复了 iTunes 10.7 可能提示需要重新安装 (-42401) 的问题</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.4 包含如下功能，現已提供下載:</string>
+	<string>新版本解印 1.5 改善了 iTunes 與 macOS Catalina 10.15.4 的兼容性，現已提供下載:</string>
 	<key>NewVersionChangelogzhHant</key>
-	<string>• 修復了 Final Cut Pro 7 在啟動時可能意外退出或停止響應的問題
-• 支持在 VMware Fusion 虛擬機下將已有的 Final Cut Pro 7 項目導出為 XML 文件 (詳見發布頁說明*)</string>
+	<string>• 修復了 iTunes 12.9.5 和 iTunes 12.6.5 無法在 macOS Catalina 10.15.4 下登錄 Apple Music、iTunes Store 和 App Store (11571 和 -42408) 的問題
+• 修復了 iTunes 10.7 可能提示需要重新安裝 (-42401) 的問題</string>
 	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.4/Retroactive.1.4.zip</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>21</integer>
+	<integer>22</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

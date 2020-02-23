@@ -98,7 +98,6 @@
 "an hour" = "一小时";
 "downloading and installing" = "下载和安装";
 "fix" = "修复";
-"iTunes may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes." = "iTunes 可能报错 “尚未安装某个必须的 iTunes 组件。请重新安装 iTunes (-42401)”。这是误报，您无需重新安装 iTunes。";
 "install" = "安装";
 "installing support files for" = "安装组件以支持";
 "unlock" = "解锁";

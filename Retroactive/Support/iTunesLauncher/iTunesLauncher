@@ -1,0 +1,7 @@
+#!/bin/bash
+iTunes_PATH="`dirname "${0}"`"
+iTunes_BIN=$iTunes_PATH/iTunes.app/Contents/MacOS/iTunes
+export DYLD_FRAMEWORK_PATH="${iTunes_PATH}/iTunes.app/Contents/Frameworks"
+export DYLD_LIBRARY_PATH="${iTunes_PATH}/iTunes.app/Contents/Frameworks"
+
+"$iTunes_BIN"

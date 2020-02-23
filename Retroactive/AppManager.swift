@@ -518,7 +518,8 @@ class AppManager: NSObject {
             case .iphoto:
                 return "com.apple.iPhoto"
             case .itunes:
-                return "com.apple.iTunes"
+                // This is intentionally the launcher's bundle ID
+                return "com.launcher.iTunes"
             case .finalCutPro7:
                 return "com.apple.FinalCutPro"
             case .logicPro9:
@@ -628,11 +629,11 @@ class AppManager: NSObject {
             case .itunes:
                 switch choseniTunesVersion {
                 case .darkMode:
-                    return "13.9.5"
+                    return "12.9.5"
                 case .appStore:
-                    return "13.6.5"
+                    return "12.6.5"
                 case .coverFlow:
-                    return "13.7"
+                    return "12.7"
                 case .none:
                     return ""
                 }
@@ -883,7 +884,7 @@ class AppManager: NSObject {
                 case .appStore:
                     return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead.".localized()
                 case .coverFlow:
-                    return "iTunes may prompt “A required iTunes component is not installed. Please reinstall iTunes (-42401).” There is no need to reinstall iTunes.".localized()
+                    return nil
                 case .none:
                     return nil
                 }

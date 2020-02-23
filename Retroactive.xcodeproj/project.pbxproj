@@ -61,6 +61,9 @@
 		607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 607C3D812382665900FAE528 /* AudioToolbox.framework.zip */; };
 		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 		60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 60D7289F23D5787B0006F233 /* VMFCPFixerScript */; };
+		60E4B4B6240207AC00919F36 /* iTunesLauncher-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */; };
+		60E4B4B8240207B400919F36 /* iTunesLauncher-PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */; };
+		60E4B4BA240207C100919F36 /* iTunesLauncher in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B9240207C100919F36 /* iTunesLauncher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +134,9 @@
 		607C3D802382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		607C3D812382665900FAE528 /* AudioToolbox.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = AudioToolbox.framework.zip; sourceTree = "<group>"; };
 		60D7289F23D5787B0006F233 /* VMFCPFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = VMFCPFixerScript; sourceTree = "<group>"; };
+		60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iTunesLauncher-Info.plist"; sourceTree = "<group>"; };
+		60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iTunesLauncher-PkgInfo"; sourceTree = "<group>"; };
+		60E4B4B9240207C100919F36 /* iTunesLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesLauncher; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +206,7 @@
 		32D181ED236434D8006253DE /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				60E4B4B42402079B00919F36 /* iTunesLauncher */,
 				606CA12923665CBF001C550E /* Credits.rtfd */,
 				606CA12723665C04001C550E /* Credits.pdf */,
 				32F763572365018500200ED7 /* capsule.icns */,
@@ -323,6 +330,16 @@
 			path = ConfettiView;
 			sourceTree = "<group>";
 		};
+		60E4B4B42402079B00919F36 /* iTunesLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				60E4B4B9240207C100919F36 /* iTunesLauncher */,
+				60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */,
+				60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */,
+			);
+			path = iTunesLauncher;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -385,6 +402,7 @@
 				32F763582365018600200ED7 /* capsule.icns in Resources */,
 				6008E6C623820F7300A2F659 /* InfoPlist.strings in Resources */,
 				6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */,
+				60E4B4B8240207B400919F36 /* iTunesLauncher-PkgInfo in Resources */,
 				606CA12A23665CBF001C550E /* Credits.rtfd in Resources */,
 				606CA154236666B3001C550E /* ConfettiView.bundle in Resources */,
 				046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */,
@@ -392,6 +410,7 @@
 				60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */,
 				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
+				60E4B4BA240207C100919F36 /* iTunesLauncher in Resources */,
 				607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				046034E42381B6E800070C86 /* KeynoteScript in Resources */,
@@ -404,6 +423,7 @@
 				606CA12123664BFD001C550E /* killpkg in Resources */,
 				6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */,
 				042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */,
+				60E4B4B6240207AC00919F36 /* iTunesLauncher-Info.plist in Resources */,
 				32F763542364DEA700200ED7 /* NyxAudioAnalysis in Resources */,
 				046034E82381C18A00070C86 /* ProKit.framework.zip in Resources */,
 				042E9E492381AC2C001D3F38 /* AppKit in Resources */,
@@ -606,14 +626,14 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.retroactive.Retroactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Retroactive/Libraries/Bridging-Header.h";
@@ -627,14 +647,14 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.retroactive.Retroactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Retroactive/Libraries/Bridging-Header.h";

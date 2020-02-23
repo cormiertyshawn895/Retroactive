@@ -66,12 +66,12 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         subProgress3 = SubProgressViewController.instantiate()
         progressGrid3.addSubview(subProgress3.view)
         subProgress3.sequenceLabel.stringValue = "3"
-        subProgress3.descriptionTextField.stringValue = isDownloadMode ? (isProVideoUpdate ? configureString : installString) : String(format: "Refresh %@ icon".localized(), AppManager.shared.nameOfChosenApp)
+        subProgress3.descriptionTextField.stringValue = isDownloadMode ? configureString : String(format: "Refresh %@ icon".localized(), AppManager.shared.nameOfChosenApp)
 
         subProgress4 = SubProgressViewController.instantiate()
         progressGrid4.addSubview(subProgress4.view)
         subProgress4.sequenceLabel.stringValue = "4"
-        subProgress4.descriptionTextField.stringValue = isDownloadMode ? (isProVideoUpdate ? installString : configureString) : String(format: "Sign %@".localized(), AppManager.shared.nameOfChosenApp)
+        subProgress4.descriptionTextField.stringValue = isDownloadMode ? installString : String(format: "Sign %@".localized(), AppManager.shared.nameOfChosenApp)
 
         iconImageView.updateIcon()
         
@@ -361,7 +361,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.38, endingPercent:0.40)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -373,7 +373,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 5, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: 35, startingPercent: 0.40, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
                 self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
@@ -650,19 +650,37 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp
         
+        let resourcePath = Bundle.main.resourcePath!.fileSystemString
+        let inAppFrameworksPath = "\(appPath)/Contents/MacOS/iTunes.app/Contents/Frameworks"
+        
         self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", appPath])
         self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", badMountPath])
         self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["attach", "-nobrowse", dmgPath, "-mountpoint", mountPath])
         
         let stageAfterExpansion = {
             self.stage3Started()
-            self.runTaskAtTemp(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", patchedVersionString, "\(afterPackagePath)/Contents/Info.plist"])
-            self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, appPath])
-            self.stage4Started()
             
-            // Only re-sign iTunes 10.7. Other iTunes version will break if resigned.
+            self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)"])
+            self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents"])
+            self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/MacOS"])
+            self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Resources"])
+            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher", "\(appPath)/Contents/MacOS/iTunes"])
+            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher-Info.plist", "\(appPath)/Contents/Info.plist"])
+            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher-PkgInfo", "\(appPath)/Contents/PkgInfo"])
+            self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["\(afterPackagePath)/Contents/Resources/iTunes.icns", "\(appPath)/Contents/Resources/iTunes.icns"])
+            self.runTaskAtTemp(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", patchedVersionString, "\(appPath)/Contents/Info.plist"])
+            self.runTaskAtTemp(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleShortVersionString, "-string", patchedVersionString, "\(appPath)/Contents/Info.plist"])
+            self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
+            
+            self.stage4Started()
+            self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, "\(appPath)/Contents/MacOS/iTunes.app"])
+            
+            // Only copy additional frameworks for iTunes 10.7. Other iTunes version will break if resigned.
             if (AppManager.shared.choseniTunesVersion == .coverFlow) {
-                self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesLibrary.pkg/Payload/System/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
             }
             self.runTaskAtTemp(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
@@ -681,7 +699,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                     let afterPackageExists = FileManager.default.fileExists(atPath: afterPackagePath)
                     print("libraryPath = \(libraryPath), libraryExists = \(libraryExists), afterPackageExists = \(afterPackageExists)")
                     if libraryExists && afterPackageExists {
-                        let resourcePath = Bundle.main.resourcePath!.fileSystemString
                         // Extracting the entire macOS installer takes way too long
                         // Kill pkg extraction before fans spin up too loud
                         ProgressViewController.runTask(toolPath: "killpkg", arguments: [], path: resourcePath)
