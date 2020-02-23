@@ -8,10 +8,12 @@ import Cocoa
 class VersionViewController: NSViewController {
     @IBOutlet weak var darkModeVersionView: NSView!
     @IBOutlet weak var appStoreVersionView: NSView!
+    @IBOutlet weak var classicThemeVersionView: NSView!
     @IBOutlet weak var coverFlowVersionView: NSView!
     @IBOutlet weak var nextButton: NSButton!
     @IBOutlet weak var darkModeButton: HoverButton!
     @IBOutlet weak var appStoreButton: HoverButton!
+    @IBOutlet weak var classicThemeButton: HoverButton!
     @IBOutlet weak var coverFlowButton: HoverButton!
     
     var choiceVCs: [VersionChoiceViewController] = []
@@ -23,7 +25,7 @@ class VersionViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let versionViews : [(NSView, HoverButton, iTunesVersion)] = [(darkModeVersionView, darkModeButton, .darkMode), (appStoreVersionView, appStoreButton, .appStore), (coverFlowVersionView, coverFlowButton, .coverFlow)]
+        let versionViews : [(NSView, HoverButton, iTunesVersion)] = [(darkModeVersionView, darkModeButton, .darkMode), (appStoreVersionView, appStoreButton, .appStore), (classicThemeVersionView, classicThemeButton, .classicTheme), (coverFlowVersionView, coverFlowButton, .coverFlow)]
         for (view, button, version) in versionViews {
             let choiceVC = VersionChoiceViewController.instantiate()
             choiceVC.itunesApp = iTunesApp(version)
@@ -54,6 +56,10 @@ class VersionViewController: NSViewController {
     
     @IBAction func appStoreClicked(_ sender: Any) {
         self.selectedVersion = .appStore
+    }
+    
+    @IBAction func classicThemeClicked(_ sender: Any) {
+        self.selectedVersion = .classicTheme
     }
     
     @IBAction func coverFlowClicked(_ sender: Any) {

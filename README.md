@@ -43,7 +43,8 @@ If you chose iTunes, Retroactive will ask you which version to install, then aut
 
 - iTunes 12.9.5 supports Dark Mode and most DJ apps.
 - iTunes 12.6.5 supports downloading and archiving iOS apps.
-- iTunes 10.7 (not recommended) supports CoverFlow.
+- iTunes 11.4 has a classic look.
+- iTunes 10.7 supports CoverFlow.
 
 If you don’t know which version to install, keep the default setting and click “Continue”.
 
@@ -87,6 +88,8 @@ After successfully modifying or installing the app, you can play with it to your
 
 - All features should work for iTunes 12.6.5 except for backing up an iOS device. Use iTunes 12.9.5 or Finder to back up instead. Thumbnails of download apps may appear distorted.
 
+- Movies and TV Shows downloaded from the iTunes Store won't play in iTunes 10.7 and iTunes 11.4. Download or play them in the TV app instead.
+
 - All Final Cut Pro 7 features should work.
 
 - Support for Logic Pro 9 is experimental. You may see frequent freezes and hangs.
@@ -104,6 +107,14 @@ After successfully modifying or installing the app, you can play with it to your
 💡 Tip:
 
 - If some RAW photos still show up as "*Unsupported Image Format*" after reprocessing, repeat the process above to reprocess all photos again. In other words, you may need to reprocess all photos twice. 
+
+---
+
+### Compatibility with macOS Catalina 10.15.4 or later
+
+If you have installed iTunes with previous versions of Retroactive, authenticating with Apple Music, iTunes Store, or App Store may fail in iTunes (11571 and -42408) after updating to macOS Catalina 10.15.4 or later.
+
+This issue has been fixed in Retroactive 1.5 and later. To resolve this issue, you need to [download and re-install iTunes with the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases).
 
 ---
 
