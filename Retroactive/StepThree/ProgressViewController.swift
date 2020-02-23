@@ -361,7 +361,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: 0.38, endingPercent:0.40)
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -373,7 +373,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 35, startingPercent: 0.40, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 10, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
                 self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
@@ -464,8 +464,13 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.guessProgressForTimer(approximateDuration: 15, startingPercent: 0.0, endingPercent: 0.4)
                 let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: dmgPath))
                 print("shasum is \(shaSum) for \(dmgPath)")
-                // Pro App 2010-02, 12.9.5, 12.6.5, 10.7
-                if ["2c50f7d57d92bd783773c188de8952e2a75b81a8d886a15890d7e0164cabbb43", "defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7","7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0", "3d92702ac8b7b2a07bcfe13cc6e0ce07c67362eb4bb2db69f3aebc0cbef27548"].contains(shaSum) {
+                // Pro App 2010-02, 12.9.5, 12.6.5, 11.4, 10.7
+                if ["2c50f7d57d92bd783773c188de8952e2a75b81a8d886a15890d7e0164cabbb43",
+                    "defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7",
+                    "7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0",
+                    "70a8369ca794251fb22fd976eb8019001f8178d3e1d5044c22a665cca81b3fd8",
+                    "3d92702ac8b7b2a07bcfe13cc6e0ce07c67362eb4bb2db69f3aebc0cbef27548"]
+                    .contains(shaSum) {
                     self.syncMainQueue {
                         self.kickOffInstallation()
                     }
@@ -557,11 +562,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             case .darkMode:
                 self.installDarkModeiTunes()
                 break
-            case .appStore:
-                self.installAppStoreiTunes()
-                break
-            case .coverFlow:
-                self.installCoverFlowiTunes()
+            case .appStore, .classicTheme, .coverFlow:
+                self.installPackagediTunes()
                 break
             case .none:
                 break
@@ -626,11 +628,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         self.installiTunesCommon("Packages/Core.pkg", appLocation: "Payload/Applications/iTunes.app")
     }
     
-    func installAppStoreiTunes() {
-        self.installiTunesCommon("Install iTunes.pkg", appLocation: "iTunesX.pkg/Payload/Applications/iTunes.app")
-    }
-    
-    func installCoverFlowiTunes() {
+    func installPackagediTunes() {
         self.installiTunesCommon("Install iTunes.pkg", appLocation: "iTunesX.pkg/Payload/Applications/iTunes.app")
     }
     
@@ -664,7 +662,14 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/MacOS"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Resources"])
-            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher", "\(appPath)/Contents/MacOS/iTunes"])
+            if (AppManager.shared.choseniTunesVersion == .classicTheme) {
+                // iTunes 11.4 asserts when setting frame origin to {nan, nan}. Insert a library to fix it.
+                self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
+                self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesOriginLauncher", "\(appPath)/Contents/MacOS/iTunes"])
+                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/OriginFixer", "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"])
+            } else {
+                self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher", "\(appPath)/Contents/MacOS/iTunes"])
+            }
             self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher-Info.plist", "\(appPath)/Contents/Info.plist"])
             self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher-PkgInfo", "\(appPath)/Contents/PkgInfo"])
             self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["\(afterPackagePath)/Contents/Resources/iTunes.icns", "\(appPath)/Contents/Resources/iTunes.icns"])
@@ -675,11 +680,20 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.stage4Started()
             self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, "\(appPath)/Contents/MacOS/iTunes.app"])
             
-            // Only copy additional frameworks for iTunes 10.7. Other iTunes version will break if resigned.
+            // Copy additional frameworks for iTunes 10.7 and iTunes 11.4. Other versions of iTunes will break with additional frameworks.
             if (AppManager.shared.choseniTunesVersion == .coverFlow) {
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesLibrary.pkg/Payload/System/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
+            }
+            
+            if (AppManager.shared.choseniTunesVersion == .classicTheme) {
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreADI.pkg/Payload/System/Library/PrivateFrameworks/CoreADI.framework", "\(inAppFrameworksPath)/CoreADI.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesX.pkg/Payload/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
+                self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/AirTrafficHost.framework", "\(inAppFrameworksPath)/AirTrafficHost.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
             }
             self.runTaskAtTemp(toolPath: "/usr/bin/touch", arguments: [appPath])

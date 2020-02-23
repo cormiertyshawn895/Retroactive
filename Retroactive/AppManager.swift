@@ -19,6 +19,7 @@ enum AppType {
 enum iTunesVersion {
     case darkMode
     case appStore
+    case classicTheme
     case coverFlow
 }
 
@@ -312,6 +313,10 @@ class AppManager: NSObject {
         return configurationDictionary?["iTunes126Dive"] as? String
     }
 
+    var iTunes114Dive: String? {
+        return configurationDictionary?["iTunes114Dive"] as? String
+    }
+
     var iTunes107Dive: String? {
         return configurationDictionary?["iTunes107Dive"] as? String
     }
@@ -362,6 +367,8 @@ class AppManager: NSObject {
                     return configurationDictionary?["iTunes129URL"] as? String
                 case .appStore:
                     return configurationDictionary?["iTunes126URL"] as? String
+                case .classicTheme:
+                    return configurationDictionary?["iTunes114URL"] as? String
                 case .coverFlow:
                     return configurationDictionary?["iTunes107URL"] as? String
                 case .none:
@@ -463,6 +470,8 @@ class AppManager: NSObject {
                     return ["12.9.5"]
                 case .appStore:
                     return ["12.6.5"]
+                case .classicTheme:
+                    return ["11.4"]
                 case .coverFlow:
                     return ["10.7"]
                 case .none:
@@ -493,6 +502,8 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
+                case .classicTheme:
+                    return "11.4"
                 case .coverFlow:
                     return "10.7"
                 case .none:
@@ -540,18 +551,8 @@ class AppManager: NSObject {
             case .iphoto:
                 return "com.apple.iPhoto9"
             case .itunes:
-                switch choseniTunesVersion {
-                // These are intentionally left unused
-                case .darkMode:
-                    return "com.apple.iTunes129"
-                case .appStore:
-                    return "com.apple.iTunes126"
-                case .coverFlow:
-                    return "com.apple.iTunes10"
-                case .none:
-                    return ""
-                }
-            // These are intentionally left unused
+                // Intentionally left unused
+                return "com.apple.intentionally-left-unused"
             case .finalCutPro7:
                 return "com.apple.FinalCutPro7"
             case .logicPro9:
@@ -599,7 +600,7 @@ class AppManager: NSObject {
             case .iphoto:
                 return "ApertureFixer"
             case .itunes:
-                return ""
+                return "OriginFixer"
             case .finalCutPro7:
                 return "VideoFixer"
             case .logicPro9:
@@ -632,8 +633,10 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
+                case .classicTheme:
+                    return "11.4"
                 case .coverFlow:
-                    return "12.7"
+                    return "10.7"
                 case .none:
                     return ""
                 }
@@ -730,6 +733,8 @@ class AppManager: NSObject {
                     return iTunes129Dive
                 case .appStore:
                     return iTunes126Dive
+                case .classicTheme:
+                    return iTunes114Dive
                 case .coverFlow:
                     return iTunes107Dive
                 case .none:
@@ -807,9 +812,7 @@ class AppManager: NSObject {
                 switch choseniTunesVersion {
                 case .darkMode:
                     return "25 minutes".localized()
-                case .appStore:
-                    return "10 minutes".localized()
-                case .coverFlow:
+                case .appStore, .classicTheme, .coverFlow:
                     return "10 minutes".localized()
                 case .none:
                     return "an hour".localized()
@@ -883,6 +886,8 @@ class AppManager: NSObject {
                     return nil
                 case .appStore:
                     return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead.".localized()
+                case .classicTheme:
+                    return nil
                 case .coverFlow:
                     return nil
                 case .none:

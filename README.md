@@ -1,5 +1,21 @@
-## Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. It also lets you run Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave and macOS High Sierra. [Click to download the Retroactive app](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip), or [view the release page](https://github.com/cormiertyshawn895/Retroactive/releases).
+### Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. It also lets you run Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave and macOS High Sierra.
 
+<p align="center">
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
+<p>
+<p align="center">
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
+</p>
+
+---
+
+### 💡 iTunes and macOS Catalina 10.15.4
+
+If you have installed iTunes on macOS Catalina with Retroactive 1.4 or earlier, and have updated to macOS Catalina 10.15.4 or later, **you need to re-install iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip).** 
+
+Re-installing iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip) resolves error -42408, -45076, and 11571, so that you can continue to use Apple Music, iTunes Store, and App Store in iTunes. It also resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device.
+
+---
 
 ### Opening Retroactive
 
@@ -43,7 +59,8 @@ If you chose iTunes, Retroactive will ask you which version to install, then aut
 
 - iTunes 12.9.5 supports Dark Mode and most DJ apps.
 - iTunes 12.6.5 supports downloading and archiving iOS apps.
-- iTunes 10.7 (not recommended) supports CoverFlow.
+- iTunes 11.4 has a classic look.
+- iTunes 10.7 supports CoverFlow.
 
 If you don’t know which version to install, keep the default setting and click “Continue”.
 
@@ -85,7 +102,11 @@ After successfully modifying or installing the app, you can play with it to your
 
 - All features should work for iTunes 12.9.5.
 
-- All features should work for iTunes 12.6.5 except for backing up an iOS device. Use iTunes 12.9.5 or Finder to back up instead. Thumbnails of download apps may appear distorted.
+- All features should work for iTunes 12.6.5 except for backing up an iOS device. Use iTunes 12.9.5 or Finder to back up your device instead. Thumbnails of download apps may appear distorted.
+
+- Movies and TV Shows downloaded from the iTunes Store may be unable to play in iTunes. Download or play them in the TV app instead. 
+
+- Some dialogs in iTunes may display a crossed-out iTunes icon. This is purely cosmetic and has no functional impact.
 
 - All Final Cut Pro 7 features should work.
 
@@ -124,6 +145,6 @@ To use editing features such as timeline and preview, install macOS Mojave on a 
 ---
 
 ### Last words
-- If GateKeeper prevents you from running modified versions of your chosen app, [temporarily disable GateKeeper in Terminal with `sudo spctl --master-disable`](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/).
+- If GateKeeper prevents you from running modified versions of your chosen app, [temporarily disable GateKeeper in Terminal](http://osxdaily.com/2015/05/04/disable-gatekeeper-command-line-mac-osx/) with `sudo spctl --master-disable`.
 
 - To learn more about how Retroactive works, [take a technical deep dive](https://medium.com/@cormiertyshawn895/deep-dive-how-does-retroactive-work-95fe0e5ea49e).
