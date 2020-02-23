@@ -361,7 +361,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.8)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -373,7 +373,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 10, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 15, startingPercent: isProVideoUpdate ? 0.40 : 0.8, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
                 self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
@@ -562,7 +562,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             case .darkMode:
                 self.installDarkModeiTunes()
                 break
-            case .appStore, .classicTheme, .coverFlow:
+            case .appStore, .albumColor, .classicTheme, .coverFlow:
                 self.installPackagediTunes()
                 break
             case .none:
@@ -634,6 +634,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     func installiTunesCommon(_ pkgLocation: String, appLocation: String) {
         guard let appPath = AppManager.shared.appPathCString else { return }
+        let chosenVersion = AppManager.shared.choseniTunesVersion
 
         self.stage2Started()
         let mountName = AppManager.shared.mountDirNameOfChosenApp
@@ -662,7 +663,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/MacOS"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Resources"])
-            if (AppManager.shared.choseniTunesVersion == .classicTheme) {
+            if (chosenVersion == .classicTheme) {
                 // iTunes 11.4 asserts when setting frame origin to {nan, nan}. Insert a library to fix it.
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesOriginLauncher", "\(appPath)/Contents/MacOS/iTunes"])
@@ -681,14 +682,14 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, "\(appPath)/Contents/MacOS/iTunes.app"])
             
             // Only copy additional frameworks for iTunes 10.7. Other iTunes version will break if resigned.
-            if (AppManager.shared.choseniTunesVersion == .coverFlow) {
+            if (chosenVersion == .coverFlow) {
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesLibrary.pkg/Payload/System/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
             }
             
-            if (AppManager.shared.choseniTunesVersion == .classicTheme) {
+            if (chosenVersion == .classicTheme || chosenVersion == .albumColor) {
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreADI.pkg/Payload/System/Library/PrivateFrameworks/CoreADI.framework", "\(inAppFrameworksPath)/CoreADI.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
@@ -703,7 +704,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.showCompletionVC()
         }
         
-        if AppManager.shared.choseniTunesVersion == .darkMode {
+        if chosenVersion == .darkMode {
             print("Chosen Dark Mode iTunes")
             if #available(OSX 10.12, *) {
                 let timer = Timer.init(timeInterval: 15.0, repeats: true) { (timer) in
@@ -725,7 +726,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             }
         }
     
-        if AppManager.shared.choseniTunesVersion != .darkMode {
+        if chosenVersion != .darkMode {
             self.runTaskAtTemp(toolPath: "/usr/sbin/pkgutil", arguments: ["--expand-full", packagePath, packageExtractionPath])
             self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
             stageAfterExpansion()

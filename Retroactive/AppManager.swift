@@ -19,6 +19,7 @@ enum AppType {
 enum iTunesVersion {
     case darkMode
     case appStore
+    case albumColor
     case classicTheme
     case coverFlow
 }
@@ -313,6 +314,10 @@ class AppManager: NSObject {
         return configurationDictionary?["iTunes126Dive"] as? String
     }
 
+    var iTunes124Dive: String? {
+        return configurationDictionary?["iTunes124Dive"] as? String
+    }
+
     var iTunes114Dive: String? {
         return configurationDictionary?["iTunes114Dive"] as? String
     }
@@ -367,6 +372,8 @@ class AppManager: NSObject {
                     return configurationDictionary?["iTunes129URL"] as? String
                 case .appStore:
                     return configurationDictionary?["iTunes126URL"] as? String
+                case .albumColor:
+                    return configurationDictionary?["iTunes124URL"] as? String
                 case .classicTheme:
                     return configurationDictionary?["iTunes114URL"] as? String
                 case .coverFlow:
@@ -470,6 +477,8 @@ class AppManager: NSObject {
                     return ["12.9.5"]
                 case .appStore:
                     return ["12.6.5"]
+                case .albumColor:
+                    return ["12.4.3"]
                 case .classicTheme:
                     return ["11.4"]
                 case .coverFlow:
@@ -502,6 +511,8 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
+                case .albumColor:
+                    return "12.4.3"
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
@@ -633,6 +644,8 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
+                case .albumColor:
+                    return "12.4.3"
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
@@ -733,6 +746,8 @@ class AppManager: NSObject {
                     return iTunes129Dive
                 case .appStore:
                     return iTunes126Dive
+                case .albumColor:
+                    return iTunes124Dive
                 case .classicTheme:
                     return iTunes114Dive
                 case .coverFlow:
@@ -812,7 +827,7 @@ class AppManager: NSObject {
                 switch choseniTunesVersion {
                 case .darkMode:
                     return "25 minutes".localized()
-                case .appStore, .classicTheme, .coverFlow:
+                case .appStore, .albumColor, .classicTheme, .coverFlow:
                     return "10 minutes".localized()
                 case .none:
                     return "an hour".localized()
@@ -882,13 +897,9 @@ class AppManager: NSObject {
                 return "All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing.".localized()
             case .itunes:
                 switch choseniTunesVersion {
-                case .darkMode:
-                    return nil
                 case .appStore:
                     return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead.".localized()
-                case .classicTheme:
-                    return nil
-                case .coverFlow:
+                case .darkMode, .albumColor, .classicTheme, .coverFlow:
                     return nil
                 case .none:
                     return nil

@@ -5,9 +5,9 @@
 
 import Cocoa
 
-let itunesVersionMapping: [iTunesVersion: String] = [.darkMode: "12.9.5", .appStore: "12.6.5", .classicTheme: "11.4", .coverFlow: "10.7"]
-let itunesFeatureMapping: [iTunesVersion: String] = [.darkMode: "DJ apps and Dark Mode".localized(), .appStore: "App Store".localized(), .classicTheme: "Classic Look".localized(), .coverFlow: "CoverFlow".localized()]
-let itunesScreenshotMapping: [iTunesVersion: String] = [.darkMode: "itunes12_9", .appStore: "itunes12_6", .classicTheme: "itunes11_4", .coverFlow: "itunes_10_7"]
+let itunesVersionMapping: [iTunesVersion: String] = [.darkMode: "12.9.5", .appStore: "12.6.5", .albumColor: "12.4.3", .classicTheme: "11.4", .coverFlow: "10.7"]
+let itunesFeatureMapping: [iTunesVersion: String] = [.darkMode: "DJ apps and Dark Mode".localized(), .appStore: "App Store".localized(), .albumColor: "Colorful Album".localized(), .classicTheme: "Classic Look".localized(), .coverFlow: "CoverFlow".localized()]
+let itunesScreenshotMapping: [iTunesVersion: String] = [.darkMode: "itunes12_9", .appStore: "itunes12_6", .albumColor: "itunes_12_4", .classicTheme: "itunes11_4", .coverFlow: "itunes_10_7"]
 
 class iTunesApp: NSObject {
     var version: iTunesVersion!

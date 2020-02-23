@@ -965,7 +965,7 @@ You can use {name} now.</string>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCT-A5-WCX">
-                                            <rect key="frame" x="0.0" y="0.0" width="1182" height="334"/>
+                                            <rect key="frame" x="-19168" y="0.0" width="1517" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yha-Hy-OXT">
@@ -998,12 +998,27 @@ You can use {name} now.</string>
                                                         <action selector="appStoreClicked:" target="Jjk-tf-Q2z" id="F7T-u3-sWF"/>
                                                     </connections>
                                                 </button>
-                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Fc-OJG">
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JaE-3d-W5h">
                                                     <rect key="frame" x="594" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
-                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCh-XX-10X" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g2Y-np-4WJ" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
                                                     <rect key="frame" x="594" y="36" width="270" height="277"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="B3t-sz-sbB">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="albumColorClicked:" target="Jjk-tf-Q2z" id="CKm-9v-bnH"/>
+                                                    </connections>
+                                                </button>
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Fc-OJG">
+                                                    <rect key="frame" x="867" y="36" width="270" height="277"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </customView>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCh-XX-10X" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                                    <rect key="frame" x="867" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="MNj-XU-Idk">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1014,11 +1029,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzl-Zi-zca">
-                                                    <rect key="frame" x="866" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="1139" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-Lo-1JI" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="866" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="1139" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="qWG-va-Fsp">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1044,6 +1059,8 @@ You can use {name} now.</string>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="albumColorButton" destination="g2Y-np-4WJ" id="Nwc-9H-kli"/>
+                        <outlet property="albumColorVersionView" destination="JaE-3d-W5h" id="HDL-fG-Gjw"/>
                         <outlet property="appStoreButton" destination="eKN-s4-v7R" id="obl-bC-xMs"/>
                         <outlet property="appStoreVersionView" destination="fox-RP-Kpo" id="8M7-rO-raJ"/>
                         <outlet property="classicThemeButton" destination="VCh-XX-10X" id="Zrs-N9-UQR"/>
