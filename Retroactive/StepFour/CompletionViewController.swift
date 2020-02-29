@@ -85,7 +85,7 @@ class CompletionViewController: NSViewController {
                                 let targetiTunes = AppManager.shared.userFacingLatestShortVersionOfChosenApp
                                 if versionString.iTunesIsNewerThan(otheriTunes: targetiTunes) {
                                     print("\(versionString) > \(targetiTunes), prompting to create a new library")
-                                    promptToCreateNewLibrary(libPath, installedVersion: targetiTunes, libraryVersion: versionString)
+                                    promptToCreateNewLibrary(libPath, installedVersion: targetiTunes, libraryVersion: versionString.normalizediTunesVersionString)
                                     return
                                 }
                             }
@@ -104,9 +104,27 @@ class CompletionViewController: NSViewController {
     }
     
     func openApp() {
+        if AppManager.shared.chosenApp == .itunes && resumeOrKilliTunes() {
+            return
+        }
         if let knownLocation = AppManager.shared.locationOfChosenApp {
             NSWorkspace.shared.launchApplication(knownLocation)
         }
+    }
+    
+    func resumeOrKilliTunes() -> Bool {
+        let runningiTunesInstances = NSRunningApplication.runningApplications(withBundleIdentifier: iTunesBundleID)
+        for itunes in runningiTunesInstances {
+            if let bundleURL = itunes.bundleURL, let bundle = Bundle(url: bundleURL), let bundleVersion = bundle.cfBundleVersionString {
+                if (bundleVersion == AppManager.shared.userFacingLatestShortVersionOfChosenApp && itunes.activate(options: .activateAllWindows)) {
+                    return true
+                } else {
+                    itunes.forceTerminate()
+                    return false
+                }
+            }
+        }
+        return false
     }
     
     func promptToCreateNewLibrary(_ libraryPath: String, installedVersion: String, libraryVersion: String) {

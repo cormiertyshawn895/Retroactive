@@ -47,6 +47,8 @@ let lastHWForMojave = ["iMac19,2", "iMacPro1,1", "MacBook10,1", "MacBookAir8,2",
 
 let tempDir = "/tmp"
 
+let iTunesBundleID = "com.apple.iTunes"
+
 extension Bundle {
     var cfBundleVersionInt: Int? {
         get {
@@ -126,13 +128,19 @@ extension String {
         return false
     }
     
-    func iTunesIsNewerThan(otheriTunes: String) -> Bool {
+    var normalizediTunesVersionString: String {
         let separated = self.components(separatedBy: ".")
         var normalized = self
         if separated.count > 3 {
             normalized = separated.prefix(3).joined(separator: ".")
         }
-        return normalized.compare(otheriTunes, options: .numeric) == .orderedDescending
+        // Without stripping trailing Null characters, "11.4\0\0\0\0" will be considered "newer" than "11.4".
+        normalized = normalized.replacingOccurrences(of: "\0", with: "")
+        return normalized
+    }
+    
+    func iTunesIsNewerThan(otheriTunes: String) -> Bool {
+        return self.normalizediTunesVersionString.compare(otheriTunes, options: .numeric) == .orderedDescending
     }
 }
 
@@ -1168,7 +1176,7 @@ class AppManager: NSObject {
     }
     
     var iTunesLibraryPath: String? {
-        guard let iTunesDefaults = UserDefaults(suiteName: "com.apple.iTunes") else {
+        guard let iTunesDefaults = UserDefaults(suiteName: iTunesBundleID) else {
             return nil
         }
         if let data = iTunesDefaults.data(forKey: "alis:1:iTunes Library Location"),
