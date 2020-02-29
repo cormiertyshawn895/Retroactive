@@ -53,13 +53,14 @@
 		6008E6E32382160400A2F659 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6008E6E52382160400A2F659 /* Localizable.strings */; };
 		6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */; };
 		6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */; };
+		604F709E240B0C9300687E1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 604F709D240B0C9200687E1B /* README.md */; };
+		604F70A1240B106B00687E1B /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 604F70A0240B106B00687E1B /* SupportPath.plist */; };
 		606CA12123664BFD001C550E /* killpkg in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12023664BFC001C550E /* killpkg */; };
 		606CA12823665C04001C550E /* Credits.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12723665C04001C550E /* Credits.pdf */; };
 		606CA12A23665CBF001C550E /* Credits.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 606CA12923665CBF001C550E /* Credits.rtfd */; };
 		606CA154236666B3001C550E /* ConfettiView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 606CA150236666B3001C550E /* ConfettiView.bundle */; };
 		606CA155236666B3001C550E /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CA151236666B3001C550E /* ConfettiView.swift */; };
 		607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 607C3D812382665900FAE528 /* AudioToolbox.framework.zip */; };
-		60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32F763432364C8C000200ED7 /* SupportPath.plist */; };
 		60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 60D7289F23D5787B0006F233 /* VMFCPFixerScript */; };
 		60E4B4B6240207AC00919F36 /* iTunesLauncher-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */; };
 		60E4B4B8240207B400919F36 /* iTunesLauncher-PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */; };
@@ -105,7 +106,7 @@
 		32D181E923643108006253DE /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		32D181F1236434F3006253DE /* CCNNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCNNavigationController.h; sourceTree = "<group>"; };
 		32D181F3236434F3006253DE /* CCNNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCNNavigationController.m; sourceTree = "<group>"; };
-		32F763432364C8C000200ED7 /* SupportPath.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SupportPath.plist; sourceTree = "<group>"; };
+		32F763432364C8C000200ED7 /* SupportPathTemplate.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SupportPathTemplate.xml; sourceTree = "<group>"; };
 		32F763452364C9F800200ED7 /* insert_dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = insert_dylib; sourceTree = "<group>"; };
 		32F763492364CAD000200ED7 /* AppFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFinder.swift; sourceTree = "<group>"; };
 		32F7634B2364D0AA00200ED7 /* AuthenticateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +128,8 @@
 		6008E6E62382160C00A2F659 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Mojave32Bit.mobileconfig; sourceTree = "<group>"; };
 		6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HighSierra32Bit.mobileconfig; sourceTree = "<group>"; };
+		604F709D240B0C9200687E1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		604F70A0240B106B00687E1B /* SupportPath.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = SupportPath.plist; path = Retroactive/Support/SupportPath.plist; sourceTree = SOURCE_ROOT; };
 		606CA12023664BFC001C550E /* killpkg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = killpkg; sourceTree = "<group>"; };
 		606CA12723665C04001C550E /* Credits.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Credits.pdf; path = Retroactive/Help/Credits.pdf; sourceTree = SOURCE_ROOT; };
 		606CA12923665CBF001C550E /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
@@ -184,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				32D181BB23640CDE006253DE /* Retroactive */,
+				604F709D240B0C9200687E1B /* README.md */,
 				32D181BA23640CDE006253DE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -221,7 +225,7 @@
 				606CA12723665C04001C550E /* Credits.pdf */,
 				32F763572365018500200ED7 /* capsule.icns */,
 				60F7A06724098A9B003CD509 /* Diffs */,
-				32F763432364C8C000200ED7 /* SupportPath.plist */,
+				32F763432364C8C000200ED7 /* SupportPathTemplate.xml */,
 				6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */,
 				6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */,
 				046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */,
@@ -238,6 +242,7 @@
 				607C3D812382665900FAE528 /* AudioToolbox.framework.zip */,
 				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
 				046034E62381C18A00070C86 /* ProKit.framework.zip */,
+				604F709F240B104400687E1B /* Generated */,
 				046034E12381B41200070C86 /* KeynoteFixer */,
 				32F763552364EA2200200ED7 /* ApertureFixer */,
 				60E4B4D424022BF900919F36 /* OriginFixer */,
@@ -334,6 +339,14 @@
 			path = Localize;
 			sourceTree = "<group>";
 		};
+		604F709F240B104400687E1B /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				604F70A0240B106B00687E1B /* SupportPath.plist */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		606CA14F236666B3001C550E /* ConfettiView */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +392,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32D181C923640CDF006253DE /* Build configuration list for PBXNativeTarget "Retroactive" */;
 			buildPhases = (
+				604F709A240B039800687E1B /* Update SupportPath */,
 				32D181B523640CDE006253DE /* Sources */,
 				32D181B623640CDE006253DE /* Frameworks */,
 				32D181B723640CDE006253DE /* Resources */,
@@ -440,6 +454,7 @@
 				046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */,
 				60E4B4D524022BF900919F36 /* OriginFixer in Resources */,
 				60E4B4D724022C4600919F36 /* iTunesOriginLauncher in Resources */,
+				604F709E240B0C9300687E1B /* README.md in Resources */,
 				046034EA2381DDB300070C86 /* ProApplicationsUpdate2010-02.dist in Resources */,
 				60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */,
 				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
@@ -451,9 +466,9 @@
 				60F7A06324091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
 				6008E6E32382160400A2F659 /* Localizable.strings in Resources */,
+				604F70A1240B106B00687E1B /* SupportPath.plist in Resources */,
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
 				606CA12823665C04001C550E /* Credits.pdf in Resources */,
-				60A58ABF2366318D00FFC1A3 /* SupportPath.plist in Resources */,
 				32D181C423640CDF006253DE /* Main.storyboard in Resources */,
 				606CA12123664BFD001C550E /* killpkg in Resources */,
 				6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */,
@@ -467,6 +482,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		604F709A240B039800687E1B /* Update SupportPath */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update SupportPath";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "CONFIGURATIONS_PATH=${SRCROOT}/${PRODUCT_NAME}/Support\nTEMPLATE_PATH=\"$CONFIGURATIONS_PATH/SupportPathTemplate.xml\"\nGENERATED_PATH=\"$CONFIGURATIONS_PATH/SupportPath.plist\"\ncp \"$TEMPLATE_PATH\" \"$GENERATED_PATH\"\n\nsed -i '' \"s/\\$(VERSION)/${MARKETING_VERSION} (Build ${CURRENT_PROJECT_VERSION})/g\" $GENERATED_PATH\nsed -i '' \"s/\\$(VERSION_HANS)/${MARKETING_VERSION} (版本号 ${CURRENT_PROJECT_VERSION})/g\" $GENERATED_PATH\nsed -i '' \"s/\\$(VERSION_HANT)/${MARKETING_VERSION} (版本號 ${CURRENT_PROJECT_VERSION})/g\" $GENERATED_PATH\nsed -i '' \"s/\\$(CURRENT_PROJECT_VERSION)/${CURRENT_PROJECT_VERSION}/g\" $GENERATED_PATH\nsed -i '' \"s/\\$(MARKETING_VERSION)/${MARKETING_VERSION}/g\" $GENERATED_PATH\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		32D181B523640CDE006253DE /* Sources */ = {
@@ -662,7 +698,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -683,7 +719,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
