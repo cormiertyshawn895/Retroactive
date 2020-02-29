@@ -8,5 +8,6 @@
 
 #import "CCNNavigationController.h"
 #import "STPrivilegedTask.h"
+#import "BDAlias.h"
 
 #endif /* Bridging_Header_h */

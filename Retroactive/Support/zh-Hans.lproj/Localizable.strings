@@ -73,7 +73,7 @@
 "The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\nDownload the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed %@ (%@) at a custom location, locate it manually." = "您已安装的 %@ 是 %@ (%@)，版本太旧，因此无法解除封印。\n\n前往 Mac App Store 下载最新版本的 %@ (%@)，然后重新运行解印。\n\n如果您在自定义位置安装了 %@ (%@)，请手动寻找并选择该应用程序。";
 "There isn't enough free space to install %@" = "剩余磁盘空间不足，无法安装 %@";
 "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@." = "此版本的解印仅适用于 macOS High Sierra、macOS Mojave 和 macOS Catalina，并可能不兼容 %@。";
-"Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead." = "您可以正常安装和使用通过 iTunes 下载的应用程序，但缩略图预览可能为空。如需备份设备，请安装 iTunes 12.9.5 或直接使用访达。";
+"If iTunes 12.6.5 can't back up your device, try to use iTunes 12.9.5 or Finder instead." = "如果 iTunes 12.6.5 无法备份您的设备，请安装 iTunes 12.9.5 或直接使用访达。";
 "Try Again" = "再试一次";
 "Unable to download %@" = "无法下载 %@";
 "Unable to quit Retroactive" = "无法退出解印";
@@ -89,7 +89,7 @@
 "Working..." = "进行中...";
 "Would you like to create a new iTunes library?" = "您是否想要创建新的 iTunes 资料库？";
 "You have already unlocked %@.\nThere's usually no need to unlock it again." = "您已经成功解印 %@。\n通常情况下，无需重复解印。";
-"You have installed an older version of iTunes, which may not be compatible with your current iTunes library.\n\nWould you like to create a new iTunes library to use with iTunes %@?" = "您安装了较早版本的 iTunes，可能不兼容您现有的 iTunes 资料库。\n\n是否要创建一个新的 iTunes 资料库，从而与 %@ 配合使用？";
+"You have installed an older version of iTunes (%@), which is not compatible with your current iTunes library (%@).\n\nWould you like to create a new iTunes library to use with iTunes %@?" = "您安装了较早版本的 iTunes (%@)，不兼容您现有的 iTunes 资料库 (%@)。\n\n是否要创建一个新的 iTunes 资料库，从而与 iTunes %@ 配合使用？";
 "You need to install Final Cut Pro 7 first." = "您需要先安装 Final Cut Pro 7。";
 "You need to update %@ from %@ to %@." = "您需要将 %@ 从 %@ 更新至 %@。";
 "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.\n\nFree up some space and try again." = "您的启动磁盘只有 %d GB 可用空间。如需安装 %@, 您的启动磁盘至少需要 %d GB 的可用空间。\n\n请先释放一些空间，然后再试一次。";
@@ -118,3 +118,5 @@
 "Parallels Desktop" = " Parallels Desktop 虚拟机";
 "a virtual machine" = "虚拟机";
 "Classic Look" = "经典外观";
+"Unable to %@ %@" = "无法%@ %@";
+"Because Retroactive can't be authenticated, %@ has failed to %@ (Error %d).\n\nYou can try to %@ %@ again." = "由于解印无法验证您的身份，%@ 未能成功%@ (错误 %d)。\n\n您可以重试%@ %@。";

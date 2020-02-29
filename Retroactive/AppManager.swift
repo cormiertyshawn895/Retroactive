@@ -45,6 +45,8 @@ let kCustomSettingsPath = "/Library/Application Support/Final Cut Pro System Sup
 
 let lastHWForMojave = ["iMac19,2", "iMacPro1,1", "MacBook10,1", "MacBookAir8,2", "MacBookPro15,4", "Macmini8,1", "MacPro6,1"]
 
+let tempDir = "/tmp"
+
 extension Bundle {
     var cfBundleVersionInt: Int? {
         get {
@@ -123,11 +125,22 @@ extension String {
         }
         return false
     }
+    
+    func iTunesIsNewerThan(otheriTunes: String) -> Bool {
+        let separated = self.components(separatedBy: ".")
+        var normalized = self
+        if separated.count > 3 {
+            normalized = separated.prefix(3).joined(separator: ".")
+        }
+        return normalized.compare(otheriTunes, options: .numeric) == .orderedDescending
+    }
 }
 
 class AppManager: NSObject {
     
     static let shared = AppManager()
+    
+    var willRelaunchSoon = false
     
     private override init() {
         super.init()
@@ -885,7 +898,7 @@ class AppManager: NSObject {
                 case .darkMode:
                     return nil
                 case .appStore:
-                    return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead.".localized()
+                    return "If iTunes 12.6.5 can't back up your device, try to use iTunes 12.9.5 or Finder instead.".localized()
                 case .classicTheme:
                     return nil
                 case .coverFlow:
@@ -1152,6 +1165,73 @@ class AppManager: NSObject {
             print("can't find current screen, assuming not in virtual machine")
             return false
         }
+    }
+    
+    var iTunesLibraryPath: String? {
+        guard let iTunesDefaults = UserDefaults(suiteName: "com.apple.iTunes") else {
+            return nil
+        }
+        if let data = iTunesDefaults.data(forKey: "alis:1:iTunes Library Location"),
+            let alias = BDAlias(data: data),
+            let path = alias.fullPath() {
+            return path
+        }
+        if let bookData = iTunesDefaults.data(forKey: "book:1:iTunes Library Location") {
+            var isStale = false
+            do {
+                let url = try URL(resolvingBookmarkData: bookData, bookmarkDataIsStale: &isStale)
+                print(url)
+                return url.path
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
+
+    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true, allowError: Bool = false) -> OSStatus {
+        if (AppManager.shared.willRelaunchSoon) {
+            return errAuthorizationCanceled
+        }
+
+        let priviledgedTask = STPrivilegedTask()
+        priviledgedTask.launchPath = toolPath
+        priviledgedTask.arguments = arguments
+        priviledgedTask.currentDirectoryPath = path
+        let err: OSStatus = priviledgedTask.launch()
+        if (err != errAuthorizationSuccess) {
+            if (err == errAuthorizationCanceled) {
+                print("User cancelled")
+            } else {
+                print("Something went wrong with authorization: %d", err)
+                // For error codes, see http://www.opensource.apple.com/source/libsecurity_authorization/libsecurity_authorization-36329/lib/Authorization.h
+            }
+            if (!allowError) {
+                AppManager.relaunchDueToAuthenticationFailure(failure: err)
+                return err
+            }
+        }
+        if wait == true {
+            priviledgedTask.waitUntilExit()
+        }
+        let readHandle = priviledgedTask.outputFileHandle
+        if let outputData = readHandle?.readDataToEndOfFile(), let outputString = String(data: outputData, encoding: .utf8) {
+            print("Output string is \(outputString), terminationStatus is \(priviledgedTask.terminationStatus)")
+        }
+        return err
+    }
+    
+    static func relaunchDueToAuthenticationFailure(failure: OSStatus) {
+        let appName = AppManager.shared.nameOfChosenApp
+        let presentTense = AppManager.shared.presentTenseActionOfChosenApp
+        UserDefaults.standard.setValue(String(format: "Unable to %@ %@".localized(), presentTense, appName), forKey: kErrorRecoveryTitle)
+        UserDefaults.standard.setValue(String(format: "Because Retroactive can't be authenticated, %@ has failed to %@ (Error %d).\n\nYou can try to %@ %@ again.".localized(), appName, presentTense, failure, presentTense, appName), forKey: kErrorRecoveryText)
+
+        NSApplication.shared.relaunch()
+    }
+
+    static func runUnameToPreAuthenticate() -> OSStatus {
+        return AppManager.runTask(toolPath: "/usr/bin/uname", arguments: ["-a"], path: tempDir, wait: true, allowError: true)
     }
 
 }

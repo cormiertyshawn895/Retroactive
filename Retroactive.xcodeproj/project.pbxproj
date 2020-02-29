@@ -66,6 +66,8 @@
 		60E4B4BA240207C100919F36 /* iTunesLauncher in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B9240207C100919F36 /* iTunesLauncher */; };
 		60E4B4D524022BF900919F36 /* OriginFixer in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4D424022BF900919F36 /* OriginFixer */; };
 		60E4B4D724022C4600919F36 /* iTunesOriginLauncher in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4D624022C4600919F36 /* iTunesOriginLauncher */; };
+		60E5EBAE240A5FA1000669FD /* BDAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E5EBAD240A5FA1000669FD /* BDAlias.m */; };
+		60F7A06324091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin in Resources */ = {isa = PBXBuildFile; fileRef = 60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +143,10 @@
 		60E4B4B9240207C100919F36 /* iTunesLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesLauncher; sourceTree = "<group>"; };
 		60E4B4D424022BF900919F36 /* OriginFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OriginFixer; sourceTree = "<group>"; };
 		60E4B4D624022C4600919F36 /* iTunesOriginLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesOriginLauncher; sourceTree = "<group>"; };
+		60E5EBAC240A5FA1000669FD /* BDAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAlias.h; sourceTree = "<group>"; };
+		60E5EBAD240A5FA1000669FD /* BDAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAlias.m; sourceTree = "<group>"; };
+		60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = iTunes12_6_5_Assets_Diff.bin; sourceTree = "<group>"; };
+		60F7A06824098AB0003CD509 /* How.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = How.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +220,7 @@
 				606CA12923665CBF001C550E /* Credits.rtfd */,
 				606CA12723665C04001C550E /* Credits.pdf */,
 				32F763572365018500200ED7 /* capsule.icns */,
+				60F7A06724098A9B003CD509 /* Diffs */,
 				32F763432364C8C000200ED7 /* SupportPath.plist */,
 				6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */,
 				6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */,
@@ -249,6 +256,7 @@
 		32D181EE236434E3006253DE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6083860B240A48E000AE2213 /* BDAlias */,
 				6008E6D52382140C00A2F659 /* Localize */,
 				606CA14F236666B3001C550E /* ConfettiView */,
 				32F7634F2364DBAA00200ED7 /* STPrivilegedTask */,
@@ -335,6 +343,15 @@
 			path = ConfettiView;
 			sourceTree = "<group>";
 		};
+		6083860B240A48E000AE2213 /* BDAlias */ = {
+			isa = PBXGroup;
+			children = (
+				60E5EBAC240A5FA1000669FD /* BDAlias.h */,
+				60E5EBAD240A5FA1000669FD /* BDAlias.m */,
+			);
+			path = BDAlias;
+			sourceTree = "<group>";
+		};
 		60E4B4B42402079B00919F36 /* iTunesLauncher */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +361,15 @@
 				60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */,
 			);
 			path = iTunesLauncher;
+			sourceTree = "<group>";
+		};
+		60F7A06724098A9B003CD509 /* Diffs */ = {
+			isa = PBXGroup;
+			children = (
+				60F7A06824098AB0003CD509 /* How.txt */,
+				60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */,
+			);
+			path = Diffs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,6 +448,7 @@
 				607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				046034E42381B6E800070C86 /* KeynoteScript in Resources */,
+				60F7A06324091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin in Resources */,
 				32F763DD23657A8D00200ED7 /* install_name_tool_packed in Resources */,
 				6008E6E32382160400A2F659 /* Localizable.strings in Resources */,
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
@@ -462,6 +489,7 @@
 				32D181DF23642229006253DE /* VersionChoiceViewController.swift in Sources */,
 				606CA155236666B3001C550E /* ConfettiView.swift in Sources */,
 				32D181F423643519006253DE /* CCNNavigationController.m in Sources */,
+				60E5EBAE240A5FA1000669FD /* BDAlias.m in Sources */,
 				32D181DD23642213006253DE /* VersionViewController.swift in Sources */,
 				321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */,
 				6008E6DC2382140C00A2F659 /* String+LocalizeTableName.swift in Sources */,
@@ -634,7 +662,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 31;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -655,7 +683,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 31;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

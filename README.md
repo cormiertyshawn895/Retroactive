@@ -13,7 +13,7 @@
 
 If you have installed iTunes on macOS Catalina with Retroactive 1.4 or earlier, and have updated to macOS Catalina 10.15.4 or later, **you need to re-install iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip).** 
 
-Re-installing iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip) resolves error -42408, -45076, and 11571, so that you can continue to use Apple Music, iTunes Store, and App Store in iTunes. It also resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device.
+Re-installing iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip) resolves error -42408, -45076, and 11571, so that you can continue to use Apple Music, iTunes Store, and App Store in iTunes. It also resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device, and allows downloaded app icons to display correctly.
 
 ---
 
@@ -102,7 +102,7 @@ After successfully modifying or installing the app, you can play with it to your
 
 - All features should work for iTunes 12.9.5.
 
-- All features should work for iTunes 12.6.5 except for backing up an iOS device. Use iTunes 12.9.5 or Finder to back up your device instead. Thumbnails of download apps may appear distorted.
+- All features should work for iTunes 12.6.5 except for backing up an iOS device. Use iTunes 12.9.5 or Finder to back up your device instead.
 
 - Movies and TV Shows downloaded from the iTunes Store may be unable to play in iTunes. Download or play them in the TV app instead. 
 

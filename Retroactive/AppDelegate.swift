@@ -5,12 +5,31 @@
 
 import Cocoa
 
+let kErrorRecoveryTitle = "ErrorRecoveryTitle"
+let kErrorRecoveryText = "ErrorRecoveryText"
+
 @NSApplicationMain
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _ = AppManager.shared
+        showRecoveryTitleIfNeeded()
+    }
+
+    func showRecoveryTitleIfNeeded() {
+        if let recoveryTitle = UserDefaults.standard.string(forKey: kErrorRecoveryTitle),
+            let recoveryText = UserDefaults.standard.string(forKey: kErrorRecoveryText) {
+            if (recoveryTitle.count > 0 && recoveryText.count > 0) {
+                UserDefaults.standard.setValue(nil, forKey: kErrorRecoveryTitle)
+                UserDefaults.standard.setValue(nil, forKey: kErrorRecoveryText)
+
+                AppDelegate.showOptionSheet(title: recoveryTitle,
+                                            text: recoveryText,
+                                            firstButtonText: "OK".localized(), secondButtonText: "", thirdButtonText: "") { (response) in
+                }
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -124,6 +143,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return true
         }
         
+        if AppManager.shared.willRelaunchSoon {
+            return true
+        }
+        
         let name = AppManager.shared.nameOfChosenApp
         
         let showUnableToClose = {
@@ -220,3 +243,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+extension NSApplication {
+    func relaunch() {
+        self.syncMainQueue {
+            AppManager.shared.willRelaunchSoon = true
+            let path = Bundle.main.bundlePath
+            print("Re-launching \(path)")
+            _ = Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [path])
+            NSApp.terminate(self)
+        }
+    }
+}

@@ -27,7 +27,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     var dataTask: URLSessionDataTask?
     var isDownloadMode = false
     var isProVideoUpdate = false
-    let tempDir = "/tmp"
     
     var expectedContentLength = 0
     var fileHandle: FileHandle?
@@ -85,9 +84,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         STPrivilegedTask.preventSleep()
         
-        let authenticateStatus = STPrivilegedTask.preAuthenticate()
-        if (authenticateStatus != errAuthorizationSuccess) {
-            return
+        let authStatus = AppManager.runUnameToPreAuthenticate()
+        if (authStatus != errAuthorizationSuccess) {
+            AppManager.relaunchDueToAuthenticationFailure(failure: authStatus)
         }
         
         if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
@@ -397,28 +396,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         ProgressViewController.runTask(toolPath: toolPath, arguments: arguments, path: tempDir)
     }
 
-    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true) {
-        let priviledgedTask = STPrivilegedTask()
-        priviledgedTask.launchPath = toolPath
-        priviledgedTask.arguments = arguments
-        priviledgedTask.currentDirectoryPath = path
-        let err: OSStatus = priviledgedTask.launch()
-        if (err != errAuthorizationSuccess) {
-            if (err == errAuthorizationCanceled) {
-                print("User cancelled")
-                return
-            } else {
-                print("Something went wrong with authorization: %d", err)
-                // For error codes, see http://www.opensource.apple.com/source/libsecurity_authorization/libsecurity_authorization-36329/lib/Authorization.h
-            }
-        }
-        if wait == true {
-            priviledgedTask.waitUntilExit()
-        }
-        let readHandle = priviledgedTask.outputFileHandle
-        if let outputData = readHandle?.readDataToEndOfFile(), let outputString = String(data: outputData, encoding: .utf8) {
-            print("Output string is \(outputString), terminationStatus is \(priviledgedTask.terminationStatus)")
-        }
+    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true, allowError: Bool = false) {
+        _ = AppManager.runTask(toolPath: toolPath, arguments: arguments, path: path, wait: wait)
     }
     
     
@@ -465,6 +444,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: dmgPath))
                 print("shasum is \(shaSum) for \(dmgPath)")
                 // Pro App 2010-02, 12.9.5, 12.6.5, 11.4, 10.7
+                // shasum -a 256 [file name]
                 if ["2c50f7d57d92bd783773c188de8952e2a75b81a8d886a15890d7e0164cabbb43",
                     "defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7",
                     "7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0",
@@ -695,6 +675,34 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesX.pkg/Payload/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/AirTrafficHost.framework", "\(inAppFrameworksPath)/AirTrafficHost.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
+            }
+            
+            // iTunes 12.6.5 needs inverted icon masking.
+            if (AppManager.shared.choseniTunesVersion == .appStore) {
+                if let appLocation = AppManager.shared.locationOfChosenApp {
+                    let innerAssetRegularPath = "\(appLocation)/Contents/MacOS/iTunes.app/Contents/Resources/Assets.car"
+                    let innerAssetCatalogCPath = innerAssetRegularPath.fileSystemString
+                    let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: innerAssetRegularPath))
+                    let expected = "39b9cbc589ee26b34850c1956c6a1eb367310c9d1a8d22606084c532d06ab895"
+                    if shaSum == expected {
+                        print("SHA 256 checksum matches stock iTunes 12.6.5 Assets.car")
+                        self.runTaskAtTemp(toolPath: "/usr/bin/bspatch", arguments: [innerAssetCatalogCPath, innerAssetCatalogCPath, "\(resourcePath)/iTunes12_6_5_Assets_Diff.bin"])
+                    } else {
+                        print("SHA 256 checksum mismatch. Expected: \(expected), actual: \(shaSum)")
+                    }
+                }
+                
+                // Clear artwork cache
+                if let path = AppManager.shared.iTunesLibraryPath {
+                    let artworkCachePath = path.stringByAppendingPathComponent(path: "Album Artwork").stringByAppendingPathComponent(path: "Cache")
+                    do {
+                        print("Found artwork cache path \(artworkCachePath)")
+                        try FileManager.default.removeItem(atPath: artworkCachePath)
+                        print("Deleted artwork cache")
+                    } catch {
+                        print("Can't remove album artwork cache, \(error)")
+                    }
+                }
             }
             self.runTaskAtTemp(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])

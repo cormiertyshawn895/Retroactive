@@ -1,0 +1,9 @@
+Why are these files not compiled into OriginFixer?
+
+On macOS Catalina, hardened runtime is enabled for iTunes 12.6.5. Without disabling SIP and Library Validation, inserting ad-hoc signed libraries like this one will fail. This was written as an experiment, and is only left in the codebase for future reference.
+
+The real SIP-compatible fix is to replace Assets.car (or iTunes.rsrc) with modified assets, which Retroactive deploys instead. The main Retroactive installer also clears album art cache.
+
+If you really want to compile this in and use this for iTunes 12.6.5, disable SIP and Library Validation on your Mac.
+csrutil disable (in recovery)
+defaults write /Library/Preferences/com.apple.security.libraryvalidation DisableLibraryValidation -bool true

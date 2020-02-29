@@ -44,8 +44,7 @@ class AuthenticateViewController: NSViewController {
     }
     
     @IBAction func authenticateClicked(_ sender: Any) {
-        let authenticateStatus = STPrivilegedTask.preAuthenticate()
-        if (authenticateStatus == errAuthorizationSuccess) {
+        if (AppManager.runUnameToPreAuthenticate() == errAuthorizationSuccess) {
             self.navigationController.pushViewController(ProgressViewController.instantiate(), animated: true)
         }
     }

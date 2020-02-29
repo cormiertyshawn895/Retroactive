@@ -1,0 +1,8 @@
+How are these bin diffs generated?
+
+iTunes12_6_5_Assets_Diff.bin
+- On a Mac running macOS 10.12, open iTunes 12.6.5's Assets.car in ThemeEngine.
+- Export DeviceAppMask and DeviceAppMask@2x into PNG files.
+- Open these PNG files in Photoshop, then invert them.
+- Drag the inverted PNG files back into ThemeEngine, and save the car file.
+- bsdiff Assets.car AssetsNew.car iTunes12_6_5_Assets_Diff.bin

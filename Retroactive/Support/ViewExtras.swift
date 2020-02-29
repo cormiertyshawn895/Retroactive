@@ -135,6 +135,11 @@ extension String {
         let swiftString = String(cString: cStr)
         return swiftString
     }
+    
+    func stringByAppendingPathComponent(path: String) -> String {
+        let nsSt = self as NSString
+        return nsSt.appendingPathComponent(path)
+    }
 }
 
 extension NSTextField {

@@ -13,11 +13,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		608F108E2408FC8A00BD7261 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		608F10B12408FEAC00BD7261 /* NSImage+Fixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Fixer.h"; sourceTree = "<group>"; };
+		608F10B22408FEAC00BD7261 /* NSImage+Fixer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Fixer.m"; sourceTree = "<group>"; };
 		60E4B4C524022A8B00919F36 /* OriginFixer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OriginFixer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60E4B4C824022A8C00919F36 /* OriginFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OriginFixer.h; sourceTree = "<group>"; };
 		60E4B4C924022A8C00919F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60E4B4D024022A9600919F36 /* NSView+Fixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Fixer.h"; sourceTree = "<group>"; };
 		60E4B4D124022A9600919F36 /* NSView+Fixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Fixer.m"; sourceTree = "<group>"; };
+		60E5EBAF240A5FB0000669FD /* BDAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BDAlias.h; path = ../../../../Libraries/BDAlias/BDAlias.h; sourceTree = "<group>"; };
+		60E5EBB0240A5FB0000669FD /* BDAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BDAlias.m; path = ../../../../Libraries/BDAlias/BDAlias.m; sourceTree = "<group>"; };
+		60F7A06524098939003CD509 /* Why.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Why.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +59,23 @@
 				60E4B4C824022A8C00919F36 /* OriginFixer.h */,
 				60E4B4D024022A9600919F36 /* NSView+Fixer.h */,
 				60E4B4D124022A9600919F36 /* NSView+Fixer.m */,
+				60F7A06424098899003CD509 /* Not Used */,
 				60E4B4C924022A8C00919F36 /* Info.plist */,
 			);
 			path = OriginFixer;
+			sourceTree = "<group>";
+		};
+		60F7A06424098899003CD509 /* Not Used */ = {
+			isa = PBXGroup;
+			children = (
+				60F7A06524098939003CD509 /* Why.txt */,
+				608F10B12408FEAC00BD7261 /* NSImage+Fixer.h */,
+				608F10B22408FEAC00BD7261 /* NSImage+Fixer.m */,
+				60E5EBAF240A5FB0000669FD /* BDAlias.h */,
+				60E5EBB0240A5FB0000669FD /* BDAlias.m */,
+				608F108E2408FC8A00BD7261 /* Assets.xcassets */,
+			);
+			path = "Not Used";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
