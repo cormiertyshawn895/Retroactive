@@ -116,6 +116,34 @@ After successfully modifying or installing the app, you can play with it to your
 
 ---
 
+### Syncing with a device
+
+If you connect an Apple device to your Mac, and either see nothing in iTunes, or "The device is in use by another user on this computer":
+
+- Disconnect the device from your Mac, but keep iTunes open.
+- Click on the Spotlight icon (magnifying glass) on the menu bar.
+- Type "Terminal" and press return to open the Terminal app.
+- Enter `killall AMPDevicesAgent` in the Terminal window, and press return.
+- Connect the Apple device back to your Mac.
+
+If you connect an iPhone, iPad, or iPod touch to your Mac, and see "iTunes cannot read the contents of the device. Go to the Summary tab in device preferences and click Restore to restore this device to factory settings":
+
+- You may have installed iTunes with Retroactive 1.4 or earlier.
+- Once you reinstall iTunes [using the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/), iTunes should be able to read the contents of your device as expected.
+
+If you connect an iPod nano, iPod shuffle, iPod classic, or iPod mini to your Mac, and see "iTunes cannot read the contents of the iPod. Go to the Summary tab in iPod preferences and click Restore to restore this iPod to factory settings":
+
+- If you have installed iTunes with Retroactive 1.4 or earlier, reinstall iTunes [using the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/).
+- Open Finder, click "Go" -> "Go to Folder...", enter "/bin" and click "Go".
+- Locate the "bash" icon.
+- Open System Preferences -> "Security & Privacy" -> "Privacy".
+- Scroll down the list and locate "Full Disk Access".
+- If the list is locked, click on the padlock ("Click the lock to make changes").
+- Drag the "bash" icon from Finder into the "Full Disk Access" list, and make sure it's checked.
+- Quit and re-open iTunes.
+
+---
+
 ### Reprocessing RAW photos in Aperture
 
 - In Aperture, if your RAW photos show up as “*Unsupported Image Format*”, open the “*Photos*” menu, click on “*Reprocess original…*”, and reprocess all photos. After reprocessing your RAW photos, you will be able to preview and adjust them as before.
