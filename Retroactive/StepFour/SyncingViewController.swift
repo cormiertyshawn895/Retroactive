@@ -147,7 +147,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
         
         let screen = NSScreen.screens.first!
         let yPositionInScreenSpace = screen.frame.size.height - lastOrigin.y - lastWidthHeight.height
-        if (lastWidthHeight.similarToSize(CGSize(width: 668, height: 573), maxDeltaX: 80, maxDeltaY: 5)) {
+        if (lastWidthHeight.similarToSize(CGSize(width: 668, height: 573), maxDeltaX: 180, maxDeltaY: 5)) {
             // Security preferences window is around 668x573
             if (shouldShowDragBashView) {
                 padlockWindow.orderOut(self)

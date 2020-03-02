@@ -141,6 +141,12 @@ If you connect an Apple device to your Mac, and see "iTunes cannot read the cont
 - Once you reinstall iTunes [using the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/), iTunes should be able to read the contents of your device as expected.
 - At the end of the installation process, Retroactive will ask you about iPod syncing. If you need to sync with iPod devices, click "Enable Full Disk Access".
 
+If you try to enable VoiceOver for iPod shuffle, but see "iTunes was unable to install the VoiceOver Kit. An unknown error occurred (1701)":
+
+- [Directly download the VoiceOver 1.4.2 installer here](https://swdist.apple.com/content/downloads/29/37/041-91732-A_LSWLP6NLRV/bk8l36k29x8d146doiwcvuv8qemu3mzxwk/VoiceOver.pkg).
+- Install the downloaded VoiceOver.pkg.
+- Quit and re-open iTunes.
+
 ---
 
 ### Reprocessing RAW photos in Aperture
