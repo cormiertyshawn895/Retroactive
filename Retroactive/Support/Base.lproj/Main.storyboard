@@ -192,7 +192,7 @@
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="RetroactiveWindowController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Retroactive" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="RetroactiveWindow" customModule="Retroactive" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1011" height="625"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="1011" height="625"/>
@@ -961,19 +961,19 @@ You can use {name} now.</string>
                                 <rect key="frame" x="0.0" y="99" width="1011" height="334"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="HEd-dy-8VD">
-                                    <rect key="frame" x="0.0" y="0.0" width="1011" height="334"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1011" height="319"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCT-A5-WCX">
-                                            <rect key="frame" x="0.0" y="0.0" width="1182" height="334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1182" height="319"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yha-Hy-OXT">
-                                                    <rect key="frame" x="50" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="50" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLM-mg-Kxg" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="50" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="zSq-cT-uR4">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -984,11 +984,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fox-RP-Kpo">
-                                                    <rect key="frame" x="322" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="322" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKN-s4-v7R" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="322" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="322" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Vg8-Mw-L2F">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -999,11 +999,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Fc-OJG">
-                                                    <rect key="frame" x="594" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="594" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCh-XX-10X" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="594" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="594" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="MNj-XU-Idk">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1014,11 +1014,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzl-Zi-zca">
-                                                    <rect key="frame" x="866" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="866" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-Lo-1JI" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="866" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="866" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="qWG-va-Fsp">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1033,7 +1033,7 @@ You can use {name} now.</string>
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="dtB-tc-ged">
-                                    <rect key="frame" x="0.0" y="318" width="1011" height="16"/>
+                                    <rect key="frame" x="0.0" y="319" width="1011" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fpk-Gf-tcu">
@@ -1110,6 +1110,125 @@ You can use {name} now.</string>
                 <customObject id="lr2-Jp-WAU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1868" y="2767.5"/>
+        </scene>
+        <!--UpArrowViewController-->
+        <scene sceneID="PM3-ku-XHo">
+            <objects>
+                <viewController title="UpArrowViewController" storyboardIdentifier="UpArrowViewController" id="SXu-2f-gS7" customClass="UpArrowViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="oeF-MP-Pbf">
+                        <rect key="frame" x="0.0" y="0.0" width="223" height="202"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCa-3S-wwH">
+                                <rect key="frame" x="103" y="100" width="15" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-dotted-up" id="TUG-9N-pcX"/>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </imageView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lY1-89-FH7" customClass="DragFileView" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="40" y="35" width="142" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="24" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ry6-3k-UD5">
+                                        <rect key="frame" x="0.0" y="0.0" width="142" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" ambiguous="YES" id="pS2-TW-kMe">
+                                            <rect key="frame" x="0.0" y="0.0" width="142" height="68"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wWD-Ri-MEs">
+                                                    <rect key="frame" x="-2" y="30" width="146" height="26"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Drag me" id="MJo-JF-HJA">
+                                                        <font key="font" metaFont="systemBold" size="22"/>
+                                                        <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vdJ-DH-oAm">
+                                                    <rect key="frame" x="-2" y="13" width="146" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="into the list." id="gOZ-6u-ZX2">
+                                                        <font key="font" metaFont="systemBold" size="14"/>
+                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                        </view>
+                                        <color key="fillColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </box>
+                                </subviews>
+                            </customView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="arrowImageView" destination="UCa-3S-wwH" id="TvV-3w-v9I"/>
+                        <outlet property="boxContainer" destination="ry6-3k-UD5" id="J0r-gR-mwN"/>
+                        <outlet property="draggingView" destination="lY1-89-FH7" id="60e-1q-Ngn"/>
+                    </connections>
+                </viewController>
+                <customObject id="8ej-aR-u1K" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1832.5" y="3080"/>
+        </scene>
+        <!--PadlockViewController-->
+        <scene sceneID="lOc-Yx-BoF">
+            <objects>
+                <viewController title="PadlockViewController" storyboardIdentifier="PadlockViewController" id="3VQ-Ob-Q7z" customClass="PadlockViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="eVe-Lv-age">
+                        <rect key="frame" x="0.0" y="0.0" width="454" height="156"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="11" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="iab-3i-nOc">
+                                <rect key="frame" x="43" y="30" width="381" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" ambiguous="YES" id="m1f-ZM-u1F">
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="67"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="0.21503631161971831" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="fillColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6YQ-H2-JOD">
+                                <rect key="frame" x="62" y="53" width="358" height="31"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Click on this padlock to unlock it." id="JcO-qZ-49G">
+                                    <font key="font" metaFont="systemSemibold" size="21"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hEZ-yu-o84" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="62" y="37" width="338" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="I've already unlocked it. What's next?" bezelStyle="regularSquare" alignment="left" imageScaling="proportionallyDown" inset="2" id="g8b-Kt-31M">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="controlContent"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="alreadyUnlockedClicked:" target="3VQ-Ob-Q7z" id="5FO-Rb-FRx"/>
+                                </connections>
+                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PIh-Ip-I9U">
+                                <rect key="frame" x="225" y="88" width="16" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-up" id="Nay-ec-0k8"/>
+                                <color key="contentTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="alreadyUnlockedButton" destination="hEZ-yu-o84" id="X0r-LQ-PCg"/>
+                        <outlet property="arrowImageView" destination="PIh-Ip-I9U" id="aQv-u6-hYh"/>
+                        <outlet property="boxView" destination="iab-3i-nOc" id="73S-lv-fAM"/>
+                        <outlet property="clickToUnlockLabel" destination="6YQ-H2-JOD" id="rYH-mx-gb4"/>
+                    </connections>
+                </viewController>
+                <customObject id="DOY-sb-QRW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1993" y="3336"/>
         </scene>
         <!--Authenticate View Controller-->
         <scene sceneID="M1L-ou-4uT">
@@ -1253,14 +1372,118 @@ You can use {name} now.</string>
             </objects>
             <point key="canvasLocation" x="-970.5" y="2593.5"/>
         </scene>
+        <!--Syncing View Controller-->
+        <scene sceneID="yEr-wf-JU3">
+            <objects>
+                <viewController storyboardIdentifier="SyncingViewController" id="nwa-hu-Yz1" customClass="SyncingViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="wec-oJ-JEe">
+                        <rect key="frame" x="0.0" y="0.0" width="1011" height="625"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E9g-hh-1pd">
+                                <rect key="frame" x="81" y="427" width="129" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="itunes_cartoon" id="par-QH-L7a"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHV-f2-S8u" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="209" y="472" width="702" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" title="One more thing." id="e6f-N2-Gk9">
+                                    <font key="font" metaFont="systemBold" size="38"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yUJ-sk-092" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="210" y="453" width="702" height="33"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" title="Enable Full Disk Access so that you can sync with iPod devices." id="7Qr-EP-RjY">
+                                    <font key="font" metaFont="system" size="23"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ysG-um-Pgw" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="363" y="46" width="310" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="I don't need to sync with iPod" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="yqS-YC-eqW">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="15"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="skipSyncingClicked:" target="nwa-hu-Yz1" id="UVn-5x-EBq"/>
+                                </connections>
+                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1wC-aT-i0G">
+                                <rect key="frame" x="156" y="179" width="260" height="230"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ipod_family" id="DgV-Gj-j4o"/>
+                            </imageView>
+                            <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BrO-en-6WP">
+                                <rect key="frame" x="457" y="175" width="454" height="260"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="454" id="5BB-dF-cEX"/>
+                                    <constraint firstAttribute="height" constant="260" id="PAr-8v-wau"/>
+                                </constraints>
+                            </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcC-zE-R8t" customClass="ClippingShadowView" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="366" y="80" width="307" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6m-i3-9GG" customClass="AccentGradientButton" customModule="Retroactive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="307" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" inset="2" id="B3L-yt-tAG">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="enableFullDiskAccessClicked:" target="nwa-hu-Yz1" id="m63-QA-9bd"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgI-Uc-hhO" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
+                                        <rect key="frame" x="9" y="12" width="289" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" alignment="center" title="Enable Full Disk Access" id="iwB-jM-Szz">
+                                            <font key="font" metaFont="systemSemibold" size="18"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="BrO-en-6WP" firstAttribute="top" secondItem="wec-oJ-JEe" secondAttribute="top" constant="190" id="I5S-rI-bmR"/>
+                            <constraint firstAttribute="trailing" secondItem="BrO-en-6WP" secondAttribute="trailing" constant="100" id="fsg-te-b6P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="accordionView" destination="BrO-en-6WP" id="yXT-oC-7K6"/>
+                        <outlet property="fullDiskAccessButton" destination="o6m-i3-9GG" id="Ofa-z7-0K0"/>
+                        <outlet property="fullDiskAccessButtonLabel" destination="tgI-Uc-hhO" id="qrr-y9-jtg"/>
+                    </connections>
+                </viewController>
+                <customObject id="2EB-qm-SCu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customView id="4sP-NC-B6n">
+                    <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
+            </objects>
+            <point key="canvasLocation" x="1139.5" y="3291.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="NSCaution" width="32" height="32"/>
         <image name="airdrop_guide_aperture" width="381" height="146.5"/>
         <image name="aperture_cartoon" width="254.5" height="254.5"/>
         <image name="appstore_guide_aperture" width="402.5" height="308.5"/>
+        <image name="arrow-dotted-up" width="13" height="100.5"/>
+        <image name="arrow-up" width="13" height="59"/>
         <image name="back" width="51" height="51"/>
         <image name="iphoto_cartoon" width="254.5" height="254.5"/>
+        <image name="ipod_family" width="261" height="231.5"/>
         <image name="itunes12_9" width="281" height="195.5"/>
         <image name="itunes_cartoon" width="252" height="252"/>
         <image name="mojave-banner" width="882" height="70"/>

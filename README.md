@@ -82,11 +82,20 @@ Retroactive will install or modify the app you chose. Modifying the app should o
 
 ![](screenshots/7.jpg)
 
-If you chose to install iTunes, this process takes longer. Depending on the version you chose, it can take between 10 minutes to an hour. It is completely normal for the fans to spin up during the process.
+If you chose to install iTunes, this process may longer. 
 
-If Retroactive asks for your login password again, enter it again. Otherwise, the iTunes installation may be damaged or incomplete. If iTunes 12.9.5 can’t be installed, try to install iTunes 12.6.5.
+- Depending on the version you chose, it can take between 10 minutes to an hour.
+- It is completely normal for the fans to spin up during the process.
+- If Retroactive asks for your login password again, re-enter it again.
+- If iTunes 12.9.5 can’t be installed, try to install iTunes 12.6.5.
+
+![](screenshots/7a.jpg)
+
+After installing iTunes, Retroactive will ask you about iPod syncing. If you need to sync with iPod devices, click "Enable Full Disk Access", and follow on-screen instructions provided by Retroactive.
 
 ![](screenshots/8.jpg)
+
+That's it! You can use the app now.
 
 ---
 
@@ -126,21 +135,11 @@ If you connect an Apple device to your Mac, and either see nothing in iTunes, or
 - Enter `killall AMPDevicesAgent` in the Terminal window, and press return.
 - Connect the Apple device back to your Mac.
 
-If you connect an iPhone, iPad, or iPod touch to your Mac, and see "iTunes cannot read the contents of the device. Go to the Summary tab in device preferences and click Restore to restore this device to factory settings":
+If you connect an Apple device to your Mac, and see "iTunes cannot read the contents of the device. Go to the Summary tab in device preferences and click Restore to restore this device to factory settings":
 
 - You may have installed iTunes with Retroactive 1.4 or earlier.
 - Once you reinstall iTunes [using the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/), iTunes should be able to read the contents of your device as expected.
-
-If you connect an iPod nano, iPod shuffle, iPod classic, or iPod mini to your Mac, and see "iTunes cannot read the contents of the iPod. Go to the Summary tab in iPod preferences and click Restore to restore this iPod to factory settings":
-
-- If you have installed iTunes with Retroactive 1.4 or earlier, reinstall iTunes [using the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/).
-- Open Finder, click "Go" -> "Go to Folder...", enter "/bin" and click "Go".
-- Locate the "bash" icon.
-- Open System Preferences -> "Security & Privacy" -> "Privacy".
-- Scroll down the list and locate "Full Disk Access".
-- If the list is locked, click on the padlock ("Click the lock to make changes").
-- Drag the "bash" icon from Finder into the "Full Disk Access" list, and make sure it's checked.
-- Quit and re-open iTunes.
+- At the end of the installation process, Retroactive will ask you about iPod syncing. If you need to sync with iPod devices, click "Enable Full Disk Access".
 
 ---
 

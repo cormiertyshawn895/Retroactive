@@ -231,11 +231,12 @@ class AppFinder: NSObject {
     }
     
     private func pushCompletionVC() {
-        let completionVC = CompletionViewController.instantiate()
-        if (self.comingFromChoiceVC) {
-            completionVC.allowPatchingAgain = true
+        AppManager.shared.allowPatchingAgain = self.comingFromChoiceVC
+        if (AppManager.shared.needsBashAccess) {
+            AppDelegate.pushSyncingVC()
+            return
         }
-        AppDelegate.rootVC?.navigationController.pushViewController(completionVC, animated: true)
+        AppDelegate.pushCompletionVC()
     }
     
     private func pushAuthenticateVC() {

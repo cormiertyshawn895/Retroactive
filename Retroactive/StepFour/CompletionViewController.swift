@@ -16,7 +16,6 @@ class CompletionViewController: NSViewController {
     @IBOutlet weak var dividerLine: NSBox!
         
     var confettiView: ConfettiView?
-    var allowPatchingAgain: Bool = false
     
     static func instantiate() -> CompletionViewController
     {
@@ -25,7 +24,7 @@ class CompletionViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (allowPatchingAgain == true) {
+        if (AppManager.shared.allowPatchingAgain == true) {
             behindTheScenesButton.title = NSLocalizedString("Unlock {name} again".localized(), comment: "")
             congratulatoryLabel.stringValue = String(format: "You have already unlocked %@.\nThere's usually no need to unlock it again.".localized(), placeholderToken)
         } else if (AppManager.shared.behindTheScenesOfChosenApp == nil) {
@@ -96,7 +95,7 @@ class CompletionViewController: NSViewController {
                 }
             }
         }
-        if (allowPatchingAgain == true) {
+        if (AppManager.shared.allowPatchingAgain == true) {
             openApp()
             return
         }
@@ -147,7 +146,7 @@ class CompletionViewController: NSViewController {
     }
     
     @IBAction func behindTheScenesClicked(_ sender: Any) {
-        if (allowPatchingAgain == true) {
+        if (AppManager.shared.allowPatchingAgain == true) {
             self.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
             return
         }

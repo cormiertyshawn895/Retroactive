@@ -120,3 +120,10 @@
 "Classic Look" = "经典外观";
 "Unable to %@ %@" = "无法%@ %@";
 "Because Retroactive can't be authenticated, %@ has failed to %@ (Error %d).\n\nYou can try to %@ %@ again." = "由于解印无法验证您的身份，%@ 未能成功%@ (错误 %d)。\n\n您可以重试%@ %@。";
+"Why does iPod syncing need Full Disk Access?" = "为什么与 iPod 同步需要完全磁盘访问权限？";
+"iPod devices are considered as removable storage by macOS Catalina. iTunes needs Full Disk Access to access removable storage and shared network drives." = "macOS 将 iPod 设备认定为可移除的宗卷。iTunes 需要完全磁盘访问权限才能访问可移除宗卷和共享的网络服务器。";
+"Can I use iTunes without Full Disk Access?" = "我能否跳过完全磁盘访问权限使用 iTunes？";
+"Yes, you can. However, iTunes will not sync with iPod devices, play music on removable storage, or access shared iTunes libraries on a network drive." = "可以。然而 iTunes 将无法与 iPod 设备同步或播放存储于可移除的宗卷的音乐，也不能访问网络共享服务器上的 iTunes 资料库。";
+"Use iTunes without Full Disk Access" = "跳过完全磁盘访问权限使用 iTunes";
+"Why isn’t this more granular?" = "为什么不能选择更加细化的访问权限？";
+"While apps optimized for macOS Catalina can request granular access to Removable Volumes, iTunes was built before macOS Catalina. Retroactive’s loader script has similar requirements." = "尽管为 macOS Catalina 优化的应用程序可以选择只允许访问可移除的宗卷，iTunes 为 macOS Catalina 之前的系统构建。解印的加载脚本也有类似的要求。";

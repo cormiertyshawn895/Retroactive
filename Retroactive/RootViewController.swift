@@ -104,7 +104,7 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
                 AppManager.shared.chosenApp = nil
                 AppManager.shared.choseniTunesVersion = nil
             }
-            self.backButton.isEnabled = !(topVC is ProgressViewController)
+            self.backButton.isEnabled = !(topVC is ProgressViewController) && !(topVC is SyncingViewController)
             return
         }
         self.backButton.isHidden = false

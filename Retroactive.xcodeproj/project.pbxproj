@@ -33,7 +33,7 @@
 		32D181DB236421F9006253DE /* CompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181DA236421F9006253DE /* CompletionViewController.swift */; };
 		32D181DD23642213006253DE /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181DC23642213006253DE /* VersionViewController.swift */; };
 		32D181DF23642229006253DE /* VersionChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181DE23642229006253DE /* VersionChoiceViewController.swift */; };
-		32D181E82364303E006253DE /* ViewExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181E72364303E006253DE /* ViewExtras.swift */; };
+		32D181E82364303E006253DE /* NSLocale-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181E72364303E006253DE /* NSLocale-Extension.swift */; };
 		32D181EA23643108006253DE /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D181E923643108006253DE /* AppManager.swift */; };
 		32D181F423643519006253DE /* CCNNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D181F3236434F3006253DE /* CCNNavigationController.m */; };
 		32F763462364C9F800200ED7 /* insert_dylib in Resources */ = {isa = PBXBuildFile; fileRef = 32F763452364C9F800200ED7 /* insert_dylib */; };
@@ -61,6 +61,26 @@
 		606CA154236666B3001C550E /* ConfettiView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 606CA150236666B3001C550E /* ConfettiView.bundle */; };
 		606CA155236666B3001C550E /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CA151236666B3001C550E /* ConfettiView.swift */; };
 		607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 607C3D812382665900FAE528 /* AudioToolbox.framework.zip */; };
+		60888CB3240C831D000EF445 /* NSWindow+Retroactive.m in Sources */ = {isa = PBXBuildFile; fileRef = 60888CB2240C831D000EF445 /* NSWindow+Retroactive.m */; };
+		60888CB5240C8F9B000EF445 /* DragFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CB4240C8F9B000EF445 /* DragFileView.swift */; };
+		60888CB7240C8FF2000EF445 /* GuaranteeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CB6240C8FF2000EF445 /* GuaranteeViewController.swift */; };
+		60888CBB240C9270000EF445 /* HoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CBA240C9270000EF445 /* HoverButton.swift */; };
+		60888CBD240C9288000EF445 /* PopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CBC240C9288000EF445 /* PopButton.swift */; };
+		60888CBF240C92B6000EF445 /* DisplayOnlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CBE240C92B6000EF445 /* DisplayOnlyView.swift */; };
+		60888CC1240C92C9000EF445 /* AccentGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CC0240C92C9000EF445 /* AccentGradientButton.swift */; };
+		60888CC3240C92E3000EF445 /* PillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CC2240C92E3000EF445 /* PillButton.swift */; };
+		60888CC8240C9367000EF445 /* ProcesssInfo-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CC7240C9367000EF445 /* ProcesssInfo-Extension.swift */; };
+		60888CCA240C9377000EF445 /* NSView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CC9240C9377000EF445 /* NSView-Extension.swift */; };
+		60888CCD240C938F000EF445 /* NSViewController-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CCC240C938F000EF445 /* NSViewController-Extension.swift */; };
+		60888CCF240C939F000EF445 /* String-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CCE240C939F000EF445 /* String-Extension.swift */; };
+		60888CD1240C93B9000EF445 /* NSButton-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CD0240C93B9000EF445 /* NSButton-Extension.swift */; };
+		60888CD4240C93D9000EF445 /* ClippingShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CD3240C93D9000EF445 /* ClippingShadowView.swift */; };
+		60888CD6240C940A000EF445 /* NSImageView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CD5240C940A000EF445 /* NSImageView-Extension.swift */; };
+		60888CD8240C9420000EF445 /* CGType-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CD7240C9420000EF445 /* CGType-Extension.swift */; };
+		60888CDA240C9435000EF445 /* NSTextField-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CD9240C9435000EF445 /* NSTextField-Extension.swift */; };
+		60888CDC240C9445000EF445 /* NSWindow-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CDB240C9445000EF445 /* NSWindow-Extension.swift */; };
+		60888CDE240C9469000EF445 /* NSStoryboard-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CDD240C9469000EF445 /* NSStoryboard-Extension.swift */; };
+		60888CE2240CA6E8000EF445 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60888CE1240CA6E8000EF445 /* Permission.swift */; };
 		60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 60D7289F23D5787B0006F233 /* VMFCPFixerScript */; };
 		60E4B4B6240207AC00919F36 /* iTunesLauncher-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */; };
 		60E4B4B8240207B400919F36 /* iTunesLauncher-PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */; };
@@ -68,6 +88,9 @@
 		60E4B4D524022BF900919F36 /* OriginFixer in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4D424022BF900919F36 /* OriginFixer */; };
 		60E4B4D724022C4600919F36 /* iTunesOriginLauncher in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4D624022C4600919F36 /* iTunesOriginLauncher */; };
 		60E5EBAE240A5FA1000669FD /* BDAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E5EBAD240A5FA1000669FD /* BDAlias.m */; };
+		60F0F941240B895E00C3715D /* SyncingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0F940240B895E00C3715D /* SyncingViewController.swift */; };
+		60F0F943240B902700C3715D /* UpArrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0F942240B902700C3715D /* UpArrowViewController.swift */; };
+		60F0F945240B903500C3715D /* PadlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0F944240B903500C3715D /* PadlockViewController.swift */; };
 		60F7A06324091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin in Resources */ = {isa = PBXBuildFile; fileRef = 60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */; };
 /* End PBXBuildFile section */
 
@@ -102,7 +125,7 @@
 		32D181DC23642213006253DE /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		32D181DE23642229006253DE /* VersionChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionChoiceViewController.swift; sourceTree = "<group>"; };
 		32D181E62364262C006253DE /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		32D181E72364303E006253DE /* ViewExtras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtras.swift; sourceTree = "<group>"; };
+		32D181E72364303E006253DE /* NSLocale-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocale-Extension.swift"; sourceTree = "<group>"; };
 		32D181E923643108006253DE /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		32D181F1236434F3006253DE /* CCNNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCNNavigationController.h; sourceTree = "<group>"; };
 		32D181F3236434F3006253DE /* CCNNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCNNavigationController.m; sourceTree = "<group>"; };
@@ -135,11 +158,30 @@
 		606CA12923665CBF001C550E /* Credits.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = Credits.rtfd; sourceTree = "<group>"; };
 		606CA150236666B3001C550E /* ConfettiView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ConfettiView.bundle; sourceTree = "<group>"; };
 		606CA151236666B3001C550E /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
-		607C3D7D23823BE200FAE528 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		607C3D7E2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		607C3D7F2382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		607C3D802382409B00FAE528 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		607C3D812382665900FAE528 /* AudioToolbox.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = AudioToolbox.framework.zip; sourceTree = "<group>"; };
+		60888CB1240C831D000EF445 /* NSWindow+Retroactive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSWindow+Retroactive.h"; sourceTree = "<group>"; };
+		60888CB2240C831D000EF445 /* NSWindow+Retroactive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+Retroactive.m"; sourceTree = "<group>"; };
+		60888CB4240C8F9B000EF445 /* DragFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragFileView.swift; sourceTree = "<group>"; };
+		60888CB6240C8FF2000EF445 /* GuaranteeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuaranteeViewController.swift; sourceTree = "<group>"; };
+		60888CBA240C9270000EF445 /* HoverButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverButton.swift; sourceTree = "<group>"; };
+		60888CBC240C9288000EF445 /* PopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopButton.swift; sourceTree = "<group>"; };
+		60888CBE240C92B6000EF445 /* DisplayOnlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayOnlyView.swift; sourceTree = "<group>"; };
+		60888CC0240C92C9000EF445 /* AccentGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentGradientButton.swift; sourceTree = "<group>"; };
+		60888CC2240C92E3000EF445 /* PillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButton.swift; sourceTree = "<group>"; };
+		60888CC7240C9367000EF445 /* ProcesssInfo-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcesssInfo-Extension.swift"; sourceTree = "<group>"; };
+		60888CC9240C9377000EF445 /* NSView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView-Extension.swift"; sourceTree = "<group>"; };
+		60888CCC240C938F000EF445 /* NSViewController-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController-Extension.swift"; sourceTree = "<group>"; };
+		60888CCE240C939F000EF445 /* String-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Extension.swift"; sourceTree = "<group>"; };
+		60888CD0240C93B9000EF445 /* NSButton-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSButton-Extension.swift"; sourceTree = "<group>"; };
+		60888CD3240C93D9000EF445 /* ClippingShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippingShadowView.swift; sourceTree = "<group>"; };
+		60888CD5240C940A000EF445 /* NSImageView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImageView-Extension.swift"; sourceTree = "<group>"; };
+		60888CD7240C9420000EF445 /* CGType-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGType-Extension.swift"; sourceTree = "<group>"; };
+		60888CD9240C9435000EF445 /* NSTextField-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField-Extension.swift"; sourceTree = "<group>"; };
+		60888CDB240C9445000EF445 /* NSWindow-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow-Extension.swift"; sourceTree = "<group>"; };
+		60888CDD240C9469000EF445 /* NSStoryboard-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSStoryboard-Extension.swift"; sourceTree = "<group>"; };
+		60888CE1240CA6E8000EF445 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		60D7289F23D5787B0006F233 /* VMFCPFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = VMFCPFixerScript; sourceTree = "<group>"; };
 		60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iTunesLauncher-Info.plist"; sourceTree = "<group>"; };
 		60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iTunesLauncher-PkgInfo"; sourceTree = "<group>"; };
@@ -148,6 +190,11 @@
 		60E4B4D624022C4600919F36 /* iTunesOriginLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesOriginLauncher; sourceTree = "<group>"; };
 		60E5EBAC240A5FA1000669FD /* BDAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAlias.h; sourceTree = "<group>"; };
 		60E5EBAD240A5FA1000669FD /* BDAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAlias.m; sourceTree = "<group>"; };
+		60F0F940240B895E00C3715D /* SyncingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncingViewController.swift; sourceTree = "<group>"; };
+		60F0F942240B902700C3715D /* UpArrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpArrowViewController.swift; sourceTree = "<group>"; };
+		60F0F944240B903500C3715D /* PadlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadlockViewController.swift; sourceTree = "<group>"; };
+		60F0F94D240BB9A700C3715D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		60F0F94F240BB9A900C3715D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = iTunes12_6_5_Assets_Diff.bin; sourceTree = "<group>"; };
 		60F7A06824098AB0003CD509 /* How.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = How.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,6 +258,7 @@
 				32D181F723643630006253DE /* StepTwo */,
 				32D181F823643637006253DE /* StepThree */,
 				32D181F92364363F006253DE /* StepFour */,
+				60888CB9240C9257000EF445 /* Common */,
 				32D181EE236434E3006253DE /* Libraries */,
 				32D181ED236434D8006253DE /* Support */,
 			);
@@ -229,9 +277,6 @@
 				6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */,
 				6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */,
 				046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */,
-				32D181CC23640DE0006253DE /* RetroactiveWindowController.swift */,
-				32F7635923651DC200200ED7 /* RetroactiveWindow.swift */,
-				32D181E72364303E006253DE /* ViewExtras.swift */,
 				32D181C223640CDF006253DE /* Main.storyboard */,
 				32F763DC23657A8D00200ED7 /* install_name_tool_packed */,
 				32F763452364C9F800200ED7 /* insert_dylib */,
@@ -268,6 +313,8 @@
 				32D181F0236434F3006253DE /* CCNNavigationController */,
 				321B09CE23645B57007F3FBA /* CircularProgress */,
 				32D181E62364262C006253DE /* Bridging-Header.h */,
+				60888CB1240C831D000EF445 /* NSWindow+Retroactive.h */,
+				60888CB2240C831D000EF445 /* NSWindow+Retroactive.m */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -314,6 +361,11 @@
 			isa = PBXGroup;
 			children = (
 				32D181DA236421F9006253DE /* CompletionViewController.swift */,
+				60888CB4240C8F9B000EF445 /* DragFileView.swift */,
+				60F0F940240B895E00C3715D /* SyncingViewController.swift */,
+				60888CB6240C8FF2000EF445 /* GuaranteeViewController.swift */,
+				60F0F942240B902700C3715D /* UpArrowViewController.swift */,
+				60F0F944240B903500C3715D /* PadlockViewController.swift */,
 			);
 			path = StepFour;
 			sourceTree = "<group>";
@@ -363,6 +415,57 @@
 				60E5EBAD240A5FA1000669FD /* BDAlias.m */,
 			);
 			path = BDAlias;
+			sourceTree = "<group>";
+		};
+		60888CB9240C9257000EF445 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				60888CC6240C9347000EF445 /* Extensions */,
+				60888CC5240C92F3000EF445 /* Buttons */,
+				60888CD2240C93CA000EF445 /* Views */,
+				60888CE1240CA6E8000EF445 /* Permission.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		60888CC5240C92F3000EF445 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				60888CBA240C9270000EF445 /* HoverButton.swift */,
+				60888CC0240C92C9000EF445 /* AccentGradientButton.swift */,
+				60888CC2240C92E3000EF445 /* PillButton.swift */,
+				60888CBC240C9288000EF445 /* PopButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		60888CC6240C9347000EF445 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				60888CD7240C9420000EF445 /* CGType-Extension.swift */,
+				60888CCE240C939F000EF445 /* String-Extension.swift */,
+				60888CC7240C9367000EF445 /* ProcesssInfo-Extension.swift */,
+				32D181E72364303E006253DE /* NSLocale-Extension.swift */,
+				60888CDD240C9469000EF445 /* NSStoryboard-Extension.swift */,
+				60888CDB240C9445000EF445 /* NSWindow-Extension.swift */,
+				60888CC9240C9377000EF445 /* NSView-Extension.swift */,
+				60888CCC240C938F000EF445 /* NSViewController-Extension.swift */,
+				60888CD0240C93B9000EF445 /* NSButton-Extension.swift */,
+				60888CD5240C940A000EF445 /* NSImageView-Extension.swift */,
+				60888CD9240C9435000EF445 /* NSTextField-Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		60888CD2240C93CA000EF445 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				60888CBE240C92B6000EF445 /* DisplayOnlyView.swift */,
+				60888CD3240C93D9000EF445 /* ClippingShadowView.swift */,
+				32D181CC23640DE0006253DE /* RetroactiveWindowController.swift */,
+				32F7635923651DC200200ED7 /* RetroactiveWindow.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		60E4B4B42402079B00919F36 /* iTunesLauncher */ = {
@@ -509,34 +612,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60888CC3240C92E3000EF445 /* PillButton.swift in Sources */,
 				32D181CD23640DE0006253DE /* RetroactiveWindowController.swift in Sources */,
+				60888CDC240C9445000EF445 /* NSWindow-Extension.swift in Sources */,
+				60888CBF240C92B6000EF445 /* DisplayOnlyView.swift in Sources */,
+				60888CB7240C8FF2000EF445 /* GuaranteeViewController.swift in Sources */,
 				32D181BF23640CDE006253DE /* RootViewController.swift in Sources */,
+				60888CD6240C940A000EF445 /* NSImageView-Extension.swift in Sources */,
 				321B09D823645B57007F3FBA /* CustomButton.swift in Sources */,
 				32D181DB236421F9006253DE /* CompletionViewController.swift in Sources */,
+				60888CB5240C8F9B000EF445 /* DragFileView.swift in Sources */,
 				321B09D623645B57007F3FBA /* util.swift in Sources */,
 				32D181BD23640CDE006253DE /* AppDelegate.swift in Sources */,
 				32D181D6236421C0006253DE /* ProgressViewController.swift in Sources */,
 				32F7634A2364CAD000200ED7 /* AppFinder.swift in Sources */,
+				60F0F941240B895E00C3715D /* SyncingViewController.swift in Sources */,
 				6008E6DF2382140C00A2F659 /* String+LocalizedBundleTableName.swift in Sources */,
+				60888CBB240C9270000EF445 /* HoverButton.swift in Sources */,
 				32F7635A23651DC200200ED7 /* RetroactiveWindow.swift in Sources */,
 				6008E6DE2382140C00A2F659 /* String+LocalizeBundle.swift in Sources */,
 				32D181EA23643108006253DE /* AppManager.swift in Sources */,
+				60888CCF240C939F000EF445 /* String-Extension.swift in Sources */,
 				32D181D9236421E2006253DE /* SubProgressViewController.swift in Sources */,
+				60888CB3240C831D000EF445 /* NSWindow+Retroactive.m in Sources */,
+				60888CDE240C9469000EF445 /* NSStoryboard-Extension.swift in Sources */,
 				32D181DF23642229006253DE /* VersionChoiceViewController.swift in Sources */,
+				60888CD8240C9420000EF445 /* CGType-Extension.swift in Sources */,
 				606CA155236666B3001C550E /* ConfettiView.swift in Sources */,
+				60888CC8240C9367000EF445 /* ProcesssInfo-Extension.swift in Sources */,
 				32D181F423643519006253DE /* CCNNavigationController.m in Sources */,
+				60888CCD240C938F000EF445 /* NSViewController-Extension.swift in Sources */,
 				60E5EBAE240A5FA1000669FD /* BDAlias.m in Sources */,
+				60888CDA240C9435000EF445 /* NSTextField-Extension.swift in Sources */,
+				60888CE2240CA6E8000EF445 /* Permission.swift in Sources */,
 				32D181DD23642213006253DE /* VersionViewController.swift in Sources */,
+				60F0F945240B903500C3715D /* PadlockViewController.swift in Sources */,
 				321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */,
+				60888CD1240C93B9000EF445 /* NSButton-Extension.swift in Sources */,
 				6008E6DC2382140C00A2F659 /* String+LocalizeTableName.swift in Sources */,
+				60F0F943240B902700C3715D /* UpArrowViewController.swift in Sources */,
 				32F763522364DBAA00200ED7 /* STPrivilegedTask.m in Sources */,
 				6008E6DD2382140C00A2F659 /* Localize.swift in Sources */,
+				60888CBD240C9288000EF445 /* PopButton.swift in Sources */,
+				60888CD4240C93D9000EF445 /* ClippingShadowView.swift in Sources */,
 				32D181D223642192006253DE /* GuidanceViewController.swift in Sources */,
 				32F7634C2364D0AA00200ED7 /* AuthenticateViewController.swift in Sources */,
-				32D181E82364303E006253DE /* ViewExtras.swift in Sources */,
+				32D181E82364303E006253DE /* NSLocale-Extension.swift in Sources */,
 				321B09D923645B57007F3FBA /* CustomButton+Util.swift in Sources */,
 				321B09D723645B57007F3FBA /* CircularProgress.swift in Sources */,
 				321B09D523645B57007F3FBA /* CheckmarkView.swift in Sources */,
+				60888CCA240C9377000EF445 /* NSView-Extension.swift in Sources */,
+				60888CC1240C92C9000EF445 /* AccentGradientButton.swift in Sources */,
 				32D181CF23642161006253DE /* ChoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,8 +674,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				32D181C323640CDF006253DE /* Base */,
-				607C3D7D23823BE200FAE528 /* zh-Hans */,
-				607C3D7E2382409B00FAE528 /* zh-Hant */,
+				60F0F94D240BB9A700C3715D /* zh-Hans */,
+				60F0F94F240BB9A900C3715D /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -698,7 +824,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -719,7 +845,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 35;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

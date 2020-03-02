@@ -3,33 +3,36 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.5 (Build 33) improves iTunes compatibility with macOS Catalina 10.15.4 and is available for download.</string>
+	<string>Retroactive 1.5 (Build 35) improves iTunes compatibility with macOS Catalina 10.15.4 and is available for download.</string>
 	<key>NewVersionChangelog</key>
 	<string>• Resolves an issue where authenticating with Apple Music, iTunes Store, or App Store may fail in iTunes 12.9.5 and iTunes 12.6.5 running on macOS Catalina 10.15.4 (-42408, -45076, and 11571).
 • Resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device.
 • Resolves an issue where iTunes 12.6.5 cannot display downloaded app icons. 
 • Resolves an issue where iTunes 10.7 may prompt to reinstall itself (-42401).
-• Adds support for installing iTunes 11.4.</string>
+• Adds support for installing iTunes 11.4.
+• Adds support for syncing with iPod shuffle, iPod nano, iPod classic, and iPod mini.</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.5 (版本号 33) 改善了 iTunes 与 macOS Catalina 10.15.4 的兼容性，现已提供下载:</string>
+	<string>新版本解印 1.5 (版本号 35) 改善了 iTunes 与 macOS Catalina 10.15.4 的兼容性，现已提供下载:</string>
 	<key>NewVersionChangelogzhHans</key>
 	<string>• 修复了 iTunes 12.9.5 和 iTunes 12.6.5 无法在 macOS Catalina 10.15.4 下登录 Apple Music、iTunes Store 和 App Store (-42408、-45076 和 11571) 的问题
 • 修复了 iTunes 不能读取 iOS 和 iPadOS 设备内容的问题
 • 修复了 iTunes 12.6.5 不能显示已下载应用程序图标的问题
 • 修复了 iTunes 10.7 可能提示需要重新安装 (-42401) 的问题
-• 支持安装 iTunes 11.4</string>
+• 支持安装 iTunes 11.4
+• 支持与 iPod shuffle、iPod nano、iPod classic 和 iPod mini 同步</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.5 (版本號 33) 改善了 iTunes 與 macOS Catalina 10.15.4 的兼容性，現已提供下載:</string>
+	<string>新版本解印 1.5 (版本號 35) 改善了 iTunes 與 macOS Catalina 10.15.4 的兼容性，現已提供下載:</string>
 	<key>NewVersionChangelogzhHant</key>
 	<string>• 修復了 iTunes 12.9.5 和 iTunes 12.6.5 無法在 macOS Catalina 10.15.4 下登錄 Apple Music、iTunes Store 和 App Store (-42408、-45076 和 11571) 的問題
 • 修復了 iTunes 無法讀取 iOS 和 iPadOS 設備內容的問題
 • 修復了 iTunes 12.6.5 無法顯示已下載應用程序圖標的問題
 • 修復了 iTunes 10.7 可能提示需要重新安裝 (-42401) 的問題
-• 支持安裝 iTunes 11.4</string>
+• 支持安裝 iTunes 11.4
+• 支持與 iPod shuffle、iPod nano、iPod classic 和 iPod mini 同步</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>33</integer>
+	<integer>35</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

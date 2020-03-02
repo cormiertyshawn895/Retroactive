@@ -150,6 +150,8 @@ class AppManager: NSObject {
     
     var willRelaunchSoon = false
     
+    var allowPatchingAgain = false
+
     private override init() {
         super.init()
         if let path = Bundle.main.path(forResource: "SupportPath", ofType: "plist"),
@@ -1197,6 +1199,10 @@ class AppManager: NSObject {
         return nil
     }
 
+    var needsBashAccess: Bool {
+        return self.chosenApp == .itunes && !Permission.shared.bashHasFullDiskAccess()
+    }
+    
     static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true, allowError: Bool = false) -> OSStatus {
         if (AppManager.shared.willRelaunchSoon) {
             return errAuthorizationCanceled

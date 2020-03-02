@@ -307,7 +307,12 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     func showCompletionVC() {
         self.syncMainQueue {
             STPrivilegedTask.allowSleep()
-            self.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
+            AppManager.shared.allowPatchingAgain = false
+            if (AppManager.shared.needsBashAccess) {
+                AppDelegate.pushSyncingVC()
+            } else {
+                AppDelegate.pushCompletionVC()
+            }
         }
     }
     
