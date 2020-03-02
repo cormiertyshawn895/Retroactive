@@ -51,6 +51,7 @@
 		6008E6DE2382140C00A2F659 /* String+LocalizeBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6D92382140C00A2F659 /* String+LocalizeBundle.swift */; };
 		6008E6DF2382140C00A2F659 /* String+LocalizedBundleTableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6008E6DA2382140C00A2F659 /* String+LocalizedBundleTableName.swift */; };
 		6008E6E32382160400A2F659 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6008E6E52382160400A2F659 /* Localizable.strings */; };
+		600FDFE8240CD9D70059E4D1 /* Process-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600FDFE7240CD9D70059E4D1 /* Process-Extension.swift */; };
 		6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */; };
 		6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */; };
 		604F709E240B0C9300687E1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 604F709D240B0C9200687E1B /* README.md */; };
@@ -149,6 +150,7 @@
 		6008E6DA2382140C00A2F659 /* String+LocalizedBundleTableName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+LocalizedBundleTableName.swift"; sourceTree = "<group>"; };
 		6008E6E42382160400A2F659 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6008E6E62382160C00A2F659 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		600FDFE7240CD9D70059E4D1 /* Process-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Process-Extension.swift"; sourceTree = "<group>"; };
 		6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Mojave32Bit.mobileconfig; sourceTree = "<group>"; };
 		6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HighSierra32Bit.mobileconfig; sourceTree = "<group>"; };
 		604F709D240B0C9200687E1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				60888CD0240C93B9000EF445 /* NSButton-Extension.swift */,
 				60888CD5240C940A000EF445 /* NSImageView-Extension.swift */,
 				60888CD9240C9435000EF445 /* NSTextField-Extension.swift */,
+				600FDFE7240CD9D70059E4D1 /* Process-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				321B09D523645B57007F3FBA /* CheckmarkView.swift in Sources */,
 				60888CCA240C9377000EF445 /* NSView-Extension.swift in Sources */,
 				60888CC1240C92C9000EF445 /* AccentGradientButton.swift in Sources */,
+				600FDFE8240CD9D70059E4D1 /* Process-Extension.swift in Sources */,
 				32D181CF23642161006253DE /* ChoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,7 +828,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -845,7 +849,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 37;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,78 +1,110 @@
 import Foundation
-import SQLite3
+
+/* There's no API to figure out if another app (bash) has FDA.
+ 
+ A naive way is to open /Library/Application Support/com.apple.TCC/TCC.db with SQLite, and execute:
+ select * from access where client="/bin/bash" and service="kTCCServiceSystemPolicyAllFiles" and allowed=1
+ This doesn't work because reading TCC.db requires FDA by itself.
+ 
+ Instead, here's a contrived workaround. Build a throwaway app bundle and make its main executable a shebang
+ script. Let the shebang script copy TCC.db to /tmp. If it copied successfully, bash has FDA.
+ 
+*/
 
 class Permission {
     static let shared = Permission()
 
-    var db: OpaquePointer?
-    var copiedDBPath: String?
-    
-    // If the system and Retroactive accesses TCC.db at the same time, bad things will happen.
-    // Instead, make a copy and query the copy.
+    var sharedUUID: String = String.randomUUID
+
+    func updateThrowawayApp() {
+        DispatchQueue.global(qos: .background).async {
+            do {
+                self.sharedUUID = String.randomUUID
+                let appPath = "\(throwawayTmpPath)/\(self.sharedUUID).app"
+                let contents = "\(appPath)/Contents"
+                let scriptName = "\(contents)/MacOS/\(self.sharedUUID)"
+                
+                try FileManager.default.createDirectory(atPath: "\(contents)/MacOS", withIntermediateDirectories: true, attributes: nil)
+                let string = plistTemplate.replacingOccurrences(of: nameReplaceToken, with: self.sharedUUID)
+                try string.write(toFile: "\(contents)/Info.plist", atomically: true, encoding: .utf8)
+                
+                let bashString = bashScriptTemplate.replacingOccurrences(of: nameReplaceToken, with: self.sharedUUID)
+                try bashString.write(toFile: scriptName, atomically: true, encoding: .utf8)
+                print("Made throwaway bundle, \(contents)")
+                
+                Process.runNonAdminTask(toolPath: "/bin/chmod", arguments: ["+x", scriptName])
+                Process.runNonAdminTask(toolPath: "/usr/bin/open", arguments: [appPath])
+            } catch {
+                print(error)
+            }
+        }
+    }
+
     func bashHasFullDiskAccess() -> Bool {
-        db = self.openCopiedTCCDatabase()
-        let result = query("select * from access where client='/bin/bash' and service='kTCCServiceSystemPolicyAllFiles' and allowed=1")
-        sqlite3_close(db)
-        db = nil
-        print(result)
-        do {
-            if let path = copiedDBPath {
-                try FileManager.default.removeItem(atPath: path)
-            }
-        } catch {
-            print("Can't remove copied database")
-        }
-        return result
+        return FileManager.default.fileExists(atPath: "\(throwawayTmpPath)/\(sharedUUID).db")
     }
-    
-    func openCopiedTCCDatabase() -> OpaquePointer? {
-        let randomizedCopiedPath = "/tmp/\(UUID().uuidString).db"
-        do {
-            try FileManager.default.copyItem(atPath: "/Library/Application Support/com.apple.TCC/TCC.db", toPath: randomizedCopiedPath)
-            copiedDBPath = randomizedCopiedPath
-            if sqlite3_open(randomizedCopiedPath, &db) == SQLITE_OK {
-                print("Successfully opened connection to TCC database")
-                return db
-            } else {
-                print("Unable to open database.")
-                return nil
-            }
-        } catch {
-            print("Can't copy database")
-            return nil
-        }
-    }
-    
-    func query(_ queryStatementString: String) -> Bool {
-        var queryStatement: OpaquePointer?
-        // 1
-        if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
-            SQLITE_OK {
-            // 2
-            if sqlite3_step(queryStatement) == SQLITE_ROW {
-                // 3
-                let id = sqlite3_column_int(queryStatement, 0)
-                // 4
-                guard let queryResultCol1 = sqlite3_column_text(queryStatement, 1) else {
-                    print("Query result is nil")
-                    return false
-                }
-                let name = String(cString: queryResultCol1)
-                // 5
-                print("\nQuery Result:")
-                print("\(id) | \(name)")
-                return true
-            } else {
-                print("\nQuery returned no results.")
-            }
-        } else {
-            // 6
-            let errorMessage = String(cString: sqlite3_errmsg(db))
-            print("\nQuery is not prepared \(errorMessage)")
-        }
-        // 7
-        sqlite3_finalize(queryStatement)
-        return false
-    }
-    
 }
+
+let nameReplaceToken = "{NAMEREPLACE}"
+
+let plistTemplate = """
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>BuildMachineOSBuild</key>
+    <string>19E242d</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleExecutable</key>
+    <string>\(nameReplaceToken)</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.temporary.\(nameReplaceToken)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>\(nameReplaceToken)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+        <string>MacOSX</string>
+    </array>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTPlatformBuild</key>
+    <string>11C504</string>
+    <key>DTPlatformVersion</key>
+    <string>GM</string>
+    <key>DTSDKBuild</key>
+    <string>19B90</string>
+    <key>DTSDKName</key>
+    <string>macosx10.15</string>
+    <key>DTXcode</key>
+    <string>1130</string>
+    <key>DTXcodeBuild</key>
+    <string>11C504</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.14</string>
+    <key>NSMainNibFile</key>
+    <string>MainMenu</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>LSUIElement</key>
+    <true/>
+</dict>
+</plist>
+"""
+
+let throwawayTmpPath = "/tmp/retroactive"
+
+let bashScriptTemplate = """
+#!/bin/bash
+cp "/Library/Application Support/com.apple.TCC/TCC.db" "\(throwawayTmpPath)/\(nameReplaceToken).db"
+"""

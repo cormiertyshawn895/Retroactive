@@ -125,18 +125,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     }
     
     func runNonAdminTask(toolPath: String, arguments: [String]) {
-        let task = Process()
-        task.launchPath = toolPath
-        task.arguments = arguments
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        task.standardError = pipe
-        task.launch()
-        task.waitUntilExit()
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        if let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? {
-            print(output)
-        }
+        Process.runNonAdminTask(toolPath: toolPath, arguments: arguments)
     }
     
     func kickoffProVideoAppPatches(fullMode: Bool = true) {
@@ -664,6 +653,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             
             self.stage4Started()
+            Permission.shared.updateThrowawayApp()
             self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, "\(appPath)/Contents/MacOS/iTunes.app"])
             
             // Copy additional frameworks for iTunes 10.7 and iTunes 11.4. Other versions of iTunes will break with additional frameworks.

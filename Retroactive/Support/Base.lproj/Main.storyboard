@@ -1111,20 +1111,14 @@ You can use {name} now.</string>
             </objects>
             <point key="canvasLocation" x="1868" y="2767.5"/>
         </scene>
-        <!--UpArrowViewController-->
+        <!--Drag Me View Controller-->
         <scene sceneID="PM3-ku-XHo">
             <objects>
-                <viewController title="UpArrowViewController" storyboardIdentifier="UpArrowViewController" id="SXu-2f-gS7" customClass="UpArrowViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DragMeViewController" id="SXu-2f-gS7" customClass="DragMeViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="oeF-MP-Pbf">
                         <rect key="frame" x="0.0" y="0.0" width="223" height="202"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UCa-3S-wwH">
-                                <rect key="frame" x="103" y="100" width="15" height="102"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-dotted-up" id="TUG-9N-pcX"/>
-                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                            </imageView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lY1-89-FH7" customClass="DragFileView" customModule="Retroactive" customModuleProvider="target">
                                 <rect key="frame" x="40" y="35" width="142" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1163,9 +1157,8 @@ You can use {name} now.</string>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="arrowImageView" destination="UCa-3S-wwH" id="TvV-3w-v9I"/>
-                        <outlet property="boxContainer" destination="ry6-3k-UD5" id="J0r-gR-mwN"/>
-                        <outlet property="draggingView" destination="lY1-89-FH7" id="60e-1q-Ngn"/>
+                        <outlet property="boxContainer" destination="ry6-3k-UD5" id="Ywr-ks-uL7"/>
+                        <outlet property="draggingView" destination="lY1-89-FH7" id="GbI-Ta-EEf"/>
                     </connections>
                 </viewController>
                 <customObject id="8ej-aR-u1K" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1204,7 +1197,7 @@ You can use {name} now.</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" title="I've already unlocked it. What's next?" bezelStyle="regularSquare" alignment="left" imageScaling="proportionallyDown" inset="2" id="g8b-Kt-31M">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="controlContent"/>
+                                    <font key="font" metaFont="label" size="12"/>
                                 </buttonCell>
                                 <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                 <connections>
@@ -1472,6 +1465,30 @@ You can use {name} now.</string>
                 </customView>
             </objects>
             <point key="canvasLocation" x="1139.5" y="3291.5"/>
+        </scene>
+        <!--Up Arrow View Controller-->
+        <scene sceneID="GZO-ed-uIf">
+            <objects>
+                <viewController storyboardIdentifier="UpArrowViewController" id="Mk1-cb-ieo" customClass="UpArrowViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="B7K-FV-DS2">
+                        <rect key="frame" x="0.0" y="0.0" width="223" height="202"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MSq-q1-ESj">
+                                <rect key="frame" x="103" y="100" width="15" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-dotted-up" id="9oA-d5-jQx"/>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </imageView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="arrowImageView" destination="MSq-q1-ESj" id="rEr-7z-2hp"/>
+                    </connections>
+                </viewController>
+                <customObject id="Zok-SL-dAd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2091" y="3080"/>
         </scene>
     </scenes>
     <resources>

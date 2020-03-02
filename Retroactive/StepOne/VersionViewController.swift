@@ -39,6 +39,7 @@ class VersionViewController: NSViewController {
         nextButton.updateTitle()
         self.selectedVersion = .darkMode
         AppManager.shared.choseniTunesVersion = .darkMode
+        Permission.shared.updateThrowawayApp()
     }
     
     var selectedVersion: iTunesVersion? {

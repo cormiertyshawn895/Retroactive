@@ -21,4 +21,8 @@ extension String {
         paragraph.alignment = .center
         return NSMutableAttributedString(string: self, attributes:[.font: font, .foregroundColor: color, .shadow: shadow, .paragraphStyle: paragraph])
     }
+    
+    static var randomUUID: String {
+        return UUID().uuidString
+    }
 }

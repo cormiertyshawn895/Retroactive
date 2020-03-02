@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _ = AppManager.shared
         showRecoveryTitleIfNeeded()
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     func showRecoveryTitleIfNeeded() {
@@ -33,6 +34,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        do {
+            try FileManager.default.removeItem(atPath: throwawayTmpPath)
+        } catch {
+            print(error)
+        }
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

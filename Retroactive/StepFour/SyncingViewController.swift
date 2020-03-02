@@ -12,8 +12,10 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
     var guaranteeVCs: [GuaranteeViewController] = []
     var padlockVC: PadlockViewController!
     var padlockWindow: NSWindow!
-    var draggingVC: UpArrowViewController!
+    var draggingVC: DragMeViewController!
     var dragWindow: NSWindow!
+    var upArrowVC: UpArrowViewController!
+    var upArrowWindow: NSWindow!
     
     let animationTrackingInterval: TimeInterval = 1.0 / 60.0
     var windowTrackingTimer: Timer?
@@ -31,10 +33,14 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
         padlockVC = PadlockViewController.instantiate()
         padlockVC.delegate = self
         padlockWindow = NSWindow.createFloatingAccessoryWindow(padlockVC)
-        draggingVC = UpArrowViewController.instantiate()
+        draggingVC = DragMeViewController.instantiate()
         draggingVC.loadView()
         draggingVC.draggingView.delegate = self
         dragWindow = NSWindow.createFloatingAccessoryWindow(draggingVC)
+        
+        upArrowVC = UpArrowViewController.instantiate()
+        upArrowWindow = NSWindow.createFloatingAccessoryWindow(upArrowVC)
+        upArrowWindow.ignoresMouseEvents = true
         
         fullDiskAccessButtonLabel.addShadow()
         fullDiskAccessButtonLabel.moveIntoView(fullDiskAccessButton)
@@ -46,6 +52,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
         windowTrackingTimer?.invalidate()
         padlockWindow.close()
         dragWindow.close()
+        upArrowWindow.close()
     }
 
     func populateGuarantees() {
@@ -101,11 +108,10 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
             if let localizedName = frontmostApp.localizedName {
                 prefsAppName = localizedName
             }
-            padlockWindow.makeKeyAndOrderFront(self)
-            dragWindow.makeKeyAndOrderFront(self)
         } else {
             padlockWindow.orderOut(self)
             dragWindow.orderOut(self)
+            upArrowWindow.orderOut(self)
             return
         }
 
@@ -146,12 +152,15 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
             if (shouldShowDragBashView) {
                 padlockWindow.orderOut(self)
                 // to drag window
+                upArrowWindow.makeKeyAndOrderFront(self)
                 dragWindow.makeKeyAndOrderFront(self)
                 let newX = NSLocale.languageLTR ? lastOrigin.x + 340 : lastOrigin.x + 120
-                dragWindow.setFrameOrigin(NSPoint(x: newX,
-                                                  y: yPositionInScreenSpace - dragWindow.frame.height + 260))
+                let originPoint = NSPoint(x: newX, y: yPositionInScreenSpace - dragWindow.frame.height + 260)
+                dragWindow.setFrameOrigin(originPoint)
+                upArrowWindow.setFrameOrigin(originPoint)
             } else {
                 dragWindow.orderOut(self)
+                upArrowWindow.orderOut(self)
                 padlockWindow.makeKeyAndOrderFront(self)
                 let newX = NSLocale.languageLTR ? lastOrigin.x - 198 : lastOrigin.x + lastWidthHeight.width - 269
                 padlockWindow.setFrameOrigin(NSPoint(x: newX,
@@ -163,18 +172,20 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
             shouldShowDragBashView = true
             padlockWindow.orderOut(self)
             dragWindow.orderOut(self)
+            upArrowWindow.orderOut(self)
         } else {
             // Main preferences window is around 668x586
             shouldShowDragBashView = false
             padlockWindow.orderOut(self)
             dragWindow.orderOut(self)
+            upArrowWindow.orderOut(self)
             self.view.window?.deminiaturize(self)
             self.view.window?.makeKeyAndOrderFront(self)
         }
     }
     
     func draggingStarted(view: DragFileView, point: NSPoint) {
-        self.draggingVC.arrowImageView.alphaValue = 0.3
+        self.upArrowVC.arrowImageView.alphaValue = 0.3
         self.draggingVC.boxContainer.isHidden = true
     }
     
@@ -193,7 +204,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
     
     func draggingFailed(view: DragFileView, point: NSPoint) {
         openFullDiskAccess(shouldTerminate: false)
-        self.draggingVC.arrowImageView.alphaValue = 1
+        self.upArrowVC.arrowImageView.alphaValue = 1
         self.draggingVC.boxContainer.isHidden = false
     }
     
@@ -201,6 +212,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
         windowTrackingTimer?.invalidate()
         padlockWindow.close()
         dragWindow.close()
+        upArrowWindow.close()
         self.view.window?.deminiaturize(self)
         terminateSystemPreferences()
 
@@ -234,6 +246,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
         mostRecentPrefsFrame = nil
         padlockWindow.orderOut(self)
         dragWindow.orderOut(self)
+        upArrowWindow.orderOut(self)
         windowTrackingTimer?.invalidate()
 
         openFullDiskAccess(shouldTerminate: true)

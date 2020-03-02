@@ -1,12 +1,11 @@
 import Cocoa
 
-class UpArrowViewController: NSViewController {
+class DragMeViewController: NSViewController {
     @IBOutlet weak var draggingView: DragFileView!
     @IBOutlet weak var boxContainer: NSBox!
-    @IBOutlet weak var arrowImageView: NSImageView!
-    
-    static func instantiate() -> UpArrowViewController {
-        return NSStoryboard.standard!.instantiateController(withIdentifier: "UpArrowViewController") as! UpArrowViewController
+
+    static func instantiate() -> DragMeViewController {
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "DragMeViewController") as! DragMeViewController
     }
 
     override func viewDidLoad() {
@@ -15,4 +14,12 @@ class UpArrowViewController: NSViewController {
         draggingView.subviewForImagePresentation = boxContainer
     }
     
+}
+
+class UpArrowViewController: NSViewController {
+    @IBOutlet weak var arrowImageView: NSImageView!
+    
+    static func instantiate() -> UpArrowViewController {
+        return NSStoryboard.standard!.instantiateController(withIdentifier: "UpArrowViewController") as! UpArrowViewController
+    }
 }
