@@ -1178,8 +1178,9 @@ class AppManager: NSObject {
     }
     
     var iTunesLibraryPath: String? {
+        let fallbackStandardPath = ("~/Music/iTunes" as NSString).expandingTildeInPath
         guard let iTunesDefaults = UserDefaults(suiteName: iTunesBundleID) else {
-            return nil
+            return fallbackStandardPath
         }
         if let data = iTunesDefaults.data(forKey: "alis:1:iTunes Library Location"),
             let alias = BDAlias(data: data),
@@ -1193,10 +1194,10 @@ class AppManager: NSObject {
                 print(url)
                 return url.path
             } catch {
-                return nil
+                return fallbackStandardPath
             }
         }
-        return nil
+        return fallbackStandardPath
     }
 
     var needsBashAccess: Bool {
