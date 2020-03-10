@@ -17,22 +17,13 @@ class ChoiceViewController: NSViewController {
     @IBOutlet weak var otherOSSubtitle: NSTextField!
     @IBOutlet weak var otherOSImageView: NSImageView!
     
-    @IBOutlet weak var apertureButton: NSButton!
-    @IBOutlet weak var iphotoButton: NSButton!
-    @IBOutlet weak var itunesButton: NSButton!
-    @IBOutlet weak var apertureLabel: NSTextField!
-    @IBOutlet weak var iphotoLabel: NSTextField!
-    @IBOutlet weak var itunesLabel: NSTextField!
-    
-    @IBOutlet weak var firstActionButton: NSBox!
-    @IBOutlet weak var secondActionButton: NSBox!
-    @IBOutlet weak var thirdActionButton: NSBox!
-    
-    @IBOutlet weak var thirdActionLabel: NSTextField!
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var scrollContentView: NSView!
+    var singularVCs: [SingularChoiceViewController] = []
     
     var appFinder: AppFinder?
     
-    let oldOS: Bool = ProcessInfo.processInfo.operatingSystemVersion.minorVersion <= 14
+    let marginBetweenApps:CGFloat = 54
     
     static func instantiate() -> ChoiceViewController
     {
@@ -41,72 +32,78 @@ class ChoiceViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstActionButton.fillColor = .controlAccentColorPolyfill
-        secondActionButton.fillColor = .controlAccentColorPolyfill
-        thirdActionButton.fillColor = .controlAccentColorPolyfill
-        apertureLabel.moveIntoView(apertureButton)
-        firstActionButton.moveIntoView(apertureButton)
-        iphotoLabel.moveIntoView(iphotoButton)
-        secondActionButton.moveIntoView(iphotoButton)
-        itunesLabel.moveIntoView(itunesButton)
-        thirdActionButton.moveIntoView(itunesButton)
-        if (oldOS) {
-            showMojaveChoices()
-        } else {
-            var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. ".localized()
-            if AppManager.shared.platformShippedAfterMojave {
-                otherOSHint += "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized()
+        let totalCount = AppManager.shared.supportedApps.count
+        let clippingWidth = scrollView.bounds.size.width
+        var previousView = NSView()
+
+        for i in 0..<totalCount {
+            let appType = AppManager.shared.supportedApps[i]
+            let singularChoiceVC = SingularChoiceViewController.instantiate()
+            singularChoiceVC.loadView()
+            singularChoiceVC.correspondingAppType = appType
+            let svcView = singularChoiceVC.view
+            var start = previousView.frame.origin.x + previousView.frame.size.width + marginBetweenApps
+            let endIfFits = svcView.bounds.width * CGFloat(totalCount) + marginBetweenApps * CGFloat(totalCount - 1)
+            var end = start + svcView.frame.size.width
+            if (clippingWidth >= endIfFits) {
+                if (i == 0) {
+                    start = (clippingWidth - endIfFits) / 2
+                    end = start + svcView.frame.size.width
+                }
             } else {
-                otherOSHint += "To get started, install macOS Mojave on a separate volume.".localized()
+                end += marginBetweenApps
             }
-            otherOSSubtitle.stringValue = otherOSHint
+            svcView.frame = CGRect(x: start, y: 0, width: svcView.bounds.width, height: svcView.bounds.height)
+            scrollContentView.addSubview(svcView)
+            scrollContentView.setFrameSize(NSSize(width: end, height: scrollContentView.frame.size.height))
+            singularVCs.append(singularChoiceVC)
+            
+            previousView = svcView
+        }
+        getStartedSubTitle.stringValue = AppManager.shared.getStartedSubTitle
+        otherOSSubtitle.stringValue = AppManager.shared.otherOSSubtitle
+        otherOSImageView.image = AppManager.shared.otherOSImage
+    }
+    
+}
+
+class SingularChoiceViewController: NSViewController {
+    var correspondingAppType: AppType? {
+        didSet {
+            guard let type = correspondingAppType else { return }
+            imageView.image = AppManager.shared.cartoonIconForAppType(type)
+            nameLabel.stringValue = AppManager.shared.nameForAppType(type)
+            actionLabel.stringValue = AppManager.shared.presentTenseActionForAppType(type).uppercased()
         }
     }
+    var clickedAction: (() -> Void)?
     
-    func showMojaveChoices() {
-        getStartedSubTitle.stringValue = "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09.".localized()
-        
-        apertureButton.image = NSImage(named: "final7_cartoon")
-        apertureLabel.stringValue = "Final Cut Pro 7"
-        
-        iphotoButton.image = NSImage(named: "logic9_cartoon")
-        iphotoLabel.stringValue = "Logic Pro 9"
-        
-        itunesButton.image = NSImage(named: "keynote5_cartoon")
-        itunesLabel.stringValue = "Keynote ’09"
-        thirdActionLabel.stringValue = "FIX".localized()
-        
-        otherOSSubtitle.stringValue = "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
-        otherOSImageView.image = NSImage(named:"catalina-banner")
+    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var nameLabel: NSTextField!
+    @IBOutlet weak var actionLabel: NSTextField!
+    @IBOutlet weak var actionBox: NSBox!
+    @IBOutlet weak var hoverButton: HoverButton!
+    
+    static func instantiate() -> SingularChoiceViewController {
+        NSStoryboard.standard!.instantiateController(withIdentifier: "SingularChoiceViewController") as! SingularChoiceViewController
     }
     
-    override func viewDidAppear() {
-        super.viewDidAppear()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        imageView.moveIntoView(hoverButton)
+        nameLabel.moveIntoView(hoverButton)
+        actionBox.moveIntoView(hoverButton)
+        actionBox.fillColor = .controlAccentColorPolyfill
     }
     
-    @IBAction func apertureClicked(_ sender: Any) {
-        AppManager.shared.chosenApp = oldOS ? .finalCutPro7 : .aperture
-        AppFinder.shared.comingFromChoiceVC = true
-        AppFinder.shared.queryAllInstalledApps()
-    }
-    
-    @IBAction func iphotoClicked(_ sender: Any) {
-        AppManager.shared.chosenApp = oldOS ? .logicPro9 : .iphoto
-        AppFinder.shared.comingFromChoiceVC = true
-        AppFinder.shared.queryAllInstalledApps()
-    }
-    
-    @IBAction func itunesClicked(_ sender: Any) {
-        if (oldOS == true) {
-            AppManager.shared.chosenApp = .keynote5
+    @IBAction func sectionClicked(_ sender: Any) {
+        print("Clicked on \(String(describing: correspondingAppType))")
+        AppManager.shared.chosenApp = correspondingAppType
+        if (correspondingAppType == .itunes) {
+            AppDelegate.pushVersionVC()
+        } else {
             AppFinder.shared.comingFromChoiceVC = true
             AppFinder.shared.queryAllInstalledApps()
-//            AppDelegate.showTextSheet(title: "iTunes is already installed", text: "iTunes is already installed on \(ProcessInfo.versionString) by default. \n\nIf you need to run iTunes after upgrading to macOS Catalina, open Retroactive again after upgrading to macOS Catalina.")
-            return
         }
-        AppManager.shared.chosenApp = oldOS ? .keynote5 : .itunes
-        let versionVC = VersionViewController.instantiate()
-        self.navigationController.pushViewController(versionVC, animated: true)
     }
-    
 }

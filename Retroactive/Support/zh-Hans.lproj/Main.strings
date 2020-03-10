@@ -20,9 +20,6 @@
 /* Class = "NSTextFieldCell"; title = "Aperture"; ObjectID = "5wq-le-A3N"; */
 "5wq-le-A3N.title" = "Aperture";
 
-/* Class = "NSTextFieldCell"; title = "Unlock Aperture and iPhoto, or install iTunes."; ObjectID = "6B8-22-FCU"; */
-"6B8-22-FCU.title" = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。";
-
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "重做";
 

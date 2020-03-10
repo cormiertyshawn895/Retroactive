@@ -253,6 +253,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    static func pushVersionVC() {
+        AppDelegate.rootVC?.navigationController.pushViewController(VersionViewController.instantiate(), animated: true)
+    }
+
     static func pushSyncingVC() {
         AppDelegate.rootVC?.navigationController.pushViewController(SyncingViewController.instantiate(), animated: true)
     }

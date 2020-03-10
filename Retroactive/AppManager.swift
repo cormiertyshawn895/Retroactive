@@ -12,6 +12,7 @@ enum AppType {
     case finalCutPro7
     case logicPro9
     case keynote5
+    case xcode
     
     case proVideoUpdate
 }
@@ -32,6 +33,7 @@ enum VirtualMachine {
 let kCFBundleIdentifier = "CFBundleIdentifier"
 let kCFBundleVersion = "CFBundleVersion"
 let kCFBundleShortVersionString = "CFBundleShortVersionString"
+let kLSMinimumSystemVersion = "LSMinimumSystemVersion"
 
 let placeholderToken = "{name}"
 let timeToken = "{timeEstimate}"
@@ -141,6 +143,10 @@ extension String {
     
     func iTunesIsNewerThan(otheriTunes: String) -> Bool {
         return self.normalizediTunesVersionString.compare(otheriTunes, options: .numeric) == .orderedDescending
+    }
+    
+    func osIsAtLeast(otherOS: String) -> Bool {
+        return self.compare(otherOS, options: .numeric) != .orderedAscending
     }
 }
 
@@ -376,6 +382,54 @@ class AppManager: NSObject {
     var fCPUpdate: String? {
         return configurationDictionary?["FCPUpdate"] as? String
     }
+    
+    var xcode114URL: String? {
+        return configurationDictionary?["Xcode114URL"] as? String
+    }
+
+    var supportedApps: [AppType] {
+        if osMinorVersion <= 13 {
+            return [.finalCutPro7, .logicPro9, .keynote5]
+        } else if osMinorVersion == 14 {
+            return [.finalCutPro7, .logicPro9, .xcode, .keynote5]
+        } else if osMinorVersion >= 15 {
+            return [.aperture, .iphoto, .itunes]
+        }
+        return []
+    }
+    
+    var getStartedSubTitle: String {
+        if osMinorVersion <= 13 {
+            return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09.".localized()
+        } else if osMinorVersion == 14 {
+            return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4, or fix Keynote ’09.".localized()
+        } else if osMinorVersion >= 15 {
+            return "Unlock Aperture and iPhoto, or install iTunes.".localized()
+        }
+        return ""
+    }
+    
+    var otherOSSubtitle: String {
+        if osMinorVersion <= 14 {
+            return "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
+        } else if osMinorVersion >= 15 {
+            var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. ".localized()
+            otherOSHint += AppManager.shared.platformShippedAfterMojave ? "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized() : "To get started, install macOS Mojave on a separate volume.".localized()
+            return otherOSHint
+        }
+        return ""
+    }
+    
+    var otherOSImage: NSImage? {
+        if osMinorVersion <= 13 {
+            return NSImage(named:"catalina-banner")
+        } else if osMinorVersion == 14 {
+            return NSImage(named:"catalina-banner")
+        } else if osMinorVersion >= 15 {
+            return NSImage(named:"mojave-banner")
+        }
+        return nil
+    }
 
     var downloadURLOfChosenApp: String? {
         get {
@@ -425,31 +479,37 @@ class AppManager: NSObject {
     
     var locationOfChosenApp: String?
     var nameOfChosenApp: String {
-        get {
-            switch self.chosenApp {
-            case .aperture:
-                return "Aperture"
-            case .iphoto:
-                return "iPhoto"
-            case .itunes:
-                return "iTunes"
-            case .finalCutPro7:
-                return "Final Cut Pro 7"
-            case .logicPro9:
-                return "Logic Pro 9"
-            case .keynote5:
-                return "Keynote ’09"
-            case .proVideoUpdate:
-                return "Pro Applications Update 2010-02".localized()
-            default:
-                return "Untitled".localized()
-            }
+        return nameForAppType(chosenApp)
+    }
+    
+    func nameForAppType(_ appType: AppType?) -> String {
+        switch appType {
+        case .aperture:
+            return "Aperture"
+        case .iphoto:
+            return "iPhoto"
+        case .itunes:
+            return "iTunes"
+        case .finalCutPro7:
+            return "Final Cut Pro 7"
+        case .logicPro9:
+            return "Logic Pro 9"
+        case .xcode:
+            return "Xcode 11.4"
+        case .keynote5:
+            return "Keynote ’09"
+        case .proVideoUpdate:
+            return "Pro Applications Update 2010-02".localized()
+        default:
+            return "Untitled".localized()
         }
     }
     
     var spaceConstrainedNameOfChosenApp: String {
         get {
             switch self.chosenApp {
+            case .xcode:
+                return "Xcode"
             case .proVideoUpdate:
                 return "Pro Update".localized()
             default:
@@ -472,6 +532,8 @@ class AppManager: NSObject {
                 return "Final Cut Pro"
             case .logicPro9:
                 return "Logic Pro"
+            case .xcode:
+                return "Xcode"
             case .keynote5:
                 return "Keynote"
             default:
@@ -504,6 +566,8 @@ class AppManager: NSObject {
                 return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
             case .logicPro9:
                 return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
+            case .xcode:
+                return ["11.4"]
             case .keynote5:
                 return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
             default:
@@ -536,6 +600,8 @@ class AppManager: NSObject {
                 return "7.0.3"
             case .logicPro9:
                 return "9.1.8"
+            case .xcode:
+                return "11.4"
             case .keynote5:
                 return "5.3"
             default:
@@ -558,6 +624,8 @@ class AppManager: NSObject {
                 return "com.apple.FinalCutPro"
             case .logicPro9:
                 return "com.apple.logic.pro"
+            case .xcode:
+                return "com.apple.dt.Xcode"
             case .keynote5:
                 return "com.apple.iWork.Keynote"
             default:
@@ -574,6 +642,8 @@ class AppManager: NSObject {
             case .iphoto:
                 return "com.apple.iPhoto9"
             case .itunes:
+                fallthrough
+            case .xcode:
                 // Intentionally left unused
                 return "com.apple.intentionally-left-unused"
             case .finalCutPro7:
@@ -667,6 +737,8 @@ class AppManager: NSObject {
                 return "7.0.4"
             case .logicPro9:
                 return "1700.68"
+            case .xcode:
+                return "9999.99" // Intentionally left unused
             case .keynote5:
                 return "1171"
             default:
@@ -695,6 +767,8 @@ class AppManager: NSObject {
                 return NSImage(named: "iwork_stage2")
             case .logicPro9:
                 return NSImage(named: "iwork_stage2")
+            case .xcode:
+                return NSImage(named: "xcode_stage2")
             default:
                 return nil
             }
@@ -714,6 +788,8 @@ class AppManager: NSObject {
                 return NSImage(named: "fcp7_stage1")
             case .logicPro9:
                 return NSImage(named: "fcp7_stage1")
+            case .xcode:
+                return NSImage(named: "xcode_stage1")
             default:
                 return nil
             }
@@ -721,25 +797,29 @@ class AppManager: NSObject {
     }
     
     var cartoonIcon: NSImage? {
-        get {
-            switch self.chosenApp {
-            case .aperture:
-                return NSImage(named: "aperture_cartoon")
-            case .iphoto:
-                return NSImage(named: "iphoto_cartoon")
-            case .itunes:
-                return NSImage(named: "itunes_cartoon")
-            case .finalCutPro7:
-                return NSImage(named: "final7_cartoon")
-            case .logicPro9:
-                return NSImage(named: "logic9_cartoon")
-            case .keynote5:
-                return NSImage(named: "keynote5_cartoon")
-            case .proVideoUpdate:
-                return NSImage(named: "fcpstudio_cartoon")
-            default:
-                return nil
-            }
+        return cartoonIconForAppType(chosenApp)
+    }
+    
+    func cartoonIconForAppType(_ appType: AppType?) -> NSImage? {
+        switch appType {
+        case .aperture:
+            return NSImage(named: "aperture_cartoon")
+        case .iphoto:
+            return NSImage(named: "iphoto_cartoon")
+        case .itunes:
+            return NSImage(named: "itunes_cartoon")
+        case .finalCutPro7:
+            return NSImage(named: "final7_cartoon")
+        case .xcode:
+            return NSImage(named: "xcode_cartoon")
+        case .logicPro9:
+            return NSImage(named: "logic9_cartoon")
+        case .keynote5:
+            return NSImage(named: "keynote5_cartoon")
+        case .proVideoUpdate:
+            return NSImage(named: "fcpstudio_cartoon")
+        default:
+            return nil
         }
     }
     
@@ -797,17 +877,19 @@ class AppManager: NSObject {
     }
     
     var presentTenseActionOfChosenApp: String {
-        get {
-            switch self.chosenApp {
-            case .itunes:
-                return "install".localized()
-            case .keynote5:
-                return "fix".localized()
-            case .proVideoUpdate:
-                return "install".localized()
-            default:
-                return "unlock".localized()
-            }
+        return presentTenseActionForAppType(chosenApp)
+    }
+    
+    func presentTenseActionForAppType(_ appType: AppType?) -> String {
+        switch appType {
+        case .itunes:
+            return "install".localized()
+        case .keynote5:
+            return "fix".localized()
+        case .proVideoUpdate:
+            return "install".localized()
+        default:
+            return "unlock".localized()
         }
     }
     
@@ -888,6 +970,8 @@ class AppManager: NSObject {
                 return dvdTemplate
             case .logicPro9:
                 return dvdTemplate
+            case .xcode:
+                return String(format: "Download %@".localized(), nameOfChosenApp)
             case .keynote5:
                 return "Download iWork ’09".localized()
             default:
@@ -940,6 +1024,8 @@ class AppManager: NSObject {
             AppDelegate.current.safelyOpenURL(AppManager.shared.fcpDVD)
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicDVD)
+        case .xcode:
+            AppDelegate.current.safelyOpenURL(AppManager.shared.xcode114URL)
         case .keynote5:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
         default:
@@ -968,6 +1054,8 @@ class AppManager: NSObject {
             }
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicUpdate)
+        case .xcode:
+            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: ("~/Downloads" as NSString).expandingTildeInPath)
         case .keynote5:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09Update)
         default:

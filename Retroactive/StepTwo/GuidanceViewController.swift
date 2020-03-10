@@ -43,6 +43,11 @@ class GuidanceViewController: NSViewController {
             airDropAppLabel.stringValue = "Download and update to Logic Pro 9.1.8".localized()
             hideThirdLabel()
         }
+        else if (chosen == .xcode) {
+            downloadAppLabel.stringValue = "Download Xcode from the Apple Developer website".localized()
+            airDropAppLabel.stringValue = "Unarchive Xcode and move it to the Applications folder".localized()
+            hideThirdLabel()
+        }
         alreadyInstalledButton.updateTitle()
         iconImageView.updateIcon()
         continueButton.updateTitle()

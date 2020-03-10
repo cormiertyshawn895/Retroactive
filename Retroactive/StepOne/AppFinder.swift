@@ -120,6 +120,16 @@ class AppFinder: NSObject {
                         AppManager.shared.locationOfChosenApp = path
                         installedFullVersionString = fullVersionNumberString
                         installedShortVersionString = versionNumberString
+                        if AppManager.shared.chosenApp == .xcode {
+                            if let minSysVersionString = appBundle?.object(forInfoDictionaryKey: kLSMinimumSystemVersion) as? String {
+                                print("Xcode min OS version: \(minSysVersionString), current OS version: \(ProcessInfo.osVersionNumberString)")
+                                if (ProcessInfo.osVersionNumberString.osIsAtLeast(otherOS: minSysVersionString)) {
+                                    print("Current OS is at least Xcode min OS")
+                                    self.pushCompletionVC()
+                                    return
+                                }
+                            }
+                        }
                         print("Found compatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
                     } else {
                         incompatibleVersion = versionNumberString
@@ -152,7 +162,7 @@ class AppFinder: NSObject {
 
     private func pushGuidanceVC(_ incompatibleVersionString: String? = nil, shortOldVersionString: String? = nil, shouldOfferUpdate: Bool = false) {
         if AppDelegate.rootVC?.navigationController.topViewController is GuidanceViewController {
-            let name = AppManager.shared.nameOfChosenApp
+            let name = AppManager.shared.spaceConstrainedNameOfChosenApp
             var title: String = ""
             var explaination: String = ""
             
@@ -163,8 +173,12 @@ class AppFinder: NSObject {
             }
             
             if let incompat = incompatibleVersionString {
-                title = String.init(format: "You need to update %@ from %@ to %@.".localized(), name, incompat,compat)
-                explaination = String.init(format: "The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\nDownload the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed %@ (%@) at a custom location, locate it manually.".localized(), name, name, incompat, name, compat, name, compat)
+                title = String.init(format: "You need to update %@ from %@ to %@.".localized(), name, incompat, compat)
+                var middlePartial = String(format: "Download the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again.".localized(), name, compat)
+                if AppManager.shared.chosenApp == .xcode {
+                    middlePartial = String(format: "Directly download %@ from the Apple Developer website, then run Retroactive again.".localized(), name)
+                }
+                explaination = String.init(format: "The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\n%@\n\nIf you have installed %@ (%@) at a custom location, locate it manually.".localized(), name, name, incompat, middlePartial, name, compat)
             } else {
                 if (shouldOfferUpdate) {
                     let short = shortOldVersionString ?? ""
@@ -209,7 +223,7 @@ class AppFinder: NSObject {
                         }
                     }
                 }
-                if (result == .alertSecondButtonReturn) {
+                if (result == .alertSecondButtonReturn && AppManager.shared.notInstalledActionText.count > 0) {
                     AppManager.shared.acquireSelectedApp()
                 }
             }

@@ -44,8 +44,7 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
     
     func alertForOSIncompatibility() {
-        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-        if osVersion.minorVersion > 15 {
+        if osMinorVersion > 15 {
             AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive".localized(),
                                         text: String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@.".localized(), ProcessInfo.versionString),
                                         firstButtonText: "Check for Updates",
