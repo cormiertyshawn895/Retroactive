@@ -12,7 +12,7 @@ import AppKit
 import UIKit
 #endif
 
-open class ConfettiView: ConfettiView.View {
+open class ConfettiView: NSView {
 
     #if canImport(AppKit)
     public typealias View = NSView

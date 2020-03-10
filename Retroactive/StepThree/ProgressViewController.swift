@@ -280,13 +280,11 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     func suppress32BitWarnings() {
         if let resourcePath = Bundle.main.resourcePath?.fileSystemString {
-            let osVersion = ProcessInfo.processInfo.operatingSystemVersion
-            let minorVersion = osVersion.minorVersion
-            if (minorVersion == 13) {
+            if (osMinorVersion == 13) {
                 print("supporessing 32 bit warnings on High Sierra")
                 self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/HighSierra32Bit.mobileconfig"])
             }
-            if (minorVersion == 14) {
+            if (osMinorVersion == 14) {
                 print("supporessing 32 bit warnings on Mojave")
                 self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/Mojave32Bit.mobileconfig"])
             }

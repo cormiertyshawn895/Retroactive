@@ -1,7 +1,7 @@
-### Retroactive is an app that lets you run Aperture, iPhoto, and iTunes on macOS Catalina. It also lets you run Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave and macOS High Sierra.
+### Retroactive lets you run Aperture, iPhoto, and iTunes on macOS Catalina. Xcode 11.4 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and Keynote ’09 on macOS Mojave or macOS High Sierra.
 
 <p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.6/Retroactive.1.6.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
 <p>
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
@@ -11,9 +11,9 @@
 
 ### 💡 iTunes and macOS Catalina 10.15.4
 
-If you have installed iTunes on macOS Catalina with Retroactive 1.4 or earlier, and have updated to macOS Catalina 10.15.4 or later, **you need to re-install iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip).** 
+If you have installed iTunes on macOS Catalina with Retroactive 1.4 or earlier, and have updated to macOS Catalina 10.15.4 or later, **you need to re-install iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.6/Retroactive.1.6.zip).** 
 
-Re-installing iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip) resolves error -42408, -45076, and 11571, so that you can continue to use Apple Music, iTunes Store, and App Store in iTunes. It also resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device, and allows downloaded app icons to display correctly.
+Re-installing iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.6/Retroactive.1.6.zip) resolves error -42408, -45076, and 11571, so that you can continue to use Apple Music, iTunes Store, and App Store in iTunes. It also resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device, and allows downloaded app icons to display correctly.
 
 ---
 
@@ -39,17 +39,17 @@ Pick the app you want to run. If you want to run multiple apps from here, pick a
 
 ![](screenshots/4.jpg)
 
-On macOS Mojave and macOS High Sierra, Retroactive can also unlock Final Cut Pro 7, Logic Pro 9 (experimental), and fix Keynote ’09.
+On macOS Mojave and macOS High Sierra, Retroactive can also unlock Final Cut Pro 7, Logic Pro 9 (experimental), Xcode 11.4 (requires macOS Mojave), and fix Keynote ’09.
 
 ![](screenshots/4b.jpg)
 
-I’ll use Aperture as the example, but the same process also works for iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, and Keynote ’09.
+I’ll use Aperture as the example, but the same process also works for iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.4, and Keynote ’09.
 
 ---
 
 ### Locating the app or choosing a version
 
-Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, or Keynote ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
+Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.4, or Keynote ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
 
 If Retroactive can’t locate an existing install of Aperture or iPhoto, you’ll either be asked to download it from the Purchased list in App Store, or re-install it from a DVD disc. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
 
@@ -120,6 +120,8 @@ After successfully modifying or installing the app, you can play with it to your
 - All Final Cut Pro 7 features should work.
 
 - Support for Logic Pro 9 is experimental. You may see frequent freezes and hangs.
+
+- Most Xcode 11.4 features should work.
 
 - After fixing Keynote ’09 with Retroactive, you can normally play slideshows.
 

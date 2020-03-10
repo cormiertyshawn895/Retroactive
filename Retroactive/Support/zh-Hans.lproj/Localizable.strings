@@ -70,7 +70,11 @@
 "Some serial numbers for Final Cut Pro 7.0 do not work with Final Cut Pro 7.0.3. If you are asked to register again, you need to find and enter a serial number compatible with Final Cut Pro 7.0.3." = "有些兼容 Final Cut Pro 7.0 的序列号不兼容 Final Cut Pro 7.0.3。如果您的 Mac 提示需要重新注册软件，请寻找并输入与 Final Cut Pro 7.0.3 相兼容的注册码。";
 "Stop Installing %@" = "停止安装 %@";
 "The Internet connection appears to be offline." = "您的设备没有接入互联网";
-"The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\nDownload the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again.\n\nIf you have installed %@ (%@) at a custom location, locate it manually." = "您已安装的 %@ 是 %@ (%@)，版本太旧，因此无法解除封印。\n\n前往 Mac App Store 下载最新版本的 %@ (%@)，然后重新运行解印。\n\n如果您在自定义位置安装了 %@ (%@)，请手动寻找并选择该应用程序。";
+"The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\n%@\n\nIf you have installed %@ (%@) at a custom location, locate it manually." = "您已安装的 %@ 是 %@ (%@)，版本太旧，因此无法解除封印。\n\n%@\n\n如果您在自定义位置安装了 %@ (%@)，请手动寻找并选择该应用程序。";
+"Download the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again." = "前往 Mac App Store 下载最新版本的 %@ (%@)，然后重新运行解印。";
+"Directly download %@ from the Apple Developer website, then run Retroactive again." = "直接前往 Apple 开发者网站下载 %@，然后重新运行解印。";
+"Download Xcode from the Apple Developer website" = "前往 Apple 开发者网站下载 Xcode";
+"Unarchive Xcode and move it to the Applications folder" = "先解压缩 Xcode，然后将其移动至应用程序文件夹";
 "There isn't enough free space to install %@" = "剩余磁盘空间不足，无法安装 %@";
 "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@." = "此版本的解印仅适用于 macOS High Sierra、macOS Mojave 和 macOS Catalina，并可能不兼容 %@。";
 "If iTunes 12.6.5 can't back up your device, try to use iTunes 12.9.5 or Finder instead." = "如果 iTunes 12.6.5 无法备份您的设备，请安装 iTunes 12.9.5 或直接使用访达。";
@@ -78,6 +82,7 @@
 "Unable to download %@" = "无法下载 %@";
 "Unable to quit Retroactive" = "无法退出解印";
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09." = "解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 Keynote ’09。";
+"Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4, or fix Keynote ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.4 的封印，或修复 Keynote ’09。";
 "Unlock {name} again" = "重新解印 {name}";
 "Untitled" = "新项目";
 "Update (Recommended)" = "安装更新 (推荐)";
@@ -127,3 +132,4 @@
 "Use iTunes without Full Disk Access" = "跳过完全磁盘访问权限使用 iTunes";
 "Why isn’t this more granular?" = "为什么不能选择更加细化的访问权限？";
 "While apps optimized for macOS Catalina can request granular access to Removable Volumes, iTunes was built before macOS Catalina. Retroactive’s loader script has similar requirements." = "尽管为 macOS Catalina 优化的应用程序可以选择只允许访问可移除的宗卷，iTunes 为 macOS Catalina 之前的系统构建。解印的加载脚本也有类似的要求。";
+"Unlock Aperture and iPhoto, or install iTunes." = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。";

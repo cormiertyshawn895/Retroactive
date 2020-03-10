@@ -44,13 +44,25 @@ class AuthenticateViewController: NSViewController {
     }
     
     @IBAction func authenticateClicked(_ sender: Any) {
-        if (AppManager.runUnameToPreAuthenticate() == errAuthorizationSuccess) {
-            self.navigationController.pushViewController(ProgressViewController.instantiate(), animated: true)
+        if (AppManager.runUnameToPreAuthenticate() != errAuthorizationSuccess) {
+            return
         }
+        if (AppManager.shared.chosenApp == .xcode) {
+            patchXcode()
+            return
+        }
+        self.navigationController.pushViewController(ProgressViewController.instantiate(), animated: true)
     }
     
     @IBAction func viewSourceClicked(_ sender: Any) {
         AppDelegate.current.viewSource()
+    }
+    
+    func patchXcode() {
+        guard let appPath = AppManager.shared.appPathCString else { return }
+        _ = AppManager.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", appPath], path: tempDir)
+        _ = AppManager.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kLSMinimumSystemVersion, "-string", "10.14", "\(appPath)/Contents/Info.plist"], path: tempDir)
+        AppDelegate.pushCompletionVC()
     }
     
     
