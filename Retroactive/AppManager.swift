@@ -20,6 +20,7 @@ enum AppType {
 enum iTunesVersion {
     case darkMode
     case appStore
+    case configurator
     case classicTheme
     case coverFlow
 }
@@ -387,6 +388,10 @@ class AppManager: NSObject {
         return configurationDictionary?["Xcode114URL"] as? String
     }
 
+    var configuratorURL: String? {
+        return configurationDictionary?["ConfiguratorURL"] as? String
+    }
+
     var supportedApps: [AppType] {
         if osMinorVersion <= 13 {
             return [.finalCutPro7, .logicPro9, .keynote5]
@@ -444,6 +449,8 @@ class AppManager: NSObject {
                     return configurationDictionary?["iTunes129URL"] as? String
                 case .appStore:
                     return configurationDictionary?["iTunes126URL"] as? String
+                case .configurator:
+                    return self.configuratorURL
                 case .classicTheme:
                     return configurationDictionary?["iTunes114URL"] as? String
                 case .coverFlow:
@@ -555,6 +562,8 @@ class AppManager: NSObject {
                     return ["12.9.5"]
                 case .appStore:
                     return ["12.6.5"]
+                case .configurator:
+                    return ["999.99.99"]
                 case .classicTheme:
                     return ["11.4"]
                 case .coverFlow:
@@ -589,6 +598,8 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
+                case .configurator:
+                    return "999.99.99"
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
@@ -726,6 +737,8 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
+                case .configurator:
+                    return "999.99.99"
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
@@ -836,6 +849,8 @@ class AppManager: NSObject {
                     return iTunes129Dive
                 case .appStore:
                     return iTunes126Dive
+                case .configurator:
+                    return configuratorURL
                 case .classicTheme:
                     return iTunes114Dive
                 case .coverFlow:
@@ -919,6 +934,8 @@ class AppManager: NSObject {
                     return "25 minutes".localized()
                 case .appStore, .classicTheme, .coverFlow:
                     return "10 minutes".localized()
+                case .configurator:
+                    return "Not Applicable"
                 case .none:
                     return "an hour".localized()
                 }
@@ -993,6 +1010,8 @@ class AppManager: NSObject {
                     return nil
                 case .appStore:
                     return "If iTunes 12.6.5 can't back up your device, try to use iTunes 12.9.5 or Finder instead.".localized()
+                case .configurator:
+                    return nil
                 case .classicTheme:
                     return nil
                 case .coverFlow:
@@ -1162,6 +1181,10 @@ class AppManager: NSObject {
     }
 
     var currentVMImage: NSImage? {
+        if (self.chosenApp == .itunes) {
+            return NSImage(named: "configurator")
+        }
+
         switch self.currentVM {
         case .vmware:
             return NSImage(named: "vmware")
@@ -1191,7 +1214,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return ""
             case .itunes:
-                return ""
+                return "Use Apple Configurator 2 to download iOS apps".localized()
             default:
                 return ""
             }
@@ -1214,7 +1237,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return ""
             case .itunes:
-                return ""
+                return "Starting from April 2020, you'll need to use Apple Configurator 2 to download iOS apps on your Mac.".localized()
             default:
                 return ""
             }
@@ -1263,6 +1286,14 @@ class AppManager: NSObject {
             print("can't find current screen, assuming not in virtual machine")
             return false
         }
+    }
+    
+    var needsToShowiTunesWorkaround: Bool {
+        return self.chosenApp == .itunes && (self.choseniTunesVersion == .appStore || self.choseniTunesVersion == .configurator)
+    }
+
+    var needsToShowCatch: Bool {
+        return needsToShowiTunesWorkaround || (self.likelyInVirtualMachine && self.chosenAppHasLimitedFeaturesInVirtualMachine)
     }
     
     var iTunesLibraryPath: String? {

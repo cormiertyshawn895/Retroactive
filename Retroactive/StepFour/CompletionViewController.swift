@@ -14,6 +14,8 @@ class CompletionViewController: NSViewController {
     @IBOutlet weak var clippingView: NSView!
     @IBOutlet weak var extraInfoLabel: DisplayOnlyTextField!
     @IBOutlet weak var dividerLine: NSBox!
+    @IBOutlet weak var catchContainerView: NSView!
+    var catchViewController: CatchViewController?
         
     var confettiView: ConfettiView?
     
@@ -30,6 +32,18 @@ class CompletionViewController: NSViewController {
         } else if (AppManager.shared.behindTheScenesOfChosenApp == nil) {
             behindTheScenesButton.isHidden = true
         }
+        
+        if (AppManager.shared.needsToShowCatch) {
+            catchViewController = CatchViewController.instantiate()
+            catchViewController?.dimSourceViewController = self
+            if let catchView = catchViewController?.view {
+                catchContainerView.addSubview(catchView)
+                iconView.frame = CGRect(x: 447, y: 330, width: 143, height: 143)
+            }
+        } else {
+            iconView.frame = CGRect(x: 388, y: 305, width: 260, height: 260)
+        }
+
         congratulatoryLabel.updateToken()
         launchAppLabel.updateToken()
         launchAppLabel.addShadow()

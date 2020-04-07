@@ -538,6 +538,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             case .appStore, .classicTheme, .coverFlow:
                 self.installPackagediTunes()
                 break
+            case .configurator:
+                break
             case .none:
                 break
             }

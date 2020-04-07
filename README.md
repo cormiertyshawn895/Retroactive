@@ -9,11 +9,9 @@
 
 ---
 
-### 💡 iTunes and macOS Catalina 10.15.4
+### 💡 Downloading iOS Apps
 
-If you have installed iTunes on macOS Catalina with Retroactive 1.4 or earlier, and have updated to macOS Catalina 10.15.4 or later, **you need to re-install iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.6/Retroactive.1.6.zip).** 
-
-Re-installing iTunes with [the latest version of Retroactive](https://github.com/cormiertyshawn895/Retroactive/releases/download/1.6/Retroactive.1.6.zip) resolves error -42408, -45076, and 11571, so that you can continue to use Apple Music, iTunes Store, and App Store in iTunes. It also resolves an issue where iTunes cannot read the contents of a connected iOS or iPadOS device, and allows downloaded app icons to display correctly.
+Starting from April 2020, you'll need to use [Apple Configurator 2](https://apps.apple.com/app/apple-configurator-2/id1037126344) to [download iOS apps on your Mac](https://www.youtube.com/watch?v=M_3t06FEhR0).
 
 ---
 
@@ -58,7 +56,7 @@ If Retroactive can’t locate an existing install of Aperture or iPhoto, you’l
 If you chose iTunes, Retroactive will ask you which version to install, then automatically download and install it for you.
 
 - iTunes 12.9.5 supports Dark Mode and most DJ apps.
-- iTunes 12.6.5 supports downloading and archiving iOS apps.
+- iTunes 12.6.5 supports Ringtones and iTunes U.
 - iTunes 11.4 has a classic look.
 - iTunes 10.7 supports CoverFlow.
 
@@ -111,7 +109,7 @@ After successfully modifying or installing the app, you can play with it to your
 
 - All features should work for iTunes 12.9.5.
 
-- All features should work for iTunes 12.6.5 except for backing up an iOS device. Use iTunes 12.9.5 or Finder to back up your device instead.
+- Most features should work for iTunes 12.6.5. Use iTunes 12.9.5 or Finder to back up your device instead. Use [Apple Configurator 2](https://apps.apple.com/app/apple-configurator-2/id1037126344) to [download iOS apps on your Mac](https://www.youtube.com/watch?v=M_3t06FEhR0).
 
 - Movies and TV Shows downloaded from the iTunes Store may be unable to play in iTunes. Download or play them in the TV app instead. 
 

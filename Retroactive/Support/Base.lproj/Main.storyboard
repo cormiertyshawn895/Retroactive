@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -340,11 +341,11 @@
                             <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="AWd-yg-cRj">
                                 <rect key="frame" x="0.0" y="226" width="1011" height="249"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="MVo-kS-MKQ">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="MVo-kS-MKQ">
                                     <rect key="frame" x="0.0" y="0.0" width="1011" height="249"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <view ambiguous="YES" id="mKT-Na-Lvv">
+                                        <view id="mKT-Na-Lvv">
                                             <rect key="frame" x="0.0" y="0.0" width="996" height="234"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
@@ -388,7 +389,7 @@
                             <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ffd-mC-qil">
                                 <rect key="frame" x="37" y="20" width="97" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" ambiguous="YES" id="Wd2-ea-f8I">
+                                <view key="contentView" id="Wd2-ea-f8I">
                                     <rect key="frame" x="0.0" y="0.0" width="97" height="31"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -716,7 +717,7 @@
                             <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="28" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-zI-fDM">
                                 <rect key="frame" x="4" y="6" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" ambiguous="YES" id="e1D-S9-JsC">
+                                <view key="contentView" id="e1D-S9-JsC">
                                     <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -841,10 +842,15 @@ You can use {name} now.</string>
                                 <rect key="frame" x="294" y="233" width="448" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="81z-xq-eF1">
+                                <rect key="frame" x="82" y="485" width="873" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </customView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="behindTheScenesButton" destination="KrF-Pq-lVe" id="qyx-oY-8If"/>
+                        <outlet property="catchContainerView" destination="81z-xq-eF1" id="aGr-F9-oVJ"/>
                         <outlet property="clippingView" destination="oB4-lP-2Xb" id="7tc-wG-aoX"/>
                         <outlet property="congratulatoryLabel" destination="qBg-47-9hl" id="cfP-Uq-A0E"/>
                         <outlet property="dividerLine" destination="fHQ-Lw-oi2" id="CZj-kh-JxQ"/>
@@ -857,6 +863,143 @@ You can use {name} now.</string>
                 <customObject id="fSg-sX-FP8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75.5" y="3986.5"/>
+        </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="O17-1l-3r6">
+            <objects>
+                <viewController storyboardIdentifier="TutorialViewController" id="kPm-Xs-0mO" customClass="TutorialViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Egx-RN-AWW">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="593"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <avPlayerView controlsStyle="none" translatesAutoresizingMaskIntoConstraints="NO" id="V5v-GJ-aPF" customClass="NonRespondingAVPlayerView" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="93" width="800" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="800" id="2T8-Mo-S2P"/>
+                                    <constraint firstAttribute="height" constant="500" id="wDv-kw-Hdx"/>
+                                </constraints>
+                            </avPlayerView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hvm-lQ-Zkn" customClass="FunButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="755" y="542" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="a4L-5M-277"/>
+                                    <constraint firstAttribute="height" constant="33" id="ghF-1a-bp1"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="closeButton" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="FbV-KM-Mzj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissClicked:" target="kPm-Xs-0mO" id="qBe-z6-1zh"/>
+                                </connections>
+                            </button>
+                            <box boxType="custom" borderWidth="0.0" cornerRadius="20" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="FIE-FA-67V">
+                                <rect key="frame" x="20" y="28" width="40" height="40"/>
+                                <view key="contentView" id="Wm3-ax-Y3c">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="71Q-tY-WPa">
+                                            <rect key="frame" x="11" y="8" width="19" height="24"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="ssy-G5-j5n">
+                                                <font key="font" metaFont="systemBold" size="21"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="71Q-tY-WPa" firstAttribute="centerX" secondItem="Wm3-ax-Y3c" secondAttribute="centerX" id="ELv-TA-amT"/>
+                                        <constraint firstItem="71Q-tY-WPa" firstAttribute="centerY" secondItem="Wm3-ax-Y3c" secondAttribute="centerY" id="kAn-Gy-VtT"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="E2V-Mg-Vi3"/>
+                                    <constraint firstAttribute="width" constant="40" id="Lrt-gr-FHJ"/>
+                                </constraints>
+                                <color key="borderColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vt0-eR-7Ds">
+                                <rect key="frame" x="69" y="47" width="77" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="titleLabel" id="Mid-N4-G3d">
+                                    <font key="font" metaFont="systemBold" size="16"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UzI-aG-6P2">
+                                <rect key="frame" x="622" y="49" width="156" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eyn-rq-KGw">
+                                <rect key="frame" x="69" y="29" width="82" height="16"/>
+                                <buttonCell key="cell" type="bevel" title="captionLabel" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="iDa-NE-ria">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="captionButtonClicked:" target="kPm-Xs-0mO" id="2SA-8C-elS"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hx6-jC-Ulj" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="670" y="19" width="108" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Ku2-aC-06g"/>
+                                    <constraint firstAttribute="width" constant="108" id="Ta7-VR-yni"/>
+                                </constraints>
+                                <buttonCell key="cell" type="bevel" title="actionButton" bezelStyle="rounded" alignment="right" imageScaling="proportionallyDown" inset="2" id="UPs-Lm-AYj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="15"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="nextSlideClicked:" target="kPm-Xs-0mO" id="ymI-6y-X7Z"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KtP-VZ-of5">
+                                <rect key="frame" x="507" y="41" width="102" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Print Time" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oGF-OB-LqU">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="printTimeClicked:" target="kPm-Xs-0mO" id="aM2-j9-2Cz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="eyn-rq-KGw" firstAttribute="top" secondItem="vt0-eR-7Ds" secondAttribute="bottom" constant="2" id="3Cs-ZH-Ctk"/>
+                            <constraint firstAttribute="trailing" secondItem="Hx6-jC-Ulj" secondAttribute="trailing" constant="22" id="9Fo-WS-eMM"/>
+                            <constraint firstItem="vt0-eR-7Ds" firstAttribute="top" secondItem="V5v-GJ-aPF" secondAttribute="bottom" constant="27" id="BY3-Ze-39o"/>
+                            <constraint firstItem="vt0-eR-7Ds" firstAttribute="leading" secondItem="FIE-FA-67V" secondAttribute="trailing" constant="11" id="BsF-J7-FpY"/>
+                            <constraint firstAttribute="bottom" secondItem="FIE-FA-67V" secondAttribute="bottom" constant="28" id="RYh-AH-vSy"/>
+                            <constraint firstAttribute="bottom" secondItem="Hx6-jC-Ulj" secondAttribute="bottom" constant="19" id="adG-4Z-bAY"/>
+                            <constraint firstAttribute="trailing" secondItem="V5v-GJ-aPF" secondAttribute="trailing" id="dLr-zs-QJg"/>
+                            <constraint firstAttribute="trailing" secondItem="hvm-lQ-Zkn" secondAttribute="trailing" constant="12" id="g2u-Yx-DcW"/>
+                            <constraint firstItem="hvm-lQ-Zkn" firstAttribute="top" secondItem="Egx-RN-AWW" secondAttribute="top" constant="18" id="oMN-iz-fhc"/>
+                            <constraint firstItem="eyn-rq-KGw" firstAttribute="leading" secondItem="FIE-FA-67V" secondAttribute="trailing" constant="9" id="onT-wF-sxn"/>
+                            <constraint firstItem="V5v-GJ-aPF" firstAttribute="leading" secondItem="Egx-RN-AWW" secondAttribute="leading" id="qos-df-pVm"/>
+                            <constraint firstItem="V5v-GJ-aPF" firstAttribute="top" secondItem="Egx-RN-AWW" secondAttribute="top" id="ryj-Wx-teW"/>
+                            <constraint firstItem="FIE-FA-67V" firstAttribute="top" secondItem="V5v-GJ-aPF" secondAttribute="bottom" constant="25" id="xOY-O4-B2S"/>
+                            <constraint firstItem="FIE-FA-67V" firstAttribute="leading" secondItem="Egx-RN-AWW" secondAttribute="leading" constant="20" id="yea-uF-g1L"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="captionButton" destination="eyn-rq-KGw" id="eOZ-Ga-O8s"/>
+                        <outlet property="closeButton" destination="hvm-lQ-Zkn" id="e8b-lf-Wix"/>
+                        <outlet property="indicatorContainerView" destination="UzI-aG-6P2" id="xVm-Q1-cAp"/>
+                        <outlet property="nextButton" destination="Hx6-jC-Ulj" id="hf5-Qd-uHd"/>
+                        <outlet property="numberLabel" destination="71Q-tY-WPa" id="atW-5F-Z27"/>
+                        <outlet property="playerView" destination="V5v-GJ-aPF" id="Cf2-ES-D5D"/>
+                        <outlet property="titleLabel" destination="vt0-eR-7Ds" id="9sC-M9-cBu"/>
+                    </connections>
+                </viewController>
+                <customObject id="NLt-ba-QOw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="4698.5"/>
         </scene>
         <!--Version View Controller-->
         <scene sceneID="yHJ-nv-MW9">
@@ -921,20 +1064,20 @@ You can use {name} now.</string>
                             <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z4-36-xEr">
                                 <rect key="frame" x="0.0" y="99" width="1011" height="334"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="HEd-dy-8VD">
-                                    <rect key="frame" x="0.0" y="0.0" width="1011" height="334"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="HEd-dy-8VD">
+                                    <rect key="frame" x="0.0" y="0.0" width="1011" height="319"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCT-A5-WCX">
-                                            <rect key="frame" x="0.0" y="0.0" width="1182" height="334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1443" height="319"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yha-Hy-OXT">
-                                                    <rect key="frame" x="50" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="50" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLM-mg-Kxg" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="50" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="zSq-cT-uR4">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -945,11 +1088,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fox-RP-Kpo">
-                                                    <rect key="frame" x="322" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="322" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKN-s4-v7R" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="322" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="322" y="21" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Vg8-Mw-L2F">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -960,11 +1103,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Fc-OJG">
-                                                    <rect key="frame" x="594" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="865" y="22" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCh-XX-10X" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="594" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="865" y="22" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="MNj-XU-Idk">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -975,11 +1118,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzl-Zi-zca">
-                                                    <rect key="frame" x="866" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="1137" y="22" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-Lo-1JI" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="866" y="36" width="270" height="277"/>
+                                                    <rect key="frame" x="1137" y="22" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="qWG-va-Fsp">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -989,15 +1132,30 @@ You can use {name} now.</string>
                                                         <action selector="coverFlowClicked:" target="Jjk-tf-Q2z" id="8zj-DT-QrV"/>
                                                     </connections>
                                                 </button>
+                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wdr-p2-Rck">
+                                                    <rect key="frame" x="594" y="21" width="270" height="277"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </customView>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0T6-CC-yvb" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                                    <rect key="frame" x="594" y="21" width="270" height="277"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="vQi-gc-Otq">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="configuratorClicked:" target="Jjk-tf-Q2z" id="Fyu-jb-zQA"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </customView>
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="dtB-tc-ged">
-                                    <rect key="frame" x="0.0" y="318" width="1011" height="16"/>
+                                    <rect key="frame" x="0.0" y="319" width="1011" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fpk-Gf-tcu">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fpk-Gf-tcu">
                                     <rect key="frame" x="-100" y="-100" width="15" height="319"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1009,6 +1167,8 @@ You can use {name} now.</string>
                         <outlet property="appStoreVersionView" destination="fox-RP-Kpo" id="8M7-rO-raJ"/>
                         <outlet property="classicThemeButton" destination="VCh-XX-10X" id="Zrs-N9-UQR"/>
                         <outlet property="classicThemeVersionView" destination="jpu-Fc-OJG" id="84c-lc-Lkg"/>
+                        <outlet property="configuratorButton" destination="0T6-CC-yvb" id="Zm7-VR-yew"/>
+                        <outlet property="configuratorVersionView" destination="Wdr-p2-Rck" id="0cK-kS-ajm"/>
                         <outlet property="coverFlowButton" destination="a4L-Lo-1JI" id="O0m-a2-XO7"/>
                         <outlet property="coverFlowVersionView" destination="rzl-Zi-zca" id="Gyk-Pz-26x"/>
                         <outlet property="darkModeButton" destination="PLM-mg-Kxg" id="OIB-Js-dGD"/>
@@ -1087,7 +1247,7 @@ You can use {name} now.</string>
                                     <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="24" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ry6-3k-UD5">
                                         <rect key="frame" x="0.0" y="0.0" width="142" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <view key="contentView" ambiguous="YES" id="pS2-TW-kMe">
+                                        <view key="contentView" id="pS2-TW-kMe">
                                             <rect key="frame" x="0.0" y="0.0" width="142" height="68"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
@@ -1137,7 +1297,7 @@ You can use {name} now.</string>
                             <box fixedFrame="YES" boxType="custom" borderWidth="0.0" cornerRadius="11" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="iab-3i-nOc">
                                 <rect key="frame" x="43" y="30" width="381" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" ambiguous="YES" id="m1f-ZM-u1F">
+                                <view key="contentView" id="m1f-ZM-u1F">
                                     <rect key="frame" x="0.0" y="0.0" width="381" height="67"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
@@ -1267,41 +1427,94 @@ You can use {name} now.</string>
                                 <rect key="frame" x="274" y="269" width="508" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
-                            <box hidden="YES" fixedFrame="YES" boxType="custom" borderType="none" cornerRadius="11" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="lN5-Mz-2x0">
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sZG-mN-EEk">
                                 <rect key="frame" x="82" y="485" width="873" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" ambiguous="YES" id="kYD-Rs-Qye">
+                            </customView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="appLocationTextField" destination="Rqw-cG-14g" id="0o1-eG-7oJ"/>
+                        <outlet property="authenticateButton" destination="iYC-bf-t4H" id="aje-xn-DrA"/>
+                        <outlet property="authenticateLabel" destination="ocb-6h-IMr" id="gA4-Yl-Mhe"/>
+                        <outlet property="catchContainerView" destination="sZG-mN-EEk" id="cKZ-fy-0P6"/>
+                        <outlet property="explainationLabel" destination="Gra-Jh-rYX" id="Lhh-ia-z9C"/>
+                        <outlet property="iconView" destination="5Tt-dG-ikx" id="YT7-nL-KZ0"/>
+                        <outlet property="searchingForLabel" destination="Eah-NJ-Zxt" id="N5J-1O-I0l"/>
+                        <outlet property="viewSourceButton" destination="y4m-yh-iGl" id="ZLP-vT-uKm"/>
+                    </connections>
+                </viewController>
+                <customObject id="ThI-SK-k7l" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-970.5" y="2593.5"/>
+        </scene>
+        <!--CatchViewController-->
+        <scene sceneID="FOD-T1-0gq">
+            <objects>
+                <viewController title="CatchViewController" storyboardIdentifier="CatchViewController" id="vPp-nN-oO0" customClass="CatchViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="039-hz-DLO">
+                        <rect key="frame" x="0.0" y="0.0" width="873" height="104"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <box fixedFrame="YES" boxType="custom" borderType="none" cornerRadius="11" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="h0m-v5-VKH">
+                                <rect key="frame" x="0.0" y="0.0" width="873" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="xEJ-KO-cRm">
                                     <rect key="frame" x="0.0" y="0.0" width="873" height="104"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FEy-dh-1lY">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P7U-bo-CBU">
                                             <rect key="frame" x="113" y="61" width="742" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="{chosenAppVMTitle}" id="Kxf-lg-IRo">
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="{chosenAppVMTitle}" id="mCA-Tk-mnJ">
                                                 <font key="font" metaFont="systemBold" size="18"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ih6-22-o5N">
-                                            <rect key="frame" x="113" y="9" width="742" height="46"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bc6-KC-BHs">
+                                            <rect key="frame" x="113" y="11" width="742" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <textFieldCell key="cell" title="{chosenAppVMDescription}" id="TSF-eD-3w7">
+                                            <textFieldCell key="cell" title="{chosenAppVMDescription}" id="nyl-74-1i5">
                                                 <font key="font" metaFont="menu" size="14"/>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEA-eq-p28">
+                                        <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSU-wL-e7W" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                            <rect key="frame" x="113" y="15" width="201" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="{workaroundLink}" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="VNw-jg-3J3">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu" size="14"/>
+                                            </buttonCell>
+                                            <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <action selector="workaroundClicked:" target="vPp-nN-oO0" id="W8F-BQ-rXr"/>
+                                            </connections>
+                                        </button>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2NG-bD-eD3">
                                             <rect key="frame" x="25" y="26" width="59" height="59"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="parallels" id="GIP-rN-ATh"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="parallels" id="h4a-7W-2gd"/>
                                         </imageView>
-                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a71-pF-Gir">
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kyi-mi-5Sm">
                                             <rect key="frame" x="58" y="14" width="44" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="GRy-w8-Py7"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="aus-tA-A75"/>
                                         </imageView>
+                                        <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFV-3c-TlH" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                            <rect key="frame" x="326" y="15" width="530" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="bevel" title="{workaroundLearnMoreDescription}" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="xc9-Xd-TYB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu" size="14"/>
+                                            </buttonCell>
+                                            <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <action selector="workaroundLearnMoreClicked:" target="vPp-nN-oO0" id="Jhn-Ih-4m7"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <color key="fillColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -1309,22 +1522,17 @@ You can use {name} now.</string>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="appLocationTextField" destination="Rqw-cG-14g" id="0o1-eG-7oJ"/>
-                        <outlet property="authenticateButton" destination="iYC-bf-t4H" id="aje-xn-DrA"/>
-                        <outlet property="authenticateLabel" destination="ocb-6h-IMr" id="gA4-Yl-Mhe"/>
-                        <outlet property="chosenAppVMDescriptionField" destination="Ih6-22-o5N" id="rXh-n6-bma"/>
-                        <outlet property="chosenAppVMTitleField" destination="FEy-dh-1lY" id="4vY-nf-daz"/>
-                        <outlet property="currentVMIconImageView" destination="sEA-eq-p28" id="cS1-ip-bLx"/>
-                        <outlet property="explainationLabel" destination="Gra-Jh-rYX" id="Lhh-ia-z9C"/>
-                        <outlet property="iconView" destination="5Tt-dG-ikx" id="YT7-nL-KZ0"/>
-                        <outlet property="searchingForLabel" destination="Eah-NJ-Zxt" id="N5J-1O-I0l"/>
-                        <outlet property="viewSourceButton" destination="y4m-yh-iGl" id="ZLP-vT-uKm"/>
-                        <outlet property="virtualMachineBox" destination="lN5-Mz-2x0" id="aEi-o6-VCO"/>
+                        <outlet property="chosenAppVMDescriptionField" destination="Bc6-KC-BHs" id="eSQ-QQ-7aR"/>
+                        <outlet property="chosenAppVMTitleField" destination="P7U-bo-CBU" id="Uk0-0g-eR5"/>
+                        <outlet property="currentVMIconImageView" destination="2NG-bD-eD3" id="ZBO-yy-A7f"/>
+                        <outlet property="virtualMachineBox" destination="h0m-v5-VKH" id="gpi-W4-LeV"/>
+                        <outlet property="workaroundButton" destination="YSU-wL-e7W" id="30Q-Ps-qN1"/>
+                        <outlet property="workaroundLearnMoreButton" destination="dFV-3c-TlH" id="sLA-n3-Mv6"/>
                     </connections>
                 </viewController>
-                <customObject id="ThI-SK-k7l" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="iuM-DS-dBc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-970.5" y="2593.5"/>
+            <point key="canvasLocation" x="-971" y="3042"/>
         </scene>
         <!--Syncing View Controller-->
         <scene sceneID="yEr-wf-JU3">
@@ -1460,6 +1668,7 @@ You can use {name} now.</string>
         <image name="arrow-dotted-up" width="13" height="100.5"/>
         <image name="arrow-up" width="13" height="59"/>
         <image name="back" width="51" height="51"/>
+        <image name="closeButton" width="63" height="62"/>
         <image name="ipod_family" width="261" height="231.5"/>
         <image name="itunes12_9" width="281" height="195.5"/>
         <image name="itunes_cartoon" width="252" height="252"/>

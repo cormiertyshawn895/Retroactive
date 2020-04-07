@@ -92,6 +92,10 @@
 		60F0F941240B895E00C3715D /* SyncingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0F940240B895E00C3715D /* SyncingViewController.swift */; };
 		60F0F943240B902700C3715D /* UpArrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0F942240B902700C3715D /* UpArrowViewController.swift */; };
 		60F0F945240B903500C3715D /* PadlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F0F944240B903500C3715D /* PadlockViewController.swift */; };
+		60F62282243AE40800B07865 /* CatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F62281243AE40800B07865 /* CatchViewController.swift */; };
+		60F62284243AE6C300B07865 /* ConfiguratorTutorial.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 60F62283243AE6C300B07865 /* ConfiguratorTutorial.mp4 */; };
+		60F62289243AE93C00B07865 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F62288243AE93C00B07865 /* AVKit.framework */; };
+		60F6228B243B04BA00B07865 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F6228A243B04BA00B07865 /* TutorialViewController.swift */; };
 		60F7A06324091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin in Resources */ = {isa = PBXBuildFile; fileRef = 60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */; };
 /* End PBXBuildFile section */
 
@@ -197,6 +201,11 @@
 		60F0F944240B903500C3715D /* PadlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadlockViewController.swift; sourceTree = "<group>"; };
 		60F0F94D240BB9A700C3715D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		60F0F94F240BB9A900C3715D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		60F62281243AE40800B07865 /* CatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchViewController.swift; sourceTree = "<group>"; };
+		60F62283243AE6C300B07865 /* ConfiguratorTutorial.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ConfiguratorTutorial.mp4; sourceTree = "<group>"; };
+		60F62286243AE92300B07865 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		60F62288243AE93C00B07865 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		60F6228A243B04BA00B07865 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = iTunes12_6_5_Assets_Diff.bin; sourceTree = "<group>"; };
 		60F7A06824098AB0003CD509 /* How.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = How.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F62289243AE93C00B07865 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +248,7 @@
 				32D181BB23640CDE006253DE /* Retroactive */,
 				604F709D240B0C9200687E1B /* README.md */,
 				32D181BA23640CDE006253DE /* Products */,
+				60F62285243AE92300B07865 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -279,6 +290,7 @@
 				6039E6E82383CB560023DAB8 /* HighSierra32Bit.mobileconfig */,
 				6039E6E72383CB560023DAB8 /* Mojave32Bit.mobileconfig */,
 				046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */,
+				60F62283243AE6C300B07865 /* ConfiguratorTutorial.mp4 */,
 				32D181C223640CDF006253DE /* Main.storyboard */,
 				32F763DC23657A8D00200ED7 /* install_name_tool_packed */,
 				32F763452364C9F800200ED7 /* insert_dylib */,
@@ -346,6 +358,8 @@
 			children = (
 				32D181D023642192006253DE /* GuidanceViewController.swift */,
 				32F7634B2364D0AA00200ED7 /* AuthenticateViewController.swift */,
+				60F62281243AE40800B07865 /* CatchViewController.swift */,
+				60F6228A243B04BA00B07865 /* TutorialViewController.swift */,
 			);
 			path = StepTwo;
 			sourceTree = "<group>";
@@ -482,6 +496,15 @@
 			path = iTunesLauncher;
 			sourceTree = "<group>";
 		};
+		60F62285243AE92300B07865 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				60F62288243AE93C00B07865 /* AVKit.framework */,
+				60F62286243AE92300B07865 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		60F7A06724098A9B003CD509 /* Diffs */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +588,7 @@
 				60D728A023D5787B0006F233 /* VMFCPFixerScript in Resources */,
 				042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */,
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
+				60F62284243AE6C300B07865 /* ConfiguratorTutorial.mp4 in Resources */,
 				60E4B4BA240207C100919F36 /* iTunesLauncher in Resources */,
 				607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
@@ -617,6 +641,7 @@
 			files = (
 				60888CC3240C92E3000EF445 /* PillButton.swift in Sources */,
 				32D181CD23640DE0006253DE /* RetroactiveWindowController.swift in Sources */,
+				60F62282243AE40800B07865 /* CatchViewController.swift in Sources */,
 				60888CDC240C9445000EF445 /* NSWindow-Extension.swift in Sources */,
 				60888CBF240C92B6000EF445 /* DisplayOnlyView.swift in Sources */,
 				60888CB7240C8FF2000EF445 /* GuaranteeViewController.swift in Sources */,
@@ -656,6 +681,7 @@
 				60F0F943240B902700C3715D /* UpArrowViewController.swift in Sources */,
 				32F763522364DBAA00200ED7 /* STPrivilegedTask.m in Sources */,
 				6008E6DD2382140C00A2F659 /* Localize.swift in Sources */,
+				60F6228B243B04BA00B07865 /* TutorialViewController.swift in Sources */,
 				60888CBD240C9288000EF445 /* PopButton.swift in Sources */,
 				60888CD4240C93D9000EF445 /* ClippingShadowView.swift in Sources */,
 				32D181D223642192006253DE /* GuidanceViewController.swift in Sources */,
@@ -828,7 +854,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 47;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -849,7 +875,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 42;
+				CURRENT_PROJECT_VERSION = 47;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
