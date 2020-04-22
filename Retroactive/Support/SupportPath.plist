@@ -3,24 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.6 (Build 47) is available for download.</string>
+	<string>Retroactive 1.6 (Build 48) is available for download.</string>
 	<key>NewVersionChangelog</key>
-	<string>• Adds support for unlocking Xcode 11.4 on macOS Mojave
+    <string>• Adds support for unlocking Xcode 11.4.1 on macOS Mojave
 • Includes guidance on downloading iOS apps with Apple Configurator 2</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.6 (版本号 47) 现已提供下载:</string>
+	<string>新版本解印 1.6 (版本号 48) 现已提供下载:</string>
 	<key>NewVersionChangelogzhHans</key>
-	<string>• 支持在 macOS Mojave 下解印并运行 Xcode 11.4
+    <string>• 支持在 macOS Mojave 下解印并运行 Xcode 11.4.1
 • 新增了使用 Apple Configurator 2 下载 iOS 应用程序的指导</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.6 (版本號 47) 現已提供下載:</string>
+	<string>新版本解印 1.6 (版本號 48) 現已提供下載:</string>
 	<key>NewVersionChangelogzhHant</key>
-	<string>• 支持在 macOS Mojave 下解印並運行 Xcode 11.4
+    <string>• 支持在 macOS Mojave 下解印並運行 Xcode 11.4.1
 • 新增了使用 Apple Configurator 2 下載 iOS 應用程序的指導</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.6/Retroactive.1.6.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>47</integer>
+	<integer>48</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>
@@ -80,7 +80,7 @@
 	<key>FCPUpdate</key>
 	<string>https://download.info.apple.com/Mac_OS_X/061-8474.20100915.wtoKR/ProApplicationsUpdate2010-02.dmg</string>
     <key>Xcode114URL</key>
-    <string>https://developer.apple.com/download/more/?=xcode%2011.4</string>
+    <string>https://developer.apple.com/download/more/?=xcode%2011.4.1</string>
     <key>ConfiguratorURL</key>
     <string>macappstore://apps.apple.com/app/apple-configurator-2/id1037126344</string>
 </dict>

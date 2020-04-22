@@ -407,7 +407,7 @@ class AppManager: NSObject {
         if osMinorVersion <= 13 {
             return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09.".localized()
         } else if osMinorVersion == 14 {
-            return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4, or fix Keynote ’09.".localized()
+            return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix Keynote ’09.".localized()
         } else if osMinorVersion >= 15 {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
@@ -502,7 +502,7 @@ class AppManager: NSObject {
         case .logicPro9:
             return "Logic Pro 9"
         case .xcode:
-            return "Xcode 11.4"
+            return "Xcode 11.4.1"
         case .keynote5:
             return "Keynote ’09"
         case .proVideoUpdate:
@@ -576,7 +576,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
             case .xcode:
-                return ["11.4"]
+                return ["11.4.1", "11.4"]
             case .keynote5:
                 return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
             default:
@@ -612,7 +612,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return "9.1.8"
             case .xcode:
-                return "11.4"
+                return "11.4.1"
             case .keynote5:
                 return "5.3"
             default:
