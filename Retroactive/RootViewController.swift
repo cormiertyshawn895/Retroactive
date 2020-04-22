@@ -26,8 +26,6 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.alertForOSIncompatibility()
-
         self.navigationController = CCNNavigationController(rootViewController: ChoiceViewController.instantiate())
         self.navigationController.delegate = self
         self.navigationController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +62,7 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window?.delegate = self
+        self.alertForOSIncompatibility()
     }
     
     @IBAction func previousClicked(_ sender: Any) {

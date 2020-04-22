@@ -5,17 +5,20 @@
 	<key>NewVersionVisibleTitle</key>
 	<string>Retroactive $(VERSION) is available for download.</string>
 	<key>NewVersionChangelog</key>
-    <string>• Adds support for unlocking Xcode 11.4.1 on macOS Mojave
+    <string>• Resolves an issue where Aperture cannot remember custom command sets
+• Adds support for unlocking Xcode 11.4.1 on macOS Mojave
 • Includes guidance on downloading iOS apps with Apple Configurator 2</string>
 	<key>NewVersionVisibleTitlezhHans</key>
 	<string>新版本解印 $(VERSION_HANS) 现已提供下载:</string>
 	<key>NewVersionChangelogzhHans</key>
-    <string>• 支持在 macOS Mojave 下解印并运行 Xcode 11.4.1
+    <string>• 修复了 Aperture 无法保留自定命令集的问题
+• 支持在 macOS Mojave 下解印并运行 Xcode 11.4.1
 • 新增了使用 Apple Configurator 2 下载 iOS 应用程序的指导</string>
 	<key>NewVersionVisibleTitlezhHant</key>
 	<string>新版本解印 $(VERSION_HANT) 現已提供下載:</string>
 	<key>NewVersionChangelogzhHant</key>
-    <string>• 支持在 macOS Mojave 下解印並運行 Xcode 11.4.1
+    <string>• 修復了 Aperture 無法保留自定命令集的問題
+• 支持在 macOS Mojave 下解印並運行 Xcode 11.4.1
 • 新增了使用 Apple Configurator 2 下載 iOS 應用程序的指導</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/$(MARKETING_VERSION)/Retroactive.$(MARKETING_VERSION).zip</string>

@@ -48,6 +48,9 @@ static
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKRedRockApp"), NSSelectorFromString(@"_delayedFinishLaunching")),
                                    class_getInstanceMethod(class, @selector(patched_delayedFinishLaunching)));
     
+    method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKRedRockApp"), NSSelectorFromString(@"_moveCommandSetsToSandboxLocation")),
+                                   class_getInstanceMethod(class, @selector(patched_moveCommandSetsToSandboxLocation)));
+
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"NSConcretePrintOperation"), NSSelectorFromString(@"runOperation")),
                                    class_getInstanceMethod(class, @selector(patched_runOperation)));
     
@@ -56,6 +59,10 @@ static
     
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"IPPrinterPaperSelectionView"), NSSelectorFromString(@"updatePaperMenu")),
                                    class_getInstanceMethod(class, @selector(patched_updatePaperMenu)));
+}
+
+- (void)patched_moveCommandSetsToSandboxLocation {
+    NSLog(@"asked to move command sets to sandbox location, but Aperture is unboxed, skipping it");
 }
 
 - (id)patched_paperWithID:(id)arg1 {
