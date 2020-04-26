@@ -107,7 +107,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.kickoffProVideoAppPatches()
         }
         
-        if chosenApp == .keynote5 || chosenApp == .pages4 || chosenApp == .numbers2 {
+        if AppManager.shared.hasChoseniWork {
             self.kickoffProVideoAppPatches(fullMode: false)
         }
         
@@ -242,6 +242,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
+            AppManager.shared.retinizeSelectedAppForCurrentUser()
             self.suppress32BitWarnings()
             self.stage4Finished()
             
@@ -417,7 +418,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             if (freeSpace < freeSpaceRequirement) {
                 let appName = AppManager.shared.nameOfChosenApp
                 AppDelegate.showOptionSheet(title: String(format: "There isn't enough free space to install %@".localized(), appName),
-                                            text: String(format: "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.\n\nFree up some space and try again.".localized(), Int(freeSpace), appName, Int(freeSpaceRequirement)),
+                                            text: String(format: "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.".localized(), Int(freeSpace), appName, Int(freeSpaceRequirement))
+                                                + twoNewLines
+                                                + "Free up some space and try again.".localized(),
                                             firstButtonText: "Check Again".localized(), secondButtonText: "Cancel".localized(), thirdButtonText: "") { (response) in
                     if (response == .alertFirstButtonReturn) {
                         self.kickoffLargeDownload()

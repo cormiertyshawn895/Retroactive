@@ -73,13 +73,13 @@ class AppFinder: NSObject {
                 if bundleID.elementsEqual(AppManager.shared.patchedBundleIDOfChosenApp) || fullVersionNumberString == AppManager.shared.patchedVersionStringOfChosenApp {
                     print("Found compatible patched app: \(bundleID), \(path)")
                     AppManager.shared.locationOfChosenApp = path
-                    
-                    if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
+                    let chosenApp = AppManager.shared.chosenApp
+                    if chosenApp == .aperture || chosenApp == .iphoto || AppManager.shared.hasChoseniWork {
                         let existingFixerPath = "\(path)/\(AppManager.shared.fixerFrameworkSubPath)"
                         if let existingFixerBundle = Bundle.init(path: existingFixerPath),
                             let existingFixerVersion = existingFixerBundle.cfBundleVersionInt,
                             let resourcePath = Bundle.main.resourcePath {
-                            let fixerResourcePath = "\(resourcePath)/ApertureFixer/Resources/Info.plist"
+                            let fixerResourcePath = "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)/Resources/Info.plist"
                             if let loadedFixerInfoPlist = NSDictionary(contentsOfFile: fixerResourcePath) as? Dictionary<String, Any>,
                                 let bundledFixerVersionString = loadedFixerInfoPlist[kCFBundleVersion] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
                                 if (existingFixerVersion < bundledFixerVersion) {
@@ -132,8 +132,14 @@ class AppFinder: NSObject {
                         }
                         print("Found compatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
                     } else {
-                        incompatibleVersion = versionNumberString
-                        print("Found incompatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
+                        var alreadyFoundVersionOnlyRequiresMinorUpdate = false
+                        if let alreadyFoundIncompatibleVersion = incompatibleVersion {
+                            alreadyFoundVersionOnlyRequiresMinorUpdate = AppManager.shared.versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: alreadyFoundIncompatibleVersion)
+                        }
+                        if (!alreadyFoundVersionOnlyRequiresMinorUpdate) {
+                            incompatibleVersion = versionNumberString
+                        }
+                        print("Found incompatible unpatched app: \(bundleID), \(path), \(versionNumberString); alreadyFoundVersionOnlyRequiresMinorUpdate = \(alreadyFoundVersionOnlyRequiresMinorUpdate)")
                     }
                 }
             }
@@ -152,7 +158,7 @@ class AppFinder: NSObject {
             if let lastCompatibleVersion = lastCompatible, let installed = installedFullVersionString, let shortVersion = installedShortVersionString {
                 let compareResult = installed.compare(lastCompatibleVersion, options: .numeric, range: nil, locale: nil)
                 if compareResult == .orderedAscending {
-                    self.pushGuidanceVC(nil, shortOldVersionString: shortVersion, shouldOfferUpdate: true)
+                    self.pushGuidanceVC(nil, shortOldVersionString: shortVersion, shouldOfferOptionalUpdate: true)
                     return
                 }
             }
@@ -160,36 +166,67 @@ class AppFinder: NSObject {
         }
     }
 
-    private func pushGuidanceVC(_ incompatibleVersionString: String? = nil, shortOldVersionString: String? = nil, shouldOfferUpdate: Bool = false) {
+    private func pushGuidanceVC(_ incompatibleVersionString: String? = nil, shortOldVersionString: String? = nil, shouldOfferOptionalUpdate: Bool = false) {
         if AppDelegate.rootVC?.navigationController.topViewController is GuidanceViewController {
             let name = AppManager.shared.spaceConstrainedNameOfChosenApp
             var title: String = ""
             var explaination: String = ""
             
+            let localizedBuildPrefix = "Build".localized()
             var compat = AppManager.shared.compatibleVersionOfChosenApp.first ?? ""
-            let userFacingCompat = AppManager.shared.userFacingLatestShortVersionOfChosenApp
-            if (userFacingCompat != compat) {
-                compat = "\(userFacingCompat), \(compat)"
-            }
+            var userFacingCompat = AppManager.shared.userFacingLatestShortVersionOfChosenApp
+            var onlyRequiresMinorUpdate = false
             
             if let incompat = incompatibleVersionString {
-                title = String.init(format: "You need to update %@ from %@ to %@.".localized(), name, incompat, compat)
-                var middlePartial = String(format: "Download the latest version of %@ (%@) from the Purchased list in the Mac App Store, then run Retroactive again.".localized(), name, compat)
-                if AppManager.shared.chosenApp == .xcode {
-                    middlePartial = String(format: "Directly download %@ from the Apple Developer website, then run Retroactive again.".localized(), name)
+                if (userFacingCompat == incompat) {
+                    compat = "\(userFacingCompat) (\(localizedBuildPrefix) \(compat))"
+                } else {
+                    compat = userFacingCompat
                 }
-                explaination = String.init(format: "The copy of %@ you have installed is %@ (%@), and is too old to be modified. \n\n%@\n\nIf you have installed %@ (%@) at a custom location, locate it manually.".localized(), name, name, incompat, middlePartial, name, compat)
+
+                let isTooNew = AppManager.shared.versionisTooNewForPatching(foundOnDiskShortVersion: incompat)
+                onlyRequiresMinorUpdate = AppManager.shared.versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: incompat)
+                title = isTooNew ?
+                    String(format: "You need to install an older version of %@ %@".localized(), name, compat) :
+                    String(format: "You need to update %@ from %@ to %@.".localized(), name, incompat, compat)
+                
+                let firstParagraph = String(format: isTooNew ?
+                    "The copy of %@ you have installed is %@ %@, and is too new to be modified.".localized() :
+                    (onlyRequiresMinorUpdate ?
+                        "The copy of %@ you have installed is %@ %@. You need to first install a minor update before Retroactive can modify it.".localized() :
+                        "The copy of %@ you have installed is %@ %@, and is too old to be modified.".localized()),
+                                            name, name, incompat)
+
+                var secondParagraph = ""
+                if AppManager.shared.chosenApp == .xcode {
+                    secondParagraph = String(format: "Directly download %@ from the Apple Developer website, then run Retroactive again.".localized(), name)
+                } else if AppManager.shared.hasChoseniWork {
+                    secondParagraph = onlyRequiresMinorUpdate ?
+                        String(format: "Click on “Download Update“ to download and install the iWork 9.3 Update.".localized(), name, compat) :
+                        "Download and install iWork ’09 from The Internet Archive, then install the iWork 9.3 Update.".localized()
+                } else {
+                    secondParagraph = String(format: "Download the latest version of %@ %@ from the Purchased list in the Mac App Store, then run Retroactive again.".localized(), name, compat)
+                }
+                
+                let thirdParagraph = String(format: "If you have already installed %@ %@ at a custom location, you can also locate it manually.".localized(), name, compat)
+                explaination = firstParagraph + " " + secondParagraph + twoNewLines + thirdParagraph
             } else {
-                if (shouldOfferUpdate) {
+                if (shouldOfferOptionalUpdate) {
                     let short = shortOldVersionString ?? ""
+                    if (userFacingCompat == short) {
+                        userFacingCompat = "\(userFacingCompat) (\(localizedBuildPrefix) \(compat))"
+                    }
+
                     title = String.init(format: "We recommend updating %@ to version %@.".localized(), name, userFacingCompat)
-                    explaination = String.init(format: "Retroactive can unlock your installed version of %@ (%@), but works best with %@ (%@). To avoid stability issues, we recommend updating to %@ (%@) before proceeding.".localized(), name, short, name, compat, name, compat)
+                    explaination = String.init(format: "Retroactive can unlock your installed version of %@ %@, but works best with %@ %@. To avoid stability issues, we recommend updating to %@ %@ before proceeding.".localized(), name, short, name, userFacingCompat, name, userFacingCompat)
                 } else {
                     title = String(format: "%@ is not installed on your Mac.".localized(), name)
-                    explaination = String(format: "Retroactive is unable to locate %@ on your Mac. %@\n\nIf you have installed %@ at a custom location, locate it manually.".localized(), name, AppManager.shared.notInstalledText, name)
+                    explaination = String(format: "Retroactive is unable to locate %@ on your Mac. %@".localized(), name, AppManager.shared.notInstalledText)
+                        + twoNewLines
+                        + String(format:"If you have installed %@ at a custom location, locate it manually.".localized(), name)
                 }
             }
-            if (shouldOfferUpdate) {
+            if (shouldOfferOptionalUpdate) {
                 AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Update (Recommended)".localized(), secondButtonText: "Don't Update (Not Recommended)".localized(), thirdButtonText: "Cancel".localized()) { (result) in
                     if (result == .alertFirstButtonReturn) {
                         AppManager.shared.updateSelectedApp()
@@ -200,8 +237,16 @@ class AppFinder: NSObject {
                 }
                 return
             }
-            AppDelegate.showOptionSheet(title: title, text: explaination, firstButtonText: "Locate Manually...".localized(), secondButtonText: AppManager.shared.notInstalledActionText, thirdButtonText: "Cancel".localized()) { (result) in
-                if (result == .alertFirstButtonReturn) {
+
+            let downloadAppText = AppManager.shared.notInstalledActionText
+            let downloadUpdateText = "Download Update".localized()
+            let locateManuallyText = "Locate Manually...".localized()
+            AppDelegate.showOptionSheet(title: title,
+                                        text: explaination,
+                                        firstButtonText: onlyRequiresMinorUpdate ? downloadUpdateText : downloadAppText,
+                                        secondButtonText: locateManuallyText,
+                                        thirdButtonText: "Cancel".localized()) { (result) in
+                if result == .alertSecondButtonReturn {
                     AppDelegate.manuallyLocateApp { (result, url, path) in
                         if (result) {
                             if let bundlePath = path {
@@ -216,15 +261,19 @@ class AppFinder: NSObject {
                                     AppManager.shared.locationOfChosenApp = bundlePath
                                     self.pushAuthenticateVC()
                                 } else {
-                                    let text = String(format: "%@ (%@) is not %@ (%@). To proceed, you need to locate a valid copy of %@ (%@).".localized(), url?.deletingPathExtension().lastPathComponent ?? "", displayShortVersionNumberString, name, compat, name, compat)
+                                    let text = String(format: "%@ %@ is not %@ %@. To proceed, you need to locate a valid copy of %@ %@.".localized(), url?.deletingPathExtension().lastPathComponent ?? "", displayShortVersionNumberString, name, compat, name, compat)
                                     AppDelegate.showTextSheet(title: "Selected app is incompatible".localized(), text: text)
                                 }
                             }
                         }
                     }
                 }
-                if (result == .alertSecondButtonReturn && AppManager.shared.notInstalledActionText.count > 0) {
-                    AppManager.shared.acquireSelectedApp()
+                if (result == .alertFirstButtonReturn && AppManager.shared.notInstalledActionText.count > 0) {
+                    if (onlyRequiresMinorUpdate) {
+                        AppManager.shared.updateSelectedApp()
+                    } else {
+                        AppManager.shared.acquireSelectedApp()
+                    }
                 }
             }
             return
@@ -244,6 +293,7 @@ class AppFinder: NSObject {
             AppDelegate.pushSyncingVC()
             return
         }
+        AppManager.shared.retinizeSelectedAppForCurrentUser()
         AppDelegate.pushCompletionVC()
     }
     

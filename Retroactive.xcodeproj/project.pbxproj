@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040914AB24558DDB00EC2475 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040914AA24558DDB00EC2475 /* main.swift */; };
 		042E9E492381AC2C001D3F38 /* AppKit in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E452381AC2B001D3F38 /* AppKit */; };
 		042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E472381AC2B001D3F38 /* GeneralFixerScript */; };
 		042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E482381AC2B001D3F38 /* VideoFixer */; };
@@ -99,7 +100,21 @@
 		60F7A06324091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin in Resources */ = {isa = PBXBuildFile; fileRef = 60F7A06224091EFA003CD509 /* iTunes12_6_5_Assets_Diff.bin */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0409149F24558D7300EC2475 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		040914A124558D7300EC2475 /* genstrings */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = genstrings; sourceTree = BUILT_PRODUCTS_DIR; };
+		040914AA24558DDB00EC2475 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		042E9E452381AC2B001D3F38 /* AppKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppKit; sourceTree = "<group>"; };
 		042E9E472381AC2B001D3F38 /* GeneralFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = GeneralFixerScript; sourceTree = "<group>"; };
 		042E9E482381AC2B001D3F38 /* VideoFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VideoFixer; sourceTree = "<group>"; };
@@ -211,6 +226,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0409149E24558D7300EC2475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		32D181B623640CDE006253DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,6 +244,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040914A224558D7300EC2475 /* genstrings */ = {
+			isa = PBXGroup;
+			children = (
+				040914AA24558DDB00EC2475 /* main.swift */,
+			);
+			path = genstrings;
+			sourceTree = "<group>";
+		};
 		321B09CE23645B57007F3FBA /* CircularProgress */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +277,7 @@
 			children = (
 				32D181BB23640CDE006253DE /* Retroactive */,
 				604F709D240B0C9200687E1B /* README.md */,
+				040914A224558D7300EC2475 /* genstrings */,
 				32D181BA23640CDE006253DE /* Products */,
 				60F62285243AE92300B07865 /* Frameworks */,
 			);
@@ -256,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				32D181B923640CDE006253DE /* Retroactive.app */,
+				040914A124558D7300EC2475 /* genstrings */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -517,10 +549,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		040914A024558D7300EC2475 /* genstrings */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 040914A724558D7300EC2475 /* Build configuration list for PBXNativeTarget "genstrings" */;
+			buildPhases = (
+				0409149D24558D7300EC2475 /* Sources */,
+				0409149E24558D7300EC2475 /* Frameworks */,
+				0409149F24558D7300EC2475 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = genstrings;
+			productName = genstrings;
+			productReference = 040914A124558D7300EC2475 /* genstrings */;
+			productType = "com.apple.product-type.tool";
+		};
 		32D181B823640CDE006253DE /* Retroactive */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32D181C923640CDF006253DE /* Build configuration list for PBXNativeTarget "Retroactive" */;
 			buildPhases = (
+				0409149B2455838600EC2475 /* Update Localization */,
 				604F709A240B039800687E1B /* Update SupportPath */,
 				32D181B523640CDE006253DE /* Sources */,
 				32D181B623640CDE006253DE /* Frameworks */,
@@ -541,9 +591,13 @@
 		32D181B123640CDE006253DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1100;
 				TargetAttributes = {
+					040914A024558D7300EC2475 = {
+						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1140;
+					};
 					32D181B823640CDE006253DE = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -565,6 +619,7 @@
 			projectRoot = "";
 			targets = (
 				32D181B823640CDE006253DE /* Retroactive */,
+				040914A024558D7300EC2475 /* genstrings */,
 			);
 		};
 /* End PBXProject section */
@@ -614,6 +669,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0409149B2455838600EC2475 /* Update Localization */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Localization";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT_PATH=${SRCROOT}/genstrings/main.swift\n\nSUPPORT_PATH=${SRCROOT}/${PRODUCT_NAME}/Support\n\nswift $SCRIPT_PATH ${SRCROOT} $SUPPORT_PATH/zh-Hans.lproj/Localizable.strings\nswift $SCRIPT_PATH ${SRCROOT} $SUPPORT_PATH/zh-Hant.lproj/Localizable.strings $SUPPORT_PATH/zh-Hans.lproj/Localizable.strings\n";
+		};
 		604F709A240B039800687E1B /* Update SupportPath */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -635,6 +708,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0409149D24558D7300EC2475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				040914AB24558DDB00EC2475 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		32D181B523640CDE006253DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -733,6 +814,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		040914A524558D7300EC2475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		040914A624558D7300EC2475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		32D181C723640CDF006253DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -854,7 +968,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 53;
+				CURRENT_PROJECT_VERSION = 56;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -875,7 +989,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 53;
+				CURRENT_PROJECT_VERSION = 56;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -893,6 +1007,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		040914A724558D7300EC2475 /* Build configuration list for PBXNativeTarget "genstrings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				040914A524558D7300EC2475 /* Debug */,
+				040914A624558D7300EC2475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		32D181B423640CDE006253DE /* Build configuration list for PBXProject "Retroactive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -28,7 +28,7 @@ class CompletionViewController: NSViewController {
         super.viewDidLoad()
         if (AppManager.shared.allowPatchingAgain == true) {
             behindTheScenesButton.title = NSLocalizedString("Unlock {name} again".localized(), comment: "")
-            congratulatoryLabel.stringValue = String(format: "You have already unlocked %@.\nThere's usually no need to unlock it again.".localized(), placeholderToken)
+            congratulatoryLabel.stringValue = String(format: "You have already unlocked %@.".localized(), placeholderToken) + oneNewLine + "There's usually no need to unlock it again.".localized()
         } else if (AppManager.shared.behindTheScenesOfChosenApp == nil) {
             behindTheScenesButton.isHidden = true
         }
@@ -141,8 +141,10 @@ class CompletionViewController: NSViewController {
     }
     
     func promptToCreateNewLibrary(_ libraryPath: String, installedVersion: String, libraryVersion: String) {
-        var description = String(format: "You have installed an older version of iTunes (%@), which is not compatible with your current iTunes library (%@).\n\nWould you like to create a new iTunes library to use with iTunes %@?".localized(), installedVersion, libraryVersion, installedVersion)
-        description = description + "\n\n" + "Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed.".localized()
+        var description = String(format: "You have installed an older version of iTunes (%@), which is not compatible with your current iTunes library (%@).".localized(), installedVersion, libraryVersion)
+            + twoNewLines
+            + String(format: "Would you like to create a new iTunes library to use with iTunes %@?".localized(), installedVersion)
+        description = description + twoNewLines + "Don't worry. Your existing iTunes library won't be deleted. Instead, it will be renamed.".localized()
         AppDelegate.showOptionSheet(title: "Would you like to create a new iTunes library?".localized(), text: description, firstButtonText: "Create New Library".localized(), secondButtonText: "Don't Create".localized(), thirdButtonText: "") { (response) in
             if (response == .alertFirstButtonReturn) {
                 do {

@@ -28,7 +28,7 @@ class GuidanceViewController: NSViewController {
             label!.updateToken()
         }
         let chosen = AppManager.shared.chosenApp
-        if (chosen == .keynote5 || chosen == .pages4 || chosen == .numbers2) {
+        if (AppManager.shared.hasChoseniWork) {
             downloadAppLabel.stringValue = "Download and install iWork ’09 from The Internet Archive".localized()
             airDropAppLabel.stringValue = "Download and install the iWork 9.3 Update".localized()
             hideThirdLabel()

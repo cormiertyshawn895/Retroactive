@@ -54,6 +54,9 @@ let tempDir = "/tmp"
 
 let iTunesBundleID = "com.apple.iTunes"
 
+let oneNewLine = "\n"
+let twoNewLines = "\n\n"
+
 extension Bundle {
     var cfBundleVersionInt: Int? {
         get {
@@ -267,6 +270,13 @@ class AppManager: NSObject {
         return false
     }
     
+    var isCurrentTimeZoneInternetConstrained: Bool {
+        let localTimeZoneAbbreviation = TimeZone.current.identifier
+        let constrained = localTimeZoneAbbreviation == "Asia/Shanghai" || localTimeZoneAbbreviation == "Asia/Chongqing"
+        print("Timezone is \(localTimeZoneAbbreviation), constrained: \(constrained)")
+        return constrained
+    }
+    
     var newVersionVisibleTitle: String? {
         if isLanguageTraditionalZhFamily {
             return configurationDictionary?["NewVersionVisibleTitlezhHant"] as? String
@@ -354,7 +364,7 @@ class AppManager: NSObject {
     }
 
     var iWork09DVD: String? {
-        if isLanguageSimplifiedZhFamily {
+        if isCurrentTimeZoneInternetConstrained {
             return configurationDictionary?["iWork09DVDCN"] as? String
         }
         return configurationDictionary?["iWork09DVD"] as? String
@@ -392,6 +402,13 @@ class AppManager: NSObject {
 
     var configuratorURL: String? {
         return configurationDictionary?["ConfiguratorURL"] as? String
+    }
+    
+    var marginBetweenApps: CGFloat {
+        if osMinorVersion == 14 {
+            return 43;
+        }
+        return 54;
     }
 
     var supportedApps: [AppType] {
@@ -482,6 +499,12 @@ class AppManager: NSObject {
             locationOfChosenApp = nil
         }
     }
+    
+    var hasChoseniWork: Bool {
+        let chosen = self.chosenApp
+        return chosen == .keynote5 || chosen == .pages4 || chosen == .numbers2
+    }
+    
     var choseniTunesVersion: iTunesVersion?
     
     var fixerUpdateAvailable: Bool = false
@@ -521,10 +544,20 @@ class AppManager: NSObject {
     var spaceConstrainedNameOfChosenApp: String {
         get {
             switch self.chosenApp {
+            case .finalCutPro7:
+                return "Final Cut Pro"
+            case .logicPro9:
+                return "Logic Pro"
             case .xcode:
                 return "Xcode"
             case .proVideoUpdate:
                 return "Pro Update".localized()
+            case .keynote5:
+                return "Keynote"
+            case .pages4:
+                return "Pages"
+            case .numbers2:
+                return "Numbers"
             default:
                 return self.nameOfChosenApp
             }
@@ -559,44 +592,90 @@ class AppManager: NSObject {
         }
     }
     
-    var compatibleVersionOfChosenApp: [String] {
-        get {
-            switch self.chosenApp {
-            case .aperture:
-                return ["3.6"]
-            case .iphoto:
-                return ["9.6.1", "9.6"]
-            case .itunes:
-                switch choseniTunesVersion {
-                case .darkMode:
-                    return ["12.9.5"]
-                case .appStore:
-                    return ["12.6.5"]
-                case .configurator:
-                    return ["999.99.99"]
-                case .classicTheme:
-                    return ["11.4"]
-                case .coverFlow:
-                    return ["10.7"]
-                case .none:
-                    return []
-                }
-            case .finalCutPro7:
-                return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
-            case .logicPro9:
-                return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
-            case .xcode:
-                return ["11.4.1", "11.4"]
-            case .keynote5:
-                return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
-            case .pages4:
-                return ["1048", "4.3", "4.2", "4.1.1", "4.1", "4.0.5", "4.0.4", "4.0.3", "4.0.2", "4.0.1", "4.0"]
-            case .numbers2:
-                return ["554", "2.3", "2.2", "2.1.1", "2.1", "2.0.5", "2.0.4", "2.0.3", "2.0.2", "2.0.1", "2.0"]
-            default:
+    private var _compatibleLongVersionOfChosenApp: [String] {
+        switch self.chosenApp {
+        case .logicPro9:
+            return ["1700.67"]
+        case .keynote5:
+            return ["1170"]
+        case .pages4:
+            return ["1048"]
+        case .numbers2:
+            return ["554"]
+        default:
+            return []
+        }
+    }
+
+    private var _compatibleShortVersionOfChosenApp: [String] {
+        switch self.chosenApp {
+        case .aperture:
+            return ["3.6"]
+        case .iphoto:
+            return ["9.6.1", "9.6"]
+        case .itunes:
+            switch choseniTunesVersion {
+            case .darkMode:
+                return ["12.9.5"]
+            case .appStore:
+                return ["12.6.5"]
+            case .configurator:
+                return ["999.99.99"]
+            case .classicTheme:
+                return ["11.4"]
+            case .coverFlow:
+                return ["10.7"]
+            case .none:
                 return []
             }
+        case .finalCutPro7:
+            return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
+        case .logicPro9:
+            return ["9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
+        case .xcode:
+            return ["11.4.1", "11.4"]
+        case .keynote5:
+            return ["5.3"]
+        case .pages4:
+            return ["4.3"]
+        case .numbers2:
+            return ["2.3"]
+        default:
+            return []
         }
+    }
+
+    var compatibleVersionOfChosenApp: [String] {
+        return _compatibleLongVersionOfChosenApp + _compatibleShortVersionOfChosenApp
+    }
+    
+    func versionisTooNewForPatching(foundOnDiskShortVersion: String) -> Bool {
+        if foundOnDiskShortVersion == patchedVersionStringOfChosenApp { return false }
+        guard let compatibleVersion = _compatibleShortVersionOfChosenApp.first else { return false }
+        let result = foundOnDiskShortVersion.compare(compatibleVersion, options: .numeric, range: nil, locale: nil)
+        return result == .orderedDescending
+    }
+    
+    var oldestShortVersionRequiringMinorUpdate: String? {
+        switch self.chosenApp {
+        case .keynote5:
+            return "5.0"
+        case .pages4:
+            return "4.0"
+        case .numbers2:
+            return "2.0"
+        default:
+            return nil
+        }
+    }
+    
+    func versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: String) -> Bool {
+        if versionisTooNewForPatching(foundOnDiskShortVersion: foundOnDiskShortVersion) { return false }
+        guard let maxCompatibleVersion = _compatibleShortVersionOfChosenApp.first else { return false }
+        guard let oldestUpdateCapable = oldestShortVersionRequiringMinorUpdate else { return false }
+        let initialComparison = oldestUpdateCapable.compare(foundOnDiskShortVersion, options: .numeric, range: nil, locale: nil)
+        return (initialComparison == .orderedAscending || initialComparison == .orderedSame)
+            && foundOnDiskShortVersion.compare(maxCompatibleVersion, options: .numeric, range: nil, locale: nil) == .orderedAscending
     }
     
     var userFacingLatestShortVersionOfChosenApp: String {
@@ -781,9 +860,9 @@ class AppManager: NSObject {
             case .keynote5:
                 return "1171"
             case .pages4:
-                return "555"
-            case .numbers2:
                 return "1049"
+            case .numbers2:
+                return "555"
             default:
                 return ""
             }
@@ -984,7 +1063,10 @@ class AppManager: NSObject {
     var notInstalledText: String {
         get {
             let appStoreTemplate = String(format: "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list.".localized(), nameOfChosenApp)
-            let dvdTemplate = String(format: "\n\nIf you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay. \n\nIf your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer.".localized(), nameOfChosenApp, nameOfChosenApp, nameOfChosenApp, nameOfChosenApp)
+            let dvdTemplate = twoNewLines
+                + String(format: "If you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay.".localized(), nameOfChosenApp, nameOfChosenApp)
+                + twoNewLines
+                + String(format:"If your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer.".localized(), nameOfChosenApp, nameOfChosenApp)
 
             switch self.chosenApp {
             case .aperture:
@@ -996,9 +1078,9 @@ class AppManager: NSObject {
             case .finalCutPro7:
                 return dvdTemplate
             case .logicPro9:
-                return "\(dvdTemplate) \n\n\(appStoreTemplate)"
+                return dvdTemplate + twoNewLines + appStoreTemplate
             case .keynote5, .pages4, .numbers2:
-                return "\n\n" + String(format: "You can download and install iWork ’09, which includes %@, from The Internet Archive.".localized(), nameOfChosenApp)
+                return twoNewLines + String(format: "You can download and install iWork ’09, which includes %@, from The Internet Archive.".localized(), nameOfChosenApp)
             default:
                 return ""
             }
@@ -1401,13 +1483,37 @@ class AppManager: NSObject {
         let appName = AppManager.shared.nameOfChosenApp
         let presentTense = AppManager.shared.presentTenseActionOfChosenApp
         UserDefaults.standard.setValue(String(format: "Unable to %@ %@".localized(), presentTense, appName), forKey: kErrorRecoveryTitle)
-        UserDefaults.standard.setValue(String(format: "Because Retroactive can't be authenticated, %@ has failed to %@ (Error %d).\n\nYou can try to %@ %@ again.".localized(), appName, presentTense, failure, presentTense, appName), forKey: kErrorRecoveryText)
+        UserDefaults.standard.setValue(String(format: "Because Retroactive can't be authenticated, %@ has failed to %@ (Error %d).", appName, presentTense, failure)
+            + twoNewLines
+            + String(format:"You can try to %@ %@ again.".localized(), presentTense, appName), forKey: kErrorRecoveryText)
 
         NSApplication.shared.relaunch()
     }
 
     static func runUnameToPreAuthenticate() -> OSStatus {
         return AppManager.runTask(toolPath: "/usr/bin/uname", arguments: ["-a"], path: tempDir, wait: true, allowError: true)
+    }
+    
+    func retinizeAppForCurrentUser(_ bundleIdentifier: String?) {
+        guard let bundleID = bundleIdentifier else {
+            return
+        }
+        var persistentDomain: [String : Any] = [:]
+        if let appPersistent = UserDefaults.standard.persistentDomain(forName: bundleID) {
+            persistentDomain = appPersistent
+        }
+        persistentDomain["AppleMagnifiedMode"] = false
+        UserDefaults.standard.setPersistentDomain(persistentDomain, forName: bundleID)
+        print("Setting AppleMagnifiedMode to false for persistence domain of \(bundleID)")
+    }
+    
+    func retinizeSelectedAppForCurrentUser() {
+        switch self.chosenApp {
+        case .finalCutPro7, .logicPro9, .keynote5, .pages4, .numbers2:
+            retinizeAppForCurrentUser(existingBundleIDOfChosenApp)
+        default:
+            return
+        }
     }
 
 }

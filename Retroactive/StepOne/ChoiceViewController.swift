@@ -23,8 +23,6 @@ class ChoiceViewController: NSViewController {
     
     var appFinder: AppFinder?
     
-    let marginBetweenApps:CGFloat = 54
-    
     static func instantiate() -> ChoiceViewController
     {
         NSStoryboard.standard!.instantiateController(withIdentifier: "ChoiceViewController") as! ChoiceViewController
@@ -35,6 +33,7 @@ class ChoiceViewController: NSViewController {
         let totalCount = AppManager.shared.supportedApps.count
         let clippingWidth = scrollView.bounds.size.width
         var previousView = NSView()
+        let marginBetweenApps = AppManager.shared.marginBetweenApps
 
         for i in 0..<totalCount {
             let appType = AppManager.shared.supportedApps[i]
