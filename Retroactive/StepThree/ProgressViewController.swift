@@ -89,23 +89,25 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             AppManager.relaunchDueToAuthenticationFailure(failure: authStatus)
         }
         
-        if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
+        let chosenApp = AppManager.shared.chosenApp
+        
+        if chosenApp == .aperture || chosenApp == .iphoto {
             self.kickoffPhotographyAppPatches()
         }
 
-        if AppManager.shared.chosenApp == .itunes {
+        if chosenApp == .itunes {
             self.kickoffLargeDownload()
         }
         
-        if AppManager.shared.chosenApp == .finalCutPro7 {
+        if chosenApp == .finalCutPro7 {
             self.kickoffProVideoAppPatches()
         }
         
-        if AppManager.shared.chosenApp == .logicPro9 {
+        if chosenApp == .logicPro9 {
             self.kickoffProVideoAppPatches()
         }
         
-        if AppManager.shared.chosenApp == .keynote5 {
+        if chosenApp == .keynote5 || chosenApp == .pages4 || chosenApp == .numbers2 {
             self.kickoffProVideoAppPatches(fullMode: false)
         }
         

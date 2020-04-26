@@ -8,7 +8,6 @@
 #import <AppKit/AppKit.h>
 #import "NSObject+Fixer.h"
 
-static
 @implementation NSObject (Fixer)
 
 + (NSFont *)swizzled_proSystemFontWithFontName:(NSString *)name pointSize:(CGFloat)size fontAppearance:(id)appearance useSystemHelveticaAdjustments:(BOOL)adjustments {

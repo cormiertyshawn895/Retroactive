@@ -231,12 +231,6 @@ class AppFinder: NSObject {
         }
         if AppManager.shared.chosenApp == .itunes {
             let itunesPath = "/Applications/iTunes.app"
-// iTunes won't launch if the path isn't exactly "/Applications/iTunes.app".
-//            let alreadyHasiTunes = FileManager.default.fileExists(atPath: itunesPath)
-//            if (alreadyHasiTunes) {
-//                let fallbackPath = "/Applications/iTunes \(AppManager.shared.compatibleVersionOfChosenApp.first!).app"
-//                itunesPath = fallbackPath
-//            }
             AppManager.shared.locationOfChosenApp = itunesPath
             self.pushAuthenticateVC()
             return

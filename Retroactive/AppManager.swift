@@ -12,6 +12,8 @@ enum AppType {
     case finalCutPro7
     case logicPro9
     case keynote5
+    case pages4
+    case numbers2
     case xcode
     
     case proVideoUpdate
@@ -396,7 +398,7 @@ class AppManager: NSObject {
         if osMinorVersion <= 13 {
             return [.finalCutPro7, .logicPro9, .keynote5]
         } else if osMinorVersion == 14 {
-            return [.finalCutPro7, .logicPro9, .xcode, .keynote5]
+            return [.finalCutPro7, .logicPro9, .xcode, .keynote5, .pages4, .numbers2]
         } else if osMinorVersion >= 15 {
             return [.aperture, .iphoto, .itunes]
         }
@@ -407,7 +409,7 @@ class AppManager: NSObject {
         if osMinorVersion <= 13 {
             return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09.".localized()
         } else if osMinorVersion == 14 {
-            return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix Keynote ’09.".localized()
+            return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix iWork ’09.".localized()
         } else if osMinorVersion >= 15 {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
@@ -416,9 +418,9 @@ class AppManager: NSObject {
     
     var otherOSSubtitle: String {
         if osMinorVersion <= 14 {
-            return "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
+            return "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
         } else if osMinorVersion >= 15 {
-            var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix Keynote ’09 on macOS Mojave or macOS High Sierra. ".localized()
+            var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. ".localized()
             otherOSHint += AppManager.shared.platformShippedAfterMojave ? "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized() : "To get started, install macOS Mojave on a separate volume.".localized()
             return otherOSHint
         }
@@ -462,7 +464,7 @@ class AppManager: NSObject {
                 return nil
             case .logicPro9:
                 return nil
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return nil
             case .proVideoUpdate:
                 return fCPUpdate
@@ -505,6 +507,10 @@ class AppManager: NSObject {
             return "Xcode 11.4.1"
         case .keynote5:
             return "Keynote ’09"
+        case .pages4:
+            return "Pages ’09"
+        case .numbers2:
+            return "Numbers ’09"
         case .proVideoUpdate:
             return "Pro Applications Update 2010-02".localized()
         default:
@@ -543,6 +549,10 @@ class AppManager: NSObject {
                 return "Xcode"
             case .keynote5:
                 return "Keynote"
+            case .pages4:
+                return "Pages"
+            case .numbers2:
+                return "Numbers"
             default:
                 return self.nameOfChosenApp
             }
@@ -579,6 +589,10 @@ class AppManager: NSObject {
                 return ["11.4.1", "11.4"]
             case .keynote5:
                 return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
+            case .pages4:
+                return ["1048", "4.3", "4.2", "4.1.1", "4.1", "4.0.5", "4.0.4", "4.0.3", "4.0.2", "4.0.1", "4.0"]
+            case .numbers2:
+                return ["554", "2.3", "2.2", "2.1.1", "2.1", "2.0.5", "2.0.4", "2.0.3", "2.0.2", "2.0.1", "2.0"]
             default:
                 return []
             }
@@ -615,6 +629,10 @@ class AppManager: NSObject {
                 return "11.4.1"
             case .keynote5:
                 return "5.3"
+            case .pages4:
+                return "4.3"
+            case .numbers2:
+                return "2.3"
             default:
                 return ""
             }
@@ -639,6 +657,10 @@ class AppManager: NSObject {
                 return "com.apple.dt.Xcode"
             case .keynote5:
                 return "com.apple.iWork.Keynote"
+            case .pages4:
+                return "com.apple.iWork.Pages"
+            case .numbers2:
+                return "com.apple.iWork.Numbers"
             default:
                 return ""
             }
@@ -655,7 +677,7 @@ class AppManager: NSObject {
             case .itunes:
                 fallthrough
             case .xcode:
-                // Intentionally left unused
+                // Intentionally left unused for everything after this enum case
                 return "com.apple.intentionally-left-unused"
             case .finalCutPro7:
                 return "com.apple.FinalCutPro7"
@@ -663,6 +685,10 @@ class AppManager: NSObject {
                 return "com.apple.logic.pro9"
             case .keynote5:
                 return "com.apple.iWork.Keynote5"
+            case .pages4:
+                return "com.apple.iWork.Pages4"
+            case .numbers2:
+                return "com.apple.iWork.Numbers2"
             default:
                 return ""
             }
@@ -688,7 +714,7 @@ class AppManager: NSObject {
                 }
             case .logicPro9:
                 return "GeneralFixerScript"
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return "KeynoteScript"
             default:
                 fatalError()
@@ -709,7 +735,7 @@ class AppManager: NSObject {
                 return "VideoFixer"
             case .logicPro9:
                 return "VideoFixer"
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return "KeynoteFixer"
             default:
                 fatalError()
@@ -754,6 +780,10 @@ class AppManager: NSObject {
                 return "9999.99" // Intentionally left unused
             case .keynote5:
                 return "1171"
+            case .pages4:
+                return "555"
+            case .numbers2:
+                return "1049"
             default:
                 return ""
             }
@@ -774,7 +804,7 @@ class AppManager: NSObject {
                 return NSImage(named: "airdrop_guide_aperture")
             case .iphoto:
                 return NSImage(named: "airdrop_guide_iphoto")
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return NSImage(named: "iwork_stage2")
             case .finalCutPro7:
                 return NSImage(named: "iwork_stage2")
@@ -795,7 +825,7 @@ class AppManager: NSObject {
                 return NSImage(named: "appstore_guide_aperture")
             case .iphoto:
                 return NSImage(named: "appstore_guide_iphoto")
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return NSImage(named: "iwork_stage1")
             case .finalCutPro7:
                 return NSImage(named: "fcp7_stage1")
@@ -829,6 +859,10 @@ class AppManager: NSObject {
             return NSImage(named: "logic9_cartoon")
         case .keynote5:
             return NSImage(named: "keynote5_cartoon")
+        case .pages4:
+            return NSImage(named: "pages4_cartoon")
+        case .numbers2:
+            return NSImage(named: "numbers2_cartoon")
         case .proVideoUpdate:
             return NSImage(named: "fcpstudio_cartoon")
         default:
@@ -899,7 +933,7 @@ class AppManager: NSObject {
         switch appType {
         case .itunes:
             return "install".localized()
-        case .keynote5:
+        case .keynote5, .pages4, .numbers2:
             return "fix".localized()
         case .proVideoUpdate:
             return "install".localized()
@@ -963,8 +997,8 @@ class AppManager: NSObject {
                 return dvdTemplate
             case .logicPro9:
                 return "\(dvdTemplate) \n\n\(appStoreTemplate)"
-            case .keynote5:
-                return "\n\nYou can download and install iWork ’09, which includes Keynote ’09, from The Internet Archive.".localized()
+            case .keynote5, .pages4, .numbers2:
+                return "\n\n" + String(format: "You can download and install iWork ’09, which includes %@, from The Internet Archive.".localized(), nameOfChosenApp)
             default:
                 return ""
             }
@@ -989,7 +1023,7 @@ class AppManager: NSObject {
                 return dvdTemplate
             case .xcode:
                 return String(format: "Download %@".localized(), nameOfChosenApp)
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return "Download iWork ’09".localized()
             default:
                 return ""
@@ -1023,7 +1057,7 @@ class AppManager: NSObject {
                 return "Some serial numbers for Final Cut Pro 7.0 do not work with Final Cut Pro 7.0.3. If you are asked to register again, you need to find and enter a serial number compatible with Final Cut Pro 7.0.3.".localized()
             case .logicPro9:
                 return nil
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return nil
             default:
                 return nil
@@ -1045,7 +1079,7 @@ class AppManager: NSObject {
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicDVD)
         case .xcode:
             AppDelegate.current.safelyOpenURL(AppManager.shared.xcode114URL)
-        case .keynote5:
+        case .keynote5, .pages4, .numbers2:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
         default:
             openMacAppStore()
@@ -1075,7 +1109,7 @@ class AppManager: NSObject {
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicUpdate)
         case .xcode:
             NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: ("~/Downloads" as NSString).expandingTildeInPath)
-        case .keynote5:
+        case .keynote5, .pages4, .numbers2:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09Update)
         default:
             return
@@ -1144,7 +1178,7 @@ class AppManager: NSObject {
                 fallthrough
             case .finalCutPro7:
                 return true
-            case .keynote5:
+            case .keynote5, .pages4, .numbers2:
                 return true
             case .logicPro9:
                 return false
@@ -1211,6 +1245,10 @@ class AppManager: NSObject {
                 return String(format: basicFormat, "Final Cut Pro 7 only supports XML exports".localized(), self.currentVMName)
             case .keynote5:
                 return String(format: basicFormat, "Keynote ’09 only supports PPTX exports".localized(), self.currentVMName)
+            case .pages4:
+                return String(format: basicFormat, "Pages ’09 only supports DOCX exports".localized(), self.currentVMName)
+            case .numbers2:
+                return String(format: basicFormat, "Numbers ’09 only supports XLSX exports".localized(), self.currentVMName)
             case .logicPro9:
                 return ""
             case .itunes:
@@ -1234,6 +1272,10 @@ class AppManager: NSObject {
                 return "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac.".localized()
             case .keynote5:
                 return "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac.".localized()
+            case .pages4:
+                return "You can export existing Pages documents into Word documents. To view and edit your Pages documents, run Retroactive on a real Mac.".localized()
+            case .numbers2:
+                return "You can export existing Numbers spreadsheets into Excel spreadsheets. To view and edit your Numbers spreadsheets, run Retroactive on a real Mac.".localized()
             case .logicPro9:
                 return ""
             case .itunes:

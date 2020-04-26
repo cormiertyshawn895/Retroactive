@@ -41,7 +41,7 @@
 "Extract %@" = "解包 %@";
 "FIX" = "修復";
 "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list." = "如果您此前曾在 Mac App Store 下載過 %@，請前往已購清單將其重新下載。";
-"If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and Keynote ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina." = "如果您將 Mac 更新到 macOS Catalina，Final Cut Pro 7、Logic Pro 9 和 Keynote ’09 會被重新封印且無法解除。但解印依然可以在 macOS Catalina 下解鎖 Aperture 和 iPhoto，或安裝 iTunes。 ";
+"If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina." = "如果您將 Mac 更新到 macOS Catalina，Final Cut Pro 7、Logic Pro 9 和 iWork ’09 會被重新封印且無法解除。但解印依然可以在 macOS Catalina 下解鎖 Aperture 和 iPhoto，或安裝 iTunes。 ";
 "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice." = "如果您的 RAW 原圖無法正常顯示，請先打開“照片”菜單, 選擇“重新處理原件…”，然後按提示重新處理原件。您可能需要重複上述操作兩次。";
 "Install %@" = "安裝 %@";
 "Install Final Cut Pro 7 from DVD disc or DMG image" = "從 DVD 光盤或 DMG 磁盤鏡像安裝 Final Cut Pro 7";
@@ -82,7 +82,7 @@
 "Unable to download %@" = "無法下載 %@";
 "Unable to quit Retroactive" = "無法退出解印";
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09." = "解除對 Final Cut Pro 7 和 Logic Pro 9 的封印，或修復 Keynote ’09。";
-"Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix Keynote ’09." = "解除對 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.4.1 的封印，或修复 Keynote ’09。";
+"Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix iWork ’09." = "解除對 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.4.1 的封印，或修复 Keynote ’09。";
 "Unlock {name} again" = "重新解印 {name}";
 "Untitled" = "新項目";
 "Update (Recommended)" = "安裝更新 (推薦)";
@@ -99,7 +99,7 @@
 "You need to update %@ from %@ to %@." = "您需要將 %@ 從 %@ 更新至 %@。";
 "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.\n\nFree up some space and try again." = "您的啟動磁盤只有 %d GB 可用空間。如需安裝 %@, 您的啟動磁盤至少需要 %d GB 的可用空間。\n\n請先釋放一些空間，然後再試一次。";
 "\n\nIf you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay. \n\nIf your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer." = "\n\n如果您有 %@ 的 DVD 安裝光盤，插入光盤並安裝該應用程序。如果您沒有 DVD 安裝光盤，您可能可以在二手交易平台上購買盒裝版 %@。\n\n如果您的 Mac 沒有 DVD 光驅，您可以試著創建、尋找，或下載 %@ 的 DMG 安裝鏡像，然後通過此 DMG 鏡像安裝 %@。";
-"\n\nYou can download and install iWork ’09, which includes Keynote ’09, from The Internet Archive." = "\n\n您可以在互聯網上找到，並下載和安裝 iWork ’09 (包含 Keynote ’09)。";
+"You can download and install iWork ’09, which includes %@, from The Internet Archive." = "您可以在互聯網上找到，並下載和安裝 iWork ’09 (包含 %@)。";
 "an hour" = "一小時";
 "downloading and installing" = "下載和安裝";
 "fix" = "修復";
@@ -114,11 +114,15 @@
 "You can open and organize your iPhoto library, or export edited images. To use editing features such as image preview, Quick Fixes, effects, and adjustments, run Retroactive on a real Mac." = "您可以打開和整理已有的 iPhoto 資料庫，或導出已編輯的照片。如需使用圖像預覽、快速修復、效果和調整等完整編輯功能，請在真正的 Mac 電腦中運行解印。";
 "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac." = "您可以將現有項目導出為 XML，從而將其轉移至 SendToX、DaVinci Resolve、Avid Media Composer 和 Adobe Premiere Pro CC。如需使用時間線與預覽等完整編輯功能，請在真正的 Mac 電腦中運行解印。";
 "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac." = "您可以將現有的 Keynote 演示文稿導出為 PowerPoint 演示文稿。如需查看或編輯 Keynote 幻燈片、動畫和轉場，請在真正的 Mac 電腦中運行解印。";
+"You can export existing Pages documents into Word documents. To view and edit your Pages documents, run Retroactive on a real Mac." = "您可以將現有的 Pages 文稿導出為 Word 文檔。如需查看或編輯 Pages 文稿，請在真正的 Mac 電腦中運行解印。";
+"You can export existing Numbers spreadsheets into Excel spreadsheets. To view and edit your Numbers spreadsheets, run Retroactive on a real Mac." = "您可以將現有的 Numbers 表格導出為 Excel 表格。如需查看或編輯 Numbers 表格，請在真正的 Mac 電腦中運行解印。";
 "%1$@ in %2$@" = "在%2$@中，%1$@";
 "Aperture has reduced functionality" = "Aperture 功能受限";
 "iPhoto has reduced functionality" = "iPhoto 功能受限";
 "Final Cut Pro 7 only supports XML exports" = "Final Cut Pro 7 僅支持導出 XML";
 "Keynote ’09 only supports PPTX exports" = "Keynote ’09 僅支持導出 PPTX";
+"Pages ’09 only supports DOCX exports" = "Pages ’09 僅支持導出 DOCX";
+"Numbers ’09 only supports XLSX exports" = "Numbers ’09 僅支持導出 XLSX";
 "VMware Fusion" = " VMware Fusion 虛擬機";
 "Parallels Desktop" = " Parallels Desktop 虛擬機";
 "a virtual machine" = "虛擬機";

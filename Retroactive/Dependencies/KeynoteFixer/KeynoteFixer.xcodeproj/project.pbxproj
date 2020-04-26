@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0493DCC524553ADC00DC22BC /* NSScroller+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0493DCC324553ADC00DC22BC /* NSScroller+iWorkFixer.h */; };
+		0493DCC624553ADC00DC22BC /* NSScroller+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493DCC424553ADC00DC22BC /* NSScroller+iWorkFixer.m */; };
+		0493DCC924553BAE00DC22BC /* NSView+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0493DCC724553BAE00DC22BC /* NSView+iWorkFixer.h */; };
+		0493DCCA24553BAE00DC22BC /* NSView+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493DCC824553BAE00DC22BC /* NSView+iWorkFixer.m */; };
+		0493DCCD24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0493DCCB24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h */; };
+		0493DCCE24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493DCCC24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m */; };
 		04B3EF882381B3B40028C792 /* NSObject+KeynoteFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04B3EF862381B3B40028C792 /* NSObject+KeynoteFixer.h */; };
 		04B3EF892381B3B40028C792 /* NSObject+KeynoteFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3EF872381B3B40028C792 /* NSObject+KeynoteFixer.m */; };
 /* End PBXBuildFile section */
@@ -14,6 +20,12 @@
 /* Begin PBXFileReference section */
 		046034D62381B37400070C86 /* KeynoteFixer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeynoteFixer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		046034DA2381B37400070C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0493DCC324553ADC00DC22BC /* NSScroller+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSScroller+iWorkFixer.h"; sourceTree = "<group>"; };
+		0493DCC424553ADC00DC22BC /* NSScroller+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSScroller+iWorkFixer.m"; sourceTree = "<group>"; };
+		0493DCC724553BAE00DC22BC /* NSView+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+iWorkFixer.h"; sourceTree = "<group>"; };
+		0493DCC824553BAE00DC22BC /* NSView+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+iWorkFixer.m"; sourceTree = "<group>"; };
+		0493DCCB24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSButtonCell+iWorkFixer.h"; sourceTree = "<group>"; };
+		0493DCCC24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButtonCell+iWorkFixer.m"; sourceTree = "<group>"; };
 		04B3EF862381B3B40028C792 /* NSObject+KeynoteFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+KeynoteFixer.h"; sourceTree = "<group>"; };
 		04B3EF872381B3B40028C792 /* NSObject+KeynoteFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KeynoteFixer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,6 +63,12 @@
 				046034DA2381B37400070C86 /* Info.plist */,
 				04B3EF862381B3B40028C792 /* NSObject+KeynoteFixer.h */,
 				04B3EF872381B3B40028C792 /* NSObject+KeynoteFixer.m */,
+				0493DCC324553ADC00DC22BC /* NSScroller+iWorkFixer.h */,
+				0493DCC424553ADC00DC22BC /* NSScroller+iWorkFixer.m */,
+				0493DCC724553BAE00DC22BC /* NSView+iWorkFixer.h */,
+				0493DCC824553BAE00DC22BC /* NSView+iWorkFixer.m */,
+				0493DCCB24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h */,
+				0493DCCC24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m */,
 			);
 			path = KeynoteFixer;
 			sourceTree = "<group>";
@@ -63,6 +81,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B3EF882381B3B40028C792 /* NSObject+KeynoteFixer.h in Headers */,
+				0493DCCD24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h in Headers */,
+				0493DCC524553ADC00DC22BC /* NSScroller+iWorkFixer.h in Headers */,
+				0493DCC924553BAE00DC22BC /* NSView+iWorkFixer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +155,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0493DCC624553ADC00DC22BC /* NSScroller+iWorkFixer.m in Sources */,
 				04B3EF892381B3B40028C792 /* NSObject+KeynoteFixer.m in Sources */,
+				0493DCCE24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m in Sources */,
+				0493DCCA24553BAE00DC22BC /* NSView+iWorkFixer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +198,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -235,7 +259,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -276,6 +300,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyshawn.KeynoteFixer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -302,6 +327,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyshawn.KeynoteFixer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
