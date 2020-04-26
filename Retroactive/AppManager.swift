@@ -507,7 +507,103 @@ class AppManager: NSObject {
     
     var choseniTunesVersion: iTunesVersion?
     
-    var fixerUpdateAvailable: Bool = false
+    func removeFCP7PresetsIfNeeded() {
+        if chosenApp != .finalCutPro7 {
+            return
+        }
+        do {
+            let exists = FileManager.default.fileExists(atPath: kCustomSettingsPath)
+            if (!exists) {
+                return
+            }
+            let contents = try FileManager.default.contentsOfDirectory(atPath: kCustomSettingsPath)
+            let presets = contents.filter { $0.lowercased().hasSuffix(".fcpre") }
+            if (presets.count == 0) {
+                return
+            }
+        } catch {
+            print("Can't determine if custom settings exist \(error)")
+        }
+    }
+    
+    func compatibleListContains(shortVersionNumber: String) -> Bool {
+        return self._compatibleShortVersionOfChosenApp.contains { (iterateVersionNumber) -> Bool in
+            return (iterateVersionNumber == shortVersionNumber)
+        }
+    }
+    
+    func hasAlreadyPatchedIDOrVersionNumber(bundleID: String, fullVersionNumber: String, shortVersionNumber: String) -> Bool {
+        return bundleID == self.patchedBundleIDOfChosenApp
+            || fullVersionNumber == self.patchedVersionStringOfChosenApp
+            || (self.patchedBundleIDOfChosenApp == nil && self.patchedVersionStringOfChosenApp == nil && compatibleListContains(shortVersionNumber: shortVersionNumber))
+    }
+    
+    func hasOrDoesNotRequireUnderscoredSheBangScriptNextToLargeBinary(foundAppPath: String) -> Bool {
+        let appMacOSPath = "\(foundAppPath)/Contents/MacOS"
+        let appBinaryPath = "\(appMacOSPath)/\(AppManager.shared.binaryNameOfChosenApp)"
+        let macAppBinaryPathUnderscore = "\(appBinaryPath)_"
+
+        switch chosenApp {
+        case .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
+            let exists = FileManager.default.fileExists(atPath: macAppBinaryPathUnderscore)
+            if (exists) {
+                do {
+                    if let fileSize = try FileManager.default.attributesOfItem(atPath: appBinaryPath)[.size] as? UInt64 {
+                        print("file size of non underscore is \(fileSize) bytes")
+                        if (fileSize < 1000) {
+                            print("The non underscored file is a fixer, no mach-o binary is smaller than 1000 bytes.")
+                            return true
+                        } else {
+                            print("The non underscored file probably isn't a fixer because it exceeds 1000 bytes, it probably got there with an app update.")
+                        }
+                    }
+                } catch {
+                    print("Can't determine file size, \(error)")
+                }
+            }
+            return false
+        default:
+            return true
+        }
+    }
+    
+    func hasAlreadyAppliedOrDoesNotRequireFixer(foundAppPath: String) -> Bool {
+        switch chosenApp {
+        case .aperture, .iphoto, .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
+            if hasOrDoesNotRequireUnderscoredSheBangScriptNextToLargeBinary(foundAppPath: foundAppPath) == false {
+                return false
+            }
+            if chosenApp == .logicPro9 && FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/MobileDevice.framework") == false {
+                return false
+            }
+            let existingFixerPath = "\(foundAppPath)/\(AppManager.shared.fixerFrameworkSubPath)"
+            if let existingFixerBundle = Bundle.init(path: existingFixerPath),
+                let existingFixerVersion = existingFixerBundle.cfBundleVersionInt,
+                let resourcePath = Bundle.main.resourcePath {
+                let fixerResourcePath = "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)/Resources/Info.plist"
+                if let loadedFixerInfoPlist = NSDictionary(contentsOfFile: fixerResourcePath) as? Dictionary<String, Any>,
+                    let bundledFixerVersionString = loadedFixerInfoPlist[kCFBundleVersion] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
+                    if (existingFixerVersion >= bundledFixerVersion) {
+                        return true
+                    }
+                }
+            }
+            return false
+        case .xcode:
+            let appBundle = Bundle(path: foundAppPath)
+            if let minSysVersionString = appBundle?.object(forInfoDictionaryKey: kLSMinimumSystemVersion) as? String {
+                print("Xcode min OS version: \(minSysVersionString), current OS version: \(ProcessInfo.osVersionNumberString)")
+                if (ProcessInfo.osVersionNumberString.osIsAtLeast(otherOS: minSysVersionString)) {
+                    print("Current OS is at least Xcode min OS")
+                    return true
+                }
+            }
+            return false
+        default:
+            print("\(String(describing: chosenApp)) doesn't need a fixer, so hasUpToDateFixer always returns true")
+            return true
+        }
+    }
     
     var locationOfChosenApp: String?
     var nameOfChosenApp: String {
@@ -597,11 +693,11 @@ class AppManager: NSObject {
         case .logicPro9:
             return ["1700.67"]
         case .keynote5:
-            return ["1170"]
+            return []
         case .pages4:
-            return ["1048"]
+            return []
         case .numbers2:
-            return ["554"]
+            return []
         default:
             return []
         }
@@ -692,7 +788,7 @@ class AppManager: NSObject {
                 case .appStore:
                     return "12.6.5"
                 case .configurator:
-                    return "999.99.99"
+                    return ""
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
@@ -746,7 +842,7 @@ class AppManager: NSObject {
         }
     }
     
-    var patchedBundleIDOfChosenApp: String {
+    var patchedBundleIDOfChosenApp: String? {
         get {
             switch self.chosenApp {
             case .aperture:
@@ -754,22 +850,17 @@ class AppManager: NSObject {
             case .iphoto:
                 return "com.apple.iPhoto9"
             case .itunes:
-                fallthrough
+                return nil
             case .xcode:
-                // Intentionally left unused for everything after this enum case
-                return "com.apple.intentionally-left-unused"
+                return nil
             case .finalCutPro7:
-                return "com.apple.FinalCutPro7"
+                return nil
             case .logicPro9:
-                return "com.apple.logic.pro9"
-            case .keynote5:
-                return "com.apple.iWork.Keynote5"
-            case .pages4:
-                return "com.apple.iWork.Pages4"
-            case .numbers2:
-                return "com.apple.iWork.Numbers2"
+                return nil
+            case .keynote5, .pages4, .numbers2:
+                return nil
             default:
-                return ""
+                return nil
             }
         }
     }
@@ -829,42 +920,32 @@ class AppManager: NSObject {
     }
 
     
-    var patchedVersionStringOfChosenApp: String {
+    var patchedVersionStringOfChosenApp: String? {
         get {
             switch self.chosenApp {
-            case .aperture:
-                return "99.9"
-            case .iphoto:
-                return "99.9"
+            case .aperture, .iphoto:
+                return nil
             case .itunes:
                 switch choseniTunesVersion {
                 case .darkMode:
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
-                case .configurator:
-                    return "999.99.99"
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
                     return "10.7"
-                case .none:
-                    return ""
+                case .configurator, .none:
+                    return nil
                 }
             case .finalCutPro7:
                 return "7.0.4"
             case .logicPro9:
                 return "1700.68"
-            case .xcode:
-                return "9999.99" // Intentionally left unused
-            case .keynote5:
-                return "1171"
-            case .pages4:
-                return "1049"
-            case .numbers2:
-                return "555"
+            case .xcode, .keynote5, .pages4, .numbers2:
+                return nil
             default:
-                return ""
+                return nil
             }
         }
     }

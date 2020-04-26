@@ -155,6 +155,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let kBrowserKitCopyPath = "\(kLibraryFrameworkPath)/BrowserKit.framework"
             let kProKitCopyPath = "\(kLibraryFrameworkPath)/ProKit.framework"
             let kAudioToolboxCopyPath = "\(appPath)/Contents/Frameworks/AudioToolbox.framework"
+            let kMobileDeviceCopyPath = "\(appPath)/Contents/Frameworks/MobileDevice.framework"
             let fsCustomSettingsPath = kCustomSettingsPath.fileSystemString
 
             if (fullMode == true) {
@@ -181,6 +182,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                     self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/AudioToolbox.framework.zip", kAudioToolboxCopyPath])
                     self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kAudioToolboxCopyPath])
                 }
+                
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/MobileDevice.framework.zip", kMobileDeviceCopyPath])
+                self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kMobileDeviceCopyPath])
 
                 self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kBrowserKitCopyPath])
                 self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kProKitCopyPath])
@@ -210,30 +214,21 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)", fixerPath])
 
             self.stage3Started()
-            let exists = FileManager.default.fileExists(atPath: macAppBinaryPathUnderscore)
-            if (exists) {
-                do {
-                    if let fileSize = try FileManager.default.attributesOfItem(atPath: appBinaryPath)[.size] as? UInt64 {
-                        print("file size of non underscore is \(fileSize) bytes")
-                        if (fileSize < 1000) {
-                            print("The non underscored file is a fixer, no mach-o binary is smaller than 1000 bytes.")
-                            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", appBinaryPath])
-                            self.runTask(toolPath: "/bin/mv", arguments: [macAppBinaryPathUnderscore, appBinaryPath])
-                        } else {
-                            print("The non underscored file probably isn't a fixer because it exceeds 1000 bytes, it probably got there with an app update. Removing the underscored backup.")
-                            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", macAppBinaryPathUnderscore])
-                        }
-                    }
-                } catch {
-                    print("Can't determine file size, \(error)")
-                }
+            if (AppManager.shared.hasOrDoesNotRequireUnderscoredSheBangScriptNextToLargeBinary(foundAppPath: appPath)) {
+                self.runTask(toolPath: "/bin/rm", arguments: ["-rf", appBinaryPath])
+                self.runTask(toolPath: "/bin/mv", arguments: [macAppBinaryPathUnderscore, appBinaryPath])
+            } else {
+                print("Removing the underscored backup as a result.")
+                self.runTask(toolPath: "/bin/rm", arguments: ["-rf", macAppBinaryPathUnderscore])
             }
 
             print("Installing fixer script, and renaming the real binary to be underscored.")
             self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
             self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["+x", appBinaryPath])
-            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", AppManager.shared.patchedVersionStringOfChosenApp, "Contents/Info.plist"])
+            if let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp {
+                self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", patchedVersionString, "Contents/Info.plist"])
+            }
 
             // Having custom settings will hang Final Cut Pro at launch, let's delete it.
             self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsCustomSettingsPath])
@@ -243,6 +238,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
             AppManager.shared.retinizeSelectedAppForCurrentUser()
+            AppManager.shared.removeFCP7PresetsIfNeeded()
             self.suppress32BitWarnings()
             self.stage4Finished()
             
@@ -268,7 +264,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.stage3Started()
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "insert_dylib", arguments: ["@executable_path/../Frameworks/ApertureFixer.framework/Versions/A/ApertureFixer", "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
-            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", AppManager.shared.patchedBundleIDOfChosenApp, "Contents/Info.plist"])
+            if let patchedBundleID = AppManager.shared.patchedBundleIDOfChosenApp {
+                self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", patchedBundleID, "Contents/Info.plist"])
+            }
             self.runTask(toolPath: "/bin/mkdir", arguments: ["-p", "/Library/Application Support/Aperture/Plug-Ins"])
 
             self.stage4Started()
@@ -626,7 +624,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         let packagePath = "\(mountPath)/\(pkgLocation.fileSystemString)"
         let afterPackagePath = "\(packageExtractionPath)/\(appLocation.fileSystemString)"
         
-        let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp
+        guard let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp else {
+            print("Missing patchedVersionString for iTunes. Can't continue to install iTunes.")
+            return
+        }
         
         let resourcePath = Bundle.main.resourcePath!.fileSystemString
         let inAppFrameworksPath = "\(appPath)/Contents/MacOS/iTunes.app/Contents/Frameworks"

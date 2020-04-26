@@ -11,6 +11,7 @@
 		042E9E492381AC2C001D3F38 /* AppKit in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E452381AC2B001D3F38 /* AppKit */; };
 		042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E472381AC2B001D3F38 /* GeneralFixerScript */; };
 		042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E482381AC2B001D3F38 /* VideoFixer */; };
+		0443E5E924562A7A008C4E9B /* MobileDevice.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 0443E5E824562A7A008C4E9B /* MobileDevice.framework.zip */; };
 		046034E22381B41200070C86 /* KeynoteFixer in Resources */ = {isa = PBXBuildFile; fileRef = 046034E12381B41200070C86 /* KeynoteFixer */; };
 		046034E42381B6E800070C86 /* KeynoteScript in Resources */ = {isa = PBXBuildFile; fileRef = 046034E32381B6E800070C86 /* KeynoteScript */; };
 		046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 046034E52381C18900070C86 /* BrowserKit.framework.zip */; };
@@ -118,6 +119,7 @@
 		042E9E452381AC2B001D3F38 /* AppKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppKit; sourceTree = "<group>"; };
 		042E9E472381AC2B001D3F38 /* GeneralFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = GeneralFixerScript; sourceTree = "<group>"; };
 		042E9E482381AC2B001D3F38 /* VideoFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VideoFixer; sourceTree = "<group>"; };
+		0443E5E824562A7A008C4E9B /* MobileDevice.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = MobileDevice.framework.zip; sourceTree = "<group>"; };
 		046034E12381B41200070C86 /* KeynoteFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = KeynoteFixer; sourceTree = "<group>"; };
 		046034E32381B6E800070C86 /* KeynoteScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = KeynoteScript; sourceTree = "<group>"; };
 		046034E52381C18900070C86 /* BrowserKit.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = BrowserKit.framework.zip; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				046034E32381B6E800070C86 /* KeynoteScript */,
 				042E9E472381AC2B001D3F38 /* GeneralFixerScript */,
 				60D7289F23D5787B0006F233 /* VMFCPFixerScript */,
+				0443E5E824562A7A008C4E9B /* MobileDevice.framework.zip */,
 				607C3D812382665900FAE528 /* AudioToolbox.framework.zip */,
 				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
 				046034E62381C18A00070C86 /* ProKit.framework.zip */,
@@ -629,6 +632,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0443E5E924562A7A008C4E9B /* MobileDevice.framework.zip in Resources */,
 				32F763582365018600200ED7 /* capsule.icns in Resources */,
 				6008E6C623820F7300A2F659 /* InfoPlist.strings in Resources */,
 				6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */,
@@ -968,7 +972,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 58;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -989,7 +993,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 58;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

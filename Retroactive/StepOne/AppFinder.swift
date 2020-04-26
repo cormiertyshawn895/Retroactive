@@ -63,85 +63,39 @@ class AppFinder: NSObject {
         var installedShortVersionString: String?
 
         for result in queriedApps {
-            if let bundleID = result.value(forAttribute: searchBundleIdentifier) as? String, let path = result.value(forAttribute: searchPath) as? String {
-                var appBundle = Bundle(path: path)
-                STPrivilegedTask.flushBundleCache(appBundle)
-                appBundle = Bundle(path: path)
+            guard let bundleID = result.value(forAttribute: searchBundleIdentifier) as? String, let path = result.value(forAttribute: searchPath) as? String else {
+                continue
+            }
+            
+            var appBundle = Bundle(path: path)
+            STPrivilegedTask.flushBundleCache(appBundle)
+            appBundle = Bundle(path: path)
 
-                let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleShortVersionString) as? String ?? ""
-                let fullVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleVersion) as? String ?? ""
-                if bundleID.elementsEqual(AppManager.shared.patchedBundleIDOfChosenApp) || fullVersionNumberString == AppManager.shared.patchedVersionStringOfChosenApp {
-                    print("Found compatible patched app: \(bundleID), \(path)")
-                    AppManager.shared.locationOfChosenApp = path
-                    let chosenApp = AppManager.shared.chosenApp
-                    if chosenApp == .aperture || chosenApp == .iphoto || AppManager.shared.hasChoseniWork {
-                        let existingFixerPath = "\(path)/\(AppManager.shared.fixerFrameworkSubPath)"
-                        if let existingFixerBundle = Bundle.init(path: existingFixerPath),
-                            let existingFixerVersion = existingFixerBundle.cfBundleVersionInt,
-                            let resourcePath = Bundle.main.resourcePath {
-                            let fixerResourcePath = "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)/Resources/Info.plist"
-                            if let loadedFixerInfoPlist = NSDictionary(contentsOfFile: fixerResourcePath) as? Dictionary<String, Any>,
-                                let bundledFixerVersionString = loadedFixerInfoPlist[kCFBundleVersion] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
-                                if (existingFixerVersion < bundledFixerVersion) {
-                                    print("existing fixer is \(existingFixerVersion), bundled fixer is \(bundledFixerVersion), upgrade is available")
-                                    AppManager.shared.fixerUpdateAvailable = true
-                                } else {
-                                    self.pushCompletionVC()
-                                    return
-                                }
-                            }
-                        }
-                    } else if AppManager.shared.chosenApp == .finalCutPro7 {
-                        do {
-                            let exists = FileManager.default.fileExists(atPath: kCustomSettingsPath)
-                            if (!exists) {
-                                self.pushCompletionVC()
-                                return
-                            }
-                            let contents = try FileManager.default.contentsOfDirectory(atPath: kCustomSettingsPath)
-                            let presets = contents.filter { $0.lowercased().hasSuffix(".fcpre") }
-                            if (presets.count == 0) {
-                                self.pushCompletionVC()
-                                return
-                            }
-                        } catch {
-                            print("Can't determine if custom settings exist \(error)")
-                        }
-                    } else {
-                        self.pushCompletionVC()
-                        return
-                    }
-
-                } else {
-                    let contains = AppManager.shared.compatibleVersionOfChosenApp.contains { (compatibleID) -> Bool in
-                        return (compatibleID == versionNumberString)
-                    }
-                    if contains {
-                        AppManager.shared.locationOfChosenApp = path
-                        installedFullVersionString = fullVersionNumberString
-                        installedShortVersionString = versionNumberString
-                        if AppManager.shared.chosenApp == .xcode {
-                            if let minSysVersionString = appBundle?.object(forInfoDictionaryKey: kLSMinimumSystemVersion) as? String {
-                                print("Xcode min OS version: \(minSysVersionString), current OS version: \(ProcessInfo.osVersionNumberString)")
-                                if (ProcessInfo.osVersionNumberString.osIsAtLeast(otherOS: minSysVersionString)) {
-                                    print("Current OS is at least Xcode min OS")
-                                    self.pushCompletionVC()
-                                    return
-                                }
-                            }
-                        }
-                        print("Found compatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
-                    } else {
-                        var alreadyFoundVersionOnlyRequiresMinorUpdate = false
-                        if let alreadyFoundIncompatibleVersion = incompatibleVersion {
-                            alreadyFoundVersionOnlyRequiresMinorUpdate = AppManager.shared.versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: alreadyFoundIncompatibleVersion)
-                        }
-                        if (!alreadyFoundVersionOnlyRequiresMinorUpdate) {
-                            incompatibleVersion = versionNumberString
-                        }
-                        print("Found incompatible unpatched app: \(bundleID), \(path), \(versionNumberString); alreadyFoundVersionOnlyRequiresMinorUpdate = \(alreadyFoundVersionOnlyRequiresMinorUpdate)")
-                    }
+            let versionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleShortVersionString) as? String ?? ""
+            let fullVersionNumberString: String = appBundle?.object(forInfoDictionaryKey: kCFBundleVersion) as? String ?? ""
+            let compatibleListContainsVersionNumberString = AppManager.shared.compatibleListContains(shortVersionNumber: versionNumberString)
+            let alreadyPatchedIDOrVersionNumber = AppManager.shared.hasAlreadyPatchedIDOrVersionNumber(bundleID: bundleID, fullVersionNumber: fullVersionNumberString, shortVersionNumber: versionNumberString)
+            let alreadyAddedLatestPatcher = AppManager.shared.hasAlreadyAppliedOrDoesNotRequireFixer(foundAppPath: path)
+            if (alreadyPatchedIDOrVersionNumber && alreadyAddedLatestPatcher) {
+                AppManager.shared.locationOfChosenApp = path
+                self.pushCompletionVC()
+                return
+            }
+            
+            if compatibleListContainsVersionNumberString {
+                AppManager.shared.locationOfChosenApp = path
+                installedFullVersionString = fullVersionNumberString
+                installedShortVersionString = versionNumberString
+                print("Found compatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
+            } else {
+                var alreadyFoundVersionOnlyRequiresMinorUpdate = false
+                if let alreadyFoundIncompatibleVersion = incompatibleVersion {
+                    alreadyFoundVersionOnlyRequiresMinorUpdate = AppManager.shared.versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: alreadyFoundIncompatibleVersion)
                 }
+                if (!alreadyFoundVersionOnlyRequiresMinorUpdate) {
+                    incompatibleVersion = versionNumberString
+                }
+                print("Found incompatible unpatched app: \(bundleID), \(path), \(versionNumberString); alreadyFoundVersionOnlyRequiresMinorUpdate = \(alreadyFoundVersionOnlyRequiresMinorUpdate)")
             }
         }
         
@@ -294,6 +248,7 @@ class AppFinder: NSObject {
             return
         }
         AppManager.shared.retinizeSelectedAppForCurrentUser()
+        AppManager.shared.removeFCP7PresetsIfNeeded()
         AppDelegate.pushCompletionVC()
     }
     
