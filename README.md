@@ -125,7 +125,7 @@ After successfully modifying or installing the app, you can play with it to your
 
 - After fixing Keynote ’09 with Retroactive, you can normally play slideshows.
 
-- After fixing Pages ’09 with Retroactive, typing and scrolling in Pages ‘09 should be more responsive.
+- After fixing Pages ’09 with Retroactive, typing and scrolling in Pages ’09 should be more responsive.
 
 ---
 

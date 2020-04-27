@@ -538,7 +538,14 @@ class AppManager: NSObject {
             || (self.patchedBundleIDOfChosenApp == nil && self.patchedVersionStringOfChosenApp == nil && compatibleListContains(shortVersionNumber: shortVersionNumber))
     }
     
-    func hasOrDoesNotRequireUnderscoredSheBangScriptNextToLargeBinary(foundAppPath: String) -> Bool {
+    enum UnderscoreState {
+        case notNeeded
+        case neededButNotFound
+        case smallUnderscoreNextToBinary // ['AppName_' is a script, 'AppName' is the binary]
+        case largeUnderscoreNextToBinary // ['AppName_' is a newer binary, 'AppName is an older binary']
+    }
+    
+    func underscoreState(foundAppPath: String) -> UnderscoreState {
         let appMacOSPath = "\(foundAppPath)/Contents/MacOS"
         let appBinaryPath = "\(appMacOSPath)/\(AppManager.shared.binaryNameOfChosenApp)"
         let macAppBinaryPathUnderscore = "\(appBinaryPath)_"
@@ -552,25 +559,26 @@ class AppManager: NSObject {
                         print("file size of non underscore is \(fileSize) bytes")
                         if (fileSize < 1000) {
                             print("The non underscored file is a fixer, no mach-o binary is smaller than 1000 bytes.")
-                            return true
+                            return .smallUnderscoreNextToBinary
                         } else {
                             print("The non underscored file probably isn't a fixer because it exceeds 1000 bytes, it probably got there with an app update.")
+                            return .largeUnderscoreNextToBinary
                         }
                     }
                 } catch {
                     print("Can't determine file size, \(error)")
                 }
             }
-            return false
+            return hasChoseniWork ? .notNeeded : .neededButNotFound
         default:
-            return true
+            return .notNeeded
         }
     }
     
     func hasAlreadyAppliedOrDoesNotRequireFixer(foundAppPath: String) -> Bool {
         switch chosenApp {
         case .aperture, .iphoto, .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
-            if hasOrDoesNotRequireUnderscoredSheBangScriptNextToLargeBinary(foundAppPath: foundAppPath) == false {
+            if underscoreState(foundAppPath: foundAppPath) == .neededButNotFound {
                 return false
             }
             if chosenApp == .logicPro9 && FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/MobileDevice.framework") == false {
@@ -919,34 +927,41 @@ class AppManager: NSObject {
         }
     }
 
+    var fixerBinaryRelativeToExecutablePath: String {
+        return "@executable_path/../Frameworks/\(fixerFrameworkName).framework/Versions/A/\(fixerFrameworkName)"
+    }
     
     var patchedVersionStringOfChosenApp: String? {
-        get {
-            switch self.chosenApp {
-            case .aperture, .iphoto:
-                return nil
-            case .itunes:
-                switch choseniTunesVersion {
-                case .darkMode:
-                    return "12.9.5"
-                case .appStore:
-                    return "12.6.5"
-                case .classicTheme:
-                    return "11.4"
-                case .coverFlow:
-                    return "10.7"
-                case .configurator, .none:
-                    return nil
-                }
-            case .finalCutPro7:
-                return "7.0.4"
-            case .logicPro9:
-                return "1700.68"
-            case .xcode, .keynote5, .pages4, .numbers2:
-                return nil
-            default:
+        switch self.chosenApp {
+        case .aperture, .iphoto:
+            return nil
+        case .itunes:
+            switch choseniTunesVersion {
+            case .darkMode:
+                return "12.9.5"
+            case .appStore:
+                return "12.6.5"
+            case .classicTheme:
+                return "11.4"
+            case .coverFlow:
+                return "10.7"
+            case .configurator, .none:
                 return nil
             }
+        case .finalCutPro7:
+            return "7.0.4"
+        case .logicPro9:
+            return "1700.68"
+        case .xcode:
+            return nil
+        case .keynote5:
+            return "1171"
+        case .pages4:
+            return "1049"
+        case .numbers2:
+            return "555"
+        default:
+            return nil
         }
     }
     

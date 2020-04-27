@@ -214,17 +214,24 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)", fixerPath])
 
             self.stage3Started()
-            if (AppManager.shared.hasOrDoesNotRequireUnderscoredSheBangScriptNextToLargeBinary(foundAppPath: appPath)) {
+            let underscoreState = AppManager.shared.underscoreState(foundAppPath: appPath)
+            if (underscoreState == .smallUnderscoreNextToBinary) {
                 self.runTask(toolPath: "/bin/rm", arguments: ["-rf", appBinaryPath])
                 self.runTask(toolPath: "/bin/mv", arguments: [macAppBinaryPathUnderscore, appBinaryPath])
-            } else {
+            } else if (underscoreState == .largeUnderscoreNextToBinary) {
                 print("Removing the underscored backup as a result.")
                 self.runTask(toolPath: "/bin/rm", arguments: ["-rf", macAppBinaryPathUnderscore])
             }
 
-            print("Installing fixer script, and renaming the real binary to be underscored.")
-            self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
-            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
+            if (fullMode) {
+                print("Installing fixer script under full mode (FCP and LP9). Renaming the real binary to be underscored.")
+                self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
+                self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
+            } else {
+                print("Inserting dylib for iWork apps instead of using a shebang script, so the document title popover still works.")
+                ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, appBinaryPath, "--inplace"], path: resourcePath)
+            }
+            
             self.runTask(toolPath: "/bin/chmod", arguments: ["+x", appBinaryPath])
             if let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp {
                 self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", patchedVersionString, "Contents/Info.plist"])
@@ -263,7 +270,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
             self.stage3Started()
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "insert_dylib", arguments: ["@executable_path/../Frameworks/ApertureFixer.framework/Versions/A/ApertureFixer", "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
+            ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
             if let patchedBundleID = AppManager.shared.patchedBundleIDOfChosenApp {
                 self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", patchedBundleID, "Contents/Info.plist"])
             }
@@ -369,7 +376,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 10, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
-                self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: AppManager.shared.hasChoseniWork ? 45 : 30, startingPercent: 0.4, endingPercent: 1.0)
             }
         }
     }
