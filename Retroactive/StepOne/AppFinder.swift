@@ -61,6 +61,7 @@ class AppFinder: NSObject {
         var incompatibleVersion: String?
         var installedFullVersionString: String?
         var installedShortVersionString: String?
+        var alreadyFoundVersionOnlyRequiresMinorUpdate = false
 
         for result in queriedApps {
             guard let bundleID = result.value(forAttribute: searchBundleIdentifier) as? String, let path = result.value(forAttribute: searchPath) as? String else {
@@ -88,9 +89,10 @@ class AppFinder: NSObject {
                 installedShortVersionString = versionNumberString
                 print("Found compatible unpatched app: \(bundleID), \(path), \(versionNumberString)")
             } else {
-                var alreadyFoundVersionOnlyRequiresMinorUpdate = false
                 if let alreadyFoundIncompatibleVersion = incompatibleVersion {
-                    alreadyFoundVersionOnlyRequiresMinorUpdate = AppManager.shared.versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: alreadyFoundIncompatibleVersion)
+                    if (AppManager.shared.versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: alreadyFoundIncompatibleVersion)) {
+                        alreadyFoundVersionOnlyRequiresMinorUpdate = true
+                    }
                 }
                 if (!alreadyFoundVersionOnlyRequiresMinorUpdate) {
                     incompatibleVersion = versionNumberString
@@ -101,12 +103,6 @@ class AppFinder: NSObject {
         
         let lastCompatible = AppManager.shared.compatibleVersionOfChosenApp.first
         if AppManager.shared.locationOfChosenApp == nil {
-            if let lastCompatibleVersion = lastCompatible, let knownIncompatible = incompatibleVersion {
-                let compareResult = knownIncompatible.compare(lastCompatibleVersion, options: .numeric, range: nil, locale: nil)
-                if compareResult == .orderedDescending {
-                    incompatibleVersion = nil
-                }
-            }
             self.pushGuidanceVC(incompatibleVersion)
         } else {
             if let lastCompatibleVersion = lastCompatible, let installed = installedFullVersionString, let shortVersion = installedShortVersionString {
