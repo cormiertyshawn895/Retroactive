@@ -21,7 +21,7 @@
 "Cancel" = "取消"; 
 "Check Again" = "重新检查"; 
 "Classic Look" = "经典外观"; 
-"Click on “Download Update“ to download and install the iWork 9.3 Update." = "点击 “下载更新” 以下载并安装 iWork 9.3 更新。"; 
+"Click on “Download Update” to download and install the iWork 9.3 Update." = "点击 “下载更新” 以下载并安装 iWork 9.3 更新。"; 
 "Completed" = "完成"; 
 "Configure %@" = "配置 %@"; 
 "Connect an iOS device to Apple Configurator 2" = "将 iOS 设备连接至 Apple Configurator 2"; 
@@ -53,6 +53,7 @@
 "If iTunes 12.6.5 can't back up your device, try to use iTunes 12.9.5 or Finder instead." = "如果 iTunes 12.6.5 无法备份您的设备，请安装 iTunes 12.9.5 或直接使用访达。"; 
 "If you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay." = "如果您有 %@ 的 DVD 安装光盘，插入光盘并安装该应用程序。如果您没有 DVD 安装光盘，您可能可以在咸鱼等二手交易平台上购买盒装版 %@。"; 
 "If you have already installed %@ %@ at a custom location, you can also locate it manually." = "如果您已经在自定义位置安装了 %@ %@，请手动寻找并选择该应用程序。"; 
+"If you have already installed Final Cut Pro X on your Mac, the Final Cut Pro 7 package will be grayed out in the Final Cut Studio 3 installer. You need to rename “Final Cut Pro.app” into “Final Cut Pro X.app”, or move it into a different folder." = "如果您已经在 Mac 上安装了 Final Cut Pro X，在安装 Final Cut Studio 3 时，您将无法选择 Final Cut Pro 7 选项。您需要将已安装的 “Final Cut Pro.app” 重命名为 “Final Cut Pro X.app”，或将其移动到另一个文件夹中。"; 
 "If you have installed %@ at a custom location, locate it manually." = "如果您将 %@ 安装在了自定义的位置，请手动寻找并选择该应用程序。"; 
 "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list." = "如果您此前曾在 Mac App Store 下载过 %@，请前往已购清单将其重新下载。"; 
 "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina." = "如果您将 Mac 更新到 macOS Catalina，Final Cut Pro 7、Logic Pro 9 和 iWork ’09 会被重新封印且无法解除。但解印依然可以在 macOS Catalina 下解锁 Aperture 和 iPhoto，或安装 iTunes。"; 

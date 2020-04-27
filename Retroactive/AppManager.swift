@@ -47,6 +47,8 @@ let purposeToken = "{purpose}"
 let actionPresentTenseToken = "{actionPR}"
 
 let kCustomSettingsPath = "/Library/Application Support/Final Cut Pro System Support/Custom Settings"
+let kFCP7EasySetupPath = "/Applications/Final Cut Pro Additional Easy Setups"
+let kFCP7EasySetupPathLocalizedPath = "/Applications/Final Cut Pro Additional Easy Setups.localized"
 
 let lastHWForMojave = ["iMac19,2", "iMacPro1,1", "MacBook10,1", "MacBookAir8,2", "MacBookPro15,4", "Macmini8,1", "MacPro6,1"]
 
@@ -519,7 +521,13 @@ class AppManager: NSObject {
             let contents = try FileManager.default.contentsOfDirectory(atPath: kCustomSettingsPath)
             let presets = contents.filter { $0.lowercased().hasSuffix(".fcpre") }
             if (presets.count == 0) {
-                return
+                print("No presets are left at the custom settings path.")
+            }
+            if (FileManager.default.fileExists(atPath: kFCP7EasySetupPath)) {
+                try FileManager.default.removeItem(atPath: kFCP7EasySetupPath)
+            }
+            if (FileManager.default.fileExists(atPath: kFCP7EasySetupPathLocalizedPath)) {
+                try FileManager.default.removeItem(atPath: kFCP7EasySetupPathLocalizedPath)
             }
         } catch {
             print("Can't determine if custom settings exist \(error)")
@@ -1172,7 +1180,7 @@ class AppManager: NSObject {
             case .itunes:
                 return ""
             case .finalCutPro7:
-                return dvdTemplate
+                return dvdTemplate + twoNewLines + "If you have already installed Final Cut Pro X on your Mac, the Final Cut Pro 7 package will be grayed out in the Final Cut Studio 3 installer. You need to rename “Final Cut Pro.app” into “Final Cut Pro X.app”, or move it into a different folder.".localized()
             case .logicPro9:
                 return dvdTemplate + twoNewLines + appStoreTemplate
             case .keynote5, .pages4, .numbers2:

@@ -157,6 +157,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let kAudioToolboxCopyPath = "\(appPath)/Contents/Frameworks/AudioToolbox.framework"
             let kMobileDeviceCopyPath = "\(appPath)/Contents/Frameworks/MobileDevice.framework"
             let fsCustomSettingsPath = kCustomSettingsPath.fileSystemString
+            let fsEasySetupPath = kFCP7EasySetupPath.fileSystemString
+            let fsEasySetupLocalizedPath = kFCP7EasySetupPathLocalizedPath.fileSystemString
 
             if (fullMode == true) {
                 // It shouldn't be possible to have ProKit or BrowserKit at /System/Library/Frameworks on High Sierra or Mojave, and deleting them will fail with SIP.
@@ -239,6 +241,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
             // Having custom settings will hang Final Cut Pro at launch, let's delete it.
             self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsCustomSettingsPath])
+            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsEasySetupPath])
+            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsEasySetupLocalizedPath])
 
             self.stage4Started()
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])

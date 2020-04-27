@@ -152,7 +152,7 @@ class AppFinder: NSObject {
                     secondParagraph = String(format: "Directly download %@ from the Apple Developer website, then run Retroactive again.".localized(), name)
                 } else if AppManager.shared.hasChoseniWork {
                     secondParagraph = onlyRequiresMinorUpdate ?
-                        String(format: "Click on “Download Update“ to download and install the iWork 9.3 Update.".localized(), name, compat) :
+                        String(format: "Click on “Download Update” to download and install the iWork 9.3 Update.".localized(), name, compat) :
                         "Download and install iWork ’09 from The Internet Archive, then install the iWork 9.3 Update.".localized()
                 } else {
                     secondParagraph = String(format: "Download the latest version of %@ %@ from the Purchased list in the Mac App Store, then run Retroactive again.".localized(), name, compat)

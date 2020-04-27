@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.7 (Build 62) improves compatibility between iWork ’09 and macOS Mojave, and contains bug fixes for Logic Pro 9.</string>
+	<string>Retroactive 1.7 (Build 63) improves compatibility between iWork ’09 and macOS Mojave, and contains bug fixes for Logic Pro 9.</string>
 	<key>NewVersionChangelog</key>
     <string>• Resolves an issue where typing and scrolling in Pages ’09 may be slow
 • Resolves an issue where Pages may fail to resize when the Styles drawer is visible
@@ -13,7 +13,7 @@
 • Resolves an issue where text in Japanese, Traditional Chinese, and Simplified Chinese may be invisible or appear as special characters in iWork ’09
 • Resolves an issue where 32-bit Audio Bridge may quit unexpectedly when opening Logic Pro 9</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.7 (版本号 62) 改进了 iWork ’09 与 macOS Mojave 的兼容性，并包含对 Logic Pro 9 的错误修正</string>
+	<string>新版本解印 1.7 (版本号 63) 改进了 iWork ’09 与 macOS Mojave 的兼容性，并包含对 Logic Pro 9 的错误修正</string>
 	<key>NewVersionChangelogzhHans</key>
     <string>• 解决了在 Pages ’09 中输入文字和滚动可能响应缓慢的问题
 • 解决了在 Pages ’09 中显示样式抽屉时窗口可能无法调整大小的问题
@@ -23,7 +23,7 @@
 • 解决了在 iWork ’09 中简体中文、繁体中文和日文字符可能不可见或被特殊字符替代的问题
 • 解决了在启动 Logic Pro 9 时，32 位 Audio Bridge 可能意外退出的问题</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.7 (版本號 62) 改進了 iWork ’09 與 macOS Mojave 的兼容性，並包含對 Logic Pro 9 的錯誤修正</string>
+	<string>新版本解印 1.7 (版本號 63) 改進了 iWork ’09 與 macOS Mojave 的兼容性，並包含對 Logic Pro 9 的錯誤修正</string>
 	<key>NewVersionChangelogzhHant</key>
     <string>• 解決了在 Pages ’09 中輸入文字和滾動可能響應緩慢的問題
 • 解決了在 Pages ’09 中顯示樣式抽屜時窗口可能無法調整大小的問題
@@ -35,7 +35,7 @@
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.7/Retroactive.1.7.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>62</integer>
+	<integer>63</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>
