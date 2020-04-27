@@ -405,7 +405,7 @@ class AppManager: NSObject {
     }
     
     var marginBetweenApps: CGFloat {
-        if osMinorVersion == 14 {
+        if osMinorVersion <= 14 {
             return 43;
         }
         return 54;
@@ -413,7 +413,7 @@ class AppManager: NSObject {
 
     var supportedApps: [AppType] {
         if osMinorVersion <= 13 {
-            return [.finalCutPro7, .logicPro9, .keynote5]
+            return [.finalCutPro7, .logicPro9, .keynote5, .pages4, .numbers2]
         } else if osMinorVersion == 14 {
             return [.finalCutPro7, .logicPro9, .xcode, .keynote5, .pages4, .numbers2]
         } else if osMinorVersion >= 15 {
@@ -424,7 +424,7 @@ class AppManager: NSObject {
     
     var getStartedSubTitle: String {
         if osMinorVersion <= 13 {
-            return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix Keynote ’09.".localized()
+            return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09.".localized()
         } else if osMinorVersion == 14 {
             return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix iWork ’09.".localized()
         } else if osMinorVersion >= 15 {

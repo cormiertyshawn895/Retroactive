@@ -53,19 +53,25 @@
 }
 
 - (void)_swizzled_really_setLionScrollerStyle:(NSScrollerStyle)newScrollerStyle {
+#if DEBUG
     NSLog(@"_really_setLionScrollerStyle");
+#endif
     [self _swizzled_really_setLionScrollerStyle:newScrollerStyle];
     [self _updateWantsLayer];
 }
 
 - (void)swizzled_setOverlayScrollerKnobAlpha:(CGFloat)alpha {
+#if DEBUG
     NSLog(@"swizzled_setOverlayScrollerKnobAlpha");
+#endif
     [self swizzled_setOverlayScrollerKnobAlpha:alpha];
     [self _updateWantsLayer];
 }
 
 - (void)swizzled_setOverlayScrollerTrackAlpha:(CGFloat)alpha {
+#if DEBUG
     NSLog(@"swizzled_setOverlayScrollerTrackAlpha");
+#endif
     [self swizzled_setOverlayScrollerTrackAlpha:alpha];
     [self _updateWantsLayer];
 }
