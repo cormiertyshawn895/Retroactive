@@ -23,12 +23,20 @@
         return;
     }
 
-    NSLog(@"On macOS Mojave, viewWillDraw significantly degrades the performance of Pages when typing and scrolling. Swap it with a no-op.");
-    method_exchangeImplementations(class_getInstanceMethod([self class], @selector(viewWillDraw)),
+    NSLog(@"On macOS Mojave, -[SLScrollView viewWillDraw] significantly degrades the performance of Pages when typing and scrolling. Swap it with a no-op.");
+    method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"SLScrollView"), @selector(viewWillDraw)),
                                    class_getInstanceMethod([self class], @selector(swizzled_viewWillDraw)));
 }
 
 - (void)swizzled_viewWillDraw {
+    NSString *classString = NSStringFromClass([self class]);
+    // Even though we're swizzling SLScrollView, this method still gets called for NSScrollView,
+    // which causes problems with the Template Chooser and the Page Thumbnails or Search sidebar.
+    // Only bail early if it is SLScrollView.
+    if ([classString isEqualToString:@"SLScrollView"]) {
+        return;
+    }
+    [self swizzled_viewWillDraw];
 }
 
 @end
