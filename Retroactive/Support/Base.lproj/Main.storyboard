@@ -407,7 +407,7 @@
                                 <color key="fillColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ngC-v5-Ghd">
-                                <rect key="frame" x="-2" y="59" width="175" height="25"/>
+                                <rect key="frame" x="-21" y="59" width="213" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Name" id="pyQ-TC-HVs">
                                     <font key="font" metaFont="system" size="20"/>
@@ -454,7 +454,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nCz-Am-4bb" customClass="DisplayOnlyTextField" customModule="Retroactive" customModuleProvider="target">
-                                <rect key="frame" x="202" y="474" width="779" height="51"/>
+                                <rect key="frame" x="202" y="474" width="811" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" title="You need to install {name} first." id="b6v-Iz-J0i">
                                     <font key="font" metaFont="systemBold" size="39"/>
@@ -1672,7 +1672,7 @@ You can use {name} now.</string>
         <image name="ipod_family" width="261" height="231.5"/>
         <image name="itunes12_9" width="281" height="195.5"/>
         <image name="itunes_cartoon" width="252" height="252"/>
-        <image name="mojave-banner" width="882" height="70"/>
+        <image name="mojave-banner" width="883" height="71"/>
         <image name="parallels" width="128" height="128"/>
         <image name="tick" width="51" height="45"/>
         <image name="timemachine_guide" width="381" height="146"/>

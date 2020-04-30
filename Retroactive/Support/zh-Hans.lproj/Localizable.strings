@@ -119,7 +119,7 @@
 "Unarchive Xcode and move it to the Applications folder" = "先解压缩 Xcode，然后将其移动至应用程序文件夹"; 
 "Unlock Aperture and iPhoto, or install iTunes." = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。"; 
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09." = "解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 iWork ’09。"; 
-"Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix iWork ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.4.1 的封印，或修复 iWork ’09。"; 
+"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, and fix iWork ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.5 或 11.4.1 的封印，并修复 iWork ’09。"; 
 "Unlock {name} again" = "重新解印 {name}"; 
 "Untitled" = "新项目"; 
 "Update (Recommended)" = "安装更新 (推荐)"; 
@@ -137,6 +137,7 @@
 "Working..." = "进行中..."; 
 "Would you like to create a new iTunes library to use with iTunes %@?" = "是否要创建一个新的 iTunes 资料库，从而与 iTunes %@ 配合使用？"; 
 "Would you like to create a new iTunes library?" = "您是否想要创建新的 iTunes 资料库？"; 
+"Xcode 11.5 or 11.4.1" = "Xcode 11.5 或 11.4.1"; 
 "Yes, you can. However, iTunes will not sync with iPod devices, play music on removable storage, or access shared iTunes libraries on a network drive." = "可以。然而 iTunes 将无法与 iPod 设备同步或播放存储于可移除的宗卷的音乐，也不能访问网络共享服务器上的 iTunes 资料库。"; 
 "You can download and install iWork ’09, which includes %@, from The Internet Archive." = "您可以在互联网上找到，并下载和安装 iWork ’09 (包含 %@)。"; 
 "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac." = "您可以将现有的 Keynote 演示文稿导出为 PowerPoint 演示文稿。如需查看或编辑 Keynote 幻灯片、动画和转场，请在真正的 Mac 电脑中运行解印。"; 
@@ -150,6 +151,7 @@
 "You have installed an older version of iTunes (%@), which is not compatible with your current iTunes library (%@)." = "您安装了较早版本的 iTunes (%@)，不兼容您现有的 iTunes 资料库 (%@)。"; 
 "You need to install Final Cut Pro 7 first." = "您需要先安装 Final Cut Pro 7。"; 
 "You need to install an older version of %@ %@" = "您需要安装旧版 %@ %@。"; 
+"You need to install {name}." = "您需要先安装 {name}。"; 
 "You need to update %@ from %@ to %@." = "您需要将 %@ 从 %@ 更新至 %@。"; 
 "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space." = "您的启动磁盘只有 %d GB 可用空间。如需安装 %@, 您的启动磁盘至少需要 %d GB 的可用空间。"; 
 "a virtual machine" = "虚拟机"; 

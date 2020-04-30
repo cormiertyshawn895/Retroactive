@@ -398,7 +398,8 @@ class AppManager: NSObject {
         return configurationDictionary?["FCPUpdate"] as? String
     }
     
-    var xcode114URL: String? {
+    var xcode11URL: String? {
+        // Intentionally Kept the Xcode114URL key for backwards compatibility
         return configurationDictionary?["Xcode114URL"] as? String
     }
 
@@ -428,7 +429,7 @@ class AppManager: NSObject {
         if osMinorVersion <= 13 {
             return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09.".localized()
         } else if osMinorVersion == 14 {
-            return "Unlock Final Cut Pro 7, Logic Pro 9, and Xcode 11.4.1, or fix iWork ’09.".localized()
+            return "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, and fix iWork ’09.".localized()
         } else if osMinorVersion >= 15 {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
@@ -639,7 +640,7 @@ class AppManager: NSObject {
         case .logicPro9:
             return "Logic Pro 9"
         case .xcode:
-            return "Xcode 11.4.1"
+            return "Xcode 11.5 or 11.4.1".localized()
         case .keynote5:
             return "Keynote ’09"
         case .pages4:
@@ -745,7 +746,7 @@ class AppManager: NSObject {
         case .logicPro9:
             return ["9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
         case .xcode:
-            return ["11.4.1", "11.4"]
+            return ["11.5", "11.4.1", "11.4"]
         case .keynote5:
             return ["5.3"]
         case .pages4:
@@ -817,7 +818,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return "9.1.8"
             case .xcode:
-                return "11.4.1"
+                return "11.5"
             case .keynote5:
                 return "5.3"
             case .pages4:
@@ -1264,7 +1265,7 @@ class AppManager: NSObject {
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicDVD)
         case .xcode:
-            AppDelegate.current.safelyOpenURL(AppManager.shared.xcode114URL)
+            AppDelegate.current.safelyOpenURL(AppManager.shared.xcode11URL)
         case .keynote5, .pages4, .numbers2:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
         default:

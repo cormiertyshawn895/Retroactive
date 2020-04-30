@@ -23,11 +23,14 @@ class GuidanceViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let chosen = AppManager.shared.chosenApp
+        if (chosen == .xcode) {
+            needInstallFirstTitle.stringValue = "You need to install {name}.".localized()
+        }
         let labels = [needInstallFirstTitle, downloadAppLabel, airDropAppLabel, timeMachineAppLabel]
         for label in labels {
             label!.updateToken()
         }
-        let chosen = AppManager.shared.chosenApp
         if (AppManager.shared.hasChoseniWork) {
             downloadAppLabel.stringValue = "Download and install iWork ’09 from The Internet Archive".localized()
             airDropAppLabel.stringValue = "Download and install the iWork 9.3 Update".localized()
