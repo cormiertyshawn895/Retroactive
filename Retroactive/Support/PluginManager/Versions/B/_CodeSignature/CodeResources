@@ -4,44 +4,47 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/English.lproj/InfoPlist.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			A29ROLSRBrMvVKFxFsC8JknAUcE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		4ioBbS/bRjtRQ/2Lrsmj1FDXT+s=
+		qI0o+HLjhTiOJYnJhqVlJE0yB+Y=
+		</data>
+		<key>Resources/version.plist</key>
+		<data>
+		0lcsBgo3TISrPCtv7bZY5Bj5dxY=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/ApertureFixer.h</key>
+		<key>Resources/English.lproj/InfoPlist.strings</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			9CYBX4PqwB3GvOPSm60abIFrfz0=
-			</data>
 			<key>hash2</key>
 			<data>
-			UAQubzh7eIHSJm7mWAgjUO/3UKzO2JAAW7s/Lkpgtc0=
+			f4ddDDMbkbX3wOL1a18UpEFHkzzciV9fyiEnGD9DEbA=
 			</data>
-		</dict>
-		<key>Modules/module.modulemap</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Fin0qpfJrFJwreOl64pLvHzSE3Q=
-			</data>
-			<key>hash2</key>
-			<data>
-			UZX+S9KIEhxNqPXYdtU3W8BhF/L1ULM5PE+HrH8zZ5g=
-			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 		<key>Resources/Info.plist</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			4ioBbS/bRjtRQ/2Lrsmj1FDXT+s=
-			</data>
 			<key>hash2</key>
 			<data>
-			9TZdZsN7tJVF3+DV9/AOf6I6xxi7J9WKhE4EfhX6IIU=
+			FZXVc2vWyI4BaXbp/yYu/9FhKIXPVs84p1WMpK+A/Yk=
+			</data>
+		</dict>
+		<key>Resources/version.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			L1UIE/lAiCJ2CJo5oMRh454+P2sQJ1Mb1njXchS7DSM=
 			</data>
 		</dict>
 	</dict>

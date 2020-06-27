@@ -42,12 +42,12 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
     
     func alertForOSIncompatibility() {
-        if osMinorVersion > 15 {
-            AppDelegate.showOptionSheet(title: "Update to a newer version of Retroactive".localized(),
-                                        text: String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@.".localized(), ProcessInfo.versionString),
-                                        firstButtonText: "Check for Updates",
-                                        secondButtonText: "Run Anyways",
-                                        thirdButtonText: "Quit") { (response) in
+        if osAtLeastBigSur {
+            AppDelegate.showOptionSheet(title: discouraged_osExactlyBigSur ? String(format: "Limited experimental support on %@".localized(), ProcessInfo.versionName) : "Update to a newer version of Retroactive".localized(),
+                                        text: discouraged_osExactlyBigSur ? String(format: "On %@, Aperture and iTunes can launch and are functional, but you may see graphical glitches, missing toolbar icons, and occasional crashes.".localized(), ProcessInfo.versionName) : String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@.".localized(), ProcessInfo.versionName),
+                                        firstButtonText: "Check for Updates".localized(),
+                                        secondButtonText: discouraged_osExactlyBigSur ? "Continue".localized() : "Run Anyways".localized(),
+                                        thirdButtonText: "Quit".localized()) { (response) in
                 if (response == .alertFirstButtonReturn) {
                     AppDelegate.current.checkForUpdates()
                     // NSApplication.shared.terminate(self)

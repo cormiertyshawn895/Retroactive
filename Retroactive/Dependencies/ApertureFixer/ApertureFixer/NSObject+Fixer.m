@@ -99,4 +99,13 @@
 	return NO;
 	
 }
+
+- (BOOL)_proIsSpinning {
+    return NO;
+}
+
+- (void)_autoSizeView:(id)a :(id)b :(id)c :(id)d :(id)e {
+    NSLog(@"Skipping _autoSizeView");
+}
+
 @end

@@ -71,7 +71,7 @@ class TutorialViewController: NSViewController {
     
     static func presentFromViewController(_ viewController: NSViewController) {
         let tutorial = TutorialViewController.instantiate()
-        if (viewController is CatchViewController) || osMinorVersion > 15 {
+        if (viewController is CatchViewController) || osAtLeastBigSur {
             viewController.presentAsSheet(tutorial)
             return
         }

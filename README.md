@@ -1,11 +1,17 @@
-### Retroactive lets you run Aperture, iPhoto, and iTunes on macOS Catalina. Xcode 11.5 or 11.4.1 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
+### Retroactive lets you run Aperture, iPhoto, and iTunes on macOS Catalina. Xcode 11.6 or 11.5 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
 
 <p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.7/Retroactive.1.7.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.8/Retroactive.1.8.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
 <p>
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
 </p>
+
+---
+
+### 🧪 Limited experimental support on macOS Big Sur
+
+Retroactive has limited experimental support for unlocking Aperture and iTunes on macOS Big Sur. You may see graphical glitches, missing toolbar icons, and occasional crashes.
 
 ---
 
@@ -37,17 +43,17 @@ Pick the app you want to run. If you want to run multiple apps from here, pick a
 
 ![](screenshots/4.jpg)
 
-On macOS Mojave and macOS High Sierra, Retroactive can also unlock Final Cut Pro 7, Logic Pro 9 (experimental), Xcode 11.5 or 11.4.1 (requires macOS Mojave), and fix iWork ’09.
+On macOS Mojave and macOS High Sierra, Retroactive can also unlock Final Cut Pro 7, Logic Pro 9 (experimental), Xcode 11.6 or 11.5 (requires macOS Mojave), and fix iWork ’09.
 
 ![](screenshots/4b.jpg)
 
-I’ll use Aperture as the example, but the same process also works for iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, and iWork ’09.
+I’ll use Aperture as the example, but the same process also works for iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.6 or 11.5, and iWork ’09.
 
 ---
 
 ### Locating the app or choosing a version
 
-Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, or iWork ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
+Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.6 or 11.5, or iWork ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
 
 If Retroactive can’t locate an existing install of Aperture or iPhoto, you’ll either be asked to download it from the Purchased list in App Store, or re-install it from a DVD disc. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
 
@@ -119,7 +125,7 @@ After successfully modifying or installing the app, you can play with it to your
 
 - Support for Logic Pro 9 is experimental. You may see frequent freezes and hangs.
 
-- Most Xcode 11.5 or 11.4.1 features should work.
+- Most Xcode 11.6 or 11.5 features should work.
 
 - After fixing iWork ’09, text format and paragraph alignment controls in the format bar should appear correctly. Scroll bars will no longer appear behind the document canvas.
 

@@ -58,8 +58,13 @@ class AuthenticateViewController: NSViewController {
     
     func patchXcode() {
         guard let appPath = AppManager.shared.appPathCString else { return }
+        _ = AppManager.runTask(toolPath: "/usr/bin/defaults", arguments: ["write", kXcodeGlobalPreferencePath, kXcodeIDELastGMLicenseAgreedToKey, "-string", kXcodeMaxEAString], path: tempDir)
+        _ = AppManager.runTask(toolPath: "/usr/bin/defaults", arguments: ["write", kXcodeGlobalPreferencePath, kXcodeIDELastBetaLicenseAgreedTo, "-string", kXcodeMaxEAString], path: tempDir)
+        _ = AppManager.runTask(toolPath: "/usr/bin/defaults", arguments: ["write", kXcodeGlobalPreferencePath, kXcodeIDEXcodeVersionForAgreedToGMLicense, "-string", kXcodeMaxVersionString], path: tempDir)
+        _ = AppManager.runTask(toolPath: "/usr/bin/defaults", arguments: ["write", kXcodeGlobalPreferencePath, kXcodeIDEXcodeVersionForAgreedToBetaLicense, "-string", kXcodeMaxVersionString], path: tempDir)
         _ = AppManager.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", appPath], path: tempDir)
         _ = AppManager.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kLSMinimumSystemVersion, "-string", "10.14", "\(appPath)/Contents/Info.plist"], path: tempDir)
+        AppManager.shared.allowPatchingAgain = false
         AppDelegate.pushCompletionVC()
     }
     

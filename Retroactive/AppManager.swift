@@ -49,6 +49,13 @@ let actionPresentTenseToken = "{actionPR}"
 let kCustomSettingsPath = "/Library/Application Support/Final Cut Pro System Support/Custom Settings"
 let kFCP7EasySetupPath = "/Applications/Final Cut Pro Additional Easy Setups"
 let kFCP7EasySetupPathLocalizedPath = "/Applications/Final Cut Pro Additional Easy Setups.localized"
+let kXcodeGlobalPreferencePath = "/Library/Preferences/com.apple.dt.Xcode.plist"
+let kXcodeIDELastGMLicenseAgreedToKey = "IDELastGMLicenseAgreedTo"
+let kXcodeIDELastBetaLicenseAgreedTo = "IDELastBetaLicenseAgreedTo"
+let kXcodeIDEXcodeVersionForAgreedToGMLicense = "IDEXcodeVersionForAgreedToGMLicense"
+let kXcodeIDEXcodeVersionForAgreedToBetaLicense = "IDEXcodeVersionForAgreedToBetaLicense"
+let kXcodeMaxEAString = "EA9999"
+let kXcodeMaxVersionString = "99.9"
 
 let lastHWForMojave = ["iMac19,2", "iMacPro1,1", "MacBook10,1", "MacBookAir8,2", "MacBookPro15,4", "Macmini8,1", "MacPro6,1"]
 
@@ -408,52 +415,63 @@ class AppManager: NSObject {
     }
     
     var marginBetweenApps: CGFloat {
-        if osMinorVersion <= 14 {
-            return 43;
+        if osAtLeastCatalina {
+            return 54
         }
-        return 54;
+        return 43;
     }
 
     var supportedApps: [AppType] {
-        if osMinorVersion <= 13 {
-            return [.finalCutPro7, .logicPro9, .keynote5, .pages4, .numbers2]
-        } else if osMinorVersion == 14 {
-            return [.finalCutPro7, .logicPro9, .xcode, .keynote5, .pages4, .numbers2]
-        } else if osMinorVersion >= 15 {
+        if osAtLeastBigSur {
+            return [.aperture, .itunes]
+        }
+        if osAtLeastCatalina {
             return [.aperture, .iphoto, .itunes]
+        }
+        if osAtLeastMojave {
+            return [.finalCutPro7, .logicPro9, .xcode, .keynote5, .pages4, .numbers2]
+        }
+        if osAtLeastHighSierra {
+            return [.finalCutPro7, .logicPro9, .keynote5, .pages4, .numbers2]
         }
         return []
     }
     
     var getStartedSubTitle: String {
-        if osMinorVersion <= 13 {
-            return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09.".localized()
-        } else if osMinorVersion == 14 {
-            return "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, and fix iWork ’09.".localized()
-        } else if osMinorVersion >= 15 {
+        if osAtLeastBigSur {
+            return "Unlock Aperture or install iTunes.".localized()
+        }
+        if osAtLeastCatalina {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
+        if osAtLeastMojave {
+            return "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.6 or 11.5, and fix iWork ’09.".localized()
+        }
+        if osAtLeastHighSierra {
+            return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09.".localized()
+        }
+
         return ""
     }
     
     var otherOSSubtitle: String {
-        if osMinorVersion <= 14 {
-            return "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
-        } else if osMinorVersion >= 15 {
+        if osAtLeastCatalina {
             var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. ".localized()
             otherOSHint += AppManager.shared.platformShippedAfterMojave ? "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized() : "To get started, install macOS Mojave on a separate volume.".localized()
             return otherOSHint
+        }
+        if osAtLeastHighSierra {
+            return "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
         }
         return ""
     }
     
     var otherOSImage: NSImage? {
-        if osMinorVersion <= 13 {
-            return NSImage(named:"catalina-banner")
-        } else if osMinorVersion == 14 {
-            return NSImage(named:"catalina-banner")
-        } else if osMinorVersion >= 15 {
+        if osAtLeastCatalina {
             return NSImage(named:"mojave-banner")
+        }
+        if osAtLeastHighSierra {
+            return NSImage(named:"catalina-banner")
         }
         return nil
     }
@@ -587,6 +605,9 @@ class AppManager: NSObject {
     func hasAlreadyAppliedOrDoesNotRequireFixer(foundAppPath: String) -> Bool {
         switch chosenApp {
         case .aperture, .iphoto, .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
+            if (chosenApp == .aperture || chosenApp == .iphoto) && osAtLeastBigSur && !FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/AppKit.framework") {
+                return false
+            }
             if underscoreState(foundAppPath: foundAppPath) == .neededButNotFound {
                 return false
             }
@@ -612,7 +633,15 @@ class AppManager: NSObject {
                 print("Xcode min OS version: \(minSysVersionString), current OS version: \(ProcessInfo.osVersionNumberString)")
                 if (ProcessInfo.osVersionNumberString.osIsAtLeast(otherOS: minSysVersionString)) {
                     print("Current OS is at least Xcode min OS")
-                    return true
+                    if let xcodeGlobalPrefInfoPlist = NSDictionary(contentsOfFile: kXcodeGlobalPreferencePath) as? Dictionary<String, Any>,
+                        let gmLicense = xcodeGlobalPrefInfoPlist[kXcodeIDELastGMLicenseAgreedToKey] as? String,
+                        let betaLicense = xcodeGlobalPrefInfoPlist[kXcodeIDELastBetaLicenseAgreedTo] as? String,
+                        let gmVersion = xcodeGlobalPrefInfoPlist[kXcodeIDEXcodeVersionForAgreedToGMLicense] as? String,
+                        let betaVersion = xcodeGlobalPrefInfoPlist[kXcodeIDEXcodeVersionForAgreedToBetaLicense] as? String {
+                        if (gmLicense == kXcodeMaxEAString && betaLicense == kXcodeMaxEAString && gmVersion == kXcodeMaxVersionString && betaVersion == kXcodeMaxVersionString) {
+                            return true
+                        }
+                    }
                 }
             }
             return false
@@ -640,7 +669,7 @@ class AppManager: NSObject {
         case .logicPro9:
             return "Logic Pro 9"
         case .xcode:
-            return "Xcode 11.5 or 11.4.1".localized()
+            return "Xcode 11.6 or 11.5".localized()
         case .keynote5:
             return "Keynote ’09"
         case .pages4:
@@ -746,7 +775,7 @@ class AppManager: NSObject {
         case .logicPro9:
             return ["9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
         case .xcode:
-            return ["11.5", "11.4.1", "11.4"]
+            return ["11.6", "11.5", "11.4.1", "11.4"]
         case .keynote5:
             return ["5.3"]
         case .pages4:
@@ -818,7 +847,7 @@ class AppManager: NSObject {
             case .logicPro9:
                 return "9.1.8"
             case .xcode:
-                return "11.5"
+                return "11.6"
             case .keynote5:
                 return "5.3"
             case .pages4:

@@ -20,11 +20,13 @@
 "Can I use iTunes without Full Disk Access?" = "我能否跳过完全磁盘访问权限使用 iTunes？"; 
 "Cancel" = "取消"; 
 "Check Again" = "重新检查"; 
+"Check for Updates" = "检查更新"; 
 "Classic Look" = "经典外观"; 
 "Click on “Download Update” to download and install the iWork 9.3 Update." = "点击 “下载更新” 以下载并安装 iWork 9.3 更新。"; 
 "Completed" = "完成"; 
 "Configure %@" = "配置 %@"; 
 "Connect an iOS device to Apple Configurator 2" = "将 iOS 设备连接至 Apple Configurator 2"; 
+"Continue" = "继续"; 
 "Copy support files" = "复制支持文件"; 
 "Create New Library" = "创建新资料库"; 
 "DJ apps and Dark Mode" = "DJ 应用和深色模式"; 
@@ -69,12 +71,14 @@
 "Keynote ’09 only supports PPTX exports" = "Keynote ’09 仅支持导出 PPTX"; 
 "Learn More..." = "进一步了解..."; 
 "Learn how to download an iOS app with Apple Configurator 2" = "了解如何使用 Apple Configurator 2 下载 iOS 应用程序"; 
+"Limited experimental support on %@" = "对 %@ 提供受限支持"; 
 "Locate %@ %@" = "找到并选择 %@ %@"; 
 "Locate Manually..." = "手动寻找..."; 
 "Next" = "继续"; 
 "Note: %@" = "注意事项：%@"; 
 "Numbers ’09 only supports XLSX exports" = "Numbers ’09 仅支持导出 XLSX"; 
 "OK" = "好"; 
+"On %@, Aperture and iTunes can launch and are functional, but you may see graphical glitches, missing toolbar icons, and occasional crashes." = "Aperture 和 iTunes 可在 %@ 上运行，且多数功能可用。然而，您可能会偶尔遇到图形差错、缺失菜单栏图标，及应用程序偶尔意外退出。"; 
 "Open Apple Configurator 2, then connect an iOS device to your Mac." = "打开 Apple Configurator 2，然后将 iOS 设备连接到您的 Mac。"; 
 "Open Apple Configurator 2’s temporary folder" = "打开 Apple Configurator 2 的临时文件夹"; 
 "Open Finder. Hold down the ⌥ Key, and choose Go › Library." = "打开访达。按住 ⌥ 键，并选择 “前往” › “资源库”。"; 
@@ -83,6 +87,7 @@
 "Parallels Desktop" = " Parallels Desktop 虚拟机"; 
 "Pro Applications Update 2010-02" = "Pro 应用更新 2010-02"; 
 "Pro Update" = "Pro 应用更新"; 
+"Quit" = "退出"; 
 "Quitting Retroactive now may result in a corrupted install of %@ and is not recommended." = "不建议退出解印，以免导致已安装的 %@ 受损。"; 
 "Refresh %@ icon" = "刷新 %@ 图标"; 
 "Replay" = "重播"; 
@@ -93,6 +98,7 @@
 "Retroactive is unable to locate %@ on your Mac. %@" = "解印在您的 Mac 上找不到 %@。%@"; 
 "Retroactive is unlocking %@. Quitting Retroactive will result in a corrupted copy of %@." = "解印正在解锁 %@，退出解印会导致已安装的 %@ 受损。"; 
 "Ringtones and iTunes U" = "铃声与 iTunes U"; 
+"Run Anyways" = "尝试运行"; 
 "Save and install the IPA" = "保存并安装 IPA"; 
 "Select your device, click “Add”, then click “Apps”." = "选中您的设备，点击“添加“，然后点击“App”。"; 
 "Selected app is incompatible" = "不兼容所选择的应用程序"; 
@@ -118,8 +124,9 @@
 "Unable to quit Retroactive" = "无法退出解印"; 
 "Unarchive Xcode and move it to the Applications folder" = "先解压缩 Xcode，然后将其移动至应用程序文件夹"; 
 "Unlock Aperture and iPhoto, or install iTunes." = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。"; 
+"Unlock Aperture or install iTunes." = "解除对 Aperture 封印或安装 iTunes。"; 
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09." = "解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 iWork ’09。"; 
-"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, and fix iWork ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.5 或 11.4.1 的封印，并修复 iWork ’09。"; 
+"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.6 or 11.5, and fix iWork ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.6 或 11.5 的封印，并修复 iWork ’09。"; 
 "Unlock {name} again" = "重新解印 {name}"; 
 "Untitled" = "新项目"; 
 "Update (Recommended)" = "安装更新 (推荐)"; 
@@ -137,7 +144,7 @@
 "Working..." = "进行中..."; 
 "Would you like to create a new iTunes library to use with iTunes %@?" = "是否要创建一个新的 iTunes 资料库，从而与 iTunes %@ 配合使用？"; 
 "Would you like to create a new iTunes library?" = "您是否想要创建新的 iTunes 资料库？"; 
-"Xcode 11.5 or 11.4.1" = "Xcode 11.5 或 11.4.1"; 
+"Xcode 11.6 or 11.5" = "Xcode 11.6 或 11.5"; 
 "Yes, you can. However, iTunes will not sync with iPod devices, play music on removable storage, or access shared iTunes libraries on a network drive." = "可以。然而 iTunes 将无法与 iPod 设备同步或播放存储于可移除的宗卷的音乐，也不能访问网络共享服务器上的 iTunes 资料库。"; 
 "You can download and install iWork ’09, which includes %@, from The Internet Archive." = "您可以在互联网上找到，并下载和安装 iWork ’09 (包含 %@)。"; 
 "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac." = "您可以将现有的 Keynote 演示文稿导出为 PowerPoint 演示文稿。如需查看或编辑 Keynote 幻灯片、动画和转场，请在真正的 Mac 电脑中运行解印。"; 
