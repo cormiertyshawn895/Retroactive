@@ -118,8 +118,9 @@
 "Unable to quit Retroactive" = "無法退出解印"; 
 "Unarchive Xcode and move it to the Applications folder" = "先解壓縮 Xcode，然後將其移動至應用程序文件夾"; 
 "Unlock Aperture and iPhoto, or install iTunes." = "解除對 Aperture 和 iPhoto 的封印，或安裝 iTunes。"; 
+"Unlock Aperture or install iTunes." = "解除對 Aperture 封印或安裝 iTunes。"; 
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09." = "解除對 Final Cut Pro 7 和 Logic Pro 9 的封印，或修復 iWork ’09。"; 
-"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.5 or 11.4.1, and fix iWork ’09." = "解除對 Final Cut Pro 7、Logic Pro 9 與 Xcode 11.5 或 11.4.1 的封印，並修複 iWork ’09。"; 
+"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.6 or 11.5, and fix iWork ’09." = "解除對 Final Cut Pro 7、Logic Pro 9 與 Xcode 11.6 或 11.5 的封印，並修複 iWork ’09。"; 
 "Unlock {name} again" = "重新解印 {name}"; 
 "Untitled" = "新項目"; 
 "Update (Recommended)" = "安裝更新 (推薦)"; 
@@ -137,7 +138,7 @@
 "Working..." = "進行中..."; 
 "Would you like to create a new iTunes library to use with iTunes %@?" = "是否要創建一個新的 iTunes 資料庫，從而與 iTunes %@ 配合使用？"; 
 "Would you like to create a new iTunes library?" = "您是否想要創建新的 iTunes 資料庫？"; 
-"Xcode 11.5 or 11.4.1" = "Xcode 11.5 或 11.4.1"; 
+"Xcode 11.6 or 11.5" = "Xcode 11.6 或 11.5"; 
 "Yes, you can. However, iTunes will not sync with iPod devices, play music on removable storage, or access shared iTunes libraries on a network drive." = "可以。然而 iTunes 將無法與 iPod 設備同步或播放存儲於可移除的宗卷的音樂，也不能訪問網絡共享服務器上的 iTunes 資料庫。"; 
 "You can download and install iWork ’09, which includes %@, from The Internet Archive." = "您可以在互聯網上找到，並下載和安裝 iWork ’09 (包含 %@)。"; 
 "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac." = "您可以將現有的 Keynote 演示文稿導出為 PowerPoint 演示文稿。如需查看或編輯 Keynote 幻燈片、動畫和轉場，請在真正的 Mac 電腦中運行解印。"; 

@@ -1,8 +1,19 @@
 import Cocoa
 
-let osFullVersion = ProcessInfo.processInfo.operatingSystemVersion
-let osMajorVersion = osFullVersion.majorVersion
-let osMinorVersion = osFullVersion.minorVersion
+private let osFullVersion = ProcessInfo.processInfo.operatingSystemVersion
+private let osMajorVersion = osFullVersion.majorVersion
+private let osMinorVersion = osFullVersion.minorVersion
+private let processInfo = ProcessInfo()
+
+let osAtLeastHighSierra = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 13, patchVersion: 0))
+let osAtLeastMojave = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 14, patchVersion: 0))
+let osAtLeastCatalina = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 15, patchVersion: 0))
+let osAtLeastBigSur = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 16, patchVersion: 0))
+
+let discouraged_osExactlyHighSierra = osMajorVersion == 10 && osMinorVersion == 13
+let discouraged_osExactlyMojave = osMajorVersion == 10 && osMinorVersion == 14
+private let osExactlyCatalina = osMajorVersion == 10 && osMinorVersion == 15
+private let osExactlyBigSur = (osMajorVersion == 10 && osMinorVersion == 16) || osMajorVersion == 11
 
 extension ProcessInfo {
     static var osVersionNumberString: String {
@@ -19,14 +30,17 @@ extension ProcessInfo {
     }
     
     static var versionName: String {
-        if (osMinorVersion == 13) {
+        if (discouraged_osExactlyHighSierra) {
             return "macOS High Sierra"
         }
-        if (osMinorVersion == 14) {
+        if (discouraged_osExactlyMojave) {
             return "macOS Mojave"
         }
-        if (osMinorVersion == 15) {
+        if (osExactlyCatalina) {
             return "macOS Catalina"
+        }
+        if (osExactlyBigSur) {
+            return "macOS Big Sur"
         }
         return ProcessInfo.versionString
     }

@@ -270,10 +270,19 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let photoFixerPath = "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", photoFixerPath])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"])
+            if (osAtLeastBigSur) {
+                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/PluginManager", "\(appPath)/Contents/Frameworks/PluginManager.framework"])
+                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKitAperture", "\(appPath)/Contents/Frameworks/AppKit.framework"])
+            }
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", photoFixerPath])
 
             self.stage3Started()
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
+            if (osAtLeastBigSur) {
+                ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/PluginManager.framework/Versions/B/PluginManager", "@executable_path/../Frameworks/PluginManager.framework/Versions/B/PluginManager", "\(appPath)/Contents/MacOS/Aperture"], path: resourcePath)
+                ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit", "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit", "\(appPath)/Contents/Frameworks/ProKit.framework/Versions/A/ProKit"], path: resourcePath)
+                ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit", "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit", "\(appPath)/Contents/Frameworks/iLifeKit.framework/Versions/A/iLifeKit"], path: resourcePath)
+            }
             ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
             if let patchedBundleID = AppManager.shared.patchedBundleIDOfChosenApp {
                 self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", patchedBundleID, "Contents/Info.plist"])
@@ -292,11 +301,11 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     func suppress32BitWarnings() {
         if let resourcePath = Bundle.main.resourcePath?.fileSystemString {
-            if (osMinorVersion == 13) {
+            if (discouraged_osExactlyHighSierra) {
                 print("supporessing 32 bit warnings on High Sierra")
                 self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/HighSierra32Bit.mobileconfig"])
             }
-            if (osMinorVersion == 14) {
+            if (discouraged_osExactlyMojave) {
                 print("supporessing 32 bit warnings on Mojave")
                 self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/Mojave32Bit.mobileconfig"])
             }

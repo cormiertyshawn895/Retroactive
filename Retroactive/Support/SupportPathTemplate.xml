@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-    <string>Retroactive $(VERSION) improves compatibility between iWork ’09 and macOS Mojave, contains bug fixes for Logic Pro 9, and adds support for unlocking Xcode 11.5 on macOS Mojave.</string>
+    <string>Retroactive $(VERSION) improves compatibility between iWork ’09 and macOS Mojave, contains bug fixes for Logic Pro 9, and adds support for unlocking Xcode 11.6 on macOS Mojave.</string>
 	<key>NewVersionChangelog</key>
     <string>• Resolves an issue where typing and scrolling in Pages ’09 may be slow
 • Resolves an issue where Pages may fail to resize when the Styles drawer is visible
@@ -12,9 +12,9 @@
 • Resolves an issue where the document title may become unresponsive in iWork ’09
 • Resolves an issue where text in Japanese, Traditional Chinese, and Simplified Chinese may be invisible or appear as special characters in iWork ’09
 • Resolves an issue where 32-bit Audio Bridge may quit unexpectedly when opening Logic Pro 9
-• Adds support for unlocking Xcode 11.5 on macOS Mojave</string>
+• Adds support for unlocking Xcode 11.6 on macOS Mojave</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 $(VERSION_HANS) 改进了 iWork ’09 与 macOS Mojave 的兼容性，包含对 Logic Pro 9 的错误修正，并支持在 macOS Mojave 下解锁 Xcode 11.5</string>
+	<string>新版本解印 $(VERSION_HANS) 改进了 iWork ’09 与 macOS Mojave 的兼容性，包含对 Logic Pro 9 的错误修正，并支持在 macOS Mojave 下解锁 Xcode 11.6</string>
 	<key>NewVersionChangelogzhHans</key>
     <string>• 解决了在 Pages ’09 中输入文字和滚动可能响应缓慢的问题
 • 解决了在 Pages ’09 中显示样式抽屉时窗口可能无法调整大小的问题
@@ -23,9 +23,9 @@
 • 解决了在 iWork ’09 中文稿名称可能失去响应的问题
 • 解决了在 iWork ’09 中简体中文、繁体中文和日文字符可能不可见或被特殊字符替代的问题
 • 解决了在启动 Logic Pro 9 时，32 位 Audio Bridge 可能意外退出的问题
-• 新增支持在 macOS Mojave 下解锁 Xcode 11.5</string>
+• 新增支持在 macOS Mojave 下解锁 Xcode 11.6</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 $(VERSION_HANT) 改進了 iWork ’09 與 macOS Mojave 的兼容性，包含對 Logic Pro 9 的錯誤修正，並支持在 macOS Mojave 下解鎖 Xcode 11.5</string>
+	<string>新版本解印 $(VERSION_HANT) 改進了 iWork ’09 與 macOS Mojave 的兼容性，包含對 Logic Pro 9 的錯誤修正，並支持在 macOS Mojave 下解鎖 Xcode 11.6</string>
 	<key>NewVersionChangelogzhHant</key>
     <string>• 解決了在 Pages ’09 中輸入文字和滾動可能響應緩慢的問題
 • 解決了在 Pages ’09 中顯示樣式抽屜時窗口可能無法調整大小的問題
@@ -34,7 +34,7 @@
 • 解決了在 iWork ’09 中文稿名稱可能失去響應的問題
 • 解決了在 iWork ’09 中繁體中文、簡體中文和日文字符可能不可見或被特殊字符替代的問題
 • 解決了在啟動 Logic Pro 9 時，32 位 Audio Bridge 可能意外退出的問題
-• 新增支持在 macOS Mojave 下解鎖 Xcode 11.5</string>
+• 新增支持在 macOS Mojave 下解鎖 Xcode 11.6</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/$(MARKETING_VERSION)/Retroactive.$(MARKETING_VERSION).zip</string>
 	<key>LatestBuildNumber</key>
