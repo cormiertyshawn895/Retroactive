@@ -445,7 +445,7 @@ class AppManager: NSObject {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
         if osAtLeastMojave {
-            return "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.6 or 11.5, and fix iWork ’09.".localized()
+            return "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.6, and fix iWork ’09.".localized()
         }
         if osAtLeastHighSierra {
             return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09.".localized()
@@ -669,7 +669,7 @@ class AppManager: NSObject {
         case .logicPro9:
             return "Logic Pro 9"
         case .xcode:
-            return "Xcode 11.6 or 11.5".localized()
+            return "Xcode 11.6".localized()
         case .keynote5:
             return "Keynote ’09"
         case .pages4:

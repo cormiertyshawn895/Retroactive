@@ -11,7 +11,7 @@
 
 ### 🧪 Limited experimental support on macOS Big Sur
 
-Retroactive has limited experimental support for unlocking Aperture and iTunes on macOS Big Sur. You may see graphical glitches, missing toolbar icons, and occasional crashes.
+Retroactive has limited experimental support for unlocking Aperture and iTunes on macOS Big Sur. You may see minor glitches.
 
 ---
 

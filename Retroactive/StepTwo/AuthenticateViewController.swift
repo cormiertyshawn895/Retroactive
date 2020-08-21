@@ -64,6 +64,7 @@ class AuthenticateViewController: NSViewController {
         _ = AppManager.runTask(toolPath: "/usr/bin/defaults", arguments: ["write", kXcodeGlobalPreferencePath, kXcodeIDEXcodeVersionForAgreedToBetaLicense, "-string", kXcodeMaxVersionString], path: tempDir)
         _ = AppManager.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", appPath], path: tempDir)
         _ = AppManager.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kLSMinimumSystemVersion, "-string", "10.14", "\(appPath)/Contents/Info.plist"], path: tempDir)
+        _ = AppManager.runTask(toolPath: "/usr/bin/touch", arguments: [appPath], path: tempDir)
         AppManager.shared.allowPatchingAgain = false
         AppDelegate.pushCompletionVC()
     }

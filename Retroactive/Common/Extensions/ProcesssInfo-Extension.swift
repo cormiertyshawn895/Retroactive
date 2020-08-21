@@ -13,7 +13,7 @@ let osAtLeastBigSur = processInfo.isOperatingSystemAtLeast(OperatingSystemVersio
 let discouraged_osExactlyHighSierra = osMajorVersion == 10 && osMinorVersion == 13
 let discouraged_osExactlyMojave = osMajorVersion == 10 && osMinorVersion == 14
 private let osExactlyCatalina = osMajorVersion == 10 && osMinorVersion == 15
-let discouraged_osExactlyBigSur = (osMajorVersion == 10 && osMinorVersion == 16) || (osMajorVersion == 11 && osMinorVersion == 0)
+let discouraged_osExactlyBigSur = (osMajorVersion == 10 && osMinorVersion == 16) || osMajorVersion == 11
 
 extension ProcessInfo {
     static var osVersionNumberString: String {
