@@ -97,7 +97,6 @@
 
 - (BOOL)_hasRowHeaderColumn {
 	return NO;
-	
 }
 
 - (BOOL)_proIsSpinning {
@@ -110,6 +109,31 @@
 
 - (void)setShowingRollover:(id)showingRollover {
     NSLog(@"Skipping setShowingRollover:");
+}
+
+- (CGFloat)_drawingWidth {
+    NSLog(@"Returning 0 _drawingWidth");
+    return 0;
+}
+
+- (void)set_drawingWidth:(CGFloat)value {
+    NSLog(@"Skipping set_drawingWidth");
+}
+
+- (BOOL)_proDelayedStartup {
+    NSLog(@"Returning NO for _proDelayedStartup");
+    return NO;
+}
+
+- (void)_setProDelayedStartup:(BOOL)value {
+    NSLog(@"Skipping _setProDelayedStartup");
+}
+
+- (void)_installHeartBeat:(id)heartbeat {
+    NSLog(@"Skipping _installHeartBeat");
+}
+
+- (void)_alignSize:(id)size force:(id)force {
 }
 
 @end

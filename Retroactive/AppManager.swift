@@ -422,9 +422,6 @@ class AppManager: NSObject {
     }
 
     var supportedApps: [AppType] {
-        if osAtLeastBigSur {
-            return [.aperture, .itunes]
-        }
         if osAtLeastCatalina {
             return [.aperture, .iphoto, .itunes]
         }
@@ -438,9 +435,6 @@ class AppManager: NSObject {
     }
     
     var getStartedSubTitle: String {
-        if osAtLeastBigSur {
-            return "Unlock Aperture or install iTunes.".localized()
-        }
         if osAtLeastCatalina {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }

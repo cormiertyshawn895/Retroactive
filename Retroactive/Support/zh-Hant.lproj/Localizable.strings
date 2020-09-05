@@ -78,7 +78,7 @@
 "Note: %@" = "注意事項：%@"; 
 "Numbers ’09 only supports XLSX exports" = "Numbers ’09 僅支持導出 XLSX"; 
 "OK" = "好"; 
-"On %@, Aperture and iTunes can launch and are functional, but you may see minor glitches." = "Aperture 和 iTunes 可在 %@ 上運行，且多數功能可用。然而，您可能會偶爾遇到少量問題。"; 
+"On %@, Aperture, iPhoto, and iTunes can launch and are functional, but you may see minor glitches." = "Aperture、iPhoto 和 iTunes 可在 %@ 上運行，且多數功能可用。然而，您可能會偶爾遇到少量問題。"; 
 "Open Apple Configurator 2, then connect an iOS device to your Mac." = "打開 Apple Configurator 2，然後將 iOS 設備連接到您的 Mac。"; 
 "Open Apple Configurator 2’s temporary folder" = "打開 Apple Configurator 2 的臨時文件夾"; 
 "Open Finder. Hold down the ⌥ Key, and choose Go › Library." = "打開 Finder 。按住 ⌥ 鍵，並選擇 “前往” › “資源庫”。"; 
@@ -124,7 +124,6 @@
 "Unable to quit Retroactive" = "無法退出解印"; 
 "Unarchive Xcode and move it to the Applications folder" = "先解壓縮 Xcode，然後將其移動至應用程序文件夾"; 
 "Unlock Aperture and iPhoto, or install iTunes." = "解除對 Aperture 和 iPhoto 的封印，或安裝 iTunes。"; 
-"Unlock Aperture or install iTunes." = "解除對 Aperture 封印或安裝 iTunes。"; 
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09." = "解除對 Final Cut Pro 7 和 Logic Pro 9 的封印，或修復 iWork ’09。"; 
 "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.7, and fix iWork ’09." = "解除對 Final Cut Pro 7、Logic Pro 9 與 Xcode 11.7 的封印，並修複 iWork ’09。"; 
 "Unlock {name} again" = "重新解印 {name}"; 
