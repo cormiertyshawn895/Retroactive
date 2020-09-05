@@ -58,7 +58,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
     func populateGuarantees() {
         let guarantees: [GuaranteeSection] = [
             GuaranteeSection(title: "Why does iPod syncing need Full Disk Access?".localized(),
-                             explaination: "iPod devices are considered as removable storage by macOS Catalina. iTunes needs Full Disk Access to access removable storage and shared network drives.".localized(),
+                             explaination: String(format: "iPod devices are considered as removable storage by %@. iTunes needs Full Disk Access to access removable storage and shared network drives.".localized(), ProcessInfo.versionName),
                              buttonText: nil,
                              buttonAction: nil),
             GuaranteeSection(title: "Can I use iTunes without Full Disk Access?".localized(),
@@ -66,7 +66,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
                              buttonText: "Use iTunes without Full Disk Access".localized() + disclosureArrow,
                              buttonAction: { self.skipSyncingClicked(self) }),
             GuaranteeSection(title: "Why isn’t this more granular?".localized(),
-                             explaination: "While apps optimized for macOS Catalina can request granular access to Removable Volumes, iTunes was built before macOS Catalina. Retroactive’s loader script has similar requirements.".localized(),
+                             explaination: String(format: "While apps optimized for %@ can request granular access to Removable Volumes, iTunes was built before %@. Retroactive’s loader script has similar requirements.".localized(), ProcessInfo.versionName, ProcessInfo.versionName),
                              buttonText: nil,
                              buttonAction: nil)
         ]
@@ -143,12 +143,16 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
                 lastOrigin = CGPoint(x: windowX, y: windowY)
                 lastWidthHeight = CGSize(width: windowWidth, height: windowHeight)
             }
+            if (lastWidthHeight.similarToPasswordDialogSize) {
+                // On Big Sur, there's two extra windows for dimmed sheet presentations.
+                // Ignore them once a sheet window is found.
+                break
+            }
         }
         
         let screen = NSScreen.screens.first!
         let yPositionInScreenSpace = screen.frame.size.height - lastOrigin.y - lastWidthHeight.height
-        if (lastWidthHeight.similarToSize(CGSize(width: 668, height: 573), maxDeltaX: 180, maxDeltaY: 5)) {
-            // Security preferences window is around 668x573
+        if (lastWidthHeight.similarToSecurityPrefPaneSize) {
             if (shouldShowDragBashView) {
                 padlockWindow.orderOut(self)
                 // to drag window
@@ -167,7 +171,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
                                                       y: yPositionInScreenSpace - padlockWindow.frame.height + 25))
             }
             mostRecentPrefsFrame = CGRect(x: lastOrigin.x, y: lastOrigin.y, width: lastWidthHeight.width, height: lastWidthHeight.height)
-        } else if (lastWidthHeight.similarToSize(CGSize(width: 444, height: 212), maxDeltaX: 40, maxDeltaY: 212)) {
+        } else if (lastWidthHeight.similarToPasswordDialogSize) {
             // Password entry
             shouldShowDragBashView = true
             padlockWindow.orderOut(self)
@@ -175,12 +179,14 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
             upArrowWindow.orderOut(self)
         } else {
             // Main preferences window is around 668x586
-            shouldShowDragBashView = false
             padlockWindow.orderOut(self)
             dragWindow.orderOut(self)
             upArrowWindow.orderOut(self)
-            self.view.window?.deminiaturize(self)
-            self.view.window?.makeKeyAndOrderFront(self)
+            if (!lastWidthHeight.similarToDimmingBackgroundSize) {
+                shouldShowDragBashView = false
+                self.view.window?.deminiaturize(self)
+                self.view.window?.makeKeyAndOrderFront(self)
+            }
         }
     }
     

@@ -138,7 +138,7 @@
 "View Release Page..." = "查看下载发布页..."; 
 "Waiting..." = "等待中..."; 
 "We recommend updating %@ to version %@." = "解印推荐您将 %@ 更新至 %@ 版本"; 
-"While apps optimized for macOS Catalina can request granular access to Removable Volumes, iTunes was built before macOS Catalina. Retroactive’s loader script has similar requirements." = "尽管为 macOS Catalina 优化的应用程序可以选择只允许访问可移除的宗卷，iTunes 为 macOS Catalina 之前的系统构建。解印的加载脚本也有类似的要求。"; 
+"While apps optimized for %@ can request granular access to Removable Volumes, iTunes was built before %@. Retroactive’s loader script has similar requirements." = "尽管为 %@ 优化的应用程序可以选择只允许访问可移除的宗卷，iTunes 为 %@ 之前的系统构建。解印的加载脚本也有类似的要求。"; 
 "Why does iPod syncing need Full Disk Access?" = "为什么与 iPod 同步需要完全磁盘访问权限？"; 
 "Why isn’t this more granular?" = "为什么不能选择更加细化的访问权限？"; 
 "Working..." = "进行中..."; 
@@ -165,7 +165,7 @@
 "downloading and installing" = "下载和安装"; 
 "fix" = "修复"; 
 "iPhoto has reduced functionality" = "iPhoto 功能受限"; 
-"iPod devices are considered as removable storage by macOS Catalina. iTunes needs Full Disk Access to access removable storage and shared network drives." = "macOS 将 iPod 设备认定为可移除的宗卷。iTunes 需要完全磁盘访问权限才能访问可移除宗卷和共享的网络服务器。"; 
+"iPod devices are considered as removable storage by %@. iTunes needs Full Disk Access to access removable storage and shared network drives." = "%@ 将 iPod 设备认定为可移除的宗卷。iTunes 需要完全磁盘访问权限才能访问可移除宗卷和共享的网络服务器。"; 
 "install" = "安装"; 
 "installing support files for" = "安装组件以支持"; 
 "unlock" = "解锁"; 
