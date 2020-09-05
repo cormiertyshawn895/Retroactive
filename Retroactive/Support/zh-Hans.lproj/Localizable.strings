@@ -126,7 +126,7 @@
 "Unlock Aperture and iPhoto, or install iTunes." = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。"; 
 "Unlock Aperture or install iTunes." = "解除对 Aperture 封印或安装 iTunes。"; 
 "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09." = "解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 iWork ’09。"; 
-"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.6, and fix iWork ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.6 的封印，并修复 iWork ’09。"; 
+"Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.7, and fix iWork ’09." = "解除对 Final Cut Pro 7、Logic Pro 9 与 Xcode 11.7 的封印，并修复 iWork ’09。"; 
 "Unlock {name} again" = "重新解印 {name}"; 
 "Untitled" = "新项目"; 
 "Update (Recommended)" = "安装更新 (推荐)"; 
@@ -172,4 +172,4 @@
 "— Retroactive" = "— 解印"; 
 "App Store" = "App Store"; 
 "CoverFlow" = "CoverFlow"; 
-"Xcode 11.6" = "Xcode 11.6"; 
+"Xcode 11.7" = "Xcode 11.7"; 

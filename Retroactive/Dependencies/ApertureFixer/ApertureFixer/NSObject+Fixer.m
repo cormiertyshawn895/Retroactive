@@ -108,4 +108,8 @@
     NSLog(@"Skipping _autoSizeView");
 }
 
+- (void)setShowingRollover:(id)showingRollover {
+    NSLog(@"Skipping setShowingRollover:");
+}
+
 @end

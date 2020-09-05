@@ -5,19 +5,19 @@
 	<key>NewVersionVisibleTitle</key>
     <string>Retroactive $(VERSION) adds new features and improves compatibility.</string>
 	<key>NewVersionChangelog</key>
-    <string>• Adds support for unlocking Xcode 11.6 on macOS Mojave
+    <string>• Adds support for unlocking Xcode 11.7 on macOS Mojave
 • Adds experimental support for unlocking Aperture and iTunes on macOS Big Sur
 </string>
 	<key>NewVersionVisibleTitlezhHans</key>
 	<string>新版本解印 $(VERSION_HANS) 包含新功能，并改进了兼容性</string>
 	<key>NewVersionChangelogzhHans</key>
-    <string>• 新增支持在 macOS Mojave 下解锁 Xcode 11.6
+    <string>• 新增支持在 macOS Mojave 下解锁 Xcode 11.7
 • 新增实验性支持在 macOS Big Sur 下解锁 Aperture 和 iTunes
 </string>
 	<key>NewVersionVisibleTitlezhHant</key>
 	<string>新版本解印 $(VERSION_HANT) 包含新功能，並改進了兼容性</string>
 	<key>NewVersionChangelogzhHant</key>
-    <string>• 新增支持在 macOS Mojave 下解鎖 Xcode 11.6
+    <string>• 新增支持在 macOS Mojave 下解鎖 Xcode 11.7
 • 新增實驗性支持在 macOS Big Sur 下解鎖 Aperture 和 iTunes
 </string>
 	<key>LatestZIP</key>
