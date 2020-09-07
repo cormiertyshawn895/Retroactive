@@ -1,4 +1,10 @@
-### Retroactive lets you run Aperture, iPhoto, and iTunes on macOS Catalina and macOS Big Sur. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
+<p align="center">
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip" alt="Download Retroactive"><img width="188" height="188" src="screenshots/icon.png" alt="Download Retroactive"></a>
+</p>
+
+## Retroactive
+
+Run Aperture, iPhoto, and iTunes on macOS Big Sur and macOS Catalina. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
 
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
@@ -6,12 +12,6 @@
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
 </p>
-
----
-
-### 💡 Downloading iOS Apps
-
-Starting from April 2020, you'll need to use [Apple Configurator 2](https://apps.apple.com/app/apple-configurator-2/id1037126344) to [download iOS apps on your Mac](https://www.youtube.com/watch?v=M_3t06FEhR0).
 
 ---
 
@@ -33,7 +33,7 @@ Retroactive will not harm your Mac. This alert only shows up because Retroactive
 
 ### Picking an app
 
-Pick the app you want to run. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
+On macOS Big Sur and macOS Catalina, Retroactive can unlock Aperture and iPhoto, or install iTunes. Pick the app you want to run. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
 
 ![](screenshots/4.jpg)
 
@@ -47,9 +47,9 @@ I’ll use Aperture as the example, but the same process also works for iPhoto, 
 
 ### Locating the app or choosing a version
 
-Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, iTunes, Final Cut Pro 7, Logic Pro 9, Xcode 11.7, or iWork ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
+Retroactive will automatically scan your Mac to locate an existing Aperture, iPhoto, Final Cut Pro 7, Logic Pro 9, Xcode 11.7, or iWork ’09 install. If Retroactive has already located the app you would like to run, skip to the next section.
 
-If Retroactive can’t locate an existing install of Aperture or iPhoto, you’ll either be asked to download it from the Purchased list in App Store, or re-install it from a DVD disc. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
+If Retroactive can’t locate an existing install, you’ll either be asked to download it from the Purchased list in App Store, or re-install it from a DVD disc. You can also find the app on another Mac you own, then AirDrop it to this Mac, or restore the app from a Time Machine backup.
 
 ![](screenshots/5.jpg)
 
@@ -150,6 +150,12 @@ If you try to enable VoiceOver for iPod shuffle, but see "iTunes was unable to i
 - [Directly download the VoiceOver 1.4.2 installer here](https://swdist.apple.com/content/downloads/29/37/041-91732-A_LSWLP6NLRV/bk8l36k29x8d146doiwcvuv8qemu3mzxwk/VoiceOver.pkg).
 - Install the downloaded VoiceOver.pkg.
 - Quit and re-open iTunes.
+
+---
+
+### Downloading iOS Apps
+
+Starting from April 2020, you'll need to use [Apple Configurator 2](https://apps.apple.com/app/apple-configurator-2/id1037126344) to [download iOS apps on your Mac](https://www.youtube.com/watch?v=M_3t06FEhR0).
 
 ---
 
