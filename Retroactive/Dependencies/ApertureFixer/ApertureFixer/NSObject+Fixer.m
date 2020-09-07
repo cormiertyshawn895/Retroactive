@@ -108,7 +108,6 @@
 }
 
 - (void)setShowingRollover:(id)showingRollover {
-    NSLog(@"Skipping setShowingRollover:");
 }
 
 - (CGFloat)_drawingWidth {
@@ -127,6 +126,10 @@
 
 - (void)_setProDelayedStartup:(BOOL)value {
     NSLog(@"Skipping _setProDelayedStartup");
+}
+
+- (unsigned long long)_proAnimationIndex {
+    return 0;
 }
 
 - (void)_installHeartBeat:(id)heartbeat {
