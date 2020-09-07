@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-    <string>Retroactive 1.8 (Build 78) adds new features and improves compatibility.</string>
+    <string>Retroactive 1.9 (Build 79) adds new features and improves compatibility.</string>
 	<key>NewVersionChangelog</key>
     <string>• Adds support for unlocking Xcode 11.7 on macOS Mojave
-• Adds experimental support for unlocking Aperture, iPhoto and iTunes on macOS Big Sur
+• Adds support for unlocking Aperture, iPhoto and iTunes on macOS Big Sur
 </string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.8 (版本号 78) 包含新功能，并改进了兼容性</string>
+	<string>新版本解印 1.9 (版本号 79) 包含新功能，并改进了兼容性</string>
 	<key>NewVersionChangelogzhHans</key>
     <string>• 新增支持在 macOS Mojave 下解锁 Xcode 11.7
-• 新增实验性支持在 macOS Big Sur 下解锁 Aperture、iPhoto 和 iTunes
+• 新增支持在 macOS Big Sur 下解锁 Aperture、iPhoto 和 iTunes
 </string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.8 (版本號 78) 包含新功能，並改進了兼容性</string>
+	<string>新版本解印 1.9 (版本號 79) 包含新功能，並改進了兼容性</string>
 	<key>NewVersionChangelogzhHant</key>
     <string>• 新增支持在 macOS Mojave 下解鎖 Xcode 11.7
-• 新增實驗性支持在 macOS Big Sur 下解鎖 Aperture、iPhoto 和 iTunes
+• 新增支持在 macOS Big Sur 下解鎖 Aperture、iPhoto 和 iTunes
 </string>
 	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.8/Retroactive.1.8.zip</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>78</integer>
+	<integer>79</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

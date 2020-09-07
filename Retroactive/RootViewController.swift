@@ -42,11 +42,11 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
     
     func alertForOSIncompatibility() {
-        if osAtLeastBigSur {
-            AppDelegate.showOptionSheet(title: discouraged_osExactlyBigSur ? String(format: "Experimental support on %@".localized(), ProcessInfo.versionName) : "Update to a newer version of Retroactive".localized(),
-                                        text: discouraged_osExactlyBigSur ? String(format: "On %@, Aperture, iPhoto, and iTunes can launch and are functional, but you may see minor glitches.".localized(), ProcessInfo.versionName) : String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@.".localized(), ProcessInfo.versionName),
+        if osAtLeast2021 {
+            AppDelegate.showOptionSheet(title: discouraged_osHasExperimentalSupport ? String(format: "Experimental support on %@".localized(), ProcessInfo.versionName) : "Update to a newer version of Retroactive".localized(),
+                                        text: discouraged_osHasExperimentalSupport ? String(format: "On %@, Aperture, iPhoto, and iTunes can launch and are functional, but you may see minor glitches.".localized(), ProcessInfo.versionName) : String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, macOS Catalina, and macOS Big Sur, which may be incompatible with %@.".localized(), ProcessInfo.versionName),
                                         firstButtonText: "Check for Updates".localized(),
-                                        secondButtonText: discouraged_osExactlyBigSur ? "Continue".localized() : "Run Anyways".localized(),
+                                        secondButtonText: discouraged_osHasExperimentalSupport ? "Continue".localized() : "Run Anyways".localized(),
                                         thirdButtonText: "Quit".localized()) { (response) in
                 if (response == .alertFirstButtonReturn) {
                     AppDelegate.current.checkForUpdates()

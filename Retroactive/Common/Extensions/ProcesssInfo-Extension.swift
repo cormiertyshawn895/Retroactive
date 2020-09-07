@@ -9,11 +9,13 @@ let osAtLeastHighSierra = processInfo.isOperatingSystemAtLeast(OperatingSystemVe
 let osAtLeastMojave = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 14, patchVersion: 0))
 let osAtLeastCatalina = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 15, patchVersion: 0))
 let osAtLeastBigSur = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 16, patchVersion: 0))
+let osAtLeast2021 = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 12, minorVersion: 0, patchVersion: 0))
 
 let discouraged_osExactlyHighSierra = osMajorVersion == 10 && osMinorVersion == 13
 let discouraged_osExactlyMojave = osMajorVersion == 10 && osMinorVersion == 14
 private let osExactlyCatalina = osMajorVersion == 10 && osMinorVersion == 15
 let discouraged_osExactlyBigSur = (osMajorVersion == 10 && osMinorVersion == 16) || osMajorVersion == 11
+let discouraged_osHasExperimentalSupport = false
 
 extension ProcessInfo {
     static var osVersionNumberString: String {

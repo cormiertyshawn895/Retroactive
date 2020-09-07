@@ -59,7 +59,7 @@
 "If you have already installed Final Cut Pro X on your Mac, the Final Cut Pro 7 package will be grayed out in the Final Cut Studio 3 installer. You need to rename “Final Cut Pro.app” into “Final Cut Pro X.app”, or move it into a different folder." = "如果您已經在 Mac 上安裝了 Final Cut Pro X，在安裝 Final Cut Studio 3 時，您將無法選擇 Final Cut Pro 7 選項。您需要將已安裝的 “Final Cut Pro.app” 重命名為 “Final Cut Pro X.app”，或將其移動到另一個文件夾中。"; 
 "If you have installed %@ at a custom location, locate it manually." = "如果您將 %@ 安裝在了自定義的位置，請手動尋找並選擇該應用程序。"; 
 "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list." = "如果您此前曾在 Mac App Store 下載過 %@，請前往已購清單將其重新下載。"; 
-"If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina." = "如果您將 Mac 更新到 macOS Catalina，Final Cut Pro 7、Logic Pro 9 和 iWork ’09 會被重新封印且無法解除。但解印依然可以在 macOS Catalina 下解鎖 Aperture 和 iPhoto，或安裝 iTunes。 "; 
+"If you upgrade to macOS Catalina or macOS Big Sur, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina or macOS Big Sur." = "如果您將 Mac 更新到 macOS Catalina 或 macOS big Sur，Final Cut Pro 7、Logic Pro 9 和 iWork ’09 會被重新封印且無法解除。但解印依然可以在 macOS Catalina 或 macOS Big Sur 下解鎖 Aperture 和 iPhoto，或安裝 iTunes。"; 
 "If your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer." = "如果您的 Mac 沒有 DVD 光驅，您可以試著創建、尋找，或下載 %@ 的 DMG 安裝鏡像，然後通過此 DMG 鏡像安裝 %@。"; 
 "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice." = "如果您的 RAW 原圖無法正常顯示，請先打開“照片”菜單, 選擇“重新處理原件…”，然後按提示重新處理原件。您可能需要重複上述操作兩次。"; 
 "Install %@" = "安裝 %@"; 
@@ -114,7 +114,7 @@
 "The copy of %@ you have installed is %@ %@. You need to first install a minor update before Retroactive can modify it." = "您已安裝的 %@ 是 %@ %@。您需要先安裝一個小版本更新，然後才能解印。"; 
 "There isn't enough free space to install %@" = "剩餘磁盤空間不足，無法安裝 %@"; 
 "There's usually no need to unlock it again." = "通常情況下，無需重複解印。"; 
-"This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, and macOS Catalina, which may be incompatible with %@." = "此版本的解印僅適用於 macOS High Sierra、macOS Mojave 和 macOS Catalina ，並可能不兼容 %@。"; 
+"This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, macOS Catalina, and macOS Big Sur, which may be incompatible with %@." = "此版本的解印僅適用於 macOS High Sierra、macOS Mojave、macOS Catalina 和 macOS Big Sur，並可能不兼容 %@。"; 
 "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac." = "先找到一台在 2019 年 10 月之前發布的舊款 Mac，然後安裝 macOS Mojave 以繼續。"; 
 "To get started, install macOS Mojave on a separate volume." = "在單獨的宗卷上安裝 macOS Mojave 以繼續。"; 
 "To quickly access IPA downloads in the future, drag the MobileApps folder into Favorites." = "如需今後快速訪問 IPA 下載，可將 MobileApps 文件夾拖動到個人收藏中。"; 

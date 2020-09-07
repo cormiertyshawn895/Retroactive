@@ -1,17 +1,11 @@
-### Retroactive lets you run Aperture, iPhoto, and iTunes on macOS Catalina. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
+### Retroactive lets you run Aperture, iPhoto, and iTunes on macOS Catalina and macOS Big Sur. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
 
 <p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.8/Retroactive.1.8.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
 <p>
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
 </p>
-
----
-
-### 🧪 Limited experimental support on macOS Big Sur
-
-Retroactive has limited experimental support for unlocking Aperture, iPhoto, and iTunes on macOS Big Sur. You may see minor glitches.
 
 ---
 

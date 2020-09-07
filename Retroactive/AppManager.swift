@@ -455,7 +455,7 @@ class AppManager: NSObject {
             return otherOSHint
         }
         if osAtLeastHighSierra {
-            return "If you upgrade to macOS Catalina, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina.".localized()
+            return "If you upgrade to macOS Catalina or macOS Big Sur, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina or macOS Big Sur.".localized()
         }
         return ""
     }
