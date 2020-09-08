@@ -132,6 +132,9 @@
     return 0;
 }
 
+- (void)_setProAnimationIndex:(unsigned long long)arg1 {
+}
+
 - (void)_installHeartBeat:(id)heartbeat {
     NSLog(@"Skipping _installHeartBeat");
 }
