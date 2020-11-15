@@ -19,6 +19,7 @@
 		046034EA2381DDB300070C86 /* ProApplicationsUpdate2010-02.dist in Resources */ = {isa = PBXBuildFile; fileRef = 046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */; };
 		047A039A24A6EEAF00E00998 /* PluginManager in Resources */ = {isa = PBXBuildFile; fileRef = 047A039924A6EEAF00E00998 /* PluginManager */; };
 		047A039C24A6F3CB00E00998 /* AppKitAperture in Resources */ = {isa = PBXBuildFile; fileRef = 047A039B24A6F3CB00E00998 /* AppKitAperture */; };
+		04DA79C525613EB200B65B4E /* CodecComponents.zip in Resources */ = {isa = PBXBuildFile; fileRef = 04DA79C425613EB200B65B4E /* CodecComponents.zip */; };
 		321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09CC23643F89007F3FBA /* RetroApp.swift */; };
 		321B09D523645B57007F3FBA /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09CF23645B57007F3FBA /* CheckmarkView.swift */; };
 		321B09D623645B57007F3FBA /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09D023645B57007F3FBA /* util.swift */; };
@@ -129,6 +130,7 @@
 		046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ProApplicationsUpdate2010-02.dist"; sourceTree = "<group>"; };
 		047A039924A6EEAF00E00998 /* PluginManager */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PluginManager; sourceTree = "<group>"; };
 		047A039B24A6F3CB00E00998 /* AppKitAperture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppKitAperture; sourceTree = "<group>"; };
+		04DA79C425613EB200B65B4E /* CodecComponents.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = CodecComponents.zip; sourceTree = "<group>"; };
 		321B09CC23643F89007F3FBA /* RetroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroApp.swift; sourceTree = "<group>"; };
 		321B09CF23645B57007F3FBA /* CheckmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
 		321B09D023645B57007F3FBA /* util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				607C3D812382665900FAE528 /* AudioToolbox.framework.zip */,
 				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
 				046034E62381C18A00070C86 /* ProKit.framework.zip */,
+				04DA79C425613EB200B65B4E /* CodecComponents.zip */,
 				604F709F240B104400687E1B /* Generated */,
 				046034E12381B41200070C86 /* KeynoteFixer */,
 				32F763552364EA2200200ED7 /* ApertureFixer */,
@@ -644,6 +647,7 @@
 				6039E6EA2383CB560023DAB8 /* HighSierra32Bit.mobileconfig in Resources */,
 				60E4B4B8240207B400919F36 /* iTunesLauncher-PkgInfo in Resources */,
 				606CA12A23665CBF001C550E /* Credits.rtfd in Resources */,
+				04DA79C525613EB200B65B4E /* CodecComponents.zip in Resources */,
 				606CA154236666B3001C550E /* ConfettiView.bundle in Resources */,
 				046034E72381C18A00070C86 /* BrowserKit.framework.zip in Resources */,
 				60E4B4D524022BF900919F36 /* OriginFixer in Resources */,
@@ -980,7 +984,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 83;
+				CURRENT_PROJECT_VERSION = 84;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1001,7 +1005,7 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 83;
+				CURRENT_PROJECT_VERSION = 84;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

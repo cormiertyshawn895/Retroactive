@@ -596,6 +596,10 @@ class AppManager: NSObject {
         }
     }
     
+    func needsProResCodecRepair() -> Bool {
+        return AppManager.shared.chosenApp == .finalCutPro7 && !FileManager.default.fileExists(atPath: "/Library/QuickTime/AppleProResCodec.component/Contents/MacOS/AppleProResCodec")
+    }
+    
     func hasAlreadyAppliedOrDoesNotRequireFixer(foundAppPath: String) -> Bool {
         switch chosenApp {
         case .aperture, .iphoto, .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
@@ -603,6 +607,9 @@ class AppManager: NSObject {
                 return false
             }
             if underscoreState(foundAppPath: foundAppPath) == .neededButNotFound {
+                return false
+            }
+            if needsProResCodecRepair() {
                 return false
             }
             if chosenApp == .logicPro9 && FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/MobileDevice.framework") == false {

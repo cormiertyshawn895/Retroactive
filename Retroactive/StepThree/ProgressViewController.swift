@@ -156,6 +156,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let kProKitCopyPath = "\(kLibraryFrameworkPath)/ProKit.framework"
             let kAudioToolboxCopyPath = "\(appPath)/Contents/Frameworks/AudioToolbox.framework"
             let kMobileDeviceCopyPath = "\(appPath)/Contents/Frameworks/MobileDevice.framework"
+            let kCodecCopyPath = "/Library/QuickTime"
             let fsCustomSettingsPath = kCustomSettingsPath.fileSystemString
             let fsEasySetupPath = kFCP7EasySetupPath.fileSystemString
             let fsEasySetupLocalizedPath = kFCP7EasySetupPathLocalizedPath.fileSystemString
@@ -194,6 +195,12 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kProKitCopyPath])
             } else {
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
+            }
+            
+            if (AppManager.shared.needsProResCodecRepair()) {
+                print("Chosen Final Cut Pro 7 but codecs are missing, restoring the codecs")
+                self.runTask(toolPath: "/bin/mkdir", arguments: [kCodecCopyPath])
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/CodecComponents.zip", kCodecCopyPath])
             }
 
             // Some pro apps and iWork may hang when submitting information, skip this by setting the defaults key.
@@ -248,6 +255,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
+
+            self.runTask(toolPath: "/usr/sbin/softwareupdate", arguments: ["--ignore", "ProVideoFormats"])
             AppManager.shared.retinizeSelectedAppForCurrentUser()
             AppManager.shared.removeFCP7PresetsIfNeeded()
             self.suppress32BitWarnings()
@@ -291,7 +300,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             if let patchedBundleID = AppManager.shared.patchedBundleIDOfChosenApp {
                 self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", patchedBundleID, "Contents/Info.plist"])
             }
-            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kLSMinimumSystemVersion, "-string", "10.14", "Contents/Info.plist"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["-p", "/Library/Application Support/Aperture/Plug-Ins"])
 
             self.stage4Started()
