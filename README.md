@@ -159,6 +159,12 @@ Starting from April 2020, you'll need to use [Apple Configurator 2](https://apps
 
 ---
 
+### Final Cut Pro 7 and the Apple Pro Video Formats update
+
+If you install Apple Pro Video Formats update from Software Update, you may need to [follow these instructions](https://github.com/cormiertyshawn895/Retroactive/issues/130#issuecomment-724078303) to re-enable Final Cut Pro 7.
+
+---
+
 ### Reprocessing RAW photos in Aperture
 
 - In Aperture, if your RAW photos show up as “*Unsupported Image Format*”, open the “*Photos*” menu, click on “*Reprocess original…*”, and reprocess all photos. After reprocessing your RAW photos, you will be able to preview and adjust them as before.
