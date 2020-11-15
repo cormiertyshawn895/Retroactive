@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-    <string>Retroactive 1.9 (Build 84) adds new features and improves compatibility.</string>
+    <string>Retroactive 1.9 (Build 85) adds new features and improves compatibility.</string>
 	<key>NewVersionChangelog</key>
     <string>• Adds support for unlocking Xcode 11.7 on macOS Mojave
 • Adds support for unlocking Aperture, iPhoto and iTunes on macOS Big Sur
@@ -11,25 +11,25 @@
 • Fixes an issue where Final Cut Pro 7 may fail to find codecs
 </string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.9 (版本号 84) 包含新功能，并改进了兼容性</string>
+	<string>新版本解印 1.9 (版本号 85) 包含新功能，并改进了兼容性</string>
 	<key>NewVersionChangelogzhHans</key>
     <string>• 新增支持在 macOS Mojave 下解锁 Xcode 11.7
 • 新增支持在 macOS Big Sur 下解锁 Aperture、iPhoto 和 iTunes
 • 解决了无法将照片从可移动存储介质导入至 Aperture 的问题
-• 修复了 Final Cut pro 7 可能无法找到解码器的问题
+• 修复了 Final Cut Pro 7 可能无法找到解码器的问题
 </string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.9 (版本號 84) 包含新功能，並改進了兼容性</string>
+	<string>新版本解印 1.9 (版本號 85) 包含新功能，並改進了兼容性</string>
 	<key>NewVersionChangelogzhHant</key>
     <string>• 新增支持在 macOS Mojave 下解鎖 Xcode 11.7
 • 新增支持在 macOS Big Sur 下解鎖 Aperture、iPhoto 和 iTunes
 • 解決了無法將照片從可移動存儲介質導入至 Aperture 的問題
-• 修復了 Final Cut pro 7 可能無法找到解碼器的問題
+• 修復了 Final Cut Pro 7 可能無法找到解碼器的問題
 </string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>84</integer>
+	<integer>85</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>

@@ -130,6 +130,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 7D83A9DB1EB6465D001506F0;
@@ -280,6 +281,7 @@
 		7D83A9EE1EB6465D001506F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				CODE_SIGN_IDENTITY = "";
 				DEVELOPMENT_TEAM = VBG97UB4TA;
 				EXECUTABLE_PREFIX = lib;
@@ -294,6 +296,7 @@
 		7D83A9EF1EB6465D001506F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				CODE_SIGN_IDENTITY = "";
 				DEVELOPMENT_TEAM = VBG97UB4TA;
 				EXECUTABLE_PREFIX = lib;

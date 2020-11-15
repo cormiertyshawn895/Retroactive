@@ -280,6 +280,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let audioAnalysisPath = "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"
             let pluginManagerPath = "\(appPath)/Contents/Frameworks/PluginManager.framework"
             let fakeAppKitPath = "\(appPath)/Contents/Frameworks/AppKit.framework"
+            let maximizeCompatibility = AppManager.shared.maximizePhotoAppCompatibility
 
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", audioAnalysisPath])
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", photoFixerPath])
@@ -288,18 +289,28 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", audioAnalysisPath])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", photoFixerPath])
-            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/PluginManager", pluginManagerPath])
-            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKitAperture", fakeAppKitPath])
+
+            if (maximizeCompatibility) {
+                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/PluginManager", pluginManagerPath])
+                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKitAperture", fakeAppKitPath])
+            }
 
             self.stage3Started()
+            let originalPluginManagerPath = "/Library/Frameworks/PluginManager.framework/Versions/B/PluginManager"
+            let patchedPluginManagerPath = "@executable_path/../Frameworks/PluginManager.framework/Versions/B/PluginManager"
+            let originalAppKitPath = "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit"
+            let patchedAppKitPath = "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit"
+            let resolvedOldAppKitArg = maximizeCompatibility ? originalAppKitPath : patchedAppKitPath
+            let resolvedNewAppKitArg = maximizeCompatibility ? patchedAppKitPath : originalAppKitPath
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/PluginManager.framework/Versions/B/PluginManager", "@executable_path/../Frameworks/PluginManager.framework/Versions/B/PluginManager", "\(appPath)/Contents/MacOS/Aperture"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit", "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit", "\(appPath)/Contents/Frameworks/ProKit.framework/Versions/A/ProKit"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit", "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit", "\(appPath)/Contents/Frameworks/iLifeKit.framework/Versions/A/iLifeKit"], path: resourcePath)
+            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", maximizeCompatibility ? originalPluginManagerPath : patchedPluginManagerPath, maximizeCompatibility ? patchedPluginManagerPath : originalPluginManagerPath, "\(appPath)/Contents/MacOS/Aperture"], path: resourcePath)
+            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", resolvedOldAppKitArg, resolvedNewAppKitArg, "\(appPath)/Contents/Frameworks/ProKit.framework/Versions/A/ProKit"], path: resourcePath)
+            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", resolvedOldAppKitArg, resolvedNewAppKitArg, "\(appPath)/Contents/Frameworks/iLifeKit.framework/Versions/A/iLifeKit"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
             if let patchedBundleID = AppManager.shared.patchedBundleIDOfChosenApp {
                 self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", patchedBundleID, "Contents/Info.plist"])
             }
+            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kLSMinimumSystemVersion, "-string", "10.10", "Contents/Info.plist"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["-p", "/Library/Application Support/Aperture/Plug-Ins"])
 
             self.stage4Started()

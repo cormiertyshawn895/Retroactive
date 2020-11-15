@@ -1318,7 +1318,7 @@ class AppManager: NSObject {
                 AppManager.shared.chosenApp = .proVideoUpdate
                 AppManager.shared.locationOfChosenApp = cachedLocation
 
-                AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
+                AppDelegate.skipCheck_pushAuthenticateVC()
             } else {
                 AppDelegate.showTextSheet(title: "You need to install Final Cut Pro 7 first.".localized(), text: String(format: "After you have already installed Final Cut Pro 7 from a DVD installer or DMG image, Retroactive can download and update Final Cut Pro 7 from version 7.0 to 7.0.3, and unlock it to be compatible with %@.".localized(), ProcessInfo.versionName))
             }
@@ -1582,6 +1582,8 @@ class AppManager: NSObject {
         return self.chosenApp == .itunes && !Permission.shared.bashHasFullDiskAccess()
     }
     
+    var maximizePhotoAppCompatibility = true
+
     static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true, allowError: Bool = false) -> OSStatus {
         if (AppManager.shared.willRelaunchSoon) {
             return errAuthorizationCanceled

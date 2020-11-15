@@ -264,6 +264,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     static func pushCompletionVC() {
         AppDelegate.rootVC?.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
     }
+    
+    static func pushAuthenticateVC() {
+        if ((AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto) && discouraged_osExactlyCatalina) {
+            let appName = AppManager.shared.nameOfChosenApp
+            let messageText = String(format: "If you choose “Optimize for macOS Catalina”, %@ will enjoy improved stability and optimization, but only works on macOS Catalina. After upgrading to macOS Big Sur, you must unlock %@ with Retroactive again.".localized(), appName, appName) + "\n\n" +  String(format: "If you choose “Optimize for macOS Big Sur”, %@ will work on both macOS Catalina and after upgrading to macOS Big Sur. However some features such as importing photos from removable media will be unavailable on macOS Catalina.".localized(), appName)
+            AppDelegate.showOptionSheet(title: String(format: "Retroactive can optimize %@ for either macOS Catalina or macOS Big Sur.".localized(), appName),
+                                        text: messageText,
+                                        firstButtonText: "Optimize for macOS Catalina".localized(),
+                                        secondButtonText: "Optimize for macOS Big Sur".localized(),
+                                        thirdButtonText: "") { (response) in
+                if (response == .alertFirstButtonReturn) {
+                    AppManager.shared.maximizePhotoAppCompatibility = false
+                }
+                self.skipCheck_pushAuthenticateVC()
+            }
+            return
+        }
+        skipCheck_pushAuthenticateVC()
+    }
+    
+    static func skipCheck_pushAuthenticateVC() {
+        AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
+    }
 }
 
 extension NSApplication {

@@ -163,7 +163,7 @@ class CompletionViewController: NSViewController {
     
     @IBAction func behindTheScenesClicked(_ sender: Any) {
         if (AppManager.shared.allowPatchingAgain == true) {
-            self.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
+            AppDelegate.pushAuthenticateVC()
             return
         }
         AppDelegate.current.safelyOpenURL(AppManager.shared.behindTheScenesOfChosenApp)

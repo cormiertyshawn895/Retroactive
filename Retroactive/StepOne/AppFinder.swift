@@ -112,7 +112,7 @@ class AppFinder: NSObject {
                     return
                 }
             }
-            self.pushAuthenticateVC()
+            AppDelegate.pushAuthenticateVC()
         }
     }
 
@@ -182,7 +182,7 @@ class AppFinder: NSObject {
                         AppManager.shared.updateSelectedApp()
                     }
                     if (result == .alertSecondButtonReturn) {
-                        self.pushAuthenticateVC()
+                        AppDelegate.pushAuthenticateVC()
                     }
                 }
                 return
@@ -209,7 +209,7 @@ class AppFinder: NSObject {
                                 }
                                 if matchesCompatible && AppManager.shared.existingBundleIDOfChosenApp.contains(identifier) {
                                     AppManager.shared.locationOfChosenApp = bundlePath
-                                    self.pushAuthenticateVC()
+                                    AppDelegate.pushAuthenticateVC()
                                 } else {
                                     let text = String(format: "%@ %@ is not %@ %@. To proceed, you need to locate a valid copy of %@ %@.".localized(), url?.deletingPathExtension().lastPathComponent ?? "", displayShortVersionNumberString, name, compat, name, compat)
                                     AppDelegate.showTextSheet(title: "Selected app is incompatible".localized(), text: text)
@@ -231,7 +231,7 @@ class AppFinder: NSObject {
         if AppManager.shared.chosenApp == .itunes {
             let itunesPath = "/Applications/iTunes.app"
             AppManager.shared.locationOfChosenApp = itunesPath
-            self.pushAuthenticateVC()
+            AppDelegate.pushAuthenticateVC()
             return
         }
         AppDelegate.rootVC?.navigationController.pushViewController(GuidanceViewController.instantiate(), animated: true)
@@ -246,10 +246,6 @@ class AppFinder: NSObject {
         AppManager.shared.retinizeSelectedAppForCurrentUser()
         AppManager.shared.removeFCP7PresetsIfNeeded()
         AppDelegate.pushCompletionVC()
-    }
-    
-    private func pushAuthenticateVC() {
-        AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
     }
     
 }

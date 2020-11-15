@@ -13,7 +13,7 @@ let osAtLeast2021 = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(
 
 let discouraged_osExactlyHighSierra = osMajorVersion == 10 && osMinorVersion == 13
 let discouraged_osExactlyMojave = osMajorVersion == 10 && osMinorVersion == 14
-private let osExactlyCatalina = osMajorVersion == 10 && osMinorVersion == 15
+let discouraged_osExactlyCatalina = osMajorVersion == 10 && osMinorVersion == 15
 let discouraged_osExactlyBigSur = (osMajorVersion == 10 && osMinorVersion == 16) || osMajorVersion == 11
 let discouraged_osHasExperimentalSupport = false
 
@@ -38,7 +38,7 @@ extension ProcessInfo {
         if (discouraged_osExactlyMojave) {
             return "macOS Mojave"
         }
-        if (osExactlyCatalina) {
+        if (discouraged_osExactlyCatalina) {
             return "macOS Catalina"
         }
         if (discouraged_osExactlyBigSur) {

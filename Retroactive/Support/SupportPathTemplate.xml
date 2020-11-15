@@ -16,7 +16,7 @@
     <string>• 新增支持在 macOS Mojave 下解锁 Xcode 11.7
 • 新增支持在 macOS Big Sur 下解锁 Aperture、iPhoto 和 iTunes
 • 解决了无法将照片从可移动存储介质导入至 Aperture 的问题
-• 修复了 Final Cut pro 7 可能无法找到解码器的问题
+• 修复了 Final Cut Pro 7 可能无法找到解码器的问题
 </string>
 	<key>NewVersionVisibleTitlezhHant</key>
 	<string>新版本解印 $(VERSION_HANT) 包含新功能，並改進了兼容性</string>
@@ -24,7 +24,7 @@
     <string>• 新增支持在 macOS Mojave 下解鎖 Xcode 11.7
 • 新增支持在 macOS Big Sur 下解鎖 Aperture、iPhoto 和 iTunes
 • 解決了無法將照片從可移動存儲介質導入至 Aperture 的問題
-• 修復了 Final Cut pro 7 可能無法找到解碼器的問題
+• 修復了 Final Cut Pro 7 可能無法找到解碼器的問題
 </string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/$(MARKETING_VERSION)/Retroactive.$(MARKETING_VERSION).zip</string>
