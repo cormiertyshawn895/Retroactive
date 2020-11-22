@@ -304,6 +304,9 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let resolvedNewAppKitArg = maximizeCompatibility ? patchedAppKitPath : originalAppKitPath
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", maximizeCompatibility ? originalPluginManagerPath : patchedPluginManagerPath, maximizeCompatibility ? patchedPluginManagerPath : originalPluginManagerPath, "\(appPath)/Contents/MacOS/Aperture"], path: resourcePath)
+            if (maximizeCompatibility) {
+                self.runTask(toolPath: "/usr/bin/codesign", arguments: ["--force", "-s", "-", "\(pluginManagerPath)/Versions/B/PluginManager"])
+            }
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", resolvedOldAppKitArg, resolvedNewAppKitArg, "\(appPath)/Contents/Frameworks/ProKit.framework/Versions/A/ProKit"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", resolvedOldAppKitArg, resolvedNewAppKitArg, "\(appPath)/Contents/Frameworks/iLifeKit.framework/Versions/A/iLifeKit"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
