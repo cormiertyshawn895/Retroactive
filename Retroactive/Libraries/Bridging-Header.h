@@ -10,5 +10,6 @@
 #import "CCNNavigationController.h"
 #import "NSWindow+Retroactive.h"
 #import "STPrivilegedTask.h"
+#import "MacOSDownloader.h"
 
 #endif /* Bridging_Header_h */

@@ -40,6 +40,7 @@ class SubProgressViewController: NSViewController {
             } else {
                 circularProgress.progress = 1.0
                 circularProgress.color = NSColor.systemGreen
+                self.progressTextField.font = NSFont.systemFont(ofSize: 16, weight: .regular)
                 self.progressTextField.stringValue = "Completed".localized()
             }
         }
