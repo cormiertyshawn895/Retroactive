@@ -20,14 +20,14 @@
 /* Class = "NSTextFieldCell"; title = "Aperture"; ObjectID = "5wq-le-A3N"; */
 "5wq-le-A3N.title" = "Aperture";
 
-/* Class = "NSTextFieldCell"; title = "Unlock Aperture and iPhoto, or install iTunes."; ObjectID = "6B8-22-FCU"; */
-"6B8-22-FCU.title" = "解除对 Aperture 和 iPhoto 的封印，或安装 iTunes。";
-
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "重做";
 
 /* Class = "NSTextFieldCell"; title = "Authenticate"; ObjectID = "6yW-ps-YvK"; */
 "6yW-ps-YvK.title" = "验证身份";
+
+/* Class = "NSTextFieldCell"; title = "Enable Full Disk Access so that you can sync with iPod devices."; ObjectID = "7Qr-EP-RjY"; */
+"7Qr-EP-RjY.title" = "允许完全磁盘访问权限，以确保 iTunes 能与 iPod 同步。";
 
 /* Class = "NSTextFieldCell"; title = "iTunes 12.9.5"; ObjectID = "8QN-TG-LSP"; */
 "8QN-TG-LSP.title" = "iTunes 12.9.5";
@@ -56,6 +56,9 @@
 /* Class = "NSTextFieldCell"; title = "UNLOCK"; ObjectID = "Gmj-7c-mcD"; */
 "Gmj-7c-mcD.title" = "解除封印";
 
+/* Class = "NSTextFieldCell"; title = "Drag me"; ObjectID = "MJo-JF-HJA"; */
+"MJo-JF-HJA.title" = "将我拖动";
+
 /* Class = "NSMenuItem"; title = "Get Help from Community"; ObjectID = "HRk-IW-XCR"; */
 "HRk-IW-XCR.title" = "从社区获取帮助";
 
@@ -67,6 +70,9 @@
 
 /* Class = "NSButtonCell"; title = "I have already installed {name} ›"; ObjectID = "JRd-3z-xeo"; */
 "JRd-3z-xeo.title" = "我已经安装了 {name} ›";
+
+/* Class = "NSTextFieldCell"; title = "Click on this padlock to unlock it."; ObjectID = "JcO-qZ-49G"; */
+"JcO-qZ-49G.title" = "跟我来：点击上方锁按钮以进行更改";
 
 /* Class = "NSTextFieldCell"; title = "Launch {name}"; ObjectID = "KAc-1b-JvD"; */
 "KAc-1b-JvD.title" = "启动 {name}";
@@ -140,8 +146,17 @@
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
 "dRJ-4n-Yzg.title" = "撤销";
 
+/* Class = "NSTextFieldCell"; title = "One more thing."; ObjectID = "e6f-N2-Gk9"; */
+"e6f-N2-Gk9.title" = "还有一件事";
+
 /* Class = "NSTextFieldCell"; title = "This process requires {actionS} {name}, and usually takes about {timeEstimate}."; ObjectID = "fFM-5t-5vq"; */
 "fFM-5t-5vq.title" = "此过程需要{actionS} {name}，通常需要 {timeEstimate}。";
+
+/* Class = "NSButtonCell"; title = "I've already unlocked it. What's next?"; ObjectID = "g8b-Kt-31M"; */
+"g8b-Kt-31M.title" = "我已经完成解锁，进入下一步";
+
+/* Class = "NSTextFieldCell"; title = "into the list."; ObjectID = "gOZ-6u-ZX2"; */
+"gOZ-6u-ZX2.title" = "到列表中";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "粘贴";
@@ -157,6 +172,9 @@
 
 /* Class = "NSTextFieldCell"; title = "iTunes"; ObjectID = "iPE-Jd-BL4"; */
 "iPE-Jd-BL4.title" = "iTunes";
+
+/* Class = "NSTextFieldCell"; title = "Enable Full Disk Access"; ObjectID = "iwB-jM-Szz"; */
+"iwB-jM-Szz.title" = "允许完全磁盘访问权限";
 
 /* Class = "NSTextFieldCell"; title = "Download {name} from the Purchased list in App Store."; ObjectID = "nzg-d3-rIG"; */
 "nzg-d3-rIG.title" = "从 App Store 的已购列表中下载 {name}";
@@ -185,6 +203,9 @@
 /* Class = "NSButtonCell"; title = "Update Available"; ObjectID = "v50-Lo-50e"; */
 "v50-Lo-50e.title" = "可下载新版本解印";
 
+/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "wCE-ll-wiN"; */
+"wCE-ll-wiN.title" = "继续 ›";
+
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
 "wpr-3q-Mcd.title" = "帮助";
 
@@ -197,6 +218,9 @@
 /* Class = "NSMenuItem"; title = "Check for Updates..."; ObjectID = "xDZ-Au-B53"; */
 "xDZ-Au-B53.title" = "检查更新...";
 
+/* Class = "NSButtonCell"; title = "I don't need to sync with iPod"; ObjectID = "yqS-YC-eqW"; */
+"yqS-YC-eqW.title" = "我不需要与 iPod 同步";
+
 /* Class = "NSTextFieldCell"; title = "INSTALL"; ObjectID = "z1o-z6-W1t"; */
 "z1o-z6-W1t.title" = "安装";
 
@@ -205,6 +229,3 @@
 
 /* Class = "NSTextFieldCell"; title = "/Applications/Stuff.app"; ObjectID = "zN7-i2-jN4"; */
 "zN7-i2-jN4.title" = "/Applications/Stuff.app";
-
-/* Class = "NSButtonCell"; title = "Continue ›"; ObjectID = "wCE-ll-wiN"; */
-"wCE-ll-wiN.title" = "继续 ›";

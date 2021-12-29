@@ -9,15 +9,23 @@
 #import "NSObject+KeynoteFixer.h"
 @import AppKit;
 
+BOOL GeneralFixerOSIsMojaveOrLater() {
+    static BOOL isMojaveOrLater;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        isMojaveOrLater = [NSProcessInfo processInfo].operatingSystemVersion.minorVersion >= 14;
+    });
+    return isMojaveOrLater;
+}
+
 @implementation NSScreen (KeynoteFixer)
 
 + (void)load {
-    NSLog(@"Loading KeynoteFixer");
-    
+    NSLog(@"Loading iWork Fixer");
 }
 
 + (void)_resetScreens {
-    NSLog(@"skipping _resetScreens");
+    NSLog(@"Skipping _resetScreens");
 }
 
 @end

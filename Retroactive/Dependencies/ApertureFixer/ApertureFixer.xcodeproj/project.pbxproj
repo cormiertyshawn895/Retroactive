@@ -10,6 +10,8 @@
 		24829F6B235E478C00D5891C /* ApertureFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 24829F69235E478C00D5891C /* ApertureFixer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24829F73235E479A00D5891C /* NSObject+Fixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 24829F71235E479A00D5891C /* NSObject+Fixer.h */; };
 		24829F74235E479A00D5891C /* NSObject+Fixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 24829F72235E479A00D5891C /* NSObject+Fixer.m */; };
+		600BD4B72505FCFA009D980E /* NSToolbarItem+Fixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 600BD4B52505FCFA009D980E /* NSToolbarItem+Fixer.h */; };
+		600BD4B82505FCFA009D980E /* NSToolbarItem+Fixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 600BD4B62505FCFA009D980E /* NSToolbarItem+Fixer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		24829F6A235E478C00D5891C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24829F71235E479A00D5891C /* NSObject+Fixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Fixer.h"; sourceTree = "<group>"; };
 		24829F72235E479A00D5891C /* NSObject+Fixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Fixer.m"; sourceTree = "<group>"; };
+		600BD4B52505FCFA009D980E /* NSToolbarItem+Fixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSToolbarItem+Fixer.h"; sourceTree = "<group>"; };
+		600BD4B62505FCFA009D980E /* NSToolbarItem+Fixer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSToolbarItem+Fixer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 				24829F69235E478C00D5891C /* ApertureFixer.h */,
 				24829F71235E479A00D5891C /* NSObject+Fixer.h */,
 				24829F72235E479A00D5891C /* NSObject+Fixer.m */,
+				600BD4B52505FCFA009D980E /* NSToolbarItem+Fixer.h */,
+				600BD4B62505FCFA009D980E /* NSToolbarItem+Fixer.m */,
 				24829F6A235E478C00D5891C /* Info.plist */,
 			);
 			path = ApertureFixer;
@@ -66,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24829F6B235E478C00D5891C /* ApertureFixer.h in Headers */,
+				600BD4B72505FCFA009D980E /* NSToolbarItem+Fixer.h in Headers */,
 				24829F73235E479A00D5891C /* NSObject+Fixer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				600BD4B82505FCFA009D980E /* NSToolbarItem+Fixer.m in Sources */,
 				24829F74235E479A00D5891C /* NSObject+Fixer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,10 +271,11 @@
 		24829F6F235E478C00D5891C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 9;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -290,10 +299,11 @@
 		24829F70235E478C00D5891C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 9;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;

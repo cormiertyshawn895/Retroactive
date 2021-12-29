@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+BOOL GeneralFixerOSIsMojaveOrLater(void);
+
 @interface NSObject (KeynoteFixer)
 
 @end

@@ -22,7 +22,7 @@ class VersionChoiceViewController: NSViewController {
         self.checkMark.isHidden = true
         self.screenshotView.image = itunesApp?.previewScreenshot
         self.featureDescription.stringValue = itunesApp?.featureDescriptionString ?? ""
-        self.versionDescription.stringValue = "iTunes \(itunesApp?.versionNumberString ?? "")"
+        self.versionDescription.stringValue = "\(itunesApp?.version != .configurator ? "iTunes " : "")\(itunesApp?.versionNumberString ?? "")"
     }
     
 }

@@ -1,7 +1,15 @@
 #!/bin/bash
-iTunes_PATH="`dirname "${0}"`"
-iTunes_BIN=$iTunes_PATH/iTunes.app/Contents/MacOS/iTunes
-export DYLD_FRAMEWORK_PATH="${iTunes_PATH}/iTunes.app/Contents/Frameworks"
-export DYLD_LIBRARY_PATH="${iTunes_PATH}/iTunes.app/Contents/Frameworks"
+OUTPUT="$(pgrep -x iTunes)"
+echo $OUTPUT
+if [ -z $OUTPUT ]
+then
+    iTunes_PATH="`dirname "${0}"`"
+    iTunes_BIN=$iTunes_PATH/iTunes.app/Contents/MacOS/iTunes
+    export DYLD_FRAMEWORK_PATH="${iTunes_PATH}/iTunes.app/Contents/Frameworks"
+    export DYLD_LIBRARY_PATH="${iTunes_PATH}/iTunes.app/Contents/Frameworks"
 
-"$iTunes_BIN"
+    "$iTunes_BIN"
+else
+    echo "iTunes is already running."
+    osascript -e 'tell application "iTunes" to activate'
+fi

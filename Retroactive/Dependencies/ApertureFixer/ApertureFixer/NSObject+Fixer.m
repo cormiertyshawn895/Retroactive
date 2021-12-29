@@ -8,7 +8,6 @@
 #import <AppKit/AppKit.h>
 #import "NSObject+Fixer.h"
 
-static
 @implementation NSObject (Fixer)
 
 + (NSFont *)swizzled_proSystemFontWithFontName:(NSString *)name pointSize:(CGFloat)size fontAppearance:(id)appearance useSystemHelveticaAdjustments:(BOOL)adjustments {
@@ -48,6 +47,9 @@ static
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKRedRockApp"), NSSelectorFromString(@"_delayedFinishLaunching")),
                                    class_getInstanceMethod(class, @selector(patched_delayedFinishLaunching)));
     
+    method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"RKRedRockApp"), NSSelectorFromString(@"_moveCommandSetsToSandboxLocation")),
+                                   class_getInstanceMethod(class, @selector(patched_moveCommandSetsToSandboxLocation)));
+
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"NSConcretePrintOperation"), NSSelectorFromString(@"runOperation")),
                                    class_getInstanceMethod(class, @selector(patched_runOperation)));
     
@@ -56,6 +58,10 @@ static
     
     method_exchangeImplementations(class_getInstanceMethod(NSClassFromString(@"IPPrinterPaperSelectionView"), NSSelectorFromString(@"updatePaperMenu")),
                                    class_getInstanceMethod(class, @selector(patched_updatePaperMenu)));
+}
+
+- (void)patched_moveCommandSetsToSandboxLocation {
+    NSLog(@"asked to move command sets to sandbox location, but Aperture is unboxed, skipping it");
 }
 
 - (id)patched_paperWithID:(id)arg1 {
@@ -91,6 +97,49 @@ static
 
 - (BOOL)_hasRowHeaderColumn {
 	return NO;
-	
 }
+
+- (BOOL)_proIsSpinning {
+    return NO;
+}
+
+- (void)_autoSizeView:(id)a :(id)b :(id)c :(id)d :(id)e {
+    NSLog(@"Skipping _autoSizeView");
+}
+
+- (void)setShowingRollover:(id)showingRollover {
+}
+
+- (CGFloat)_drawingWidth {
+    NSLog(@"Returning 0 _drawingWidth");
+    return 0;
+}
+
+- (void)set_drawingWidth:(CGFloat)value {
+    NSLog(@"Skipping set_drawingWidth");
+}
+
+- (BOOL)_proDelayedStartup {
+    NSLog(@"Returning NO for _proDelayedStartup");
+    return NO;
+}
+
+- (void)_setProDelayedStartup:(BOOL)value {
+    NSLog(@"Skipping _setProDelayedStartup");
+}
+
+- (unsigned long long)_proAnimationIndex {
+    return 0;
+}
+
+- (void)_setProAnimationIndex:(unsigned long long)arg1 {
+}
+
+- (void)_installHeartBeat:(id)heartbeat {
+    NSLog(@"Skipping _installHeartBeat");
+}
+
+- (void)_alignSize:(id)size force:(id)force {
+}
+
 @end

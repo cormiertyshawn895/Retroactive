@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1120"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -74,5 +74,23 @@
    <ArchiveAction
       buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "cp -R &quot;$SRCROOT/$PRODUCT_NAME/Help/What to do if Retroactive can&apos;t be opened.lpdf&quot; &quot;$ARCHIVE_PATH/Products/Applications&quot;&#10;mv &quot;$ARCHIVE_PATH/Products/Applications/$PRODUCT_NAME.app&quot; &quot;$ARCHIVE_PATH/Products/Applications/Retroactive (right click to open).app&quot;&#10;MARKETING_FOLDER=&quot;$PRODUCT_NAME $MARKETING_VERSION&quot;&#10;MARKETING_PATH=&quot;$ARCHIVE_PATH/Products/$MARKETING_FOLDER&quot;&#10;mv &quot;$ARCHIVE_PATH/Products/Applications&quot; &quot;$MARKETING_PATH&quot;&#10;cd &quot;$ARCHIVE_PATH/Products&quot;&#10;ZIP_NAME=&quot;Retroactive.$MARKETING_VERSION.zip&quot;&#10;zip -r -y -9 &quot;$ZIP_NAME&quot; &quot;$MARKETING_FOLDER&quot;&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "32D181B823640CDE006253DE"
+                     BuildableName = "Retroactive.app"
+                     BlueprintName = "Retroactive"
+                     ReferencedContainer = "container:Retroactive.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
    </ArchiveAction>
 </Scheme>

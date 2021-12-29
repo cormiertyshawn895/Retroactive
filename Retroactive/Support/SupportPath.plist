@@ -3,29 +3,38 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-	<string>Retroactive 1.5 improves iTunes compatibility with macOS Catalina 10.15.4 and is available for download.</string>
+    <string>Retroactive 1.9 (Build 86) adds new features and improves compatibility.</string>
 	<key>NewVersionChangelog</key>
-	<string>• Resolves an issue where authenticating with Apple Music, iTunes Store, or App Store may fail with iTunes 12.9.5 and iTunes 12.6.5 running on macOS Catalina 10.15.4 (11571 and -42408).
-• Resolves an issue where iTunes 10.7 may prompt to reinstall itself (-42401).
-• Adds support for installing iTunes 12.4 and iTunes 11.4.</string>
+    <string>• Adds support for unlocking Xcode 11.7 on macOS Mojave
+• Adds support for unlocking Aperture, iPhoto and iTunes on macOS Big Sur
+• Addresses an issue where Aperture and iPhoto fail to launch under Rosetta 2
+• Resolves an issue where photos cannot be imported from removable media into Aperture
+• Fixes an issue where Final Cut Pro 7 may fail to find codecs
+</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 1.5 改善了 iTunes 与 macOS Catalina 10.15.4 的兼容性，现已提供下载:</string>
+	<string>新版本解印 1.9 (版本号 86) 包含新功能，并改进了兼容性</string>
 	<key>NewVersionChangelogzhHans</key>
-	<string>• 修复了 iTunes 12.9.5 和 iTunes 12.6.5 无法在 macOS Catalina 10.15.4 下登录 Apple Music、iTunes Store 和 App Store (11571 和 -42408) 的问题 
-• 修复了 iTunes 10.7 可能提示需要重新安装 (-42401) 的问题
-• 支持安装 iTunes 12.4 和 iTunes 11.4</string>
+    <string>• 新增支持在 macOS Mojave 下解锁 Xcode 11.7
+• 新增支持在 macOS Big Sur 下解锁 Aperture、iPhoto 和 iTunes
+• 解决了无法在 Rosetta 2 下打开 Aperture 和 iPhoto 的问题
+• 解决了无法将照片从可移动存储介质导入至 Aperture 的问题
+• 修复了 Final Cut Pro 7 可能无法找到解码器的问题
+</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 1.5 改善了 iTunes 與 macOS Catalina 10.15.4 的兼容性，現已提供下載:</string>
+	<string>新版本解印 1.9 (版本號 86) 包含新功能，並改進了兼容性</string>
 	<key>NewVersionChangelogzhHant</key>
-	<string>• 修復了 iTunes 12.9.5 和 iTunes 12.6.5 無法在 macOS Catalina 10.15.4 下登錄 Apple Music、iTunes Store 和 App Store (11571 和 -42408) 的問題
-• 修復了 iTunes 10.7 可能提示需要重新安裝 (-42401) 的問題
-• 支持安裝 iTunes 12.4 和 iTunes 11.4</string>
+    <string>• 新增支持在 macOS Mojave 下解鎖 Xcode 11.7
+• 新增支持在 macOS Big Sur 下解鎖 Aperture、iPhoto 和 iTunes
+• 解決了無法在 Rosetta 2 下打開 Aperture 和 iPhoto 的問題
+• 解決了無法將照片從可移動存儲介質導入至 Aperture 的問題
+• 修復了 Final Cut Pro 7 可能無法找到解碼器的問題
+</string>
 	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.5/Retroactive.1.5.zip</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>26</integer>
+	<integer>86</integer>
 	<key>SupportPathURL</key>
-	<string></string>
+	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases</string>
 	<key>SourcePage</key>
@@ -48,8 +57,6 @@
 	<string>http://appldnld.apple.com/iTunes10/041-7195.20120912.d3uzQ/iTunes10.7.dmg</string>
 	<key>iTunes114URL</key>
 	<string>https://secure-appldnld.apple.com/iTunes11/031-06978.20140909.HuRRe/iTunes11.4.dmg</string>
-	<key>iTunes124URL</key>
-	<string>https://secure-appldnld.apple.com/itunes12/031-69280-20160802-E751E1E2-5524-11E6-8829-EB6BECD541CE/iTunes12.4.3.dmg</string>
 	<key>iTunes126URL</key>
 	<string>https://secure-appldnld.apple.com/itunes12/091-87821-20180912-69177170-B085-11E8-B6AB-C1D03409AD2A/iTunes12.6.5.dmg</string>
 	<key>ApertureDive</key>
@@ -60,8 +67,6 @@
 	<string>https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27843550#post-27843550</string>
 	<key>iTunes126Dive</key>
 	<string>https://forums.macrumors.com/threads/itunes-12-6-5-3-on-macos-catalina-10-15.2184518/page-4?post=27807492#post-27807492</string>
-	<key>iTunes124Dive</key>
-	<string>https://osxdaily.com/2014/10/26/downgrades-itunes-12/</string>
 	<key>iTunes114Dive</key>
 	<string>https://osxdaily.com/2014/10/26/downgrades-itunes-12/</string>
 	<key>iTunes107Dive</key>
@@ -86,5 +91,9 @@
 	<string>https://www.baidu.com/s?wd=Final%20Cut%20Pro%207</string>
 	<key>FCPUpdate</key>
 	<string>https://download.info.apple.com/Mac_OS_X/061-8474.20100915.wtoKR/ProApplicationsUpdate2010-02.dmg</string>
+    <key>Xcode114URL</key>
+    <string>https://developer.apple.com/download/more/?=xcode%2011</string>
+    <key>ConfiguratorURL</key>
+    <string>macappstore://apps.apple.com/app/apple-configurator-2/id1037126344</string>
 </dict>
 </plist>

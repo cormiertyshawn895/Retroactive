@@ -278,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = x86_64;
 				CODE_SIGN_IDENTITY = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -292,6 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = x86_64;
 				CODE_SIGN_IDENTITY = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

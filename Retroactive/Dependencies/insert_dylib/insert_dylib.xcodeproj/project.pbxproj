@@ -151,6 +151,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 55ABCB4019881CA600B03F31;
@@ -312,6 +313,7 @@
 		55ABCB5319881CA600B03F31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -319,6 +321,7 @@
 		55ABCB5419881CA600B03F31 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -333,6 +336,7 @@
 				55708CC41B308025002D62A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55ABCB4419881CA600B03F31 /* Build configuration list for PBXProject "insert_dylib" */ = {
 			isa = XCConfigurationList;

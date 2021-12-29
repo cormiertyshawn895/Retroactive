@@ -5,18 +5,48 @@
 
 import Cocoa
 
+let kErrorRecoveryTitle = "ErrorRecoveryTitle"
+let kErrorRecoveryText = "ErrorRecoveryText"
+
 @NSApplicationMain
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _ = AppManager.shared
+        showRecoveryTitleIfNeeded()
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    func showRecoveryTitleIfNeeded() {
+        if let recoveryTitle = UserDefaults.standard.string(forKey: kErrorRecoveryTitle),
+            let recoveryText = UserDefaults.standard.string(forKey: kErrorRecoveryText) {
+            if (recoveryTitle.count > 0 && recoveryText.count > 0) {
+                UserDefaults.standard.setValue(nil, forKey: kErrorRecoveryTitle)
+                UserDefaults.standard.setValue(nil, forKey: kErrorRecoveryText)
+
+                AppDelegate.showOptionSheet(title: recoveryTitle,
+                                            text: recoveryText,
+                                            firstButtonText: "OK".localized(), secondButtonText: "", thirdButtonText: "") { (response) in
+                }
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        do {
+            try FileManager.default.removeItem(atPath: throwawayTmpPath)
+        } catch {
+            print(error)
+        }
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        AppDelegate.appWindow?.makeKeyAndOrderFront(self)
         return true
     }
     
@@ -26,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     static var rootVC: RootViewController? {
         get {
-            return NSApp.mainWindow?.contentViewController as? RootViewController
+            return self.appWindow?.contentViewController as? RootViewController
         }
     }
     
@@ -47,7 +77,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if thirdButtonText.count > 0 {
             alert.addButton(withTitle: thirdButtonText)
         }
-        if let window = NSApp.mainWindow {
+        if let window = self.appWindow {
             alert.beginSheetModal(for: window) { (response) in
                 callback(response)
             }
@@ -57,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    static func appWindow() -> NSWindow? {
+    static var appWindow: NSWindow? {
         if let mainWindow = NSApp.mainWindow {
             return mainWindow
         }
@@ -70,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     static func manuallyLocateApp(callback: @escaping ((_ selectedFile: Bool, _ fileURL: URL?, _ filePath: String?)-> ())) {
-        guard let window = self.appWindow() else {
+        guard let window = self.appWindow else {
             return
         }
         let dialog = NSOpenPanel()
@@ -100,7 +130,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         alert.informativeText = text
         alert.alertStyle = NSAlert.Style.informational
         alert.addButton(withTitle: "OK".localized())
-        if let window = NSApp.mainWindow {
+        if let window = self.appWindow {
             alert.beginSheetModal(for: window, completionHandler: nil)
         } else {
             alert.runModal()
@@ -120,7 +150,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return true
         }
         
-        if !(rootVC.navigationController.topViewController is ProgressViewController) {
+        let topVC = rootVC.navigationController.topViewController
+        if !(topVC is ProgressViewController) && !(topVC is SyncingViewController && !AppManager.shared.allowPatchingAgain) {
+            return true
+        }
+        
+        if AppManager.shared.willRelaunchSoon {
             return true
         }
         
@@ -131,7 +166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         if AppManager.shared.chosenApp == .itunes {
-            if let progressVC = rootVC.navigationController.topViewController as? ProgressViewController {
+            if let progressVC = topVC as? ProgressViewController {
                 if progressVC.subProgress1.inProgress {
                     AppDelegate.showOptionSheet(title: String(format: "Are you sure you want to stop installing %@?".localized(), name),
                                                 text: String(format: "Quitting Retroactive now may result in a corrupted install of %@ and is not recommended.".localized(), name),
@@ -139,16 +174,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                 secondButtonText: String(format: "Stop Installing %@".localized(), name),
                                                 thirdButtonText: "") { (response) in
                         if (response == .alertSecondButtonReturn) {
-                            AppDelegate.appWindow()?.close()
+                            AppDelegate.appWindow?.close()
                         }
                     }
-                } else {
-                    showUnableToClose()
+                    return false
                 }
             }
-        } else {
-            showUnableToClose()
         }
+
+        showUnableToClose()
         return false
     }
     
@@ -218,5 +252,51 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSWorkspace.shared.open(credits)
         }
     }
+    
+    static func pushVersionVC() {
+        AppDelegate.rootVC?.navigationController.pushViewController(VersionViewController.instantiate(), animated: true)
+    }
+
+    static func pushSyncingVC() {
+        AppDelegate.rootVC?.navigationController.pushViewController(SyncingViewController.instantiate(), animated: true)
+    }
+    
+    static func pushCompletionVC() {
+        AppDelegate.rootVC?.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
+    }
+    
+    static func pushAuthenticateVC() {
+        if ((AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto) && discouraged_osExactlyCatalina) {
+            let appName = AppManager.shared.nameOfChosenApp
+            let messageText = String(format: "If you choose “Optimize for macOS Catalina”, %@ will enjoy improved stability and optimization, but only works on macOS Catalina. After upgrading to macOS Big Sur, you must unlock %@ with Retroactive again.".localized(), appName, appName) + "\n\n" +  String(format: "If you choose “Optimize for macOS Big Sur”, %@ will work on both macOS Catalina and after upgrading to macOS Big Sur. However some features such as importing photos from removable media will be unavailable on macOS Catalina.".localized(), appName)
+            AppDelegate.showOptionSheet(title: String(format: "Retroactive can optimize %@ for either macOS Catalina or macOS Big Sur.".localized(), appName),
+                                        text: messageText,
+                                        firstButtonText: "Optimize for macOS Catalina".localized(),
+                                        secondButtonText: "Optimize for macOS Big Sur".localized(),
+                                        thirdButtonText: "") { (response) in
+                if (response == .alertFirstButtonReturn) {
+                    AppManager.shared.maximizePhotoAppCompatibility = false
+                }
+                self.skipCheck_pushAuthenticateVC()
+            }
+            return
+        }
+        skipCheck_pushAuthenticateVC()
+    }
+    
+    static func skipCheck_pushAuthenticateVC() {
+        AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
+    }
 }
 
+extension NSApplication {
+    func relaunch() {
+        self.syncMainQueue {
+            AppManager.shared.willRelaunchSoon = true
+            let path = Bundle.main.bundlePath
+            print("Re-launching \(path)")
+            _ = Process.launchedProcess(launchPath: "/usr/bin/open", arguments: [path])
+            NSApp.terminate(self)
+        }
+    }
+}

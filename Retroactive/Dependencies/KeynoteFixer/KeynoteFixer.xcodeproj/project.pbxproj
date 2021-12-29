@@ -7,13 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04051D6F2456946E002286B4 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 04051D6D2456946E002286B4 /* fishhook.h */; };
+		04051D702456946E002286B4 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 04051D6E2456946E002286B4 /* fishhook.c */; };
+		04051D72245694A2002286B4 /* FontDescriptorInject.m in Sources */ = {isa = PBXBuildFile; fileRef = 04051D71245694A2002286B4 /* FontDescriptorInject.m */; };
+		04051D8F245699C5002286B4 /* DefaultFontFallbacks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04051D8E245699C5002286B4 /* DefaultFontFallbacks.plist */; };
+		045EF94624564370002D5193 /* NSTextFieldCell+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 045EF94424564370002D5193 /* NSTextFieldCell+iWorkFixer.h */; };
+		045EF94724564370002D5193 /* NSTextFieldCell+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EF94524564370002D5193 /* NSTextFieldCell+iWorkFixer.m */; };
+		0493DCC524553ADC00DC22BC /* NSScroller+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0493DCC324553ADC00DC22BC /* NSScroller+iWorkFixer.h */; };
+		0493DCC624553ADC00DC22BC /* NSScroller+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493DCC424553ADC00DC22BC /* NSScroller+iWorkFixer.m */; };
+		0493DCC924553BAE00DC22BC /* NSView+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0493DCC724553BAE00DC22BC /* NSView+iWorkFixer.h */; };
+		0493DCCA24553BAE00DC22BC /* NSView+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493DCC824553BAE00DC22BC /* NSView+iWorkFixer.m */; };
+		0493DCCD24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0493DCCB24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h */; };
+		0493DCCE24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493DCCC24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m */; };
 		04B3EF882381B3B40028C792 /* NSObject+KeynoteFixer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04B3EF862381B3B40028C792 /* NSObject+KeynoteFixer.h */; };
 		04B3EF892381B3B40028C792 /* NSObject+KeynoteFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3EF872381B3B40028C792 /* NSObject+KeynoteFixer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04051D6D2456946E002286B4 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		04051D6E2456946E002286B4 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		04051D71245694A2002286B4 /* FontDescriptorInject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontDescriptorInject.m; sourceTree = "<group>"; };
+		04051D8E245699C5002286B4 /* DefaultFontFallbacks.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DefaultFontFallbacks.plist; sourceTree = "<group>"; };
+		045EF94424564370002D5193 /* NSTextFieldCell+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTextFieldCell+iWorkFixer.h"; sourceTree = "<group>"; };
+		045EF94524564370002D5193 /* NSTextFieldCell+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTextFieldCell+iWorkFixer.m"; sourceTree = "<group>"; };
 		046034D62381B37400070C86 /* KeynoteFixer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeynoteFixer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		046034DA2381B37400070C86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0493DCC324553ADC00DC22BC /* NSScroller+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSScroller+iWorkFixer.h"; sourceTree = "<group>"; };
+		0493DCC424553ADC00DC22BC /* NSScroller+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSScroller+iWorkFixer.m"; sourceTree = "<group>"; };
+		0493DCC724553BAE00DC22BC /* NSView+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+iWorkFixer.h"; sourceTree = "<group>"; };
+		0493DCC824553BAE00DC22BC /* NSView+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+iWorkFixer.m"; sourceTree = "<group>"; };
+		0493DCCB24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSButtonCell+iWorkFixer.h"; sourceTree = "<group>"; };
+		0493DCCC24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSButtonCell+iWorkFixer.m"; sourceTree = "<group>"; };
 		04B3EF862381B3B40028C792 /* NSObject+KeynoteFixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+KeynoteFixer.h"; sourceTree = "<group>"; };
 		04B3EF872381B3B40028C792 /* NSObject+KeynoteFixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KeynoteFixer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,6 +75,18 @@
 				046034DA2381B37400070C86 /* Info.plist */,
 				04B3EF862381B3B40028C792 /* NSObject+KeynoteFixer.h */,
 				04B3EF872381B3B40028C792 /* NSObject+KeynoteFixer.m */,
+				0493DCC324553ADC00DC22BC /* NSScroller+iWorkFixer.h */,
+				0493DCC424553ADC00DC22BC /* NSScroller+iWorkFixer.m */,
+				0493DCC724553BAE00DC22BC /* NSView+iWorkFixer.h */,
+				0493DCC824553BAE00DC22BC /* NSView+iWorkFixer.m */,
+				0493DCCB24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h */,
+				0493DCCC24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m */,
+				045EF94424564370002D5193 /* NSTextFieldCell+iWorkFixer.h */,
+				045EF94524564370002D5193 /* NSTextFieldCell+iWorkFixer.m */,
+				04051D8E245699C5002286B4 /* DefaultFontFallbacks.plist */,
+				04051D6E2456946E002286B4 /* fishhook.c */,
+				04051D6D2456946E002286B4 /* fishhook.h */,
+				04051D71245694A2002286B4 /* FontDescriptorInject.m */,
 			);
 			path = KeynoteFixer;
 			sourceTree = "<group>";
@@ -63,6 +99,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B3EF882381B3B40028C792 /* NSObject+KeynoteFixer.h in Headers */,
+				0493DCCD24553C0B00DC22BC /* NSButtonCell+iWorkFixer.h in Headers */,
+				045EF94624564370002D5193 /* NSTextFieldCell+iWorkFixer.h in Headers */,
+				0493DCC524553ADC00DC22BC /* NSScroller+iWorkFixer.h in Headers */,
+				0493DCC924553BAE00DC22BC /* NSView+iWorkFixer.h in Headers */,
+				04051D6F2456946E002286B4 /* fishhook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04051D8F245699C5002286B4 /* DefaultFontFallbacks.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +176,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04051D72245694A2002286B4 /* FontDescriptorInject.m in Sources */,
+				0493DCC624553ADC00DC22BC /* NSScroller+iWorkFixer.m in Sources */,
 				04B3EF892381B3B40028C792 /* NSObject+KeynoteFixer.m in Sources */,
+				045EF94724564370002D5193 /* NSTextFieldCell+iWorkFixer.m in Sources */,
+				0493DCCE24553C0B00DC22BC /* NSButtonCell+iWorkFixer.m in Sources */,
+				04051D702456946E002286B4 /* fishhook.c in Sources */,
+				0493DCCA24553BAE00DC22BC /* NSView+iWorkFixer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +222,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -235,7 +283,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -265,6 +313,7 @@
 				);
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -276,9 +325,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyshawn.KeynoteFixer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -291,6 +342,7 @@
 				);
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -302,9 +354,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyshawn.KeynoteFixer;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};

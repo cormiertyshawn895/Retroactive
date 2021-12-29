@@ -23,12 +23,15 @@ class GuidanceViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let chosen = AppManager.shared.chosenApp
+        if (chosen == .xcode) {
+            needInstallFirstTitle.stringValue = "You need to install {name}.".localized()
+        }
         let labels = [needInstallFirstTitle, downloadAppLabel, airDropAppLabel, timeMachineAppLabel]
         for label in labels {
             label!.updateToken()
         }
-        let chosen = AppManager.shared.chosenApp
-        if (chosen == .keynote5) {
+        if (AppManager.shared.hasChoseniWork) {
             downloadAppLabel.stringValue = "Download and install iWork ’09 from The Internet Archive".localized()
             airDropAppLabel.stringValue = "Download and install the iWork 9.3 Update".localized()
             hideThirdLabel()
@@ -41,6 +44,11 @@ class GuidanceViewController: NSViewController {
         else if (chosen == .logicPro9) {
             downloadAppLabel.stringValue = "Install Logic Pro 9 from DVD disc or DMG image".localized()
             airDropAppLabel.stringValue = "Download and update to Logic Pro 9.1.8".localized()
+            hideThirdLabel()
+        }
+        else if (chosen == .xcode) {
+            downloadAppLabel.stringValue = "Download Xcode from the Apple Developer website".localized()
+            airDropAppLabel.stringValue = "Unarchive Xcode and move it to the Applications folder".localized()
             hideThirdLabel()
         }
         alreadyInstalledButton.updateTitle()
