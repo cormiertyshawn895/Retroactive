@@ -27,6 +27,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     var dataTask: URLSessionDataTask?
     var isDownloadMode = false
     var isProVideoUpdate = false
+    let tempDir = "/tmp"
     
     var expectedContentLength = 0
     var fileHandle: FileHandle?
@@ -84,30 +85,28 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         
         STPrivilegedTask.preventSleep()
         
-        let authStatus = AppManager.runUnameToPreAuthenticate()
-        if (authStatus != errAuthorizationSuccess) {
-            AppManager.relaunchDueToAuthenticationFailure(failure: authStatus)
+        let authenticateStatus = STPrivilegedTask.preAuthenticate()
+        if (authenticateStatus != errAuthorizationSuccess) {
+            return
         }
         
-        let chosenApp = AppManager.shared.chosenApp
-        
-        if chosenApp == .aperture || chosenApp == .iphoto {
+        if AppManager.shared.chosenApp == .aperture || AppManager.shared.chosenApp == .iphoto {
             self.kickoffPhotographyAppPatches()
         }
 
-        if chosenApp == .itunes {
+        if AppManager.shared.chosenApp == .itunes {
             self.kickoffLargeDownload()
         }
         
-        if chosenApp == .finalCutPro7 {
+        if AppManager.shared.chosenApp == .finalCutPro7 {
             self.kickoffProVideoAppPatches()
         }
         
-        if chosenApp == .logicPro9 {
+        if AppManager.shared.chosenApp == .logicPro9 {
             self.kickoffProVideoAppPatches()
         }
         
-        if AppManager.shared.hasChoseniWork {
+        if AppManager.shared.chosenApp == .keynote5 {
             self.kickoffProVideoAppPatches(fullMode: false)
         }
         
@@ -127,7 +126,18 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     }
     
     func runNonAdminTask(toolPath: String, arguments: [String]) {
-        Process.runNonAdminTask(toolPath: toolPath, arguments: arguments)
+        let task = Process()
+        task.launchPath = toolPath
+        task.arguments = arguments
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+        task.launch()
+        task.waitUntilExit()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        if let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue) as String? {
+            print(output)
+        }
     }
     
     func kickoffProVideoAppPatches(fullMode: Bool = true) {
@@ -155,11 +165,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let kBrowserKitCopyPath = "\(kLibraryFrameworkPath)/BrowserKit.framework"
             let kProKitCopyPath = "\(kLibraryFrameworkPath)/ProKit.framework"
             let kAudioToolboxCopyPath = "\(appPath)/Contents/Frameworks/AudioToolbox.framework"
-            let kMobileDeviceCopyPath = "\(appPath)/Contents/Frameworks/MobileDevice.framework"
-            let kCodecCopyPath = "/Library/QuickTime"
             let fsCustomSettingsPath = kCustomSettingsPath.fileSystemString
-            let fsEasySetupPath = kFCP7EasySetupPath.fileSystemString
-            let fsEasySetupLocalizedPath = kFCP7EasySetupPathLocalizedPath.fileSystemString
 
             if (fullMode == true) {
                 // It shouldn't be possible to have ProKit or BrowserKit at /System/Library/Frameworks on High Sierra or Mojave, and deleting them will fail with SIP.
@@ -185,9 +191,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                     self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/AudioToolbox.framework.zip", kAudioToolboxCopyPath])
                     self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kAudioToolboxCopyPath])
                 }
-                
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/MobileDevice.framework.zip", kMobileDeviceCopyPath])
-                self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kMobileDeviceCopyPath])
 
                 self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/BrowserKit.framework.zip", kBrowserKitCopyPath])
                 self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/ProKit.framework.zip", kProKitCopyPath])
@@ -195,12 +198,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", kProKitCopyPath])
             } else {
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
-            }
-            
-            if (AppManager.shared.needsProResCodecRepair()) {
-                print("Chosen Final Cut Pro 7 but codecs are missing, restoring the codecs")
-                self.runTask(toolPath: "/bin/mkdir", arguments: [kCodecCopyPath])
-                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/CodecComponents.zip", kCodecCopyPath])
             }
 
             // Some pro apps and iWork may hang when submitting information, skip this by setting the defaults key.
@@ -223,42 +220,38 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)", fixerPath])
 
             self.stage3Started()
-            let underscoreState = AppManager.shared.underscoreState(foundAppPath: appPath)
-            if (underscoreState == .smallUnderscoreNextToBinary) {
-                self.runTask(toolPath: "/bin/rm", arguments: ["-rf", appBinaryPath])
-                self.runTask(toolPath: "/bin/mv", arguments: [macAppBinaryPathUnderscore, appBinaryPath])
-            } else if (underscoreState == .largeUnderscoreNextToBinary) {
-                print("Removing the underscored backup as a result.")
-                self.runTask(toolPath: "/bin/rm", arguments: ["-rf", macAppBinaryPathUnderscore])
+            let exists = FileManager.default.fileExists(atPath: macAppBinaryPathUnderscore)
+            if (exists) {
+                do {
+                    if let fileSize = try FileManager.default.attributesOfItem(atPath: appBinaryPath)[.size] as? UInt64 {
+                        print("file size of non underscore is \(fileSize) bytes")
+                        if (fileSize < 1000) {
+                            print("The non underscored file is a fixer, no mach-o binary is smaller than 1000 bytes.")
+                            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", appBinaryPath])
+                            self.runTask(toolPath: "/bin/mv", arguments: [macAppBinaryPathUnderscore, appBinaryPath])
+                        } else {
+                            print("The non underscored file probably isn't a fixer because it exceeds 1000 bytes, it probably got there with an app update. Removing the underscored backup.")
+                            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", macAppBinaryPathUnderscore])
+                        }
+                    }
+                } catch {
+                    print("Can't determine file size, \(error)")
+                }
             }
 
-            if (fullMode) {
-                print("Installing fixer script under full mode (FCP and LP9). Renaming the real binary to be underscored.")
-                self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
-                self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
-            } else {
-                print("Inserting dylib for iWork apps instead of using a shebang script, so the document title popover still works.")
-                ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, appBinaryPath, "--inplace"], path: resourcePath)
-            }
-            
+            print("Installing fixer script, and renaming the real binary to be underscored.")
+            self.runTask(toolPath: "/bin/mv", arguments: [appBinaryPath, macAppBinaryPathUnderscore])
+            self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/\(AppManager.shared.fixerScriptName)", appBinaryPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["+x", appBinaryPath])
-            if let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp {
-                self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", patchedVersionString, "Contents/Info.plist"])
-            }
+            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleVersion, "-string", AppManager.shared.patchedVersionStringOfChosenApp, "Contents/Info.plist"])
 
             // Having custom settings will hang Final Cut Pro at launch, let's delete it.
             self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsCustomSettingsPath])
-            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsEasySetupPath])
-            self.runTask(toolPath: "/bin/rm", arguments: ["-rf", fsEasySetupLocalizedPath])
 
             self.stage4Started()
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             self.runTask(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/bin/chmod", arguments: ["-R", "+r", appPath])
-
-            self.runTask(toolPath: "/usr/sbin/softwareupdate", arguments: ["--ignore", "ProVideoFormats"])
-            AppManager.shared.retinizeSelectedAppForCurrentUser()
-            AppManager.shared.removeFCP7PresetsIfNeeded()
             self.suppress32BitWarnings()
             self.stage4Finished()
             
@@ -277,44 +270,14 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
 
             self.stage2Started()
             let photoFixerPath = "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"
-            let audioAnalysisPath = "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"
-            let pluginManagerPath = "\(appPath)/Contents/Frameworks/PluginManager.framework"
-            let fakeAppKitPath = "\(appPath)/Contents/Frameworks/AppKit.framework"
-            let maximizeCompatibility = AppManager.shared.maximizePhotoAppCompatibility
-
-            self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", audioAnalysisPath])
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", photoFixerPath])
-            self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", pluginManagerPath])
-            self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", fakeAppKitPath])
-
-            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", audioAnalysisPath])
+            self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"])
             self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/ApertureFixer", photoFixerPath])
 
-            if (maximizeCompatibility) {
-                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/PluginManager", pluginManagerPath])
-                self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKitAperture", fakeAppKitPath])
-            }
-
             self.stage3Started()
-            let originalPluginManagerPath = "/Library/Frameworks/PluginManager.framework/Versions/B/PluginManager"
-            let patchedPluginManagerPath = "@executable_path/../Frameworks/PluginManager.framework/Versions/B/PluginManager"
-            let originalAppKitPath = "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit"
-            let patchedAppKitPath = "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit"
-            let resolvedOldAppKitArg = maximizeCompatibility ? originalAppKitPath : patchedAppKitPath
-            let resolvedNewAppKitArg = maximizeCompatibility ? patchedAppKitPath : originalAppKitPath
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", maximizeCompatibility ? originalPluginManagerPath : patchedPluginManagerPath, maximizeCompatibility ? patchedPluginManagerPath : originalPluginManagerPath, "\(appPath)/Contents/MacOS/Aperture"], path: resourcePath)
-            if (maximizeCompatibility) {
-                self.runTask(toolPath: "/usr/bin/codesign", arguments: ["--force", "-s", "-", "\(pluginManagerPath)/Versions/B/PluginManager"])
-            }
-            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", resolvedOldAppKitArg, resolvedNewAppKitArg, "\(appPath)/Contents/Frameworks/ProKit.framework/Versions/A/ProKit"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", resolvedOldAppKitArg, resolvedNewAppKitArg, "\(appPath)/Contents/Frameworks/iLifeKit.framework/Versions/A/iLifeKit"], path: resourcePath)
-            ProgressViewController.runTask(toolPath: "insert_dylib", arguments: [AppManager.shared.fixerBinaryRelativeToExecutablePath, "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
-            if let patchedBundleID = AppManager.shared.patchedBundleIDOfChosenApp {
-                self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", patchedBundleID, "Contents/Info.plist"])
-            }
-            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kLSMinimumSystemVersion, "-string", "10.10", "Contents/Info.plist"])
-            self.runTask(toolPath: "/bin/mkdir", arguments: ["-p", "/Library/Application Support/Aperture/Plug-Ins"])
+            ProgressViewController.runTask(toolPath: "insert_dylib", arguments: ["@executable_path/../Frameworks/ApertureFixer.framework/Versions/A/ApertureFixer", "\(appPath)/Contents/MacOS/\(AppManager.shared.binaryNameOfChosenApp)", "--inplace"], path: resourcePath)
+            self.runTask(toolPath: "/usr/bin/plutil", arguments: ["-replace", kCFBundleIdentifier, "-string", AppManager.shared.patchedBundleIDOfChosenApp, "Contents/Info.plist"])
 
             self.stage4Started()
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
@@ -328,11 +291,13 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     func suppress32BitWarnings() {
         if let resourcePath = Bundle.main.resourcePath?.fileSystemString {
-            if (discouraged_osExactlyHighSierra) {
+            let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+            let minorVersion = osVersion.minorVersion
+            if (minorVersion == 13) {
                 print("supporessing 32 bit warnings on High Sierra")
                 self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/HighSierra32Bit.mobileconfig"])
             }
-            if (discouraged_osExactlyMojave) {
+            if (minorVersion == 14) {
                 print("supporessing 32 bit warnings on Mojave")
                 self.runNonAdminTask(toolPath: "/usr/bin/profiles", arguments: ["install", "-path=\(resourcePath)/Mojave32Bit.mobileconfig"])
             }
@@ -342,12 +307,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     func showCompletionVC() {
         self.syncMainQueue {
             STPrivilegedTask.allowSleep()
-            AppManager.shared.allowPatchingAgain = false
-            if (AppManager.shared.needsBashAccess) {
-                AppDelegate.pushSyncingVC()
-            } else {
-                AppDelegate.pushCompletionVC()
-            }
+            self.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
         }
     }
     
@@ -401,7 +361,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress2.inProgress = false
             self.subProgress3.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.88)
+                self.guessProgressForTimer(approximateDuration: 5, startingPercent: isProVideoUpdate ? 0.38 : 0.70, endingPercent: isProVideoUpdate ? 0.40 : 0.8)
             } else {
                 self.progressIndicator.doubleValue = 0.3
             }
@@ -413,10 +373,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.subProgress3.inProgress = false
             self.subProgress4.inProgress = true
             if (isDownloadMode) {
-                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 10, startingPercent: isProVideoUpdate ? 0.40 : 0.88, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: isProVideoUpdate ? 35 : 15, startingPercent: isProVideoUpdate ? 0.40 : 0.8, endingPercent: 1.0)
             } else {
                 self.progressIndicator.doubleValue = 0.4
-                self.guessProgressForTimer(approximateDuration: AppManager.shared.hasChoseniWork ? 45 : 30, startingPercent: 0.4, endingPercent: 1.0)
+                self.guessProgressForTimer(approximateDuration: 30, startingPercent: 0.4, endingPercent: 1.0)
             }
         }
     }
@@ -437,8 +397,28 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         ProgressViewController.runTask(toolPath: toolPath, arguments: arguments, path: tempDir)
     }
 
-    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true, allowError: Bool = false) {
-        _ = AppManager.runTask(toolPath: toolPath, arguments: arguments, path: path, wait: wait)
+    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true) {
+        let priviledgedTask = STPrivilegedTask()
+        priviledgedTask.launchPath = toolPath
+        priviledgedTask.arguments = arguments
+        priviledgedTask.currentDirectoryPath = path
+        let err: OSStatus = priviledgedTask.launch()
+        if (err != errAuthorizationSuccess) {
+            if (err == errAuthorizationCanceled) {
+                print("User cancelled")
+                return
+            } else {
+                print("Something went wrong with authorization: %d", err)
+                // For error codes, see http://www.opensource.apple.com/source/libsecurity_authorization/libsecurity_authorization-36329/lib/Authorization.h
+            }
+        }
+        if wait == true {
+            priviledgedTask.waitUntilExit()
+        }
+        let readHandle = priviledgedTask.outputFileHandle
+        if let outputData = readHandle?.readDataToEndOfFile(), let outputString = String(data: outputData, encoding: .utf8) {
+            print("Output string is \(outputString), terminationStatus is \(priviledgedTask.terminationStatus)")
+        }
     }
     
     
@@ -463,9 +443,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             if (freeSpace < freeSpaceRequirement) {
                 let appName = AppManager.shared.nameOfChosenApp
                 AppDelegate.showOptionSheet(title: String(format: "There isn't enough free space to install %@".localized(), appName),
-                                            text: String(format: "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.".localized(), Int(freeSpace), appName, Int(freeSpaceRequirement))
-                                                + twoNewLines
-                                                + "Free up some space and try again.".localized(),
+                                            text: String(format: "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space.\n\nFree up some space and try again.".localized(), Int(freeSpace), appName, Int(freeSpaceRequirement)),
                                             firstButtonText: "Check Again".localized(), secondButtonText: "Cancel".localized(), thirdButtonText: "") { (response) in
                     if (response == .alertFirstButtonReturn) {
                         self.kickoffLargeDownload()
@@ -487,7 +465,6 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: dmgPath))
                 print("shasum is \(shaSum) for \(dmgPath)")
                 // Pro App 2010-02, 12.9.5, 12.6.5, 11.4, 10.7
-                // shasum -a 256 [file name]
                 if ["2c50f7d57d92bd783773c188de8952e2a75b81a8d886a15890d7e0164cabbb43",
                     "defd3e8fdaaed4b816ebdd7fdd92ebc44f12410a0deeb93e34486c3d7390ffb7",
                     "7404f9b766075f45f8441cd0657f51ac227249cf205281212618dffa371c50f0",
@@ -585,10 +562,8 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             case .darkMode:
                 self.installDarkModeiTunes()
                 break
-            case .appStore, .classicTheme, .coverFlow:
+            case .appStore, .albumColor, .classicTheme, .coverFlow:
                 self.installPackagediTunes()
-                break
-            case .configurator:
                 break
             case .none:
                 break
@@ -659,6 +634,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
     
     func installiTunesCommon(_ pkgLocation: String, appLocation: String) {
         guard let appPath = AppManager.shared.appPathCString else { return }
+        let chosenVersion = AppManager.shared.choseniTunesVersion
 
         self.stage2Started()
         let mountName = AppManager.shared.mountDirNameOfChosenApp
@@ -671,10 +647,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
         let packagePath = "\(mountPath)/\(pkgLocation.fileSystemString)"
         let afterPackagePath = "\(packageExtractionPath)/\(appLocation.fileSystemString)"
         
-        guard let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp else {
-            print("Missing patchedVersionString for iTunes. Can't continue to install iTunes.")
-            return
-        }
+        let patchedVersionString = AppManager.shared.patchedVersionStringOfChosenApp
         
         let resourcePath = Bundle.main.resourcePath!.fileSystemString
         let inAppFrameworksPath = "\(appPath)/Contents/MacOS/iTunes.app/Contents/Frameworks"
@@ -690,7 +663,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/MacOS"])
             self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Resources"])
-            if (AppManager.shared.choseniTunesVersion == .classicTheme) {
+            if (chosenVersion == .classicTheme) {
                 // iTunes 11.4 asserts when setting frame origin to {nan, nan}. Insert a library to fix it.
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesOriginLauncher", "\(appPath)/Contents/MacOS/iTunes"])
@@ -706,52 +679,23 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.runTask(toolPath: "/usr/bin/codesign", arguments: ["-fs", "-", appPath, "--deep"])
             
             self.stage4Started()
-            Permission.shared.updateThrowawayApp()
             self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", afterPackagePath, "\(appPath)/Contents/MacOS/iTunes.app"])
             
-            // Copy additional frameworks for iTunes 10.7 and iTunes 11.4. Other versions of iTunes will break with additional frameworks.
-            if (AppManager.shared.choseniTunesVersion == .coverFlow) {
+            // Only copy additional frameworks for iTunes 10.7. Other iTunes version will break if resigned.
+            if (chosenVersion == .coverFlow) {
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesLibrary.pkg/Payload/System/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
             }
             
-            if (AppManager.shared.choseniTunesVersion == .classicTheme) {
+            if (chosenVersion == .classicTheme || chosenVersion == .albumColor) {
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreADI.pkg/Payload/System/Library/PrivateFrameworks/CoreADI.framework", "\(inAppFrameworksPath)/CoreADI.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/CoreFP.pkg/Payload/System/Library/PrivateFrameworks/CoreFP.framework", "\(inAppFrameworksPath)/CoreFP.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesAccess.pkg/Payload/System/Library/PrivateFrameworks/iTunesAccess.framework", "\(inAppFrameworksPath)/iTunesAccess.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/iTunesX.pkg/Payload/Library/Frameworks/iTunesLibrary.framework", "\(inAppFrameworksPath)/iTunesLibrary.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/AirTrafficHost.framework", "\(inAppFrameworksPath)/AirTrafficHost.framework"])
                 self.runTaskAtTemp(toolPath: "/bin/cp", arguments: ["-R", "\(packageExtractionPath)/MobileDevice.pkg/Payload/System/Library/PrivateFrameworks/DeviceLink.framework", "\(inAppFrameworksPath)/DeviceLink.framework"])
-            }
-            
-            // iTunes 12.6.5 needs inverted icon masking.
-            if (AppManager.shared.choseniTunesVersion == .appStore) {
-                if let appLocation = AppManager.shared.locationOfChosenApp {
-                    let innerAssetRegularPath = "\(appLocation)/Contents/MacOS/iTunes.app/Contents/Resources/Assets.car"
-                    let innerAssetCatalogCPath = innerAssetRegularPath.fileSystemString
-                    let shaSum = self.sha256String(fileURL: URL(fileURLWithPath: innerAssetRegularPath))
-                    let expected = "39b9cbc589ee26b34850c1956c6a1eb367310c9d1a8d22606084c532d06ab895"
-                    if shaSum == expected {
-                        print("SHA 256 checksum matches stock iTunes 12.6.5 Assets.car")
-                        self.runTaskAtTemp(toolPath: "/usr/bin/bspatch", arguments: [innerAssetCatalogCPath, innerAssetCatalogCPath, "\(resourcePath)/iTunes12_6_5_Assets_Diff.bin"])
-                    } else {
-                        print("SHA 256 checksum mismatch. Expected: \(expected), actual: \(shaSum)")
-                    }
-                }
-                
-                // Clear artwork cache
-                if let path = AppManager.shared.iTunesLibraryPath {
-                    let artworkCachePath = path.stringByAppendingPathComponent(path: "Album Artwork").stringByAppendingPathComponent(path: "Cache")
-                    do {
-                        print("Found artwork cache path \(artworkCachePath)")
-                        try FileManager.default.removeItem(atPath: artworkCachePath)
-                        print("Deleted artwork cache")
-                    } catch {
-                        print("Can't remove album artwork cache, \(error)")
-                    }
-                }
             }
             self.runTaskAtTemp(toolPath: "/usr/bin/touch", arguments: [appPath])
             self.runTask(toolPath: "/usr/bin/xattr", arguments: ["-d", "com.apple.quarantine", "\(appPath)"])
@@ -760,7 +704,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             self.showCompletionVC()
         }
         
-        if AppManager.shared.choseniTunesVersion == .darkMode {
+        if chosenVersion == .darkMode {
             print("Chosen Dark Mode iTunes")
             if #available(OSX 10.12, *) {
                 let timer = Timer.init(timeInterval: 15.0, repeats: true) { (timer) in
@@ -782,7 +726,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             }
         }
     
-        if AppManager.shared.choseniTunesVersion != .darkMode {
+        if chosenVersion != .darkMode {
             self.runTaskAtTemp(toolPath: "/usr/sbin/pkgutil", arguments: ["--expand-full", packagePath, packageExtractionPath])
             self.runTaskAtTemp(toolPath: "/usr/bin/hdiutil", arguments: ["unmount", mountPath])
             stageAfterExpansion()

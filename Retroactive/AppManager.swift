@@ -12,9 +12,6 @@ enum AppType {
     case finalCutPro7
     case logicPro9
     case keynote5
-    case pages4
-    case numbers2
-    case xcode
     
     case proVideoUpdate
 }
@@ -22,7 +19,7 @@ enum AppType {
 enum iTunesVersion {
     case darkMode
     case appStore
-    case configurator
+    case albumColor
     case classicTheme
     case coverFlow
 }
@@ -36,7 +33,6 @@ enum VirtualMachine {
 let kCFBundleIdentifier = "CFBundleIdentifier"
 let kCFBundleVersion = "CFBundleVersion"
 let kCFBundleShortVersionString = "CFBundleShortVersionString"
-let kLSMinimumSystemVersion = "LSMinimumSystemVersion"
 
 let placeholderToken = "{name}"
 let timeToken = "{timeEstimate}"
@@ -47,24 +43,8 @@ let purposeToken = "{purpose}"
 let actionPresentTenseToken = "{actionPR}"
 
 let kCustomSettingsPath = "/Library/Application Support/Final Cut Pro System Support/Custom Settings"
-let kFCP7EasySetupPath = "/Applications/Final Cut Pro Additional Easy Setups"
-let kFCP7EasySetupPathLocalizedPath = "/Applications/Final Cut Pro Additional Easy Setups.localized"
-let kXcodeGlobalPreferencePath = "/Library/Preferences/com.apple.dt.Xcode.plist"
-let kXcodeIDELastGMLicenseAgreedToKey = "IDELastGMLicenseAgreedTo"
-let kXcodeIDELastBetaLicenseAgreedTo = "IDELastBetaLicenseAgreedTo"
-let kXcodeIDEXcodeVersionForAgreedToGMLicense = "IDEXcodeVersionForAgreedToGMLicense"
-let kXcodeIDEXcodeVersionForAgreedToBetaLicense = "IDEXcodeVersionForAgreedToBetaLicense"
-let kXcodeMaxEAString = "EA9999"
-let kXcodeMaxVersionString = "99.9"
 
 let lastHWForMojave = ["iMac19,2", "iMacPro1,1", "MacBook10,1", "MacBookAir8,2", "MacBookPro15,4", "Macmini8,1", "MacPro6,1"]
-
-let tempDir = "/tmp"
-
-let iTunesBundleID = "com.apple.iTunes"
-
-let oneNewLine = "\n"
-let twoNewLines = "\n\n"
 
 extension Bundle {
     var cfBundleVersionInt: Int? {
@@ -144,35 +124,12 @@ extension String {
         }
         return false
     }
-    
-    var normalizediTunesVersionString: String {
-        let separated = self.components(separatedBy: ".")
-        var normalized = self
-        if separated.count > 3 {
-            normalized = separated.prefix(3).joined(separator: ".")
-        }
-        // Without stripping trailing Null characters, "11.4\0\0\0\0" will be considered "newer" than "11.4".
-        normalized = normalized.replacingOccurrences(of: "\0", with: "")
-        return normalized
-    }
-    
-    func iTunesIsNewerThan(otheriTunes: String) -> Bool {
-        return self.normalizediTunesVersionString.compare(otheriTunes, options: .numeric) == .orderedDescending
-    }
-    
-    func osIsAtLeast(otherOS: String) -> Bool {
-        return self.compare(otherOS, options: .numeric) != .orderedAscending
-    }
 }
 
 class AppManager: NSObject {
     
     static let shared = AppManager()
     
-    var willRelaunchSoon = false
-    
-    var allowPatchingAgain = false
-
     private override init() {
         super.init()
         if let path = Bundle.main.path(forResource: "SupportPath", ofType: "plist"),
@@ -279,13 +236,6 @@ class AppManager: NSObject {
         return false
     }
     
-    var isCurrentTimeZoneInternetConstrained: Bool {
-        let localTimeZoneAbbreviation = TimeZone.current.identifier
-        let constrained = localTimeZoneAbbreviation == "Asia/Shanghai" || localTimeZoneAbbreviation == "Asia/Chongqing"
-        print("Timezone is \(localTimeZoneAbbreviation), constrained: \(constrained)")
-        return constrained
-    }
-    
     var newVersionVisibleTitle: String? {
         if isLanguageTraditionalZhFamily {
             return configurationDictionary?["NewVersionVisibleTitlezhHant"] as? String
@@ -364,6 +314,10 @@ class AppManager: NSObject {
         return configurationDictionary?["iTunes126Dive"] as? String
     }
 
+    var iTunes124Dive: String? {
+        return configurationDictionary?["iTunes124Dive"] as? String
+    }
+
     var iTunes114Dive: String? {
         return configurationDictionary?["iTunes114Dive"] as? String
     }
@@ -373,7 +327,7 @@ class AppManager: NSObject {
     }
 
     var iWork09DVD: String? {
-        if isCurrentTimeZoneInternetConstrained {
+        if isLanguageSimplifiedZhFamily {
             return configurationDictionary?["iWork09DVDCN"] as? String
         }
         return configurationDictionary?["iWork09DVD"] as? String
@@ -404,71 +358,6 @@ class AppManager: NSObject {
     var fCPUpdate: String? {
         return configurationDictionary?["FCPUpdate"] as? String
     }
-    
-    var xcode11URL: String? {
-        // Intentionally Kept the Xcode114URL key for backwards compatibility
-        return configurationDictionary?["Xcode114URL"] as? String
-    }
-
-    var configuratorURL: String? {
-        return configurationDictionary?["ConfiguratorURL"] as? String
-    }
-    
-    var marginBetweenApps: CGFloat {
-        if osAtLeastCatalina {
-            return 54
-        }
-        return 43;
-    }
-
-    var supportedApps: [AppType] {
-        if osAtLeastCatalina {
-            return [.aperture, .iphoto, .itunes]
-        }
-        if osAtLeastMojave {
-            return [.finalCutPro7, .logicPro9, .xcode, .keynote5, .pages4, .numbers2]
-        }
-        if osAtLeastHighSierra {
-            return [.finalCutPro7, .logicPro9, .keynote5, .pages4, .numbers2]
-        }
-        return []
-    }
-    
-    var getStartedSubTitle: String {
-        if osAtLeastCatalina {
-            return "Unlock Aperture and iPhoto, or install iTunes.".localized()
-        }
-        if osAtLeastMojave {
-            return "Unlock Final Cut Pro 7, Logic Pro 9, Xcode 11.7, and fix iWork ’09.".localized()
-        }
-        if osAtLeastHighSierra {
-            return "Unlock Final Cut Pro 7 and Logic Pro 9, or fix iWork ’09.".localized()
-        }
-
-        return ""
-    }
-    
-    var otherOSSubtitle: String {
-        if osAtLeastCatalina {
-            var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. ".localized()
-            otherOSHint += AppManager.shared.platformShippedAfterMojave ? "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized() : "To get started, install macOS Mojave on a separate volume.".localized()
-            return otherOSHint
-        }
-        if osAtLeastHighSierra {
-            return "If you upgrade to macOS Catalina or macOS Big Sur, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina or macOS Big Sur.".localized()
-        }
-        return ""
-    }
-    
-    var otherOSImage: NSImage? {
-        if osAtLeastCatalina {
-            return NSImage(named:"mojave-banner")
-        }
-        if osAtLeastHighSierra {
-            return NSImage(named:"catalina-banner")
-        }
-        return nil
-    }
 
     var downloadURLOfChosenApp: String? {
         get {
@@ -483,8 +372,8 @@ class AppManager: NSObject {
                     return configurationDictionary?["iTunes129URL"] as? String
                 case .appStore:
                     return configurationDictionary?["iTunes126URL"] as? String
-                case .configurator:
-                    return self.configuratorURL
+                case .albumColor:
+                    return configurationDictionary?["iTunes124URL"] as? String
                 case .classicTheme:
                     return configurationDictionary?["iTunes114URL"] as? String
                 case .coverFlow:
@@ -496,7 +385,7 @@ class AppManager: NSObject {
                 return nil
             case .logicPro9:
                 return nil
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return nil
             case .proVideoUpdate:
                 return fCPUpdate
@@ -514,193 +403,39 @@ class AppManager: NSObject {
             locationOfChosenApp = nil
         }
     }
-    
-    var hasChoseniWork: Bool {
-        let chosen = self.chosenApp
-        return chosen == .keynote5 || chosen == .pages4 || chosen == .numbers2
-    }
-    
     var choseniTunesVersion: iTunesVersion?
     
-    func removeFCP7PresetsIfNeeded() {
-        if chosenApp != .finalCutPro7 {
-            return
-        }
-        do {
-            let exists = FileManager.default.fileExists(atPath: kCustomSettingsPath)
-            if (!exists) {
-                return
-            }
-            let contents = try FileManager.default.contentsOfDirectory(atPath: kCustomSettingsPath)
-            let presets = contents.filter { $0.lowercased().hasSuffix(".fcpre") }
-            if (presets.count == 0) {
-                print("No presets are left at the custom settings path.")
-            }
-            if (FileManager.default.fileExists(atPath: kFCP7EasySetupPath)) {
-                try FileManager.default.removeItem(atPath: kFCP7EasySetupPath)
-            }
-            if (FileManager.default.fileExists(atPath: kFCP7EasySetupPathLocalizedPath)) {
-                try FileManager.default.removeItem(atPath: kFCP7EasySetupPathLocalizedPath)
-            }
-        } catch {
-            print("Can't determine if custom settings exist \(error)")
-        }
-    }
-    
-    func compatibleListContains(shortVersionNumber: String) -> Bool {
-        return self._compatibleShortVersionOfChosenApp.contains { (iterateVersionNumber) -> Bool in
-            return (iterateVersionNumber == shortVersionNumber)
-        }
-    }
-    
-    func hasAlreadyPatchedIDOrVersionNumber(bundleID: String, fullVersionNumber: String, shortVersionNumber: String) -> Bool {
-        return bundleID == self.patchedBundleIDOfChosenApp
-            || fullVersionNumber == self.patchedVersionStringOfChosenApp
-            || (self.patchedBundleIDOfChosenApp == nil && self.patchedVersionStringOfChosenApp == nil && compatibleListContains(shortVersionNumber: shortVersionNumber))
-    }
-    
-    enum UnderscoreState {
-        case notNeeded
-        case neededButNotFound
-        case smallUnderscoreNextToBinary // ['AppName_' is a script, 'AppName' is the binary]
-        case largeUnderscoreNextToBinary // ['AppName_' is a newer binary, 'AppName is an older binary']
-    }
-    
-    func underscoreState(foundAppPath: String) -> UnderscoreState {
-        let appMacOSPath = "\(foundAppPath)/Contents/MacOS"
-        let appBinaryPath = "\(appMacOSPath)/\(AppManager.shared.binaryNameOfChosenApp)"
-        let macAppBinaryPathUnderscore = "\(appBinaryPath)_"
-
-        switch chosenApp {
-        case .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
-            let exists = FileManager.default.fileExists(atPath: macAppBinaryPathUnderscore)
-            if (exists) {
-                do {
-                    if let fileSize = try FileManager.default.attributesOfItem(atPath: appBinaryPath)[.size] as? UInt64 {
-                        print("file size of non underscore is \(fileSize) bytes")
-                        if (fileSize < 1000) {
-                            print("The non underscored file is a fixer, no mach-o binary is smaller than 1000 bytes.")
-                            return .smallUnderscoreNextToBinary
-                        } else {
-                            print("The non underscored file probably isn't a fixer because it exceeds 1000 bytes, it probably got there with an app update.")
-                            return .largeUnderscoreNextToBinary
-                        }
-                    }
-                } catch {
-                    print("Can't determine file size, \(error)")
-                }
-            }
-            return hasChoseniWork ? .notNeeded : .neededButNotFound
-        default:
-            return .notNeeded
-        }
-    }
-    
-    func needsProResCodecRepair() -> Bool {
-        return AppManager.shared.chosenApp == .finalCutPro7 && !FileManager.default.fileExists(atPath: "/Library/QuickTime/AppleProResCodec.component/Contents/MacOS/AppleProResCodec")
-    }
-    
-    func hasAlreadyAppliedOrDoesNotRequireFixer(foundAppPath: String) -> Bool {
-        switch chosenApp {
-        case .aperture, .iphoto, .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
-            if (chosenApp == .aperture || chosenApp == .iphoto) && osAtLeastBigSur && !FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/AppKit.framework") {
-                return false
-            }
-            if underscoreState(foundAppPath: foundAppPath) == .neededButNotFound {
-                return false
-            }
-            if needsProResCodecRepair() {
-                return false
-            }
-            if chosenApp == .logicPro9 && FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/MobileDevice.framework") == false {
-                return false
-            }
-            let existingFixerPath = "\(foundAppPath)/\(AppManager.shared.fixerFrameworkSubPath)"
-            if let existingFixerBundle = Bundle.init(path: existingFixerPath),
-                let existingFixerVersion = existingFixerBundle.cfBundleVersionInt,
-                let resourcePath = Bundle.main.resourcePath {
-                let fixerResourcePath = "\(resourcePath)/\(AppManager.shared.fixerFrameworkName)/Resources/Info.plist"
-                if let loadedFixerInfoPlist = NSDictionary(contentsOfFile: fixerResourcePath) as? Dictionary<String, Any>,
-                    let bundledFixerVersionString = loadedFixerInfoPlist[kCFBundleVersion] as? String, let bundledFixerVersion = Int(bundledFixerVersionString) {
-                    if (existingFixerVersion >= bundledFixerVersion) {
-                        return true
-                    }
-                }
-            }
-            return false
-        case .xcode:
-            let appBundle = Bundle(path: foundAppPath)
-            if let minSysVersionString = appBundle?.object(forInfoDictionaryKey: kLSMinimumSystemVersion) as? String {
-                print("Xcode min OS version: \(minSysVersionString), current OS version: \(ProcessInfo.osVersionNumberString)")
-                if (ProcessInfo.osVersionNumberString.osIsAtLeast(otherOS: minSysVersionString)) {
-                    print("Current OS is at least Xcode min OS")
-                    if let xcodeGlobalPrefInfoPlist = NSDictionary(contentsOfFile: kXcodeGlobalPreferencePath) as? Dictionary<String, Any>,
-                        let gmLicense = xcodeGlobalPrefInfoPlist[kXcodeIDELastGMLicenseAgreedToKey] as? String,
-                        let betaLicense = xcodeGlobalPrefInfoPlist[kXcodeIDELastBetaLicenseAgreedTo] as? String,
-                        let gmVersion = xcodeGlobalPrefInfoPlist[kXcodeIDEXcodeVersionForAgreedToGMLicense] as? String,
-                        let betaVersion = xcodeGlobalPrefInfoPlist[kXcodeIDEXcodeVersionForAgreedToBetaLicense] as? String {
-                        if (gmLicense == kXcodeMaxEAString && betaLicense == kXcodeMaxEAString && gmVersion == kXcodeMaxVersionString && betaVersion == kXcodeMaxVersionString) {
-                            return true
-                        }
-                    }
-                }
-            }
-            return false
-        default:
-            print("\(String(describing: chosenApp)) doesn't need a fixer, so hasUpToDateFixer always returns true")
-            return true
-        }
-    }
+    var fixerUpdateAvailable: Bool = false
     
     var locationOfChosenApp: String?
     var nameOfChosenApp: String {
-        return nameForAppType(chosenApp)
-    }
-    
-    func nameForAppType(_ appType: AppType?) -> String {
-        switch appType {
-        case .aperture:
-            return "Aperture"
-        case .iphoto:
-            return "iPhoto"
-        case .itunes:
-            return "iTunes"
-        case .finalCutPro7:
-            return "Final Cut Pro 7"
-        case .logicPro9:
-            return "Logic Pro 9"
-        case .xcode:
-            return "Xcode 11.7".localized()
-        case .keynote5:
-            return "Keynote ’09"
-        case .pages4:
-            return "Pages ’09"
-        case .numbers2:
-            return "Numbers ’09"
-        case .proVideoUpdate:
-            return "Pro Applications Update 2010-02".localized()
-        default:
-            return "Untitled".localized()
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return "Aperture"
+            case .iphoto:
+                return "iPhoto"
+            case .itunes:
+                return "iTunes"
+            case .finalCutPro7:
+                return "Final Cut Pro 7"
+            case .logicPro9:
+                return "Logic Pro 9"
+            case .keynote5:
+                return "Keynote ’09"
+            case .proVideoUpdate:
+                return "Pro Applications Update 2010-02".localized()
+            default:
+                return "Untitled".localized()
+            }
         }
     }
     
     var spaceConstrainedNameOfChosenApp: String {
         get {
             switch self.chosenApp {
-            case .finalCutPro7:
-                return "Final Cut Pro"
-            case .logicPro9:
-                return "Logic Pro"
-            case .xcode:
-                return "Xcode"
             case .proVideoUpdate:
                 return "Pro Update".localized()
-            case .keynote5:
-                return "Keynote"
-            case .pages4:
-                return "Pages"
-            case .numbers2:
-                return "Numbers"
             default:
                 return self.nameOfChosenApp
             }
@@ -721,104 +456,46 @@ class AppManager: NSObject {
                 return "Final Cut Pro"
             case .logicPro9:
                 return "Logic Pro"
-            case .xcode:
-                return "Xcode"
             case .keynote5:
                 return "Keynote"
-            case .pages4:
-                return "Pages"
-            case .numbers2:
-                return "Numbers"
             default:
                 return self.nameOfChosenApp
             }
         }
     }
     
-    private var _compatibleLongVersionOfChosenApp: [String] {
-        switch self.chosenApp {
-        case .logicPro9:
-            return ["1700.67"]
-        case .keynote5:
-            return []
-        case .pages4:
-            return []
-        case .numbers2:
-            return []
-        default:
-            return []
-        }
-    }
-
-    private var _compatibleShortVersionOfChosenApp: [String] {
-        switch self.chosenApp {
-        case .aperture:
-            return ["3.6"]
-        case .iphoto:
-            return ["9.6.1", "9.6"]
-        case .itunes:
-            switch choseniTunesVersion {
-            case .darkMode:
-                return ["12.9.5"]
-            case .appStore:
-                return ["12.6.5"]
-            case .configurator:
-                return ["999.99.99"]
-            case .classicTheme:
-                return ["11.4"]
-            case .coverFlow:
-                return ["10.7"]
-            case .none:
+    var compatibleVersionOfChosenApp: [String] {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return ["3.6"]
+            case .iphoto:
+                return ["9.6.1", "9.6"]
+            case .itunes:
+                switch choseniTunesVersion {
+                case .darkMode:
+                    return ["12.9.5"]
+                case .appStore:
+                    return ["12.6.5"]
+                case .albumColor:
+                    return ["12.4.3"]
+                case .classicTheme:
+                    return ["11.4"]
+                case .coverFlow:
+                    return ["10.7"]
+                case .none:
+                    return []
+                }
+            case .finalCutPro7:
+                return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
+            case .logicPro9:
+                return ["1700.67", "9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
+            case .keynote5:
+                return ["1170", "5.3", "5.2", "5.1.1", "5.1", "5.0.5", "5.0.4", "5.0.3", "5.0.2", "5.0.1", "5.0"]
+            default:
                 return []
             }
-        case .finalCutPro7:
-            return ["7.0.3", "7.0.2", "7.0.1", "7.0"]
-        case .logicPro9:
-            return ["9.1.8", "9.1.7", "9.1.6", "9.1.5", "9.1.4", "9.1.3", "9.1.2", "9.1.1", "9.1.0", "9.1", "9.0.2", "9.0.1", "9.0.0", "9.0"]
-        case .xcode:
-            return ["11.7", "11.6", "11.5", "11.4.1", "11.4"]
-        case .keynote5:
-            return ["5.3"]
-        case .pages4:
-            return ["4.3"]
-        case .numbers2:
-            return ["2.3"]
-        default:
-            return []
         }
-    }
-
-    var compatibleVersionOfChosenApp: [String] {
-        return _compatibleLongVersionOfChosenApp + _compatibleShortVersionOfChosenApp
-    }
-    
-    func versionisTooNewForPatching(foundOnDiskShortVersion: String) -> Bool {
-        if foundOnDiskShortVersion == patchedVersionStringOfChosenApp { return false }
-        guard let compatibleVersion = _compatibleShortVersionOfChosenApp.first else { return false }
-        let result = foundOnDiskShortVersion.compare(compatibleVersion, options: .numeric, range: nil, locale: nil)
-        return result == .orderedDescending
-    }
-    
-    var oldestShortVersionRequiringMinorUpdate: String? {
-        switch self.chosenApp {
-        case .keynote5:
-            return "5.0"
-        case .pages4:
-            return "4.0"
-        case .numbers2:
-            return "2.0"
-        default:
-            return nil
-        }
-    }
-    
-    func versionOnlyRequiresMinorUpdateToBeCompatible(foundOnDiskShortVersion: String) -> Bool {
-        if versionisTooNewForPatching(foundOnDiskShortVersion: foundOnDiskShortVersion) { return false }
-        guard let maxCompatibleVersion = _compatibleShortVersionOfChosenApp.first else { return false }
-        guard let oldestUpdateCapable = oldestShortVersionRequiringMinorUpdate else { return false }
-        let initialComparison = oldestUpdateCapable.compare(foundOnDiskShortVersion, options: .numeric, range: nil, locale: nil)
-        return (initialComparison == .orderedAscending || initialComparison == .orderedSame)
-            && foundOnDiskShortVersion.compare(maxCompatibleVersion, options: .numeric, range: nil, locale: nil) == .orderedAscending
     }
     
     var userFacingLatestShortVersionOfChosenApp: String {
@@ -834,8 +511,8 @@ class AppManager: NSObject {
                     return "12.9.5"
                 case .appStore:
                     return "12.6.5"
-                case .configurator:
-                    return ""
+                case .albumColor:
+                    return "12.4.3"
                 case .classicTheme:
                     return "11.4"
                 case .coverFlow:
@@ -847,14 +524,8 @@ class AppManager: NSObject {
                 return "7.0.3"
             case .logicPro9:
                 return "9.1.8"
-            case .xcode:
-                return "11.7"
             case .keynote5:
                 return "5.3"
-            case .pages4:
-                return "4.3"
-            case .numbers2:
-                return "2.3"
             default:
                 return ""
             }
@@ -875,21 +546,15 @@ class AppManager: NSObject {
                 return "com.apple.FinalCutPro"
             case .logicPro9:
                 return "com.apple.logic.pro"
-            case .xcode:
-                return "com.apple.dt.Xcode"
             case .keynote5:
                 return "com.apple.iWork.Keynote"
-            case .pages4:
-                return "com.apple.iWork.Pages"
-            case .numbers2:
-                return "com.apple.iWork.Numbers"
             default:
                 return ""
             }
         }
     }
     
-    var patchedBundleIDOfChosenApp: String? {
+    var patchedBundleIDOfChosenApp: String {
         get {
             switch self.chosenApp {
             case .aperture:
@@ -897,17 +562,16 @@ class AppManager: NSObject {
             case .iphoto:
                 return "com.apple.iPhoto9"
             case .itunes:
-                return nil
-            case .xcode:
-                return nil
+                // Intentionally left unused
+                return "com.apple.intentionally-left-unused"
             case .finalCutPro7:
-                return nil
+                return "com.apple.FinalCutPro7"
             case .logicPro9:
-                return nil
-            case .keynote5, .pages4, .numbers2:
-                return nil
+                return "com.apple.logic.pro9"
+            case .keynote5:
+                return "com.apple.iWork.Keynote5"
             default:
-                return nil
+                return ""
             }
         }
     }
@@ -931,7 +595,7 @@ class AppManager: NSObject {
                 }
             case .logicPro9:
                 return "GeneralFixerScript"
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return "KeynoteScript"
             default:
                 fatalError()
@@ -952,7 +616,7 @@ class AppManager: NSObject {
                 return "VideoFixer"
             case .logicPro9:
                 return "VideoFixer"
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return "KeynoteFixer"
             default:
                 fatalError()
@@ -966,41 +630,38 @@ class AppManager: NSObject {
         }
     }
 
-    var fixerBinaryRelativeToExecutablePath: String {
-        return "@executable_path/../Frameworks/\(fixerFrameworkName).framework/Versions/A/\(fixerFrameworkName)"
-    }
     
-    var patchedVersionStringOfChosenApp: String? {
-        switch self.chosenApp {
-        case .aperture, .iphoto:
-            return nil
-        case .itunes:
-            switch choseniTunesVersion {
-            case .darkMode:
-                return "12.9.5"
-            case .appStore:
-                return "12.6.5"
-            case .classicTheme:
-                return "11.4"
-            case .coverFlow:
-                return "10.7"
-            case .configurator, .none:
-                return nil
+    var patchedVersionStringOfChosenApp: String {
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return "99.9"
+            case .iphoto:
+                return "99.9"
+            case .itunes:
+                switch choseniTunesVersion {
+                case .darkMode:
+                    return "12.9.5"
+                case .appStore:
+                    return "12.6.5"
+                case .albumColor:
+                    return "12.4.3"
+                case .classicTheme:
+                    return "11.4"
+                case .coverFlow:
+                    return "10.7"
+                case .none:
+                    return ""
+                }
+            case .finalCutPro7:
+                return "7.0.4"
+            case .logicPro9:
+                return "1700.68"
+            case .keynote5:
+                return "1171"
+            default:
+                return ""
             }
-        case .finalCutPro7:
-            return "7.0.4"
-        case .logicPro9:
-            return "1700.68"
-        case .xcode:
-            return nil
-        case .keynote5:
-            return "1171"
-        case .pages4:
-            return "1049"
-        case .numbers2:
-            return "555"
-        default:
-            return nil
         }
     }
     
@@ -1018,14 +679,12 @@ class AppManager: NSObject {
                 return NSImage(named: "airdrop_guide_aperture")
             case .iphoto:
                 return NSImage(named: "airdrop_guide_iphoto")
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return NSImage(named: "iwork_stage2")
             case .finalCutPro7:
                 return NSImage(named: "iwork_stage2")
             case .logicPro9:
                 return NSImage(named: "iwork_stage2")
-            case .xcode:
-                return NSImage(named: "xcode_stage2")
             default:
                 return nil
             }
@@ -1039,14 +698,12 @@ class AppManager: NSObject {
                 return NSImage(named: "appstore_guide_aperture")
             case .iphoto:
                 return NSImage(named: "appstore_guide_iphoto")
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return NSImage(named: "iwork_stage1")
             case .finalCutPro7:
                 return NSImage(named: "fcp7_stage1")
             case .logicPro9:
                 return NSImage(named: "fcp7_stage1")
-            case .xcode:
-                return NSImage(named: "xcode_stage1")
             default:
                 return nil
             }
@@ -1054,33 +711,25 @@ class AppManager: NSObject {
     }
     
     var cartoonIcon: NSImage? {
-        return cartoonIconForAppType(chosenApp)
-    }
-    
-    func cartoonIconForAppType(_ appType: AppType?) -> NSImage? {
-        switch appType {
-        case .aperture:
-            return NSImage(named: "aperture_cartoon")
-        case .iphoto:
-            return NSImage(named: "iphoto_cartoon")
-        case .itunes:
-            return NSImage(named: "itunes_cartoon")
-        case .finalCutPro7:
-            return NSImage(named: "final7_cartoon")
-        case .xcode:
-            return NSImage(named: "xcode_cartoon")
-        case .logicPro9:
-            return NSImage(named: "logic9_cartoon")
-        case .keynote5:
-            return NSImage(named: "keynote5_cartoon")
-        case .pages4:
-            return NSImage(named: "pages4_cartoon")
-        case .numbers2:
-            return NSImage(named: "numbers2_cartoon")
-        case .proVideoUpdate:
-            return NSImage(named: "fcpstudio_cartoon")
-        default:
-            return nil
+        get {
+            switch self.chosenApp {
+            case .aperture:
+                return NSImage(named: "aperture_cartoon")
+            case .iphoto:
+                return NSImage(named: "iphoto_cartoon")
+            case .itunes:
+                return NSImage(named: "itunes_cartoon")
+            case .finalCutPro7:
+                return NSImage(named: "final7_cartoon")
+            case .logicPro9:
+                return NSImage(named: "logic9_cartoon")
+            case .keynote5:
+                return NSImage(named: "keynote5_cartoon")
+            case .proVideoUpdate:
+                return NSImage(named: "fcpstudio_cartoon")
+            default:
+                return nil
+            }
         }
     }
     
@@ -1097,8 +746,8 @@ class AppManager: NSObject {
                     return iTunes129Dive
                 case .appStore:
                     return iTunes126Dive
-                case .configurator:
-                    return configuratorURL
+                case .albumColor:
+                    return iTunes124Dive
                 case .classicTheme:
                     return iTunes114Dive
                 case .coverFlow:
@@ -1140,19 +789,17 @@ class AppManager: NSObject {
     }
     
     var presentTenseActionOfChosenApp: String {
-        return presentTenseActionForAppType(chosenApp)
-    }
-    
-    func presentTenseActionForAppType(_ appType: AppType?) -> String {
-        switch appType {
-        case .itunes:
-            return "install".localized()
-        case .keynote5, .pages4, .numbers2:
-            return "fix".localized()
-        case .proVideoUpdate:
-            return "install".localized()
-        default:
-            return "unlock".localized()
+        get {
+            switch self.chosenApp {
+            case .itunes:
+                return "install".localized()
+            case .keynote5:
+                return "fix".localized()
+            case .proVideoUpdate:
+                return "install".localized()
+            default:
+                return "unlock".localized()
+            }
         }
     }
     
@@ -1180,10 +827,8 @@ class AppManager: NSObject {
                 switch choseniTunesVersion {
                 case .darkMode:
                     return "25 minutes".localized()
-                case .appStore, .classicTheme, .coverFlow:
+                case .appStore, .albumColor, .classicTheme, .coverFlow:
                     return "10 minutes".localized()
-                case .configurator:
-                    return "Not Applicable"
                 case .none:
                     return "an hour".localized()
                 }
@@ -1198,10 +843,7 @@ class AppManager: NSObject {
     var notInstalledText: String {
         get {
             let appStoreTemplate = String(format: "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list.".localized(), nameOfChosenApp)
-            let dvdTemplate = twoNewLines
-                + String(format: "If you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay.".localized(), nameOfChosenApp, nameOfChosenApp)
-                + twoNewLines
-                + String(format:"If your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer.".localized(), nameOfChosenApp, nameOfChosenApp)
+            let dvdTemplate = String(format: "\n\nIf you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay. \n\nIf your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer.".localized(), nameOfChosenApp, nameOfChosenApp, nameOfChosenApp, nameOfChosenApp)
 
             switch self.chosenApp {
             case .aperture:
@@ -1211,11 +853,11 @@ class AppManager: NSObject {
             case .itunes:
                 return ""
             case .finalCutPro7:
-                return dvdTemplate + twoNewLines + "If you have already installed Final Cut Pro X on your Mac, the Final Cut Pro 7 package will be grayed out in the Final Cut Studio 3 installer. You need to rename “Final Cut Pro.app” into “Final Cut Pro X.app”, or move it into a different folder.".localized()
+                return dvdTemplate
             case .logicPro9:
-                return dvdTemplate + twoNewLines + appStoreTemplate
-            case .keynote5, .pages4, .numbers2:
-                return twoNewLines + String(format: "You can download and install iWork ’09, which includes %@, from The Internet Archive.".localized(), nameOfChosenApp)
+                return "\(dvdTemplate) \n\n\(appStoreTemplate)"
+            case .keynote5:
+                return "\n\nYou can download and install iWork ’09, which includes Keynote ’09, from The Internet Archive.".localized()
             default:
                 return ""
             }
@@ -1238,9 +880,7 @@ class AppManager: NSObject {
                 return dvdTemplate
             case .logicPro9:
                 return dvdTemplate
-            case .xcode:
-                return String(format: "Download %@".localized(), nameOfChosenApp)
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return "Download iWork ’09".localized()
             default:
                 return ""
@@ -1257,15 +897,9 @@ class AppManager: NSObject {
                 return "All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing.".localized()
             case .itunes:
                 switch choseniTunesVersion {
-                case .darkMode:
-                    return nil
                 case .appStore:
-                    return "If iTunes 12.6.5 can't back up your device, try to use iTunes 12.9.5 or Finder instead.".localized()
-                case .configurator:
-                    return nil
-                case .classicTheme:
-                    return nil
-                case .coverFlow:
+                    return "Thumbnails of download apps may appear distorted. Use iTunes 12.9.5 or Finder to back up instead.".localized()
+                case .darkMode, .albumColor, .classicTheme, .coverFlow:
                     return nil
                 case .none:
                     return nil
@@ -1274,7 +908,7 @@ class AppManager: NSObject {
                 return "Some serial numbers for Final Cut Pro 7.0 do not work with Final Cut Pro 7.0.3. If you are asked to register again, you need to find and enter a serial number compatible with Final Cut Pro 7.0.3.".localized()
             case .logicPro9:
                 return nil
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return nil
             default:
                 return nil
@@ -1294,9 +928,7 @@ class AppManager: NSObject {
             AppDelegate.current.safelyOpenURL(AppManager.shared.fcpDVD)
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicDVD)
-        case .xcode:
-            AppDelegate.current.safelyOpenURL(AppManager.shared.xcode11URL)
-        case .keynote5, .pages4, .numbers2:
+        case .keynote5:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09DVD)
         default:
             openMacAppStore()
@@ -1318,15 +950,13 @@ class AppManager: NSObject {
                 AppManager.shared.chosenApp = .proVideoUpdate
                 AppManager.shared.locationOfChosenApp = cachedLocation
 
-                AppDelegate.skipCheck_pushAuthenticateVC()
+                AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
             } else {
                 AppDelegate.showTextSheet(title: "You need to install Final Cut Pro 7 first.".localized(), text: String(format: "After you have already installed Final Cut Pro 7 from a DVD installer or DMG image, Retroactive can download and update Final Cut Pro 7 from version 7.0 to 7.0.3, and unlock it to be compatible with %@.".localized(), ProcessInfo.versionName))
             }
         case .logicPro9:
             AppDelegate.current.safelyOpenURL(AppManager.shared.logicUpdate)
-        case .xcode:
-            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: ("~/Downloads" as NSString).expandingTildeInPath)
-        case .keynote5, .pages4, .numbers2:
+        case .keynote5:
             AppDelegate.current.safelyOpenURL(AppManager.shared.iWork09Update)
         default:
             return
@@ -1395,7 +1025,7 @@ class AppManager: NSObject {
                 fallthrough
             case .finalCutPro7:
                 return true
-            case .keynote5, .pages4, .numbers2:
+            case .keynote5:
                 return true
             case .logicPro9:
                 return false
@@ -1432,10 +1062,6 @@ class AppManager: NSObject {
     }
 
     var currentVMImage: NSImage? {
-        if (self.chosenApp == .itunes) {
-            return NSImage(named: "configurator")
-        }
-
         switch self.currentVM {
         case .vmware:
             return NSImage(named: "vmware")
@@ -1462,14 +1088,10 @@ class AppManager: NSObject {
                 return String(format: basicFormat, "Final Cut Pro 7 only supports XML exports".localized(), self.currentVMName)
             case .keynote5:
                 return String(format: basicFormat, "Keynote ’09 only supports PPTX exports".localized(), self.currentVMName)
-            case .pages4:
-                return String(format: basicFormat, "Pages ’09 only supports DOCX exports".localized(), self.currentVMName)
-            case .numbers2:
-                return String(format: basicFormat, "Numbers ’09 only supports XLSX exports".localized(), self.currentVMName)
             case .logicPro9:
                 return ""
             case .itunes:
-                return "Use Apple Configurator 2 to download iOS apps".localized()
+                return ""
             default:
                 return ""
             }
@@ -1489,14 +1111,10 @@ class AppManager: NSObject {
                 return "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac.".localized()
             case .keynote5:
                 return "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac.".localized()
-            case .pages4:
-                return "You can export existing Pages documents into Word documents. To view and edit your Pages documents, run Retroactive on a real Mac.".localized()
-            case .numbers2:
-                return "You can export existing Numbers spreadsheets into Excel spreadsheets. To view and edit your Numbers spreadsheets, run Retroactive on a real Mac.".localized()
             case .logicPro9:
                 return ""
             case .itunes:
-                return "Starting from April 2020, you'll need to use Apple Configurator 2 to download iOS apps on your Mac.".localized()
+                return ""
             default:
                 return ""
             }
@@ -1544,112 +1162,6 @@ class AppManager: NSObject {
             }
             print("can't find current screen, assuming not in virtual machine")
             return false
-        }
-    }
-    
-    var needsToShowiTunesWorkaround: Bool {
-        return self.chosenApp == .itunes && (self.choseniTunesVersion == .appStore || self.choseniTunesVersion == .configurator)
-    }
-
-    var needsToShowCatch: Bool {
-        return needsToShowiTunesWorkaround || (self.likelyInVirtualMachine && self.chosenAppHasLimitedFeaturesInVirtualMachine)
-    }
-    
-    var iTunesLibraryPath: String? {
-        let fallbackStandardPath = ("~/Music/iTunes" as NSString).expandingTildeInPath
-        guard let iTunesDefaults = UserDefaults(suiteName: iTunesBundleID) else {
-            return fallbackStandardPath
-        }
-        if let data = iTunesDefaults.data(forKey: "alis:1:iTunes Library Location"),
-            let alias = BDAlias(data: data),
-            let path = alias.fullPath() {
-            return path
-        }
-        if let bookData = iTunesDefaults.data(forKey: "book:1:iTunes Library Location") {
-            var isStale = false
-            do {
-                let url = try URL(resolvingBookmarkData: bookData, bookmarkDataIsStale: &isStale)
-                print(url)
-                return url.path
-            } catch {
-                return fallbackStandardPath
-            }
-        }
-        return fallbackStandardPath
-    }
-
-    var needsBashAccess: Bool {
-        return self.chosenApp == .itunes && !Permission.shared.bashHasFullDiskAccess()
-    }
-    
-    var maximizePhotoAppCompatibility = true
-
-    static func runTask(toolPath: String, arguments: [String], path: String, wait: Bool = true, allowError: Bool = false) -> OSStatus {
-        if (AppManager.shared.willRelaunchSoon) {
-            return errAuthorizationCanceled
-        }
-
-        let priviledgedTask = STPrivilegedTask()
-        priviledgedTask.launchPath = toolPath
-        priviledgedTask.arguments = arguments
-        priviledgedTask.currentDirectoryPath = path
-        let err: OSStatus = priviledgedTask.launch()
-        if (err != errAuthorizationSuccess) {
-            if (err == errAuthorizationCanceled) {
-                print("User cancelled")
-            } else {
-                print("Something went wrong with authorization: %d", err)
-                // For error codes, see http://www.opensource.apple.com/source/libsecurity_authorization/libsecurity_authorization-36329/lib/Authorization.h
-            }
-            if (!allowError) {
-                AppManager.relaunchDueToAuthenticationFailure(failure: err)
-                return err
-            }
-        }
-        if wait == true {
-            priviledgedTask.waitUntilExit()
-        }
-        let readHandle = priviledgedTask.outputFileHandle
-        if let outputData = readHandle?.readDataToEndOfFile(), let outputString = String(data: outputData, encoding: .utf8) {
-            print("Output string is \(outputString), terminationStatus is \(priviledgedTask.terminationStatus)")
-        }
-        return err
-    }
-    
-    static func relaunchDueToAuthenticationFailure(failure: OSStatus) {
-        let appName = AppManager.shared.nameOfChosenApp
-        let presentTense = AppManager.shared.presentTenseActionOfChosenApp
-        UserDefaults.standard.setValue(String(format: "Unable to %@ %@".localized(), presentTense, appName), forKey: kErrorRecoveryTitle)
-        UserDefaults.standard.setValue(String(format: "Because Retroactive can't be authenticated, %@ has failed to %@ (Error %d).", appName, presentTense, failure)
-            + twoNewLines
-            + String(format:"You can try to %@ %@ again.".localized(), presentTense, appName), forKey: kErrorRecoveryText)
-
-        NSApplication.shared.relaunch()
-    }
-
-    static func runUnameToPreAuthenticate() -> OSStatus {
-        return AppManager.runTask(toolPath: "/usr/bin/uname", arguments: ["-a"], path: tempDir, wait: true, allowError: true)
-    }
-    
-    func retinizeAppForCurrentUser(_ bundleIdentifier: String?) {
-        guard let bundleID = bundleIdentifier else {
-            return
-        }
-        var persistentDomain: [String : Any] = [:]
-        if let appPersistent = UserDefaults.standard.persistentDomain(forName: bundleID) {
-            persistentDomain = appPersistent
-        }
-        persistentDomain["AppleMagnifiedMode"] = false
-        UserDefaults.standard.setPersistentDomain(persistentDomain, forName: bundleID)
-        print("Setting AppleMagnifiedMode to false for persistence domain of \(bundleID)")
-    }
-    
-    func retinizeSelectedAppForCurrentUser() {
-        switch self.chosenApp {
-        case .finalCutPro7, .logicPro9, .keynote5, .pages4, .numbers2:
-            retinizeAppForCurrentUser(existingBundleIDOfChosenApp)
-        default:
-            return
         }
     }
 
