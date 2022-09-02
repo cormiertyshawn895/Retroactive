@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		040914AB24558DDB00EC2475 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040914AA24558DDB00EC2475 /* main.swift */; };
+		0412C27628C18E35006FB234 /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0412C27528C18E35006FB234 /* SheetViewController.swift */; };
+		0412C27828C18E51006FB234 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0412C27728C18E51006FB234 /* QRCodeGenerator.swift */; };
 		042E9E492381AC2C001D3F38 /* AppKit in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E452381AC2B001D3F38 /* AppKit */; };
 		042E9E4B2381AC2C001D3F38 /* GeneralFixerScript in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E472381AC2B001D3F38 /* GeneralFixerScript */; };
 		042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */ = {isa = PBXBuildFile; fileRef = 042E9E482381AC2B001D3F38 /* VideoFixer */; };
+		0432042F28C1B00C00421FDE /* Python.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 0432042E28C1B00C00421FDE /* Python.framework.zip */; };
 		0443E5E924562A7A008C4E9B /* MobileDevice.framework.zip in Resources */ = {isa = PBXBuildFile; fileRef = 0443E5E824562A7A008C4E9B /* MobileDevice.framework.zip */; };
 		046034E22381B41200070C86 /* KeynoteFixer in Resources */ = {isa = PBXBuildFile; fileRef = 046034E12381B41200070C86 /* KeynoteFixer */; };
 		046034E42381B6E800070C86 /* KeynoteScript in Resources */ = {isa = PBXBuildFile; fileRef = 046034E32381B6E800070C86 /* KeynoteScript */; };
@@ -119,9 +122,12 @@
 /* Begin PBXFileReference section */
 		040914A124558D7300EC2475 /* genstrings */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = genstrings; sourceTree = BUILT_PRODUCTS_DIR; };
 		040914AA24558DDB00EC2475 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0412C27528C18E35006FB234 /* SheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
+		0412C27728C18E51006FB234 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		042E9E452381AC2B001D3F38 /* AppKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppKit; sourceTree = "<group>"; };
 		042E9E472381AC2B001D3F38 /* GeneralFixerScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = GeneralFixerScript; sourceTree = "<group>"; };
 		042E9E482381AC2B001D3F38 /* VideoFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VideoFixer; sourceTree = "<group>"; };
+		0432042E28C1B00C00421FDE /* Python.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Python.framework.zip; sourceTree = "<group>"; };
 		0443E5E824562A7A008C4E9B /* MobileDevice.framework.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = MobileDevice.framework.zip; sourceTree = "<group>"; };
 		046034E12381B41200070C86 /* KeynoteFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = KeynoteFixer; sourceTree = "<group>"; };
 		046034E32381B6E800070C86 /* KeynoteScript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = KeynoteScript; sourceTree = "<group>"; };
@@ -343,6 +349,7 @@
 				046034E52381C18900070C86 /* BrowserKit.framework.zip */,
 				046034E62381C18A00070C86 /* ProKit.framework.zip */,
 				04DA79C425613EB200B65B4E /* CodecComponents.zip */,
+				0432042E28C1B00C00421FDE /* Python.framework.zip */,
 				604F709F240B104400687E1B /* Generated */,
 				046034E12381B41200070C86 /* KeynoteFixer */,
 				32F763552364EA2200200ED7 /* ApertureFixer */,
@@ -400,6 +407,7 @@
 		32D181F723643630006253DE /* StepTwo */ = {
 			isa = PBXGroup;
 			children = (
+				0412C27528C18E35006FB234 /* SheetViewController.swift */,
 				32D181D023642192006253DE /* GuidanceViewController.swift */,
 				32F7634B2364D0AA00200ED7 /* AuthenticateViewController.swift */,
 				60F62281243AE40800B07865 /* CatchViewController.swift */,
@@ -483,6 +491,7 @@
 				60888CC6240C9347000EF445 /* Extensions */,
 				60888CC5240C92F3000EF445 /* Buttons */,
 				60888CD2240C93CA000EF445 /* Views */,
+				0412C27728C18E51006FB234 /* QRCodeGenerator.swift */,
 				60888CE1240CA6E8000EF445 /* Permission.swift */,
 			);
 			path = Common;
@@ -671,6 +680,7 @@
 				32F763562364EA2200200ED7 /* ApertureFixer in Resources */,
 				606CA12823665C04001C550E /* Credits.pdf in Resources */,
 				32D181C423640CDF006253DE /* Main.storyboard in Resources */,
+				0432042F28C1B00C00421FDE /* Python.framework.zip in Resources */,
 				606CA12123664BFD001C550E /* killpkg in Resources */,
 				6039E6E92383CB560023DAB8 /* Mojave32Bit.mobileconfig in Resources */,
 				042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */,
@@ -740,6 +750,8 @@
 				32D181CD23640DE0006253DE /* RetroactiveWindowController.swift in Sources */,
 				60F62282243AE40800B07865 /* CatchViewController.swift in Sources */,
 				60888CDC240C9445000EF445 /* NSWindow-Extension.swift in Sources */,
+				0412C27828C18E51006FB234 /* QRCodeGenerator.swift in Sources */,
+				0412C27628C18E35006FB234 /* SheetViewController.swift in Sources */,
 				60888CBF240C92B6000EF445 /* DisplayOnlyView.swift in Sources */,
 				60888CB7240C8FF2000EF445 /* GuaranteeViewController.swift in Sources */,
 				32D181BF23640CDE006253DE /* RootViewController.swift in Sources */,
@@ -987,14 +999,14 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 86;
+				CURRENT_PROJECT_VERSION = 87;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.retroactive.Retroactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Retroactive/Libraries/Bridging-Header.h";
@@ -1009,14 +1021,14 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 86;
+				CURRENT_PROJECT_VERSION = 87;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.retroactive.Retroactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Retroactive/Libraries/Bridging-Header.h";

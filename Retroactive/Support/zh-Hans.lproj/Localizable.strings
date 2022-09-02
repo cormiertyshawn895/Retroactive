@@ -89,6 +89,7 @@
 "Optimize for macOS Catalina" = "为 macOS Catalina 优化"; 
 "Pages ’09 only supports DOCX exports" = "Pages ’09 仅支持导出 DOCX"; 
 "Parallels Desktop" = " Parallels Desktop 虚拟机"; 
+"Preview instructions on Mac…" = "在 Mac 上预览步骤…"; 
 "Pro Applications Update 2010-02" = "Pro 应用更新 2010-02"; 
 "Pro Update" = "Pro 应用更新"; 
 "Quit" = "退出"; 
@@ -105,6 +106,7 @@
 "Ringtones and iTunes U" = "铃声与 iTunes U"; 
 "Run Anyways" = "尝试运行"; 
 "Save and install the IPA" = "保存并安装 IPA"; 
+"Scan this QR code on your iPhone, iPad, or Android device to view step-by-step instructions." = "在您的 iPhone、iPad 或安卓设备上扫描此二维码以查看详细步骤。"; 
 "Select your device, click “Add”, then click “Apps”." = "选中您的设备，点击“添加“，然后点击“App”。"; 
 "Selected app is incompatible" = "不兼容所选择的应用程序"; 
 "Shop DVD on eBay" = "在网络上查找安装盘"; 
@@ -119,10 +121,11 @@
 "The copy of %@ you have installed is %@ %@. You need to first install a minor update before Retroactive can modify it." = "您已安装的 %@ 是 %@ %@。您需要先安装一个小版本更新，然后才能解印。"; 
 "There isn't enough free space to install %@" = "剩余磁盘空间不足，无法安装 %@"; 
 "There's usually no need to unlock it again." = "通常情况下，无需重复解印。"; 
-"This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, macOS Catalina, and macOS Big Sur, which may be incompatible with %@." = "此版本的解印仅适用于 macOS High Sierra、macOS Mojave、macOS Catalina 和 macOS Big Sur，并可能不兼容 %@。"; 
+"This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, macOS Catalina, macOS Big Sur, macOS Montery, and macOS Ventura, which may be incompatible with %@." = "此版本的解印仅适用于 macOS High Sierra、macOS Mojave、macOS Catalina、macOS Big Sur、macOS Monterey 和 macOS Ventura，并可能不兼容 %@。"; 
 "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac." = "先找到一台在 2019 年 10 月之前发布的旧款 Mac，然后安装 macOS Mojave 以继续。"; 
 "To get started, install macOS Mojave on a separate volume." = "在单独的宗卷上安装 macOS Mojave 以继续。"; 
 "To quickly access IPA downloads in the future, drag the MobileApps folder into Favorites." = "如需今后快速访问 IPA 下载，可将 MobileApps 文件夹拖动到个人收藏中。"; 
+"To use iTunes 12.9.5 on Mac computers with Apple Silicon, you need to disable System Integrity Protection." = "如需在搭载 Apple 芯片的 Mac 电脑上使用 iTunes 12.9.5，您需要先关闭系统完整性保护。"; 
 "Try Again" = "再试一次"; 
 "Unable to %@ %@" = "无法%@ %@"; 
 "Unable to download %@" = "无法下载 %@"; 

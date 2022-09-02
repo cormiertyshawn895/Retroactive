@@ -173,6 +173,8 @@ class AppManager: NSObject {
     
     var allowPatchingAgain = false
 
+    private(set) public var isSIPEnabled: Bool = true
+
     private override init() {
         super.init()
         if let path = Bundle.main.path(forResource: "SupportPath", ofType: "plist"),
@@ -181,6 +183,9 @@ class AppManager: NSObject {
         }
         
         self.checkForConfigurationUpdates()
+
+        let sipStatus = Process.runNonAdminTaskWithOutput(toolPath: "/usr/bin/csrutil", arguments: ["status"])
+        isSIPEnabled = !sipStatus.lowercased().contains("disabled")
     }
     
     func checkForConfigurationUpdates() {
@@ -604,6 +609,9 @@ class AppManager: NSObject {
         switch chosenApp {
         case .aperture, .iphoto, .finalCutPro7, .logicPro9, .pages4, .numbers2, .keynote5:
             if (chosenApp == .aperture || chosenApp == .iphoto) && osAtLeastBigSur && !FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/AppKit.framework") {
+                return false
+            }
+            if (chosenApp == .iphoto && osAtLeastMontereyE && !FileManager.default.fileExists(atPath: "\(foundAppPath)/Contents/Frameworks/Python.framework")) {
                 return false
             }
             if underscoreState(foundAppPath: foundAppPath) == .neededButNotFound {
@@ -1545,6 +1553,28 @@ class AppManager: NSObject {
             print("can't find current screen, assuming not in virtual machine")
             return false
         }
+    }
+    
+    private let NATIVE_EXECUTION = Int32(0)
+    private let EMULATED_EXECUTION = Int32(1)
+    private let UNKNOWN_EXECUTION = -Int32(1)
+    private var processIsTranslated: Int32 {
+        let key = "sysctl.proc_translated"
+        var ret = Int32(0)
+        var size: Int = 0
+        sysctlbyname(key, nil, &size, nil, 0)
+        let result = sysctlbyname(key, &ret, &size, nil, 0)
+        if result == -1 {
+            if errno == ENOENT {
+                return 0
+            }
+            return -1
+        }
+        return ret
+    }
+    
+    var isTranslated: Bool {
+        return processIsTranslated == EMULATED_EXECUTION
     }
     
     var needsToShowiTunesWorkaround: Bool {

@@ -1659,6 +1659,96 @@ You can use {name} now.</string>
             </objects>
             <point key="canvasLocation" x="2091" y="3080"/>
         </scene>
+        <!--Sheet View Controller-->
+        <scene sceneID="Z1w-Cq-dAb">
+            <objects>
+                <viewController storyboardIdentifier="SheetViewController" id="3ld-s3-iiJ" customClass="SheetViewController" customModule="Retroactive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="AN1-wF-IYy">
+                        <rect key="frame" x="0.0" y="0.0" width="298" height="454"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UTu-FV-5xQ">
+                                <rect key="frame" x="264" y="419" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="d6L-bD-qXr">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                                </buttonCell>
+                                <color key="contentTintColor" red="0.74901968240000005" green="0.74901968240000005" blue="0.74901968240000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="closeButtonClicked:" target="3ld-s3-iiJ" id="AQq-Fx-T0I"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Tn-2X-Wa2">
+                                <rect key="frame" x="20" y="333" width="260" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" title="To customize the recording indicator, you need to disable System Integrity Protection and allow non-sealed system snapshots." id="t2e-c7-3MS">
+                                    <font key="font" metaFont="systemBold" size="14"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="17k-3L-Sfr">
+                                <rect key="frame" x="21" y="328" width="255" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MMj-lv-KW7">
+                                <rect key="frame" x="20" y="244" width="260" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" title="Scan this QR code on your iPhone, iPad, or Android device to view step-by-step instructions." id="fE2-fk-gxR">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <box fixedFrame="YES" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="8NI-qY-pM2">
+                                <rect key="frame" x="62" y="72" width="174" height="174"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="NNh-rb-94T">
+                                    <rect key="frame" x="3" y="3" width="168" height="168"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ks6-9l-3pL">
+                                            <rect key="frame" x="14" y="14" width="140" height="140"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="x1d-7e-CC9"/>
+                                            <color key="contentTintColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        </imageView>
+                                        <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xm0-bc-bQ1">
+                                            <rect key="frame" x="76" y="76" width="16" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        </progressIndicator>
+                                    </subviews>
+                                </view>
+                            </box>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Blp-5y-3mj">
+                                <rect key="frame" x="0.0" y="22" width="298" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="Preview instructions on Mac…" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Izy-gK-ykK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="viewInstructionsClicked:" target="3ld-s3-iiJ" id="OsG-W6-R5t"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="captionLabel" destination="MMj-lv-KW7" id="IIX-8U-L4f"/>
+                        <outlet property="closeButton" destination="UTu-FV-5xQ" id="daL-g0-42N"/>
+                        <outlet property="progressIndicator" destination="xm0-bc-bQ1" id="C0Y-Vv-iWB"/>
+                        <outlet property="qrCodeImageView" destination="Ks6-9l-3pL" id="8No-3V-Veh"/>
+                        <outlet property="titleLabel" destination="1Tn-2X-Wa2" id="U0M-mn-lKj"/>
+                        <outlet property="viewInstructionsButton" destination="Blp-5y-3mj" id="13c-VY-8mB"/>
+                    </connections>
+                </viewController>
+                <customObject id="csc-Ix-dOh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="781" y="1254"/>
+        </scene>
     </scenes>
     <resources>
         <image name="NSCaution" width="32" height="32"/>
@@ -1676,5 +1766,6 @@ You can use {name} now.</string>
         <image name="parallels" width="128" height="128"/>
         <image name="tick" width="51" height="45"/>
         <image name="timemachine_guide" width="381" height="146"/>
+        <image name="xmark.circle.fill" catalog="system" width="20" height="20"/>
     </resources>
 </document>

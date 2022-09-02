@@ -220,7 +220,9 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
         dragWindow.close()
         upArrowWindow.close()
         self.view.window?.deminiaturize(self)
-        terminateSystemPreferences()
+        if (!osAtLeastVentura) {
+            terminateSystemPreferences()
+        }
 
         if (self.navigationController != nil) {
             self.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
@@ -248,7 +250,7 @@ class SyncingViewController: NSViewController, GuaranteeViewControllerDelegate, 
     }
     
     @IBAction func enableFullDiskAccessClicked(_ sender: Any) {
-        shouldShowDragBashView = false
+        shouldShowDragBashView = osAtLeastVentura
         mostRecentPrefsFrame = nil
         padlockWindow.orderOut(self)
         dragWindow.orderOut(self)

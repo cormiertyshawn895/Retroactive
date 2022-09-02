@@ -258,10 +258,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     static func pushSyncingVC() {
+        if (pushSIPVC() == true) {
+            return
+        }
         AppDelegate.rootVC?.navigationController.pushViewController(SyncingViewController.instantiate(), animated: true)
     }
     
     static func pushCompletionVC() {
+        if (pushSIPVC() == true) {
+            return
+        }
         AppDelegate.rootVC?.navigationController.pushViewController(CompletionViewController.instantiate(), animated: true)
     }
     
@@ -285,7 +291,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     static func skipCheck_pushAuthenticateVC() {
+        if (pushSIPVC() == true) {
+            return
+        }
         AppDelegate.rootVC?.navigationController.pushViewController(AuthenticateViewController.instantiate(), animated: true)
+    }
+    
+    static func pushSIPVC() -> Bool {
+        if AppManager.shared.choseniTunesVersion == .darkMode && AppManager.shared.isTranslated && AppManager.shared.isSIPEnabled {
+            let sheetViewController = SheetViewController.instantiate()
+            sheetViewController.guidanceType = .asLowering
+            let topVC = AppDelegate.rootVC?.navigationController.topViewController
+            topVC?.presentAsSheet(sheetViewController)
+            return true
+        }
+        return false
     }
 }
 

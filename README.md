@@ -1,13 +1,13 @@
 <p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip" alt="Download Retroactive"><img width="188" height="188" src="screenshots/icon.png" alt="Download Retroactive"></a>
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/2.0/Retroactive.2.0.zip" alt="Download Retroactive"><img width="188" height="188" src="screenshots/icon.png" alt="Download Retroactive"></a>
 </p>
 
 ## Retroactive
 
-Run Aperture, iPhoto, and iTunes on macOS Big Sur and macOS Catalina. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
+Run Aperture, iPhoto, and iTunes on macOS Ventura, macOS Monterey, macOS Big Sur, and macOS Catalina. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
 
 <p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/1.9/Retroactive.1.9.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
+  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/2.0/Retroactive.2.0.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
 <p>
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
@@ -33,7 +33,7 @@ Retroactive will not harm your Mac. This alert only shows up because Retroactive
 
 ### Picking an app
 
-On macOS Big Sur and macOS Catalina, Retroactive can unlock Aperture and iPhoto, or install iTunes. Pick the app you want to run. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
+On macOS Ventura, macOS Monterey, macOS Big Sur, and macOS Catalina, Retroactive can unlock Aperture and iPhoto, or install iTunes. Pick the app you want to run. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
 
 ![](screenshots/4.jpg)
 

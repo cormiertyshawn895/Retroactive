@@ -280,6 +280,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let audioAnalysisPath = "\(appPath)/Contents/Frameworks/NyxAudioAnalysis.framework"
             let pluginManagerPath = "\(appPath)/Contents/Frameworks/PluginManager.framework"
             let fakeAppKitPath = "\(appPath)/Contents/Frameworks/AppKit.framework"
+            let pythonPath = "\(appPath)/Contents/Frameworks/Python.framework"
             let maximizeCompatibility = AppManager.shared.maximizePhotoAppCompatibility
 
             self.runTaskAtTemp(toolPath: "/bin/rm", arguments: ["-rf", audioAnalysisPath])
@@ -294,6 +295,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/PluginManager", pluginManagerPath])
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/AppKitAperture", fakeAppKitPath])
             }
+            let needsPython = AppManager.shared.chosenApp == .iphoto && osAtLeastMontereyE
+            if (needsPython) {
+                self.runTask(toolPath: "/usr/bin/ditto", arguments: ["-xk", "\(resourcePath)/Python.framework.zip", pythonPath])
+            }
 
             self.stage3Started()
             let originalPluginManagerPath = "/Library/Frameworks/PluginManager.framework/Versions/B/PluginManager"
@@ -302,6 +307,10 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
             let patchedAppKitPath = "@executable_path/../Frameworks/AppKit.framework/Versions/C/AppKit"
             let resolvedOldAppKitArg = maximizeCompatibility ? originalAppKitPath : patchedAppKitPath
             let resolvedNewAppKitArg = maximizeCompatibility ? patchedAppKitPath : originalAppKitPath
+            if (needsPython) {
+                ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/System/Library/Frameworks/Python.framework/Versions/2.6/Python", "@executable_path/../Frameworks/Python.framework/Versions/2.6/Python", "\(appPath)/Contents/MacOS/iPhoto"], path: resourcePath)
+                self.runTask(toolPath: "/usr/bin/codesign", arguments: ["--force", "-s", "-", "\(pythonPath)/Versions/2.7/Python"])
+            }
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", "/Library/Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "@executable_path/../Frameworks/NyxAudioAnalysis.framework/Versions/A/NyxAudioAnalysis", "\(appPath)/Contents/Frameworks/iLifeSlideshow.framework/Versions/A/iLifeSlideshow"], path: resourcePath)
             ProgressViewController.runTask(toolPath: "install_name_tool_packed", arguments: ["-change", maximizeCompatibility ? originalPluginManagerPath : patchedPluginManagerPath, maximizeCompatibility ? patchedPluginManagerPath : originalPluginManagerPath, "\(appPath)/Contents/MacOS/Aperture"], path: resourcePath)
             if (maximizeCompatibility) {

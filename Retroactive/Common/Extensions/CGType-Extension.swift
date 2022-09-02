@@ -6,11 +6,17 @@ extension CGSize {
     }
     
     var similarToSecurityPrefPaneSize: Bool {
+        if (osAtLeastVentura) {
+            return true
+        }
         // Security preferences window is around 668x573 on Catalina, 668x587 on Big Sur
         return self.similarToSize(CGSize(width: 668, height: osAtLeastBigSur ? 587 : 573), maxDeltaX: 180, maxDeltaY: 5)
     }
     
     var similarToPasswordDialogSize: Bool {
+        if (osAtLeastMonterey) {
+            return self.similarToSize(CGSize(width: 260, height: 310), maxDeltaX: 40, maxDeltaY: 80)
+        }
         return self.similarToSize(CGSize(width: 444, height: 212), maxDeltaX: 40, maxDeltaY: 212)
     }
     

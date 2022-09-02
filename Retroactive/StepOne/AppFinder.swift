@@ -207,7 +207,8 @@ class AppFinder: NSObject {
                                 let matchesCompatible = AppManager.shared.compatibleVersionOfChosenApp.contains { (compatible) -> Bool in
                                     return compatible == versionNumberString || compatible == displayShortVersionNumberString
                                 }
-                                if matchesCompatible && AppManager.shared.existingBundleIDOfChosenApp.contains(identifier) {
+                                let patchedContains = AppManager.shared.patchedBundleIDOfChosenApp?.contains(identifier) ?? false
+                                if matchesCompatible && (AppManager.shared.existingBundleIDOfChosenApp.contains(identifier) || patchedContains) {
                                     AppManager.shared.locationOfChosenApp = bundlePath
                                     AppDelegate.pushAuthenticateVC()
                                 } else {
