@@ -16,6 +16,7 @@ class ChoiceViewController: NSViewController {
     @IBOutlet weak var getStartedSubTitle: DisplayOnlyTextField!
     @IBOutlet weak var otherOSSubtitle: NSTextField!
     @IBOutlet weak var otherOSImageView: NSImageView!
+    @IBOutlet weak var transitionHelpButton: HoverButton!
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var scrollContentView: NSView!
@@ -62,8 +63,16 @@ class ChoiceViewController: NSViewController {
         getStartedSubTitle.stringValue = AppManager.shared.getStartedSubTitle
         otherOSSubtitle.stringValue = AppManager.shared.otherOSSubtitle
         otherOSImageView.image = AppManager.shared.otherOSImage
+        if (osAtLeastSonoma) {
+            otherOSSubtitle.alignment = .center
+            transitionHelpButton.isHidden = false
+            transitionHelpButton.title = "Learn how to transition from Retroactive to supported apps".localized() + " ↗"
+        }
     }
     
+    @IBAction func transitionButtonClicked(_ sender: Any) {
+        AppDelegate.current.safelyOpenURL("https://github.com/cormiertyshawn895/Retroactive/blob/master/TRANSITION.md")
+    }
 }
 
 class SingularChoiceViewController: NSViewController {

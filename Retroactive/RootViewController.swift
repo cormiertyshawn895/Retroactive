@@ -42,9 +42,9 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
     
     func alertForOSIncompatibility() {
-        if osAtLeast2023 {
+        if osAtLeast2024 {
             AppDelegate.showOptionSheet(title: discouraged_osHasExperimentalSupport ? String(format: "Experimental support on %@".localized(), ProcessInfo.versionName) : "Update to a newer version of Retroactive".localized(),
-                                        text: discouraged_osHasExperimentalSupport ? String(format: "On %@, Aperture, iPhoto, and iTunes can launch and are functional, but you may see minor glitches.".localized(), ProcessInfo.versionName) : String(format: "This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, macOS Catalina, macOS Big Sur, macOS Montery, and macOS Ventura, which may be incompatible with %@.".localized(), ProcessInfo.versionName),
+                                        text: discouraged_osHasExperimentalSupport ? String(format: "On %@, Aperture, iPhoto, and iTunes can launch and are functional, but you may see minor glitches.".localized(), ProcessInfo.versionName) : String(format: "This version of Retroactive is only designed and tested for macOS Sonoma, macOS Ventura, macOS Monterey, macOS Big Sur, macOS Catalina, macOS Mojave, and macOS High Sierra, which may be incompatible with %@.".localized(), ProcessInfo.versionName),
                                         firstButtonText: "Check for Updates".localized(),
                                         secondButtonText: discouraged_osHasExperimentalSupport ? "Continue".localized() : "Run Anyways".localized(),
                                         thirdButtonText: "Quit".localized()) { (response) in

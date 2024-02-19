@@ -1,15 +1,19 @@
 @import Foundation;
 @import AppKit;
 
-extern @interface NSFlippableView : NSView {
-}
+extern @interface NSRegion : NSObject
+@end
+
+@implementation NSRegion
+@end
+
+extern @interface NSFlippableView : NSView
 @end
 
 @implementation NSFlippableView
 @end
 
-extern @interface NSToolbarClippedItemsIndicator : NSView {
-}
+extern @interface NSToolbarClippedItemsIndicator : NSView
 @end
 
 @implementation NSToolbarClippedItemsIndicator

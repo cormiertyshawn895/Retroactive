@@ -3,25 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-    <string>Retroactive $(VERSION) improves compatibility with macOS Ventura and macOS Monterey.</string>
+    <string>Retroactive $(VERSION) improves compatibility with macOS Sonoma.</string>
 	<key>NewVersionChangelog</key>
-    <string>• Resolves a problem where iPhoto quits unexpectedly on macOS Monterey 12.3 or later
-• Fixes an issue where Full Disk Access cannot be enabled for iTunes on macOS Ventura
-• Adds instructions to use iTunes 12.9.5 on Mac computers with Apple Silicon
+    <string>• Resolves a problem where Aperture and iPhoto quit unexpectedly on macOS Sonoma 14.2 or later
+• Adds instructions to transition from Retroactive, which only receives limited support, to supported apps
 </string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 $(VERSION_HANS) 改善了与 macOS Ventura 和 macOS Monterey 的兼容性</string>
+	<string>新版本解印 $(VERSION_HANS) 改善了与 macOS Sonoma 的兼容性</string>
 	<key>NewVersionChangelogzhHans</key>
-    <string>• 解决了 iPhoto 在 macOS Monterey 12.3 或更高版本中意外退出的问题
-• 修复了无法在 macOS Ventura 中为 iTunes 添加完全磁盘访问权限的问题
-• 新增了在搭载 Apple 芯片的 Mac 电脑上使用 iTunes 12.9.5 的指导步骤
+    <string>• 解决了 Aperture 和 iPhoto 在 macOS Sonoma 14.2 或更高版本中意外退出的问题
+• 新增了指导步骤，帮助用户从仅获有限支持的解印过渡到受支持的应用程序
 </string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 $(VERSION_HANT) 改善了與 macOS Ventura 和 macOS Monterey 的兼容性</string>
+	<string>新版本解印 $(VERSION_HANT) 改善了與 macOS Sonoma 的兼容性</string>
 	<key>NewVersionChangelogzhHant</key>
-    <string>• 解決了 iPhoto 在 macOS Monterey 12.3 或更高版本中意外退出的問題
-• 修復了無法在 macOS Ventura 中為 iTunes 添加完全磁盤訪問權限的問題
-• 新增了在搭載 Apple 芯片的 Mac 電腦上使用 iTunes 12.9.5 的指導步驟
+    <string>• 解決了 Aperture 和 iPhoto 在 macOS Sonoma 14.2 或更高版本中意外退出的問題
+• 新增了指導步驟，幫助用戶從僅獲有限支援的解印過渡到受支援的應用程式
 </string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/$(MARKETING_VERSION)/Retroactive.$(MARKETING_VERSION).zip</string>

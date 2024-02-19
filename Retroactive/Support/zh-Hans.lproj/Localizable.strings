@@ -74,6 +74,7 @@
 "Keynote ’09 only supports PPTX exports" = "Keynote ’09 仅支持导出 PPTX"; 
 "Learn More..." = "进一步了解..."; 
 "Learn how to download an iOS app with Apple Configurator 2" = "了解如何使用 Apple Configurator 2 下载 iOS 应用程序"; 
+"Learn how to transition from Retroactive to supported apps" = "了解如何从解印过渡到受支持的应用程序"; 
 "Locate %@ %@" = "找到并选择 %@ %@"; 
 "Locate Manually..." = "手动寻找..."; 
 "Next" = "继续"; 
@@ -103,6 +104,7 @@
 "Retroactive can unlock your installed version of %@ %@, but works best with %@ %@. To avoid stability issues, we recommend updating to %@ %@ before proceeding." = "虽然解印可以解锁您已安装的 %@ %@，解印搭配 %@ %@ 效果最佳。为了提高稳定性和兼容性，解印建议您先将软件更新到 %@ %@，然后再继续。"; 
 "Retroactive is unable to locate %@ on your Mac. %@" = "解印在您的 Mac 上找不到 %@。%@"; 
 "Retroactive is unlocking %@. Quitting Retroactive will result in a corrupted copy of %@." = "解印正在解锁 %@，退出解印会导致已安装的 %@ 受损。"; 
+"Retroactive only receives limited support. You should transition from Retroactive to a" = "解印仅获得有限支持。你应从解印过渡到多款受支持的"; 
 "Ringtones and iTunes U" = "铃声与 iTunes U"; 
 "Run Anyways" = "尝试运行"; 
 "Save and install the IPA" = "保存并安装 IPA"; 
@@ -121,7 +123,7 @@
 "The copy of %@ you have installed is %@ %@. You need to first install a minor update before Retroactive can modify it." = "您已安装的 %@ 是 %@ %@。您需要先安装一个小版本更新，然后才能解印。"; 
 "There isn't enough free space to install %@" = "剩余磁盘空间不足，无法安装 %@"; 
 "There's usually no need to unlock it again." = "通常情况下，无需重复解印。"; 
-"This version of Retroactive is only designed and tested for macOS High Sierra, macOS Mojave, macOS Catalina, macOS Big Sur, macOS Montery, and macOS Ventura, which may be incompatible with %@." = "此版本的解印仅适用于 macOS High Sierra、macOS Mojave、macOS Catalina、macOS Big Sur、macOS Monterey 和 macOS Ventura，并可能不兼容 %@。"; 
+"This version of Retroactive is only designed and tested for macOS Sonoma, macOS Ventura, macOS Monterey, macOS Big Sur, macOS Catalina, macOS Mojave, and macOS High Sierra, which may be incompatible with %@." = "此版本的解印仅适用于 macOS Sonoma、macOS Ventura、macOS Monterey、macOS Big Sur、macOS Catalina、macOS Mojave 和 macOS High Sierra，并可能不兼容 %@。"; 
 "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac." = "先找到一台在 2019 年 10 月之前发布的旧款 Mac，然后安装 macOS Mojave 以继续。"; 
 "To get started, install macOS Mojave on a separate volume." = "在单独的宗卷上安装 macOS Mojave 以继续。"; 
 "To quickly access IPA downloads in the future, drag the MobileApps folder into Favorites." = "如需今后快速访问 IPA 下载，可将 MobileApps 文件夹拖动到个人收藏中。"; 
@@ -176,6 +178,7 @@
 "install" = "安装"; 
 "installing support files for" = "安装组件以支持"; 
 "unlock" = "解锁"; 
+"wide range of supported apps, many of which are built into macOS or free to download." = "应用程序，其中许多已在macOS中内置或可免费下载。"; 
 "— Retroactive" = "— 解印"; 
 "App Store" = "App Store"; 
 "CoverFlow" = "CoverFlow"; 

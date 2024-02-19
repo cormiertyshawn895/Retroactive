@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.AVKitIBPlugin" version="16096"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -360,6 +361,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wk3-qs-2AD" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
+                                <rect key="frame" x="289" y="28" width="432" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="{transitionTitle}" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="g1C-Ok-7fI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="15"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="transitionButtonClicked:" target="MjG-QZ-5gm" id="vLe-pt-3Lp"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -368,6 +381,7 @@
                         <outlet property="otherOSSubtitle" destination="rGe-T9-oAh" id="YaI-mh-Uaf"/>
                         <outlet property="scrollContentView" destination="mKT-Na-Lvv" id="K3Q-IX-k3l"/>
                         <outlet property="scrollView" destination="AWd-yg-cRj" id="lkE-sR-69T"/>
+                        <outlet property="transitionHelpButton" destination="wk3-qs-2AD" id="lgl-zc-10t"/>
                     </connections>
                 </viewController>
                 <customObject id="XHC-cX-gbX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -468,10 +482,10 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="aperture_cartoon" id="15a-6W-RJC"/>
                             </imageView>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWF-z1-WSn">
-                                <rect key="frame" x="204" y="462" width="4" height="14"/>
+                                <rect key="frame" x="204" y="426" width="50" height="50"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SBD-nY-21h">
-                                        <rect key="frame" x="0.0" y="0.0" width="4" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="3lr-mk-eFA">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system" size="28"/>
@@ -609,10 +623,10 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="aperture_cartoon" id="k5d-Xi-ptL"/>
                             </imageView>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h8b-I6-l6C">
-                                <rect key="frame" x="204" y="462" width="4" height="14"/>
+                                <rect key="frame" x="204" y="426" width="50" height="50"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cf8-eI-EXS">
-                                        <rect key="frame" x="0.0" y="0.0" width="4" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="taq-6N-QBJ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system" size="28"/>
@@ -900,7 +914,7 @@ You can use {name} now.</string>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="71Q-tY-WPa">
-                                            <rect key="frame" x="11" y="8" width="19" height="24"/>
+                                            <rect key="frame" x="11" y="8" width="18" height="25"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="ssy-G5-j5n">
                                                 <font key="font" metaFont="systemBold" size="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1015,10 +1029,10 @@ You can use {name} now.</string>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="itunes_cartoon" id="vSl-Vx-VHC"/>
                             </imageView>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GnW-qd-8Pa">
-                                <rect key="frame" x="204" y="462" width="4" height="14"/>
+                                <rect key="frame" x="204" y="426" width="50" height="50"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fcm-4u-thL">
-                                        <rect key="frame" x="0.0" y="0.0" width="4" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="9HR-xh-wqw">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system" size="28"/>
@@ -1065,19 +1079,19 @@ You can use {name} now.</string>
                                 <rect key="frame" x="0.0" y="99" width="1011" height="334"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="HEd-dy-8VD">
-                                    <rect key="frame" x="0.0" y="0.0" width="1011" height="319"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1011" height="334"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZCT-A5-WCX">
-                                            <rect key="frame" x="0.0" y="0.0" width="1443" height="319"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1443" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yha-Hy-OXT">
-                                                    <rect key="frame" x="50" y="21" width="270" height="277"/>
+                                                    <rect key="frame" x="50" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PLM-mg-Kxg" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="21" width="270" height="277"/>
+                                                    <rect key="frame" x="50" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="zSq-cT-uR4">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1088,11 +1102,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fox-RP-Kpo">
-                                                    <rect key="frame" x="322" y="21" width="270" height="277"/>
+                                                    <rect key="frame" x="322" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKN-s4-v7R" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="322" y="21" width="270" height="277"/>
+                                                    <rect key="frame" x="322" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Vg8-Mw-L2F">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1103,11 +1117,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpu-Fc-OJG">
-                                                    <rect key="frame" x="865" y="22" width="270" height="277"/>
+                                                    <rect key="frame" x="865" y="37" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VCh-XX-10X" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="865" y="22" width="270" height="277"/>
+                                                    <rect key="frame" x="865" y="37" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="MNj-XU-Idk">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1118,11 +1132,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzl-Zi-zca">
-                                                    <rect key="frame" x="1137" y="22" width="270" height="277"/>
+                                                    <rect key="frame" x="1137" y="37" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-Lo-1JI" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="1137" y="22" width="270" height="277"/>
+                                                    <rect key="frame" x="1137" y="37" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="qWG-va-Fsp">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1133,11 +1147,11 @@ You can use {name} now.</string>
                                                     </connections>
                                                 </button>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wdr-p2-Rck">
-                                                    <rect key="frame" x="594" y="21" width="270" height="277"/>
+                                                    <rect key="frame" x="594" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </customView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0T6-CC-yvb" customClass="HoverButton" customModule="Retroactive" customModuleProvider="target">
-                                                    <rect key="frame" x="594" y="21" width="270" height="277"/>
+                                                    <rect key="frame" x="594" y="36" width="270" height="277"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="vQi-gc-Otq">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1152,7 +1166,7 @@ You can use {name} now.</string>
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="dtB-tc-ged">
-                                    <rect key="frame" x="0.0" y="319" width="1011" height="15"/>
+                                    <rect key="frame" x="0.0" y="318" width="1011" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fpk-Gf-tcu">
@@ -1760,7 +1774,7 @@ You can use {name} now.</string>
         <image name="back" width="51" height="51"/>
         <image name="closeButton" width="63" height="62"/>
         <image name="ipod_family" width="261" height="231.5"/>
-        <image name="itunes12_9" width="281" height="195.5"/>
+        <image name="itunes12_9" width="329" height="229"/>
         <image name="itunes_cartoon" width="252" height="252"/>
         <image name="mojave-banner" width="883" height="71"/>
         <image name="parallels" width="128" height="128"/>

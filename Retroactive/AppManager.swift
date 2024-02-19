@@ -454,6 +454,9 @@ class AppManager: NSObject {
     }
     
     var otherOSSubtitle: String {
+        if osAtLeastSonoma {
+            return "Retroactive only receives limited support. You should transition from Retroactive to a".localized() + "\n" + "wide range of supported apps, many of which are built into macOS or free to download.".localized()
+        }
         if osAtLeastCatalina {
             var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. ".localized()
             otherOSHint += AppManager.shared.platformShippedAfterMojave ? "To get started, find an older Mac released before Late 2019, and install macOS Mojave on that Mac.".localized() : "To get started, install macOS Mojave on a separate volume.".localized()
@@ -466,6 +469,9 @@ class AppManager: NSObject {
     }
     
     var otherOSImage: NSImage? {
+        if osAtLeastSonoma {
+            return NSImage(named:"supported-banner")
+        }
         if osAtLeastCatalina {
             return NSImage(named:"mojave-banner")
         }
