@@ -72,9 +72,10 @@
 "Keep Installing" = "繼續安裝"; 
 "Keep drilling down for the IPA" = "繼續打開子文件夾並找到 IPA"; 
 "Keynote ’09 only supports PPTX exports" = "Keynote ’09 僅支持導出 PPTX"; 
+"Learn More" = "進一步了解"; 
 "Learn More..." = "進一步了解..."; 
 "Learn how to download an iOS app with Apple Configurator 2" = "了解如何使用 Apple Configurator 2 下載 iOS 應用程序"; 
-"Learn how to transition from Retroactive to supported apps" = "了解如何從解印過渡到受支持的應用程式"; 
+"Learn how to transition from Retroactive to supported apps" = "了解如何從解印過渡到受支援的應用程式"; 
 "Locate %@ %@" = "找到並選擇 %@ %@"; 
 "Locate Manually..." = "手動尋找..."; 
 "Next" = "繼續"; 
@@ -102,6 +103,8 @@
 "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. " = "解印還可以在 macOS Mojave 和 macOS High Sierra 下解除對 Final Cut Pro 7 和 Logic Pro 9 的封印，或修複 iWork ’09。"; 
 "Retroactive can optimize %@ for either macOS Catalina or macOS Big Sur." = "解印可為 macOS Catalina 或 macOS Big Sur 優化 %@。"; 
 "Retroactive can unlock your installed version of %@ %@, but works best with %@ %@. To avoid stability issues, we recommend updating to %@ %@ before proceeding." = "雖然解印可以解鎖您已安裝的 %@ %@，解印搭配 %@ %@ 效果最佳。為了提高穩定性和兼容性，解印建議您先將軟件更新到 %@ %@，然後再繼續。"; 
+"Retroactive has been discontinued." = "解印已停止服務。"; 
+"Retroactive has been discontinued. You should transition from Retroactive to a" = "解印已停止服務。你應從解印過渡到多款受支援的"; 
 "Retroactive is unable to locate %@ on your Mac. %@" = "解印在您的 Mac 上找不到 %@。%@"; 
 "Retroactive is unlocking %@. Quitting Retroactive will result in a corrupted copy of %@." = "解印正在解鎖 %@，退出解印會導致已安裝的 %@ 受損。"; 
 "Retroactive only receives limited support. You should transition from Retroactive to a" = "解印僅獲得有限支援。你應從解印過渡到多款受支援的"; 
@@ -159,6 +162,7 @@
 "You can export existing Numbers spreadsheets into Excel spreadsheets. To view and edit your Numbers spreadsheets, run Retroactive on a real Mac." = "您可以將現有的 Numbers 表格導出為 Excel 表格。如需查看或編輯 Numbers 表格，請在真正的 Mac 電腦中運行解印。"; 
 "You can export existing Pages documents into Word documents. To view and edit your Pages documents, run Retroactive on a real Mac." = "您可以將現有的 Pages 文稿導出為 Word 文檔。如需查看或編輯 Pages 文稿，請在真正的 Mac 電腦中運行解印。"; 
 "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac." = "您可以將現有項目導出為 XML，從而將其轉移至 SendToX、DaVinci Resolve、Avid Media Composer 和 Adobe Premiere Pro CC。如需使用時間線與預覽等完整編輯功能，請在真正的 Mac 電腦中運行解印。"; 
+"You can install iTunes using Retroactive." = "你可透過解印安裝iTunes。"; 
 "You can open and organize your Aperture library, or export edited images. To use editing features such as image preview, adjustments, brushes, and effects, run Retroactive on a real Mac." = "您可以打開和整理已有的 Aperture 資料庫，或導出已編輯的照片。如需使用圖像預覽、調整、筆刷和效果等完整編輯功能，請在真正的 Mac 電腦中運行解印。"; 
 "You can open and organize your iPhoto library, or export edited images. To use editing features such as image preview, Quick Fixes, effects, and adjustments, run Retroactive on a real Mac." = "您可以打開和整理已有的 iPhoto 資料庫，或導出已編輯的照片。如需使用圖像預覽、快速修復、效果和調整等完整編輯功能，請在真正的 Mac 電腦中運行解印。"; 
 "You can try to %@ %@ again." = "您可以重試%@ %@。"; 
@@ -168,6 +172,7 @@
 "You need to install an older version of %@ %@" = "您需要安裝舊版 %@ %@。"; 
 "You need to install {name}." = "您需要先安裝 {name}。"; 
 "You need to update %@ from %@ to %@." = "您需要將 %@ 從 %@ 更新至 %@。"; 
+"You should transition from Retroactive to a wide range of supported apps, many of which are built into macOS or free to download." = "你應從解印過渡到多款受支援的應用程式，其中許多已在macOS中內建或可免費下載。"; 
 "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space." = "您的啟動磁盤隻有 %d GB 可用空間。如需安裝 %@, 您的啟動磁盤至少需要 %d GB 的可用空間。"; 
 "a virtual machine" = "虛擬機"; 
 "an hour" = "一小時"; 
@@ -178,7 +183,7 @@
 "install" = "安裝"; 
 "installing support files for" = "安裝組件以支持"; 
 "unlock" = "解鎖"; 
-"wide range of supported apps, many of which are built into macOS or free to download." = "應用程式，其中許多已在macOS中內置或可免費下載。"; 
+"wide range of supported apps, many of which are built into macOS or free to download." = "應用程式，其中許多已在macOS中內建或可免費下載。"; 
 "— Retroactive" = "— 解印"; 
 "App Store" = "App Store"; 
 "CoverFlow" = "CoverFlow"; 

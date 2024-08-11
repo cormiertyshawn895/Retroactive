@@ -1,39 +1,47 @@
-<p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/2.1/Retroactive.2.1.zip" alt="Download Retroactive"><img width="188" height="188" src="screenshots/icon.png" alt="Download Retroactive"></a>
-</p>
+## Transition from Retroactive to supported apps
+
+Retroactive has been discontinued, and does not support macOS Sequoia or later. You should transition from Retroactive to a wide range of supported apps, many of which are built into macOS or free to download.
+
+#### iTunes
+
+- Switch to [Music](https://support.apple.com/guide/music/welcome/mac), [TV](https://support.apple.com/guide/tvapp-mac/welcome/mac), [Podcasts](https://support.apple.com/guide/podcasts/welcome/mac), [Books](https://support.apple.com/guide/books/welcome/mac), and [Finder](https://support.apple.com/102471).
+- Install Windows with [Parallels Desktop](https://www.parallels.com/products/desktop) or [VMware Fusion](https://www.vmware.com/products/fusion.html), then download [iTunes for Windows](https://apps.microsoft.com/detail/9PB2MZ1ZMB1S).
+- To archive iPhone and iPad apps, use [IPATool](https://github.com/majd/ipatool), [iMazing](https://imazing.com), [Apple Configurator](https://apps.apple.com/app/id1037126344) [(tutorial)](https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/ConfiguratorTutorial.mp4), or [iTunes 12.6.5.3 for Windows](https://secure-appldnld.apple.com/itunes12/091-87819-20180912-69177170-B085-11E8-B6AB-C1D03409AD2A6/iTunes64Setup.exe).
+
+#### Aperture and iPhoto
+- Switch to [Photos](https://support.apple.com/guide/photos/welcome/mac), [Darktable](https://www.darktable.org), or [RawTherapee](https://www.rawtherapee.com).
+- Purchase or subscribe to [AfterShot Pro](https://www.aftershotpro.com), [Capture One Pro](https://www.captureone.com), [Darkroom](https://apps.apple.com/app/id953286746), [DxO PhotoLab](https://www.dxo.com/dxo-photolab), [Lightroom](https://apps.apple.com/app/id1451544217), [Lightroom Classic](https://www.adobe.com/products/photoshop-lightroom-classic.html), [Luminar Neo](https://apps.apple.com/app/id1584373150), or [Photomator](https://apps.apple.com/app/id1444636541).
+
+#### Final Cut Pro 7
+- Export your projects into XML on a compatible Mac. Then import them into [DaVinci Resolve](https://apps.apple.com/app/id571213070), [Media Composer](https://www.avid.com/media-composer), or [Premiere Pro](https://www.adobe.com/products/premiere.html). You can also use [SendToX](https://apps.apple.com/app/id496926258) to import them into the latest version of [Final Cut Pro](https://apps.apple.com/app/id424389933).
+
+---
 
 ## Retroactive
 
-Retroactive only receives limited support. You should transition from Retroactive to a wide range of supported apps, many of which are built into macOS or free to download. [Learn how to transition from Retroactive to supported apps](TRANSITION.md).
-
-Run Aperture, iPhoto, and iTunes on macOS Sonoma, macOS Ventura, macOS Monterey, macOS Big Sur, and macOS Catalina. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
+While Retroactive does not support macOS Sequoia or later, you can still use Retroactive to run Aperture, iPhoto, and iTunes on macOS Sonoma, macOS Ventura, macOS Monterey, macOS Big Sur, and macOS Catalina. Xcode 11.7 on macOS Mojave. Final Cut Pro 7, Logic Pro 9, and iWork ’09 on macOS Mojave or macOS High Sierra.
 
 <p align="center">
   <a href="https://github.com/cormiertyshawn895/Retroactive/releases/download/2.1/Retroactive.2.1.zip" alt="Download Retroactive"><img width="282" height="68" src="screenshots/resources/download-button.png" alt="Download Retroactive"></a>
 <p>
-<p align="center">
-  <a href="https://github.com/cormiertyshawn895/Retroactive/releases" alt="View Release Page"><img width="160" height="18" src="screenshots/resources/release-button.png" alt="View Release Page"></a>
-</p>
 
 ---
 
 ### Opening Retroactive
 
-After downloading Retroactive, double click to open it. macOS may prompt you “Retroactive cannot be opened because it is from an unidentified developer.” This is completely normal and expected.
+After downloading Retroactive, double click to open it. macOS may prompt you “Retroactive cannot be opened because it is from an unidentified developer.” This is expected.
 
-![](screenshots/2.jpg)
-
-To open Retroactive, [right-click](https://support.apple.com/HT207700) on the Retroactive app in Finder, and click “Open” as shown below.
+To open Retroactive, navigate to System Settings > Privacy & Security, then scroll down and click [“Open Anyway”](https://support.apple.com/102445#openanyway).
 
 ![](screenshots/3.jpg)
-
-If you right-clicked when opening Retroactive for the first time, you need to [right-click](https://support.apple.com/HT207700) for a second time. If Retroactive still can’t be opened, [check your GateKeeper settings](https://support.apple.com/en-us/HT202491) under the General tab in System Preferences > Security & Privacy. Click “Open Anyway” to open Retroactive.
 
 Retroactive will not harm your Mac. This alert only shows up because Retroactive is not notarized. Retroactive is open source, so you can always examine its source code to make sure it’s safe.
 
 ---
 
 ### Picking an app
+
+Retroactive has been discontinued, and does not support macOS Sequoia or later.
 
 On macOS Sonoma, macOS Ventura, macOS Monterey, macOS Big Sur, and macOS Catalina, Retroactive can unlock Aperture and iPhoto, or install iTunes. Pick the app you want to run. If you want to run multiple apps from here, pick any one of them. You will always be able to get back to this screen later.
 

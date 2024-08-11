@@ -161,19 +161,6 @@
                                                 <action selector="issueTracker:" target="Voe-Tx-rLC" id="iKf-tF-P5F"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="w0N-lX-HMX"/>
-                                        <menuItem title="Report an Issue" id="zEu-hd-hYQ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="openIssue:" target="Voe-Tx-rLC" id="F6w-E2-BYb"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Send Feedback" id="WLk-og-ZMB">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="openIssue:" target="Voe-Tx-rLC" id="hfR-vy-lSd"/>
-                                            </connections>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

@@ -79,7 +79,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cp -R &quot;$SRCROOT/$PRODUCT_NAME/Help/What to do if Retroactive can&apos;t be opened.lpdf&quot; &quot;$ARCHIVE_PATH/Products/Applications&quot;&#10;mv &quot;$ARCHIVE_PATH/Products/Applications/$PRODUCT_NAME.app&quot; &quot;$ARCHIVE_PATH/Products/Applications/Retroactive (right click to open).app&quot;&#10;MARKETING_FOLDER=&quot;$PRODUCT_NAME $MARKETING_VERSION&quot;&#10;MARKETING_PATH=&quot;$ARCHIVE_PATH/Products/$MARKETING_FOLDER&quot;&#10;mv &quot;$ARCHIVE_PATH/Products/Applications&quot; &quot;$MARKETING_PATH&quot;&#10;cd &quot;$ARCHIVE_PATH/Products&quot;&#10;ZIP_NAME=&quot;Retroactive.$MARKETING_VERSION.zip&quot;&#10;zip -r -y -9 &quot;$ZIP_NAME&quot; &quot;$MARKETING_FOLDER&quot;&#10;">
+               scriptText = "cp -R &quot;$SRCROOT/$PRODUCT_NAME/Help/Help.webloc&quot; &quot;$ARCHIVE_PATH/Products/Applications&quot;&#10;MARKETING_FOLDER=&quot;$PRODUCT_NAME $MARKETING_VERSION&quot;&#10;MARKETING_PATH=&quot;$ARCHIVE_PATH/Products/$MARKETING_FOLDER&quot;&#10;mv &quot;$ARCHIVE_PATH/Products/Applications&quot; &quot;$MARKETING_PATH&quot;&#10;cd &quot;$ARCHIVE_PATH/Products&quot;&#10;ZIP_NAME=&quot;Retroactive.$MARKETING_VERSION.zip&quot;&#10;zip -r -y -9 &quot;$ZIP_NAME&quot; &quot;$MARKETING_FOLDER&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

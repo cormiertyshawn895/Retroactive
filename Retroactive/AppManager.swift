@@ -427,6 +427,9 @@ class AppManager: NSObject {
     }
 
     var supportedApps: [AppType] {
+        if osAtLeastSequoia {
+            return [.itunes]
+        }
         if osAtLeastCatalina {
             return [.aperture, .iphoto, .itunes]
         }
@@ -440,6 +443,9 @@ class AppManager: NSObject {
     }
     
     var getStartedSubTitle: String {
+        if osAtLeastSequoia {
+            return "You can install iTunes using Retroactive.".localized()
+        }
         if osAtLeastCatalina {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
@@ -454,6 +460,9 @@ class AppManager: NSObject {
     }
     
     var otherOSSubtitle: String {
+        if osAtLeastSequoia {
+            return "Retroactive has been discontinued. You should transition from Retroactive to a".localized() + "\n" + "wide range of supported apps, many of which are built into macOS or free to download.".localized()
+        }
         if osAtLeastSonoma {
             return "Retroactive only receives limited support. You should transition from Retroactive to a".localized() + "\n" + "wide range of supported apps, many of which are built into macOS or free to download.".localized()
         }

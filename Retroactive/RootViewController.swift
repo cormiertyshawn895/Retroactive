@@ -42,7 +42,20 @@ class RootViewController: NSViewController, CCNNavigationControllerDelegate, NSW
     }
     
     func alertForOSIncompatibility() {
-        if osAtLeast2024 {
+        if osAtLeastSequoia {
+            AppDelegate.showOptionSheet(title: "Retroactive has been discontinued.".localized(),
+                                        text: "You should transition from Retroactive to a wide range of supported apps, many of which are built into macOS or free to download.".localized(),
+                                        firstButtonText: "Learn More".localized(),
+                                        secondButtonText: "Cancel".localized(),
+                                        thirdButtonText: "") { (response) in
+                if (response == .alertFirstButtonReturn) {
+                    AppDelegate.current.safelyOpenURL("https://github.com/cormiertyshawn895/Retroactive/blob/master/TRANSITION.md")
+                    NSApplication.shared.terminate(self)
+                }
+            }
+            return
+        }
+        if discouraged_osHasExperimentalSupport {
             AppDelegate.showOptionSheet(title: discouraged_osHasExperimentalSupport ? String(format: "Experimental support on %@".localized(), ProcessInfo.versionName) : "Update to a newer version of Retroactive".localized(),
                                         text: discouraged_osHasExperimentalSupport ? String(format: "On %@, Aperture, iPhoto, and iTunes can launch and are functional, but you may see minor glitches.".localized(), ProcessInfo.versionName) : String(format: "This version of Retroactive is only designed and tested for macOS Sonoma, macOS Ventura, macOS Monterey, macOS Big Sur, macOS Catalina, macOS Mojave, and macOS High Sierra, which may be incompatible with %@.".localized(), ProcessInfo.versionName),
                                         firstButtonText: "Check for Updates".localized(),

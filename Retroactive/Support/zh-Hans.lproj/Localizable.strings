@@ -72,6 +72,7 @@
 "Keep Installing" = "继续安装"; 
 "Keep drilling down for the IPA" = "继续打开子文件夹并找到 IPA"; 
 "Keynote ’09 only supports PPTX exports" = "Keynote ’09 仅支持导出 PPTX"; 
+"Learn More" = "进一步了解"; 
 "Learn More..." = "进一步了解..."; 
 "Learn how to download an iOS app with Apple Configurator 2" = "了解如何使用 Apple Configurator 2 下载 iOS 应用程序"; 
 "Learn how to transition from Retroactive to supported apps" = "了解如何从解印过渡到受支持的应用程序"; 
@@ -102,6 +103,8 @@
 "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. " = "解印还可以在 macOS Mojave 和 macOS High Sierra 下解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 iWork ’09。"; 
 "Retroactive can optimize %@ for either macOS Catalina or macOS Big Sur." = "解印可为 macOS Catalina 或 macOS Big Sur 优化 %@。"; 
 "Retroactive can unlock your installed version of %@ %@, but works best with %@ %@. To avoid stability issues, we recommend updating to %@ %@ before proceeding." = "虽然解印可以解锁您已安装的 %@ %@，解印搭配 %@ %@ 效果最佳。为了提高稳定性和兼容性，解印建议您先将软件更新到 %@ %@，然后再继续。"; 
+"Retroactive has been discontinued." = "解印已停止服务。"; 
+"Retroactive has been discontinued. You should transition from Retroactive to a" = "解印已停止服务。你应从解印过渡到多款受支持的"; 
 "Retroactive is unable to locate %@ on your Mac. %@" = "解印在您的 Mac 上找不到 %@。%@"; 
 "Retroactive is unlocking %@. Quitting Retroactive will result in a corrupted copy of %@." = "解印正在解锁 %@，退出解印会导致已安装的 %@ 受损。"; 
 "Retroactive only receives limited support. You should transition from Retroactive to a" = "解印仅获得有限支持。你应从解印过渡到多款受支持的"; 
@@ -159,6 +162,7 @@
 "You can export existing Numbers spreadsheets into Excel spreadsheets. To view and edit your Numbers spreadsheets, run Retroactive on a real Mac." = "您可以将现有的 Numbers 表格导出为 Excel 表格。如需查看或编辑 Numbers 表格，请在真正的 Mac 电脑中运行解印。"; 
 "You can export existing Pages documents into Word documents. To view and edit your Pages documents, run Retroactive on a real Mac." = "您可以将现有的 Pages 文稿导出为 Word 文档。如需查看或编辑 Pages 文稿，请在真正的 Mac 电脑中运行解印。"; 
 "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac." = "您可以将现有项目导出为 XML，从而将其转移至 SendToX、DaVinci Resolve、Avid Media Composer 和 Adobe Premiere Pro CC。如需使用时间线与预览等完整编辑功能，请在真正的 Mac 电脑中运行解印。"; 
+"You can install iTunes using Retroactive." = "你可通过解印安装iTunes。"; 
 "You can open and organize your Aperture library, or export edited images. To use editing features such as image preview, adjustments, brushes, and effects, run Retroactive on a real Mac." = "您可以打开和整理已有的 Aperture 资料库，或导出已编辑的照片。如需使用图像预览、调整、笔刷和效果等完整编辑功能，请在真正的 Mac 电脑中运行解印。"; 
 "You can open and organize your iPhoto library, or export edited images. To use editing features such as image preview, Quick Fixes, effects, and adjustments, run Retroactive on a real Mac." = "您可以打开和整理已有的 iPhoto 资料库，或导出已编辑的照片。如需使用图像预览、快速修复、效果和调整等完整编辑功能，请在真正的 Mac 电脑中运行解印。"; 
 "You can try to %@ %@ again." = "您可以重试%@ %@。"; 
@@ -168,6 +172,7 @@
 "You need to install an older version of %@ %@" = "您需要安装旧版 %@ %@。"; 
 "You need to install {name}." = "您需要先安装 {name}。"; 
 "You need to update %@ from %@ to %@." = "您需要将 %@ 从 %@ 更新至 %@。"; 
+"You should transition from Retroactive to a wide range of supported apps, many of which are built into macOS or free to download." = "你应从解印过渡到多款受支持的应用程序，其中许多已在macOS中内置或可免费下载。"; 
 "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space." = "您的启动磁盘只有 %d GB 可用空间。如需安装 %@, 您的启动磁盘至少需要 %d GB 的可用空间。"; 
 "a virtual machine" = "虚拟机"; 
 "an hour" = "一小时"; 

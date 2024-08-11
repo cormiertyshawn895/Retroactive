@@ -3,23 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-    <string>Retroactive $(VERSION) improves compatibility with macOS Sonoma.</string>
+    <string>Retroactive has been discontinued. Retroactive $(VERSION) is the final version.</string>
 	<key>NewVersionChangelog</key>
-    <string>• Resolves a problem where Aperture and iPhoto quit unexpectedly on macOS Sonoma 14.2 or later
-• Adds instructions to transition from Retroactive, which only receives limited support, to supported apps
-</string>
+    <string>• Adds instructions to transition from Retroactive to supported apps</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>新版本解印 $(VERSION_HANS) 改善了与 macOS Sonoma 的兼容性</string>
+	<string>解印已停止服务。解印 $(VERSION_HANS) 是最终版本。</string>
 	<key>NewVersionChangelogzhHans</key>
-    <string>• 解决了 Aperture 和 iPhoto 在 macOS Sonoma 14.2 或更高版本中意外退出的问题
-• 新增了指导步骤，帮助用户从仅获有限支持的解印过渡到受支持的应用程序
-</string>
+    <string>• 新增了指导步骤，帮助用户从解印过渡到受支持的应用程序</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>新版本解印 $(VERSION_HANT) 改善了與 macOS Sonoma 的兼容性</string>
+	<string>解印已停止服務。解印 $(VERSION_HANT) 是最終版本。</string>
 	<key>NewVersionChangelogzhHant</key>
-    <string>• 解決了 Aperture 和 iPhoto 在 macOS Sonoma 14.2 或更高版本中意外退出的問題
-• 新增了指導步驟，幫助用戶從僅獲有限支援的解印過渡到受支援的應用程式
-</string>
+    <string>• 新增了指導步驟，幫助用戶從解印過渡到受支援的應用程式</string>
 	<key>LatestZIP</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/$(MARKETING_VERSION)/Retroactive.$(MARKETING_VERSION).zip</string>
 	<key>LatestBuildNumber</key>
