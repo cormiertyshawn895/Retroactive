@@ -3,21 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>NewVersionVisibleTitle</key>
-    <string>Retroactive has been discontinued. Retroactive 2.1 (Build 91) is the final version.</string>
+    <string>Retroactive 3.0 (Build 95) improves compatibility with newer versions of macOS.</string>
 	<key>NewVersionChangelog</key>
-    <string>• Adds instructions to transition from Retroactive to supported apps</string>
+    <string>• Adds support for macOS Golden Gate, macOS Tahoe, and macOS Sequoia
+• Because Rosetta 2 will be removed from macOS 28, macOS Golden Gate is likely the final version of macOS to support running Aperture, iPhoto, and iTunes through Retroactive</string>
 	<key>NewVersionVisibleTitlezhHans</key>
-	<string>解印已停止服务。解印 2.1 (版本号 91) 是最终版本。</string>
+	<string>解印 3.0 (版本号 95) 改善了与新版 macOS 的兼容性</string>
 	<key>NewVersionChangelogzhHans</key>
-    <string>• 新增了指导步骤，帮助用户从解印过渡到受支持的应用程序</string>
+    <string>• 新增对 macOS Golden Gate、macOS Tahoe 和 macOS Sequoia 的支持
+• 因为 macOS 28 将移除 Rosetta 2，macOS Golden Gate 可能是最后一个支持通过 Retroactive 运行 Aperture、iPhoto 和 iTunes 的 macOS</string>
 	<key>NewVersionVisibleTitlezhHant</key>
-	<string>解印已停止服務。解印 2.1 (版本號 91) 是最終版本。</string>
+	<string>解印 3.0 (版本號 95) 改善了與新版 macOS 的兼容性</string>
 	<key>NewVersionChangelogzhHant</key>
-    <string>• 新增了指導步驟，幫助用戶從解印過渡到受支援的應用程式</string>
+    <string>• 新增 macOS Golden Gate、macOS Tahoe 和 macOS Sequoia 的支援
+• 由於 macOS 28 將移除 Rosetta 2，macOS Golden Gate 可能是最後一個支援透過 Retroactive 運行 Aperture、iPhoto 和 iTunes 的 macOS</string>
 	<key>LatestZIP</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/2.1/Retroactive.2.1.zip</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/releases/download/3.0/Retroactive.3.0.zip</string>
 	<key>LatestBuildNumber</key>
-	<integer>91</integer>
+	<integer>95</integer>
 	<key>SupportPathURL</key>
 	<string>https://raw.githubusercontent.com/cormiertyshawn895/Retroactive/master/Retroactive/Support/SupportPath.plist</string>
 	<key>ReleasePage</key>
@@ -27,7 +30,7 @@
 	<key>NewIssuePage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/issues/new</string>
 	<key>IssuesPage</key>
-	<string>https://github.com/cormiertyshawn895/Retroactive/issues?q=</string>
+	<string>https://github.com/cormiertyshawn895/Retroactive/issues?q=is%3Aissue</string>
 	<key>WikiPage</key>
 	<string>https://github.com/cormiertyshawn895/Retroactive/wiki</string>
 	<key>iTunes129ExpectedName</key>
@@ -80,5 +83,9 @@
     <string>https://developer.apple.com/download/more/?=xcode%2011</string>
     <key>ConfiguratorURL</key>
     <string>macappstore://apps.apple.com/app/apple-configurator-2/id1037126344</string>
+    <key>ApertureURL</key>
+    <string>https://archive.org/details/iPhoto-9.6.1</string>
+    <key>iPhotoURL</key>
+    <string>https://archive.org/details/iPhoto-9.6.1</string>
 </dict>
 </plist>

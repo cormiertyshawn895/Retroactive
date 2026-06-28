@@ -195,6 +195,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @IBAction func openIssue(_ sender: Any? = nil) {
+        self.safelyOpenURL(AppManager.shared.newIssuePage)
+    }
+
     @IBAction func viewSource(_ sender: Any? = nil) {
         self.safelyOpenURL(AppManager.shared.sourcePage)
     }
@@ -294,6 +298,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     static func pushSIPVC() -> Bool {
+        if osAtLeastSequoia {
+            return false
+        }
         if AppManager.shared.choseniTunesVersion == .darkMode && AppManager.shared.isTranslated && AppManager.shared.isSIPEnabled {
             let sheetViewController = SheetViewController.instantiate()
             sheetViewController.guidanceType = .asLowering

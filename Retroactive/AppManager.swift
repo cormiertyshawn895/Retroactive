@@ -175,6 +175,12 @@ class AppManager: NSObject {
 
     private(set) public var isSIPEnabled: Bool = true
 
+    var shouldResignPatchediTunes: Bool {
+        if !osAtLeastSequoia { return false }
+        if UserDefaults.standard.bool(forKey: "PreserveiTunesSignature") { return false }
+        return true
+    }
+
     private override init() {
         super.init()
         if let path = Bundle.main.path(forResource: "SupportPath", ofType: "plist"),
@@ -419,6 +425,14 @@ class AppManager: NSObject {
         return configurationDictionary?["ConfiguratorURL"] as? String
     }
     
+    var apertureURL: String? {
+        return configurationDictionary?["ApertureURL"] as? String
+    }
+
+    var iPhotoURL: String? {
+        return configurationDictionary?["iPhotoURL"] as? String
+    }
+
     var marginBetweenApps: CGFloat {
         if osAtLeastCatalina {
             return 54
@@ -427,9 +441,6 @@ class AppManager: NSObject {
     }
 
     var supportedApps: [AppType] {
-        if osAtLeastSequoia {
-            return [.itunes]
-        }
         if osAtLeastCatalina {
             return [.aperture, .iphoto, .itunes]
         }
@@ -443,9 +454,6 @@ class AppManager: NSObject {
     }
     
     var getStartedSubTitle: String {
-        if osAtLeastSequoia {
-            return "You can install iTunes using Retroactive.".localized()
-        }
         if osAtLeastCatalina {
             return "Unlock Aperture and iPhoto, or install iTunes.".localized()
         }
@@ -460,11 +468,8 @@ class AppManager: NSObject {
     }
     
     var otherOSSubtitle: String {
-        if osAtLeastSequoia {
-            return "Retroactive has been discontinued. You should transition from Retroactive to a".localized() + "\n" + "wide range of supported apps, many of which are built into macOS or free to download.".localized()
-        }
         if osAtLeastSonoma {
-            return "Retroactive only receives limited support. You should transition from Retroactive to a".localized() + "\n" + "wide range of supported apps, many of which are built into macOS or free to download.".localized()
+            return "Because Rosetta 2 will be removed from macOS 28, macOS Golden Gate is likely the final".localized() + "\n" + "version of macOS to support running Aperture, iPhoto, and iTunes through Retroactive.".localized()
         }
         if osAtLeastCatalina {
             var otherOSHint = "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. ".localized()
@@ -1220,7 +1225,7 @@ class AppManager: NSObject {
     
     var notInstalledText: String {
         get {
-            let appStoreTemplate = String(format: "If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list.".localized(), nameOfChosenApp)
+            let internetTemplate = String(format: "You can downloaded %@ from the internet.".localized(), nameOfChosenApp)
             let dvdTemplate = twoNewLines
                 + String(format: "If you have a DVD installer for %@, insert the DVD and install it. If you don't have a DVD installer, You may be able to purchase a boxed copy of %@ on eBay.".localized(), nameOfChosenApp, nameOfChosenApp)
                 + twoNewLines
@@ -1228,15 +1233,15 @@ class AppManager: NSObject {
 
             switch self.chosenApp {
             case .aperture:
-                return appStoreTemplate
+                return internetTemplate
             case .iphoto:
-                return appStoreTemplate
+                return internetTemplate
             case .itunes:
                 return ""
             case .finalCutPro7:
                 return dvdTemplate + twoNewLines + "If you have already installed Final Cut Pro X on your Mac, the Final Cut Pro 7 package will be grayed out in the Final Cut Studio 3 installer. You need to rename “Final Cut Pro.app” into “Final Cut Pro X.app”, or move it into a different folder.".localized()
             case .logicPro9:
-                return dvdTemplate + twoNewLines + appStoreTemplate
+                return dvdTemplate + twoNewLines + internetTemplate
             case .keynote5, .pages4, .numbers2:
                 return twoNewLines + String(format: "You can download and install iWork ’09, which includes %@, from The Internet Archive.".localized(), nameOfChosenApp)
             default:
@@ -1247,14 +1252,14 @@ class AppManager: NSObject {
     
     var notInstalledActionText: String {
         get {
-            let appStoreTemplate = "Open Mac App Store".localized()
+            let internetTemplate = "Download from Internet".localized()
             let dvdTemplate = "Shop DVD on eBay".localized()
 
             switch self.chosenApp {
             case .aperture:
-                return appStoreTemplate
+                return internetTemplate
             case .iphoto:
-                return appStoreTemplate
+                return internetTemplate
             case .itunes:
                 return ""
             case .finalCutPro7:
@@ -1308,9 +1313,9 @@ class AppManager: NSObject {
     func acquireSelectedApp() {
         switch self.chosenApp {
         case .aperture:
-            openMacAppStore()
+            AppDelegate.current.safelyOpenURL(AppManager.shared.apertureURL)
         case .iphoto:
-            openMacAppStore()
+            AppDelegate.current.safelyOpenURL(AppManager.shared.iPhotoURL)
         case .itunes:
             return
         case .finalCutPro7:

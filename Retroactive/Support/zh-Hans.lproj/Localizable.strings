@@ -16,6 +16,7 @@
 "All iPhoto features should be available except for playing videos, exporting slideshows, Photo Stream, and iCloud Photo Sharing." = "几乎全部 iPhoto 功能都可以正常使用。不可用的功能包括播放视频、导出幻灯片、照片流，和 iCloud 照片共享。"; 
 "Aperture has reduced functionality" = "Aperture 功能受限"; 
 "Are you sure you want to stop installing %@?" = "确定要停止安装 %@？"; 
+"Because Rosetta 2 will be removed from macOS 28, macOS Golden Gate is likely the final" = "因为 macOS 28 将移除 Rosetta 2，macOS Golden Gate 可能是最后一个"; 
 "Build" = "构建"; 
 "Can I use iTunes without Full Disk Access?" = "我能否跳过完全磁盘访问权限使用 iTunes？"; 
 "Cancel" = "取消"; 
@@ -43,8 +44,9 @@
 "Download and install the iWork 9.3 Update" = "下载并安装 iWork 9.3 更新包"; 
 "Download and update to Final Cut Pro 7.0.3 (2010-02)" = "下载并更新到 Final Cut Pro 7.0.3 (2010-02)"; 
 "Download and update to Logic Pro 9.1.8" = "下载并更新到 Logic Pro 9.1.8"; 
+"Download from Internet" = "从互联网下载"; 
 "Download iWork ’09" = "下载 iWork ’09"; 
-"Download the latest version of %@ %@ from the Purchased list in the Mac App Store, then run Retroactive again." = "前往 Mac App Store 下载最新版本的 %@ %@，然后重新运行解印。"; 
+"Download the latest version of %@ %@, then run Retroactive again." = "下载最新版本的 %@ %@，然后重新运行解印。"; 
 "Drag the IPA to a safe location. To install the app, sync it with Finder or AirDrop it to an iOS device." = "将 IPA 拖动到安全的位置。如需安装应用程序，通过访达同步或将其隔空投送至 iOS 设备。"; 
 "Drill in two more levels of temporary folder. You’ll see the app download in IPA format." = "继续打开两层临时子文件夹。您会发现下载的应用程序以 IPA 格式保存。"; 
 "Experimental support on %@" = "对 %@ 提供实验支持"; 
@@ -60,7 +62,6 @@
 "If you have already installed %@ %@ at a custom location, you can also locate it manually." = "如果您已经在自定义位置安装了 %@ %@，请手动寻找并选择该应用程序。"; 
 "If you have already installed Final Cut Pro X on your Mac, the Final Cut Pro 7 package will be grayed out in the Final Cut Studio 3 installer. You need to rename “Final Cut Pro.app” into “Final Cut Pro X.app”, or move it into a different folder." = "如果您已经在 Mac 上安装了 Final Cut Pro X，在安装 Final Cut Studio 3 时，您将无法选择 Final Cut Pro 7 选项。您需要将已安装的 “Final Cut Pro.app” 重命名为 “Final Cut Pro X.app”，或将其移动到另一个文件夹中。"; 
 "If you have installed %@ at a custom location, locate it manually." = "如果您将 %@ 安装在了自定义的位置，请手动寻找并选择该应用程序。"; 
-"If you have previously downloaded %@ from the Mac App Store, download it again from the Purchased list." = "如果您此前曾在 Mac App Store 下载过 %@，请前往已购清单将其重新下载。"; 
 "If you upgrade to macOS Catalina or macOS Big Sur, Final Cut Pro 7, Logic Pro 9, and iWork ’09 will be locked again, and can’t be unlocked. However, Retroactive can still unlock Aperture and iPhoto, or install iTunes on macOS Catalina or macOS Big Sur." = "如果您将 Mac 更新到 macOS Catalina 或 macOS big Sur，Final Cut Pro 7、Logic Pro 9 和 iWork ’09 会被重新封印且无法解除。但解印依然可以在 macOS Catalina 或 macOS Big Sur 下解锁 Aperture 和 iPhoto，或安装 iTunes。"; 
 "If your Mac doesn't have a DVD drive, you can try to create, locate, or download a DMG installer of %@, and install %@ through the DMG installer." = "如果您的 Mac 没有 DVD 光驱，您可以试着创建、寻找，或下载 %@ 的 DMG 安装镜像，然后通过此 DMG 镜像安装 %@。"; 
 "If your RAW photos show up as “Unsupported Image Format”, open the “Photos” menu, click on “Reprocess original…”, and reprocess all photos. You may need to reprocess all photos twice." = "如果您的 RAW 原图无法正常显示，请先打开“照片”菜单, 选择“重新处理原件…”，然后按提示重新处理原件。您可能需要重复上述操作两次。"; 
@@ -72,7 +73,6 @@
 "Keep Installing" = "继续安装"; 
 "Keep drilling down for the IPA" = "继续打开子文件夹并找到 IPA"; 
 "Keynote ’09 only supports PPTX exports" = "Keynote ’09 仅支持导出 PPTX"; 
-"Learn More" = "进一步了解"; 
 "Learn More..." = "进一步了解..."; 
 "Learn how to download an iOS app with Apple Configurator 2" = "了解如何使用 Apple Configurator 2 下载 iOS 应用程序"; 
 "Learn how to transition from Retroactive to supported apps" = "了解如何从解印过渡到受支持的应用程序"; 
@@ -86,7 +86,6 @@
 "Open Apple Configurator 2, then connect an iOS device to your Mac." = "打开 Apple Configurator 2，然后将 iOS 设备连接到您的 Mac。"; 
 "Open Apple Configurator 2’s temporary folder" = "打开 Apple Configurator 2 的临时文件夹"; 
 "Open Finder. Hold down the ⌥ Key, and choose Go › Library." = "打开访达。按住 ⌥ 键，并选择 “前往” › “资源库”。"; 
-"Open Mac App Store" = "打开 Mac App Store"; 
 "Optimize for macOS Big Sur" = "为 macOS Big Sur 优化"; 
 "Optimize for macOS Catalina" = "为 macOS Catalina 优化"; 
 "Pages ’09 only supports DOCX exports" = "Pages ’09 仅支持导出 DOCX"; 
@@ -103,11 +102,8 @@
 "Retroactive can also unlock Final Cut Pro 7, Logic Pro 9, and fix iWork ’09 on macOS Mojave or macOS High Sierra. " = "解印还可以在 macOS Mojave 和 macOS High Sierra 下解除对 Final Cut Pro 7 和 Logic Pro 9 的封印，或修复 iWork ’09。"; 
 "Retroactive can optimize %@ for either macOS Catalina or macOS Big Sur." = "解印可为 macOS Catalina 或 macOS Big Sur 优化 %@。"; 
 "Retroactive can unlock your installed version of %@ %@, but works best with %@ %@. To avoid stability issues, we recommend updating to %@ %@ before proceeding." = "虽然解印可以解锁您已安装的 %@ %@，解印搭配 %@ %@ 效果最佳。为了提高稳定性和兼容性，解印建议您先将软件更新到 %@ %@，然后再继续。"; 
-"Retroactive has been discontinued." = "解印已停止服务。"; 
-"Retroactive has been discontinued. You should transition from Retroactive to a" = "解印已停止服务。你应从解印过渡到多款受支持的"; 
 "Retroactive is unable to locate %@ on your Mac. %@" = "解印在您的 Mac 上找不到 %@。%@"; 
 "Retroactive is unlocking %@. Quitting Retroactive will result in a corrupted copy of %@." = "解印正在解锁 %@，退出解印会导致已安装的 %@ 受损。"; 
-"Retroactive only receives limited support. You should transition from Retroactive to a" = "解印仅获得有限支持。你应从解印过渡到多款受支持的"; 
 "Ringtones and iTunes U" = "铃声与 iTunes U"; 
 "Run Anyways" = "尝试运行"; 
 "Save and install the IPA" = "保存并安装 IPA"; 
@@ -158,11 +154,11 @@
 "Would you like to create a new iTunes library?" = "您是否想要创建新的 iTunes 资料库？"; 
 "Yes, you can. However, iTunes will not sync with iPod devices, play music on removable storage, or access shared iTunes libraries on a network drive." = "可以。然而 iTunes 将无法与 iPod 设备同步或播放存储于可移除的宗卷的音乐，也不能访问网络共享服务器上的 iTunes 资料库。"; 
 "You can download and install iWork ’09, which includes %@, from The Internet Archive." = "您可以在互联网上找到，并下载和安装 iWork ’09 (包含 %@)。"; 
+"You can downloaded %@ from the internet." = "你可从互联网下载 %@。"; 
 "You can export existing Keynote presentations into PowerPoint presentations. To view and edit your Keynote slides, animations, and transitions, run Retroactive on a real Mac." = "您可以将现有的 Keynote 演示文稿导出为 PowerPoint 演示文稿。如需查看或编辑 Keynote 幻灯片、动画和转场，请在真正的 Mac 电脑中运行解印。"; 
 "You can export existing Numbers spreadsheets into Excel spreadsheets. To view and edit your Numbers spreadsheets, run Retroactive on a real Mac." = "您可以将现有的 Numbers 表格导出为 Excel 表格。如需查看或编辑 Numbers 表格，请在真正的 Mac 电脑中运行解印。"; 
 "You can export existing Pages documents into Word documents. To view and edit your Pages documents, run Retroactive on a real Mac." = "您可以将现有的 Pages 文稿导出为 Word 文档。如需查看或编辑 Pages 文稿，请在真正的 Mac 电脑中运行解印。"; 
 "You can export existing projects into XML files, so that SendToX, DaVinci Resolve, Media Composer, and Premiere Pro can open them. To use editing features such as timeline and preview, run Retroactive on a real Mac." = "您可以将现有项目导出为 XML，从而将其转移至 SendToX、DaVinci Resolve、Avid Media Composer 和 Adobe Premiere Pro CC。如需使用时间线与预览等完整编辑功能，请在真正的 Mac 电脑中运行解印。"; 
-"You can install iTunes using Retroactive." = "你可通过解印安装iTunes。"; 
 "You can open and organize your Aperture library, or export edited images. To use editing features such as image preview, adjustments, brushes, and effects, run Retroactive on a real Mac." = "您可以打开和整理已有的 Aperture 资料库，或导出已编辑的照片。如需使用图像预览、调整、笔刷和效果等完整编辑功能，请在真正的 Mac 电脑中运行解印。"; 
 "You can open and organize your iPhoto library, or export edited images. To use editing features such as image preview, Quick Fixes, effects, and adjustments, run Retroactive on a real Mac." = "您可以打开和整理已有的 iPhoto 资料库，或导出已编辑的照片。如需使用图像预览、快速修复、效果和调整等完整编辑功能，请在真正的 Mac 电脑中运行解印。"; 
 "You can try to %@ %@ again." = "您可以重试%@ %@。"; 
@@ -172,7 +168,6 @@
 "You need to install an older version of %@ %@" = "您需要安装旧版 %@ %@。"; 
 "You need to install {name}." = "您需要先安装 {name}。"; 
 "You need to update %@ from %@ to %@." = "您需要将 %@ 从 %@ 更新至 %@。"; 
-"You should transition from Retroactive to a wide range of supported apps, many of which are built into macOS or free to download." = "你应从解印过渡到多款受支持的应用程序，其中许多已在macOS中内置或可免费下载。"; 
 "Your startup disk only has %d GB available. To install %@, your startup disk needs to at least have %d GB of available space." = "您的启动磁盘只有 %d GB 可用空间。如需安装 %@, 您的启动磁盘至少需要 %d GB 的可用空间。"; 
 "a virtual machine" = "虚拟机"; 
 "an hour" = "一小时"; 
@@ -183,7 +178,7 @@
 "install" = "安装"; 
 "installing support files for" = "安装组件以支持"; 
 "unlock" = "解锁"; 
-"wide range of supported apps, many of which are built into macOS or free to download." = "应用程序，其中许多已在macOS中内置或可免费下载。"; 
+"version of macOS to support running Aperture, iPhoto, and iTunes through Retroactive." = "支持通过 Retroactive 运行 Aperture、iPhoto 和 iTunes 的 macOS。"; 
 "— Retroactive" = "— 解印"; 
 "App Store" = "App Store"; 
 "CoverFlow" = "CoverFlow"; 

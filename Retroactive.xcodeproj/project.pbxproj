@@ -22,6 +22,7 @@
 		046034EA2381DDB300070C86 /* ProApplicationsUpdate2010-02.dist in Resources */ = {isa = PBXBuildFile; fileRef = 046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */; };
 		047A039A24A6EEAF00E00998 /* PluginManager in Resources */ = {isa = PBXBuildFile; fileRef = 047A039924A6EEAF00E00998 /* PluginManager */; };
 		047A039C24A6F3CB00E00998 /* AppKitAperture in Resources */ = {isa = PBXBuildFile; fileRef = 047A039B24A6F3CB00E00998 /* AppKitAperture */; };
+		04A1FE5024A6F3CB00E00998 /* iLifeMediaBrowserShim in Resources */ = {isa = PBXBuildFile; fileRef = 04A1FE5124A6F3CB00E00998 /* iLifeMediaBrowserShim */; };
 		04DA79C525613EB200B65B4E /* CodecComponents.zip in Resources */ = {isa = PBXBuildFile; fileRef = 04DA79C425613EB200B65B4E /* CodecComponents.zip */; };
 		321B09CD23643F89007F3FBA /* RetroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09CC23643F89007F3FBA /* RetroApp.swift */; };
 		321B09D523645B57007F3FBA /* CheckmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321B09CF23645B57007F3FBA /* CheckmarkView.swift */; };
@@ -136,6 +137,7 @@
 		046034E92381DDB300070C86 /* ProApplicationsUpdate2010-02.dist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ProApplicationsUpdate2010-02.dist"; sourceTree = "<group>"; };
 		047A039924A6EEAF00E00998 /* PluginManager */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PluginManager; sourceTree = "<group>"; };
 		047A039B24A6F3CB00E00998 /* AppKitAperture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppKitAperture; sourceTree = "<group>"; };
+		04A1FE5124A6F3CB00E00998 /* iLifeMediaBrowserShim */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iLifeMediaBrowserShim; sourceTree = "<group>"; };
 		04DA79C425613EB200B65B4E /* CodecComponents.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = CodecComponents.zip; sourceTree = "<group>"; };
 		321B09CC23643F89007F3FBA /* RetroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetroApp.swift; sourceTree = "<group>"; };
 		321B09CF23645B57007F3FBA /* CheckmarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkView.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				32F763552364EA2200200ED7 /* ApertureFixer */,
 				60E4B4D424022BF900919F36 /* OriginFixer */,
 				32F763532364DEA700200ED7 /* NyxAudioAnalysis */,
+				04A1FE5124A6F3CB00E00998 /* iLifeMediaBrowserShim */,
 				047A039924A6EEAF00E00998 /* PluginManager */,
 				042E9E452381AC2B001D3F38 /* AppKit */,
 				047A039B24A6F3CB00E00998 /* AppKitAperture */,
@@ -686,6 +689,7 @@
 				042E9E4C2381AC2C001D3F38 /* VideoFixer in Resources */,
 				60E4B4B6240207AC00919F36 /* iTunesLauncher-Info.plist in Resources */,
 				32F763542364DEA700200ED7 /* NyxAudioAnalysis in Resources */,
+				04A1FE5024A6F3CB00E00998 /* iLifeMediaBrowserShim in Resources */,
 				046034E82381C18A00070C86 /* ProKit.framework.zip in Resources */,
 				042E9E492381AC2C001D3F38 /* AppKit in Resources */,
 				046034E22381B41200070C86 /* KeynoteFixer in Resources */,
@@ -999,14 +1003,14 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 95;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.retroactive.Retroactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Retroactive/Libraries/Bridging-Header.h";
@@ -1021,14 +1025,14 @@
 				CODE_SIGN_ENTITLEMENTS = Retroactive/Support/Retroactive.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 91;
+				CURRENT_PROJECT_VERSION = 95;
 				INFOPLIST_FILE = Retroactive/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.retroactive.Retroactive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Retroactive/Libraries/Bridging-Header.h";

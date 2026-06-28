@@ -161,8 +161,8 @@
 /* Class = "NSTextFieldCell"; title = "iTunes"; ObjectID = "iPE-Jd-BL4"; */
 "iPE-Jd-BL4.title" = "iTunes";
 
-/* Class = "NSTextFieldCell"; title = "Download {name} from the Purchased list in App Store."; ObjectID = "nzg-d3-rIG"; */
-"nzg-d3-rIG.title" = "Download {name} from the Purchased list in App Store.";
+/* Class = "NSTextFieldCell"; title = "Download {name} from the internet."; ObjectID = "nzg-d3-rIG"; */
+"nzg-d3-rIG.title" = "Download {name} from the internet.";
 
 /* Class = "NSTextFieldCell"; title = "Find {name} on another Mac, and AirDrop it to yourself."; ObjectID = "oU0-KV-ceF"; */
 "oU0-KV-ceF.title" = "Find {name} on another Mac, and AirDrop it to yourself.";

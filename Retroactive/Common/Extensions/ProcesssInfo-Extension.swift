@@ -14,6 +14,9 @@ let osAtLeastMontereyE = processInfo.isOperatingSystemAtLeast(OperatingSystemVer
 let osAtLeastVentura = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 13, minorVersion: 0, patchVersion: 0))
 let osAtLeastSonoma = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 14, minorVersion: 0, patchVersion: 0))
 let osAtLeastSequoia = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 15, minorVersion: 0, patchVersion: 0))
+let osAtLeastTahoe = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 26, minorVersion: 0, patchVersion: 0))
+let osAtLeastGoldenGate = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 27, minorVersion: 0, patchVersion: 0))
+let osAtLeast28 = processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 28, minorVersion: 0, patchVersion: 0))
 
 let discouraged_osExactlyHighSierra = osMajorVersion == 10 && osMinorVersion == 13
 let discouraged_osExactlyMojave = osMajorVersion == 10 && osMinorVersion == 14
@@ -22,6 +25,9 @@ let discouraged_osExactlyBigSur = (osMajorVersion == 10 && osMinorVersion == 16)
 let discouraged_osExactlyMonterey = osMajorVersion == 12
 let discouraged_osExactlyVentura = osMajorVersion == 13
 let discouraged_osExactlySonoma = osMajorVersion == 14
+let discouraged_osExactlySequoia = osMajorVersion == 15
+let discouraged_osExactlyTahoe = osMajorVersion == 26
+let discouraged_osExactlyGoldenGate = osMajorVersion == 27
 let discouraged_osHasExperimentalSupport = false
 
 extension ProcessInfo {
@@ -59,6 +65,15 @@ extension ProcessInfo {
         }
         if (discouraged_osExactlySonoma) {
             return "macOS Sonoma"
+        }
+        if (discouraged_osExactlySequoia) {
+            return "macOS Sequoia"
+        }
+        if (discouraged_osExactlyTahoe) {
+            return "macOS Tahoe"
+        }
+        if (discouraged_osExactlyGoldenGate) {
+            return "macOS Golden Gate"
         }
         return ProcessInfo.versionString
     }

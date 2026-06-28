@@ -155,7 +155,7 @@ class AppFinder: NSObject {
                         String(format: "Click on “Download Update” to download and install the iWork 9.3 Update.".localized(), name, compat) :
                         "Download and install iWork ’09 from The Internet Archive, then install the iWork 9.3 Update.".localized()
                 } else {
-                    secondParagraph = String(format: "Download the latest version of %@ %@ from the Purchased list in the Mac App Store, then run Retroactive again.".localized(), name, compat)
+                    secondParagraph = String(format: "Download the latest version of %@ %@, then run Retroactive again.".localized(), name, compat)
                 }
                 
                 let thirdParagraph = String(format: "If you have already installed %@ %@ at a custom location, you can also locate it manually.".localized(), name, compat)
