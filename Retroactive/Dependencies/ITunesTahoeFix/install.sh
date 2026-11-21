@@ -64,7 +64,7 @@ if [[ ! -f "$DYLIB_SRC" ]]; then
   echo "Building ITunesTahoeFix.dylib..."
   DYLIB_SRC="$(mktemp -d)/ITunesTahoeFix.dylib"
   clang -arch x86_64 -dynamiclib -fobjc-arc -mmacosx-version-min=10.13 \
-        -framework AppKit -o "$DYLIB_SRC" "$HERE/ITunesTahoeFix.m"
+        -framework AppKit -lsqlite3 -o "$DYLIB_SRC" "$HERE/ITunesTahoeFix.m"
   codesign -s - -f "$DYLIB_SRC" >/dev/null
 fi
 lipo -archs "$DYLIB_SRC" 2>/dev/null | grep -q x86_64 || die "dylib is not x86_64."

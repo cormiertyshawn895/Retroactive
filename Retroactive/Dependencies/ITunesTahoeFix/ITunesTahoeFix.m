@@ -119,3 +119,66 @@ static void ITF_init2(void) {
     gOrigDoModal = method_setImplementation(m, (IMP)ITF_doModal);
     os_log(OS_LOG_DEFAULT, "ITunesTahoeFix: patched -[CocoaDialogUtilitiesController doModal]");
 }
+
+// ---------------------------------------------------------------------------
+// Fix 3: error 13021 / 13026 when iTunes has to create a new library
+// (first launch, or no "iTunes Library.itl" in the library folder).
+// iTunes keys its .itdb SQLite databases with sqlite3_key() and attaches them
+// with "ATTACH DATABASE ... KEY X'...'". Recent macOS ships libsqlite3 without
+// encryption support: sqlite3_key() is a stub returning SQLITE_MISUSE (21), and
+// ATTACH ... KEY on an existing database fails with SQLITE_NOTADB (26). iTunes
+// turns these into errors 13021 / 13026 and stops before writing the .itl.
+// Only when this macOS lacks encryption support: report sqlite3_key() as
+// success and drop the KEY clause from ATTACH, so the databases are used
+// unencrypted (the only thing this libsqlite3 can do anyway).
+// ---------------------------------------------------------------------------
+#include <sqlite3.h>
+int sqlite3_key(sqlite3 *db, const void *key, int nKey);
+
+static BOOL ITF_sqliteKeyUnsupported(void) {
+    static BOOL unsupported;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        sqlite3 *db = NULL;
+        if (sqlite3_open(":memory:", &db) == SQLITE_OK) {
+            unsupported = (sqlite3_key(db, "probe", 5) == SQLITE_MISUSE);
+        }
+        if (db) sqlite3_close(db);
+        if (unsupported) os_log(OS_LOG_DEFAULT, "ITunesTahoeFix: libsqlite3 has no encryption support, using unencrypted iTunes databases");
+    });
+    return unsupported;
+}
+
+static int ITF_sqlite3_key(sqlite3 *db, const void *key, int nKey) {
+    int rc = sqlite3_key(db, key, nKey);
+    if (rc == SQLITE_MISUSE && ITF_sqliteKeyUnsupported()) return SQLITE_OK;
+    return rc;
+}
+
+// "ATTACH DATABASE "path" AS name KEY X'hex'" -> "ATTACH DATABASE "path" AS name"
+static int ITF_sqlite3_exec(sqlite3 *db, const char *sql, int (*cb)(void *, int, char **, char **), void *arg, char **err) {
+    if (sql && strncasecmp(sql, "ATTACH", 6) == 0 && ITF_sqliteKeyUnsupported()) {
+        const char *k = strstr(sql, " KEY X'");
+        if (k) {
+            const char *end = strchr(k + 7, '\'');
+            if (end) {
+                size_t head = (size_t)(k - sql);
+                char *copy = malloc(strlen(sql) + 1);
+                if (copy) {
+                    memcpy(copy, sql, head);
+                    strcpy(copy + head, end + 1);
+                    int rc = sqlite3_exec(db, copy, cb, arg, err);
+                    free(copy);
+                    return rc;
+                }
+            }
+        }
+    }
+    return sqlite3_exec(db, sql, cb, arg, err);
+}
+
+__attribute__((used, section("__DATA,__interpose")))
+static struct { const void *replacement; const void *original; } ITF_interpose_sqlite[] = {
+    { (const void *)ITF_sqlite3_key,  (const void *)sqlite3_key },
+    { (const void *)ITF_sqlite3_exec, (const void *)sqlite3_exec },
+};
