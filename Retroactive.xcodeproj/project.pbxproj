@@ -95,6 +95,8 @@
 		60E4B4B6240207AC00919F36 /* iTunesLauncher-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */; };
 		60E4B4B8240207B400919F36 /* iTunesLauncher-PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */; };
 		60E4B4BA240207C100919F36 /* iTunesLauncher in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4B9240207C100919F36 /* iTunesLauncher */; };
+		A1B2C3D4E5F6071829304050 /* iTunesTahoeLauncher in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6071829304051 /* iTunesTahoeLauncher */; };
+		A1B2C3D4E5F6071829304052 /* ITunesTahoeFix.dylib in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6071829304053 /* ITunesTahoeFix.dylib */; };
 		60E4B4D524022BF900919F36 /* OriginFixer in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4D424022BF900919F36 /* OriginFixer */; };
 		60E4B4D724022C4600919F36 /* iTunesOriginLauncher in Resources */ = {isa = PBXBuildFile; fileRef = 60E4B4D624022C4600919F36 /* iTunesOriginLauncher */; };
 		60E5EBAE240A5FA1000669FD /* BDAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E5EBAD240A5FA1000669FD /* BDAlias.m */; };
@@ -224,6 +226,8 @@
 		60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "iTunesLauncher-PkgInfo"; sourceTree = "<group>"; };
 		60E4B4B9240207C100919F36 /* iTunesLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesLauncher; sourceTree = "<group>"; };
 		60E4B4D424022BF900919F36 /* OriginFixer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OriginFixer; sourceTree = "<group>"; };
+		A1B2C3D4E5F6071829304051 /* iTunesTahoeLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesTahoeLauncher; sourceTree = "<group>"; };
+		A1B2C3D4E5F6071829304053 /* ITunesTahoeFix.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = ITunesTahoeFix.dylib; path = ITunesTahoeFix/ITunesTahoeFix.dylib; sourceTree = "<group>"; };
 		60E4B4D624022C4600919F36 /* iTunesOriginLauncher */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = iTunesOriginLauncher; sourceTree = "<group>"; };
 		60E5EBAC240A5FA1000669FD /* BDAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDAlias.h; sourceTree = "<group>"; };
 		60E5EBAD240A5FA1000669FD /* BDAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDAlias.m; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				046034E12381B41200070C86 /* KeynoteFixer */,
 				32F763552364EA2200200ED7 /* ApertureFixer */,
 				60E4B4D424022BF900919F36 /* OriginFixer */,
+				A1B2C3D4E5F6071829304053 /* ITunesTahoeFix.dylib */,
 				32F763532364DEA700200ED7 /* NyxAudioAnalysis */,
 				04A1FE5124A6F3CB00E00998 /* iLifeMediaBrowserShim */,
 				047A039924A6EEAF00E00998 /* PluginManager */,
@@ -546,6 +551,7 @@
 			children = (
 				60E4B4B9240207C100919F36 /* iTunesLauncher */,
 				60E4B4D624022C4600919F36 /* iTunesOriginLauncher */,
+				A1B2C3D4E5F6071829304051 /* iTunesTahoeLauncher */,
 				60E4B4B7240207B400919F36 /* iTunesLauncher-PkgInfo */,
 				60E4B4B5240207AC00919F36 /* iTunesLauncher-Info.plist */,
 			);
@@ -671,6 +677,8 @@
 				32F763462364C9F800200ED7 /* insert_dylib in Resources */,
 				60F62284243AE6C300B07865 /* ConfiguratorTutorial.mp4 in Resources */,
 				60E4B4BA240207C100919F36 /* iTunesLauncher in Resources */,
+				A1B2C3D4E5F6071829304050 /* iTunesTahoeLauncher in Resources */,
+				A1B2C3D4E5F6071829304052 /* ITunesTahoeFix.dylib in Resources */,
 				607C3D822382665900FAE528 /* AudioToolbox.framework.zip in Resources */,
 				32D181C123640CDF006253DE /* Assets.xcassets in Resources */,
 				047A039A24A6EEAF00E00998 /* PluginManager in Resources */,

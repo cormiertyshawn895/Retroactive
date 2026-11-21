@@ -713,6 +713,12 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 self.runTask(toolPath: "/bin/mkdir", arguments: ["\(appPath)/Contents/Frameworks"])
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesOriginLauncher", "\(appPath)/Contents/MacOS/iTunes"])
                 self.runTask(toolPath: "/bin/cp", arguments: ["-R", "\(resourcePath)/OriginFixer", "\(appPath)/\(AppManager.shared.fixerFrameworkSubPath)"])
+            } else if (AppManager.shared.choseniTunesVersion == .darkMode) {
+                // iTunes 12.9.5 crashes on macOS Tahoe when closing Get Info, About, or MiniPlayer,
+                // and shows error -42408 at launch. Insert a library to fix both.
+                self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesTahoeLauncher", "\(appPath)/Contents/MacOS/iTunes"])
+                self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/ITunesTahoeFix.dylib", "\(appPath)/Contents/Resources/ITunesTahoeFix.dylib"])
+                self.runTask(toolPath: "/bin/chmod", arguments: ["+x", "\(appPath)/Contents/MacOS/iTunes"])
             } else {
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher", "\(appPath)/Contents/MacOS/iTunes"])
             }
