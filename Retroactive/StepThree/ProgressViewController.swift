@@ -718,6 +718,7 @@ class ProgressViewController: NSViewController, URLSessionDelegate, URLSessionDa
                 // and shows error -42408 at launch. Insert a library to fix both.
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesTahoeLauncher", "\(appPath)/Contents/MacOS/iTunes"])
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/ITunesTahoeFix.dylib", "\(appPath)/Contents/Resources/ITunesTahoeFix.dylib"])
+                self.runTask(toolPath: "/bin/chmod", arguments: ["+x", "\(appPath)/Contents/MacOS/iTunes"])
             } else {
                 self.runTask(toolPath: "/bin/cp", arguments: ["\(resourcePath)/iTunesLauncher", "\(appPath)/Contents/MacOS/iTunes"])
             }
