@@ -7,6 +7,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import <AppKit/AppKit.h>
+#import <ImageIO/ImageIO.h>
 #import <dlfcn.h>
 #import <sys/sysctl.h>
 #import "NSObject+Fixer.h"
@@ -35,6 +36,99 @@ static void retro_swizzle(const char *clsName, NSString *sel, SEL replacement) {
     Method a = class_getInstanceMethod(cls, NSSelectorFromString(sel));
     Method b = class_getInstanceMethod(cls, replacement);
     if (a && b) method_exchangeImplementations(a, b);
+}
+
+#pragma mark - Library sidebar and RAW decoding
+
+static void retro_replaceImplementation(const char *clsName, NSString *sel, IMP imp) {
+    Class cls = objc_getClass(clsName);
+    if (!cls) return;
+    Method m = class_getInstanceMethod(cls, NSSelectorFromString(sel));
+    if (m) method_setImplementation(m, imp);
+}
+
+// Freeze after clicking a disclosure triangle (#448). When a cell-based NSOutlineView expands or collapses an item,
+// newer AppKit converts the table to view-based on the fly to animate rows (-[NSTableView _switchToViewBasedIfNeeded],
+// gated by _canSwitchToViewBasedForAnimations). For Aperture's Library sidebar, -[NSTableRowData updateVisibleRowViews]
+// opens an NSAnimationContext group and CATransaction during that conversion and never closes them, so nothing the app
+// draws reaches the screen any more. Keep cell-based tables on the classic, non-converting path.
+static BOOL retro_canSwitchToViewBasedForAnimations(id self, SEL _cmd) {
+    return NO;
+}
+
+// -[NSOutlineView _doExpandAnimation:forRow:] animates the disclosure triangle of cell-based outlines by spinning a
+// private run loop for ~0.2 s, which blocks the UI and dequeues (drops) clicks made meanwhile. The expand or collapse
+// itself is done by the caller, so skip the triangle animation.
+static void retro_doExpandAnimation(id self, SEL _cmd, BOOL expand, NSInteger row) {
+}
+
+// -[RKSourceListOutlineView testSwallowMouseDragForEvent:forItem:] waits for the next mouse event and treats any
+// mouseDragged event as a drag, with no threshold. Moving the pointer by a single pixel while clicking (common with
+// trackpads) therefore drops clicks on items that can't be dragged (LIBRARY/RECENT headers, Projects, Photos...).
+// Same logic, but movements below the usual drag threshold count as part of the click.
+static BOOL retro_testSwallowMouseDrag(NSView *self, SEL _cmd, NSEvent *mouseDown, id item) {
+    NSWindow *window = [self window];
+    NSPoint start = [mouseDown locationInWindow];
+    NSEventMask mask = NSEventMaskLeftMouseUp | NSEventMaskRightMouseUp | NSEventMaskLeftMouseDragged | NSEventMaskRightMouseDragged;
+    BOOL jittered = NO;
+    for (;;) {
+        NSEvent *e = [window nextEventMatchingMask:mask untilDate:[NSDate distantFuture] inMode:NSDefaultRunLoopMode dequeue:YES];
+        switch ([e type]) {
+            case NSEventTypeLeftMouseDragged:
+            case NSEventTypeRightMouseDragged: {
+                NSPoint p = [e locationInWindow];
+                if (hypot(p.x - start.x, p.y - start.y) < 4.0) { jittered = YES; continue; }
+                SEL canDrag = NSSelectorFromString(@"sourceListCanDrag");
+                return [item respondsToSelector:canDrag] ? ((BOOL (*)(id, SEL))objc_msgSend)(item, canDrag) : NO;
+            }
+            case NSEventTypeLeftMouseUp:
+            case NSEventTypeRightMouseUp:
+                if (jittered) {
+                    // Hand AppKit a plain click, so NSTableView's own tracking doesn't see the small movement either.
+                    e = [NSEvent mouseEventWithType:[e type] location:start modifierFlags:[e modifierFlags] timestamp:[e timestamp]
+                                       windowNumber:[e windowNumber] context:nil eventNumber:[e eventNumber]
+                                         clickCount:[e clickCount] pressure:[e pressure]];
+                }
+                [window postEvent:e atStart:NO];
+                return YES;
+            default:
+                break;
+        }
+    }
+}
+
+// RAW photos show "Unsupported Image Format" (#440). RAW files are decoded with
+// CGImageSourceCreateImageAtIndex(kCGImageSourceShouldExtendRaw). Current ImageIO returns that image as 16-bit RGBX
+// (kCGImageAlphaNoneSkipLast), and Geode has no read function from that pixel format to the one its render pipeline asks
+// for, so -[DGImageIOFactory fulfillImageRequest:intoLockedPage:forTile:] reports a corrupt master and the photo is marked
+// unsupported. Re-pack such RAW output as 16-bit RGBA (premultiplied last), which Geode reads. Photos that were already
+// marked unsupported come back with Photos > Reprocess Original.
+static CGImageRef retro_CGImageSourceCreateImageAtIndex(CGImageSourceRef source, size_t index, CFDictionaryRef options) {
+    CGImageRef image = CGImageSourceCreateImageAtIndex(source, index, options);
+    if (!image || !options || !CFDictionaryContainsKey(options, CFSTR("kCGImageSourceShouldExtendRaw"))) return image;
+    if (CGImageGetBitsPerComponent(image) != 16 || CGImageGetBitsPerPixel(image) != 64 ||
+        CGImageGetAlphaInfo(image) != kCGImageAlphaNoneSkipLast) return image;
+    size_t width = CGImageGetWidth(image), height = CGImageGetHeight(image);
+    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 16, width * 8, CGImageGetColorSpace(image),
+                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder16Little);
+    if (!context) return image;
+    CGContextSetBlendMode(context, kCGBlendModeCopy);
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), image);
+    CGImageRef repacked = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    if (!repacked) return image;
+    CGImageRelease(image);
+    return repacked;
+}
+
+__attribute__((used, section("__DATA,__interpose"))) static struct { const void *replacement, *original; } retro_interposers[] = {
+    { (const void *)retro_CGImageSourceCreateImageAtIndex, (const void *)CGImageSourceCreateImageAtIndex },
+};
+
+static void retro_installSidebarFixes(void) {
+    retro_replaceImplementation("NSTableView", @"_canSwitchToViewBasedForAnimations", (IMP)retro_canSwitchToViewBasedForAnimations);
+    retro_replaceImplementation("NSOutlineView", @"_doExpandAnimation:forRow:", (IMP)retro_doExpandAnimation);
+    retro_replaceImplementation("RKSourceListOutlineView", @"testSwallowMouseDragForEvent:forItem:", (IMP)retro_testSwallowMouseDrag);
 }
 
 static void retro_addFallback(const char *clsName, SEL sel, const char *types, id block) {
@@ -160,6 +254,7 @@ static double retro_segFullWidthAt(id cell, NSInteger seg);
                                    class_getInstanceMethod(class, @selector(patched_updatePaperMenu)));
 
     retro_installProgressFallbacks();
+    retro_installSidebarFixes();
 
     retro_swizzle("NSWindow", @"setTitle:", @selector(retro_winSetTitle:));
     if (retro_osAtLeastTahoe()) {
